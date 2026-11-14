@@ -264,7 +264,6 @@
   #data-list li.sel, #data-list tr.sel td { background: color-mix(in srgb, var(--accent) 14%, var(--panel)); }
   #data-detail { margin-top: 16px; min-height: 0; }
   #data-detail .files { margin: 0; padding-left: 18px; }
-  #data-detail .files a { overflow-wrap: anywhere; }
   #data-detail .results { max-height: 70vh; }
   th.labcol { text-decoration: underline dotted var(--warn-line); text-underline-offset: 3px; }
   @media (max-width: 1000px) { .ref-body { grid-template-columns: 1fr; } .ref-side { position: static; max-height: none; } }
@@ -297,6 +296,7 @@
   .rc-sum { margin: 8px 0 6px; line-height: 1.55; max-width: 80ch; }
   .rc-links { font-size: 12px; color: var(--muted); line-height: 1.7; }
   .rc-links a, .rc-foot a, .rc .ev-h a, .rc .ev-t a { color: var(--accent); }
+  .linkish { overflow-wrap: anywhere; } /* long column names wrap instead of widening the page on a phone */
   .rc .linkish { border: 0; background: none; padding: 0; color: var(--accent); text-decoration: underline; cursor: pointer; font-size: 12px; }
   .rc details { margin-top: 6px; }
   .rc summary { cursor: pointer; font-size: 12.5px; color: var(--muted); }
@@ -311,8 +311,8 @@
   .rc-foot { font-size: 12px; color: var(--muted); margin-top: 8px; }
   .model-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
   .model-head p { margin: 0; color: var(--muted); font-size: 13px; max-width: 78ch; }
-  .model-head label { font-size: 12px; color: var(--muted); display: flex; gap: 6px; align-items: center; }
-  .model-head select { width: auto; }
+  .model-head label { font-size: 12px; color: var(--muted); display: flex; gap: 6px; align-items: center; max-width: 100%; }
+  .model-head select { width: auto; min-width: 0; max-width: 100%; }
   .erd { position: relative; display: grid; padding: 0 64px;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(0, 1fr);
     grid-template-areas: "inv cau sku" "bp cau cc"; column-gap: 112px; row-gap: 28px; align-items: start; }
@@ -350,7 +350,8 @@
   .pill.hl { border-color: var(--accent); color: var(--accent); font-weight: 600; }
   .erd.focus .pill:not(.hl) { opacity: 0.35; }
   .model-bottom { margin-top: 22px; }
-  .detail { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 13px; min-height: 140px; }
+  .detail { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 13px; min-height: 140px;
+    overflow-wrap: anywhere; }
   .detail h3 { margin: 0 0 2px; font-size: 15px; }
   .detail .sub { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-bottom: 8px; }
   .detail p { margin: 6px 0; }
@@ -398,7 +399,8 @@
   .meter { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; margin: 4px 0 8px; max-width: 360px; }
   .meter span { display: block; height: 100%; background: var(--accent); }
   .detail table { font-size: 12px; min-width: 0; width: auto; }
-  .detail th, .detail td { position: static; padding: 3px 10px 3px 0; border-bottom: 1px solid var(--line); background: none; }
+  .detail th, .detail td { position: static; padding: 3px 10px 3px 0; border-bottom: 1px solid var(--line); background: none;
+    white-space: normal; }
   @media (max-width: 1000px) {
     .erd { grid-template-columns: 1fr; grid-template-areas: "cau" "sku" "cc" "inv" "bp"; padding: 0; }
     .erd > svg, #erd-labels { display: none; }
