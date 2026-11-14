@@ -1,10 +1,543 @@
 {
- "generated_at": "2026-11-14T00:24:55Z",
- "since": "2026-10-31T00:24:55Z",
+ "generated_at": "2026-11-14T23:13:27Z",
+ "since": "2026-10-31T23:13:27Z",
  "days": 14,
  "model": "claude-haiku-5-5",
  "about": "FOCUS_Spec issues and pull requests that people opened, commented on or reviewed in the last 14 days. Each summary (what is proposed and why, where the debate lies, how people feel and where it stands) and each one-line gist is written by an AI model from the thread and the issue it implements, and rewritten when the thread gains comments or reviews: they interpret, so check the thread before relying on one. Status changes are posted by the repository's own automation.",
  "threads": [
+  {
+   "number": 2859,
+   "kind": "pr",
+   "title": "AI #2771: Separate Champion scope entry from PR approval",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859",
+   "state": "open",
+   "labels": [],
+   "author": "qquigley",
+   "opened": "2026-11-12",
+   "last": "2026-11-14T16:50:15Z",
+   "earlier": 0,
+   "objects": [],
+   "files_matched": false,
+   "refs": [
+    {
+     "n": 2771,
+     "title": "[AI] Separate Champion Scope entry from PR approval"
+    },
+    {
+     "n": 2444,
+     "title": "AI #2381: Add `Recommendation` dataset"
+    },
+    {
+     "n": 2606,
+     "title": "FR #2099: Distinguish cached from uncached token costs"
+    },
+    {
+     "n": 2640,
+     "title": "AI #2614: Reconcile reused SkuPriceIds in the commitment discount example data"
+    },
+    {
+     "n": 2705,
+     "title": "1.6 Release Scope / Themes / Milestones"
+    }
+   ],
+   "basis": [
+    "i4545194889",
+    "i4545194903",
+    "i4545194908",
+    "i4545194914",
+    "i4545194917",
+    "i4545472823",
+    "i4574613411",
+    "i4574619493",
+    "i4574623488",
+    "i4574633341",
+    "i4574736177",
+    "o2859",
+    "r5867695726"
+   ],
+   "events": [
+    {
+     "id": "o2859",
+     "kind": "opened",
+     "author": "qquigley",
+     "at": "2026-11-12T00:44:20Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859",
+     "excerpt": "Summary Closes 2771. Today, a Maintainer's approval does two jobs on Champion scope PRs: it brings an out-of-scope Feature Request into Task Force discussion, and it counts as an approval to merge. That's confusing for…"
+    },
+    {
+     "id": "s6810953928",
+     "kind": "status",
+     "at": "2026-11-12T00:44:43Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#issuecomment-6810953928",
+     "lines": [
+      "Initialized PR Approvals: 0",
+      "Initialized PR Change Requests: 0"
+     ]
+    },
+    {
+     "id": "i4545194889",
+     "kind": "inline",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-12T01:37:21Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4545194889",
+     "path": "guidelines/contributors/development-processes.md",
+     "parent": "r5867695726",
+     "excerpt": "The current test excludes only Submitted and Needs More Info, so a closed Feature Request would qualify. Its parenthetical also calls Needs More Info untriaged, while line 80 calls it triaged. Submitted means awaiting…"
+    },
+    {
+     "id": "i4545194903",
+     "kind": "inline",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-12T01:37:21Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4545194903",
+     "path": "guidelines/contributors/development-processes.md",
+     "parent": "r5867695726",
+     "excerpt": "Lines 187 to 193 make a sponsored Feature Request eligible after seven days with no objection. At the November 9 Maintainers meeting, the interim practice ran the other way. Champion items wait until the Maintainers say…"
+    },
+    {
+     "id": "i4545194908",
+     "kind": "inline",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-12T01:37:21Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4545194908",
+     "path": "guidelines/contributors/development-processes.md",
+     "parent": "r5867695726",
+     "excerpt": "Lines 188 and 190 use lowercase \"must.\" Are these meant as requirements? If so, uppercase MUST on line 188 and MUST NOT on line 190 would make that clear. The list already opens with an anchor on line 183, and lines 413…"
+    },
+    {
+     "id": "i4545194914",
+     "kind": "inline",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-12T01:37:21Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4545194914",
+     "path": "guidelines/contributors/development-processes.md",
+     "parent": "r5867695726",
+     "excerpt": "What happens when an objection is upheld? Line 185 sets the Scope field to Champion before the seven-day window opens. Line 193 covers only the outcomes where the item goes ahead. A bullet for the other outcome could…"
+    },
+    {
+     "id": "i4545194917",
+     "kind": "inline",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-12T01:37:21Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4545194917",
+     "path": "guidelines/contributors/development-processes.md",
+     "parent": "r5867695726",
+     "excerpt": "Does line 366 apply to every PR, or only to Champion entry? Approval Criteria (lines 400 to 405) already tie an approval to resolved comments. In 1.5, though, some PRs, such as 2606 and 2640, got one early approval…"
+    },
+    {
+     "id": "r5867695726",
+     "kind": "review",
+     "state": "commented",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-12T01:37:21Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#pullrequestreview-5867695726",
+     "excerpt": "Thanks, Q. My notes are targeted process questions in the line comments, plus one suggestion on the readiness check. The main question is on lines 187 to 193. The PR description says that setting Scope and informing the…"
+    },
+    {
+     "id": "i4545472823",
+     "kind": "inline",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-12T02:23:46Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4545472823",
+     "path": "guidelines/contributors/development-processes.md",
+     "parent": null,
+     "excerpt": "Line 145 defines Champion scope as work that a champion chooses to lead. But line 149 says a Feature Request enters Champion scope through a sponsorship, and this line sets Scope to Champion only after one. Until then,…"
+    },
+    {
+     "id": "s6812761786",
+     "kind": "status",
+     "at": "2026-11-12T02:39:30Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#issuecomment-6812761786",
+     "lines": [
+      "Matt-Cowsert updated PR Type: Supporting",
+      "Matt-Cowsert updated Task Force: Maintainers"
+     ]
+    },
+    {
+     "id": "i4574613411",
+     "kind": "inline",
+     "author": "qquigley",
+     "at": "2026-11-14T16:23:59Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4574613411",
+     "path": "guidelines/contributors/development-processes.md",
+     "parent": "i4545194914",
+     "excerpt": "Good call, I dropped the seven day window. After a sponsorship, the Maintainers now confirm readiness at their next meeting. When the Maintainers decide it isn't ready yet, the Feature Request stays in Champion scope…"
+    },
+    {
+     "id": "i4574619493",
+     "kind": "inline",
+     "author": "qquigley",
+     "at": "2026-11-14T16:25:14Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4574619493",
+     "path": "guidelines/contributors/development-processes.md",
+     "parent": "i4545472823",
+     "excerpt": "Agreed. A Feature Request now enters Champion scope when a contributor commits, in a comment on the FR, to lead the work, and the WG Chair sets Scope to Champion at that point. I like your suggestion of splitting the…"
+    },
+    {
+     "id": "i4574623488",
+     "kind": "inline",
+     "author": "qquigley",
+     "at": "2026-11-14T16:25:56Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4574623488",
+     "path": "guidelines/contributors/development-processes.md",
+     "parent": "i4545194908",
+     "excerpt": "Yep, both are requirements. The line 188 bullet (\"An objection must be recorded...\") is gone now that the Maintainers confirm readiness instead of having an objection window. Line 190 now reads: \"The Feature Request…"
+    },
+    {
+     "id": "i4574633341",
+     "kind": "inline",
+     "author": "qquigley",
+     "at": "2026-11-14T16:27:54Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4574633341",
+     "path": "guidelines/contributors/development-processes.md",
+     "parent": "i4545194903",
+     "excerpt": "I dropped the seven day thing. I didn't have the context of the Nov 9th meeting because my Q-mention-notifier gizmo only runs on Thurdsays. I'll need to adjust that."
+    },
+    {
+     "id": "i4574736177",
+     "kind": "inline",
+     "author": "qquigley",
+     "at": "2026-11-14T16:50:15Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4574736177",
+     "path": "guidelines/contributors/development-processes.md",
+     "parent": "i4545194917",
+     "excerpt": "For every PR, an approval already means ready to merge. The Approval Criteria say a PR is eligible for approval only once comments are resolved, the DoD is met, and no objections remain. The PRs you mention were from…"
+    }
+   ],
+   "summary": "qquigley proposes separating two meanings of a Maintainer approval on Champion scope PRs. Today one approval both brings an out-of-scope Feature Request into Task Force discussion and counts toward merging. Under this PR, a non-author Maintainer posts a sponsorship comment on the FR and the WG Chair sets Scope to Champion; sponsorship never counts toward merge. Matt-Cowsert's main concern was a seven-day objection window that would let items reach a Task Force without Maintainer sign-off, which didn't match the 9 November interim practice. qquigley dropped it: after sponsorship, Maintainers confirm readiness at their next meeting. Other points were answered in the 14 November revisions. Reaction looks largely settled, though only one reviewer has commented and no approvals are recorded yet. Existing #2444 approvals are treated as a one-time case.",
+   "gists": {
+    "o2859": "qquigley opened the PR to separate Champion scope entry, signalled by a Maintainer sponsorship comment, from PR approval, so that approval means merge readiness only.",
+    "i4545194889": "Matt-Cowsert suggests the readiness check require an open, triaged FR not in Needs More Info, because closed FRs currently qualify and the wording conflicts with a later line.",
+    "i4545194903": "Matt-Cowsert asks whether the seven-day opt-out was part of the 9 November practice, which had Maintainers clear items first, and suggests either noting it or requiring confirmation.",
+    "i4545194908": "Matt-Cowsert asks whether the lowercase must lines are requirements and suggests uppercase MUST and MUST NOT, since the file mixes both styles.",
+    "i4545194914": "Matt-Cowsert asks what happens to Scope and the sponsorship when an objection is upheld, since the text only covers the outcome where the item goes ahead.",
+    "i4545194917": "Matt-Cowsert asks whether the approval rule applies to every PR or only Champion entry, since some 1.5 PRs got early approvals to signal readiness to discuss.",
+    "r5867695726": "Matt-Cowsert's review says the main concern is the seven-day opt-out compared with the interim practice, and lists smaller questions on triage, keywords, objection outcomes and approval scope.",
+    "i4545472823": "Matt-Cowsert asks whether Scope should change when the champion commits, since a committed lead has no fitting Scope value before sponsorship, and suggests splitting the champion's comment in two.",
+    "i4574613411": "qquigley drops the seven-day window; after sponsorship Maintainers confirm readiness at their next meeting, and the sponsorship stands if they decide the item is not yet ready.",
+    "i4574619493": "qquigley agrees that Champion entry happens when a contributor commits in an FR comment, with the Chair setting Scope then, and adopts the suggestion to split the champion's comments.",
+    "i4574623488": "qquigley confirms both lines are requirements, removes the objection bullet, and bars Task Force agenda placement until Maintainers decide readiness.",
+    "i4574633341": "qquigley drops the seven-day window, explaining they had missed the context of the 9 November meeting and will adjust the text to match.",
+    "i4574736177": "qquigley says approval already means merge-ready for every PR, calls earlier approvals one-offs, and says Champion items on a Task Force agenda follow Core review."
+   },
+   "written_by": [
+    "claude-haiku-5-5"
+   ],
+   "style": 2
+  },
+  {
+   "number": 2521,
+   "kind": "issue",
+   "title": "[FR] Distinguish AI model costs by context window size",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521",
+   "state": "open",
+   "labels": [
+    "ai",
+    "feature"
+   ],
+   "author": "Matt-Cowsert",
+   "opened": "2026-07-07",
+   "last": "2026-11-14T06:35:09Z",
+   "earlier": 4,
+   "objects": [
+    "column:CostAndUsage.SkuPriceDetails",
+    "dataset:SkuPrice",
+    "column:CostAndUsage.SkuPriceId",
+    "column:CostAndUsage.PricingUnit",
+    "dataset:CostAndUsage",
+    "column:SkuPrice.QuantityTierMinimum"
+   ],
+   "files_matched": false,
+   "refs": [
+    {
+     "n": 2018,
+     "title": "[FR] Surface AI model identity and token consumption in FOCUS"
+    },
+    {
+     "n": 2511,
+     "title": null
+    },
+    {
+     "n": 2099,
+     "title": "[FR] Distinguish cached from uncached token costs"
+    },
+    {
+     "n": 2371,
+     "title": "[FR] Standardize AI provisioned throughput commitments"
+    },
+    {
+     "n": 2414,
+     "title": "[FR] Distinguish global from regional prices by region scope"
+    },
+    {
+     "n": 2437,
+     "title": "[FR] Distinguish AI inference processing tiers"
+    },
+    {
+     "n": 1941,
+     "title": "[FR] Add examples for token and generation-based AI billing in FOCUS"
+    },
+    {
+     "n": 2416,
+     "title": null
+    },
+    {
+     "n": 2442,
+     "title": "FR #2018: AI model identity as SkuPriceDetails properties"
+    },
+    {
+     "n": 2605,
+     "title": "AI #1941: Add AI model billing examples and supported feature"
+    },
+    {
+     "n": 2606,
+     "title": "FR #2099: Distinguish cached from uncached token costs"
+    },
+    {
+     "n": 2424,
+     "title": "AI #2364: Add `SKU Price` dataset"
+    }
+   ],
+   "basis": [
+    "c6611147187",
+    "c6616230209",
+    "c6633163337",
+    "c6758415040",
+    "c6780497157",
+    "c6873204925"
+   ],
+   "events": [
+    {
+     "id": "s6610010405",
+     "kind": "status",
+     "at": "2026-11-03T16:48:09Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521#issuecomment-6610010405",
+     "lines": [
+      "Matt-Cowsert updated Scope: Seeking Champion → Champion",
+      "Matt-Cowsert updated Scope: Champion → Core",
+      "Matt-Cowsert updated Task Force: TF-1"
+     ]
+    },
+    {
+     "id": "c6611147187",
+     "kind": "comment",
+     "author": "jerrysr99",
+     "at": "2026-11-03T17:39:22Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521#issuecomment-6611147187",
+     "excerpt": "A quick look at current coverage for context-window pricing. Based on a review of first-party pricing pages as of November 2026, 24 models across six providers bill by prompt size: - Alibaba - Anthropic - Google -…"
+    },
+    {
+     "id": "c6616230209",
+     "kind": "comment",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-03T21:47:37Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521#issuecomment-6616230209",
+     "excerpt": "Status Update - TF1 - November 3, 2026 FR 2521 - Distinguish AI model costs by context window size This feature request (FR) is now in the 1.6 Core scope, the work this release commits to, and in Task Force 1 (TF1). AI…"
+    },
+    {
+     "id": "c6633163337",
+     "kind": "comment",
+     "author": "jerrysr99",
+     "at": "2026-11-04T14:25:21Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521#issuecomment-6633163337",
+     "excerpt": "For reference, here is how providers currently express context-window band boundaries in their first-party pricing documentation (wording only, no price data): Boundary style Providers Prompt exactly at the boundary…"
+    },
+    {
+     "id": "c6758415040",
+     "kind": "comment",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-10T03:47:44Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521#issuecomment-6758415040",
+     "excerpt": "Status Update - Maintainers - November 9, 2026 FR 2521 - Distinguish AI model costs by context window size The Maintainers reviewed this feature request (FR) for estimation. Jerry Lambert took it on at Task Force 1 on…"
+    },
+    {
+     "id": "c6780497157",
+     "kind": "comment",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-10T22:03:47Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521#issuecomment-6780497157",
+     "excerpt": "Status Update - TF1 - November 10, 2026 FR 2521 - Distinguish AI model costs by context window size Jerry Lambert walked Task Force 1 (TF1) through a draft model of context window pricing for this feature request (FR),…"
+    },
+    {
+     "id": "c6873204925",
+     "kind": "comment",
+     "author": "jerrysr99",
+     "at": "2026-11-14T06:35:09Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521#issuecomment-6873204925",
+     "excerpt": "Context-window size can affect pricing in six ways. The table below lists those mechanisms from a review of published provider pages as of November 9, 2026. Mechanism Description In use today --------- Rate change by…"
+    }
+   ],
+   "summary": "FR #2521 asks FOCUS to separate charges for one AI model billed at a long-context tier from standard-rate charges. Google prices some Gemini models by prompt size, so today the blended cost lands in one group and practitioners cannot measure long-context spend without provider logs. The FR is now in 1.6 Core scope. jerrysr99 found 24 models across six providers, mostly with two bands. The draft proposes an exclusive minimum and inclusive maximum, as SKU Price columns and SkuPriceDetails properties. Support for the goal looks solid, though some maintainers see a modest cost effect. Open points are whether the value belongs to the SKU ID or SKU Price ID, and what it holds. Draft PRs #2871 and #2872 are up, and the next step is ratings in the estimation workbook.",
+   "gists": {
+    "c6611147187": "jerrysr99 reports 24 models across six providers bill by prompt size, mostly with two bands, and asks whether FOCUS should represent context-size bands explicitly and whether two bands suffice.",
+    "c6616230209": "Matt-Cowsert records that the FR moved into 1.6 Core scope, that jerrysr99 took it on, and suggests starting with a SkuPriceDetails property, with a SKU Price column as a stretch.",
+    "c6633163337": "jerrysr99 compares how providers word band boundaries and notes that repricing applies to the whole request, raising open questions on boundary identity, counted tokens, and whole-request versus partial repricing.",
+    "c6758415040": "Matt-Cowsert summarises the Maintainers estimation discussion: broad agreement it is worth doing, open questions on SKU ID versus SKU Price ID and the property's value, and a two-step plan.",
+    "c6780497157": "Matt-Cowsert records the TF1 draft adding two SKU Price bound columns and an applicability condition, plus Option D carrying both columns and properties; zero-minimum and conflict rules stay open.",
+    "c6873204925": "jerrysr99 lists six ways context size can affect pricing, notes only whole-request repricing is in use today, and points to draft PRs #2871 and #2872."
+   },
+   "written_by": [
+    "claude-haiku-5-5"
+   ],
+   "style": 2
+  },
+  {
+   "number": 2872,
+   "kind": "pr",
+   "title": "FR #2521: Add context-window pricing columns to SKU Price (stacked on the properties PR)",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2872",
+   "state": "draft",
+   "labels": [],
+   "author": "jerrysr99",
+   "opened": "2026-11-14",
+   "last": "2026-11-14T06:14:58Z",
+   "earlier": 0,
+   "objects": [
+    "topic:sku-price-examples",
+    "column:SkuPrice.SkuPriceId",
+    "dataset:SkuPrice",
+    "column:CostAndUsage.SkuPriceId",
+    "column:CostAndUsage.ServiceProviderName",
+    "column:CostAndUsage.SkuPriceDetails",
+    "dataset:CostAndUsage",
+    "condition:IncludesQuantityTierPricing"
+   ],
+   "files_matched": true,
+   "refs": [
+    {
+     "n": 2521,
+     "title": "[FR] Distinguish AI model costs by context window size"
+    },
+    {
+     "n": 2817,
+     "title": "[AI] Draft a first model of context window pricing for FR 2521"
+    },
+    {
+     "n": 2871,
+     "title": "FR #2521: Add context-window pricing properties to SKU Price Details"
+    },
+    {
+     "n": 2748,
+     "title": "AI #2364: Add `QuantityTierCategory` to `SkuPrice` dataset"
+    },
+    {
+     "n": 2749,
+     "title": "AI #2364: Add `SkuMeter` to `SkuPrice` dataset"
+    },
+    {
+     "n": 2753,
+     "title": "FOCUS #2751: Adding CommitmentApplicability to the SKU Price dataset"
+    }
+   ],
+   "basis": [
+    "c6872951115",
+    "o2872"
+   ],
+   "events": [
+    {
+     "id": "o2872",
+     "kind": "opened",
+     "author": "jerrysr99",
+     "at": "2026-11-14T06:04:34Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2872",
+     "excerpt": "Summary Implements the SKU Price columns for FR 2521, tracked under AI 2817, by adding two Conditional columns, ContextWindowMinimum and ContextWindowMaximum, the IncludesContextWindowPricing condition, and a worked SKU…"
+    },
+    {
+     "id": "s6872815084",
+     "kind": "status",
+     "at": "2026-11-14T06:04:54Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2872#issuecomment-6872815084",
+     "lines": [
+      "Initialized PR Approvals: 0",
+      "Initialized PR Change Requests: 0"
+     ]
+    },
+    {
+     "id": "c6872951115",
+     "kind": "comment",
+     "author": "jerrysr99",
+     "at": "2026-11-14T06:14:58Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2872#issuecomment-6872951115",
+     "excerpt": "The table below is a snapshot, as of November 9, 2026, of providers and models that publish context-window-dependent pricing, with threshold wording quoted as written on the provider pages (wording only; no prices). It…"
+    }
+   ],
+   "summary": "jerrysr99 has opened this draft implementing the SKU Price part of FR #2521, which asks for long-context AI charges to be distinguished from standard-context charges for the same model. Google's Gemini models price at a 200K-token prompt threshold, and FOCUS data currently blends those rates together. The pull request adds two Conditional columns, ContextWindowMinimum (exclusive) and ContextWindowMaximum (inclusive), measured in input tokens per request, along with an IncludesContextWindowPricing condition, dataset requirements and an appendix example. Unlike Quantity Tier Minimum, the minimum is null when price does not vary by window size. It is stacked on #2871 and needs that branch first. Trial merges conflict with #2748, #2749 and #2753, which also edit the SKU Price column table. No reviews or approvals exist yet; the only other activity is jerrysr99's comment listing providers with context-window pricing.",
+   "gists": {
+    "o2872": "Draft PR implementing FR #2521 in SKU Price: two Conditional columns, an IncludesContextWindowPricing condition, SkuPriceId requirements and an appendix example, stacked on #2871.",
+    "c6872951115": "Snapshot, as of 9 November 2026, of providers and models with context-window pricing, quoting threshold wording only, offered as context for naming those bounds as columns."
+   },
+   "written_by": [
+    "claude-haiku-5-5"
+   ],
+   "style": 2
+  },
+  {
+   "number": 2871,
+   "kind": "pr",
+   "title": "FR #2521: Add context-window pricing properties to SKU Price Details",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871",
+   "state": "draft",
+   "labels": [],
+   "author": "jerrysr99",
+   "opened": "2026-11-14",
+   "last": "2026-11-14T06:04:23Z",
+   "earlier": 0,
+   "objects": [
+    "column:CostAndUsage.SkuPriceDetails",
+    "dataset:SkuPrice",
+    "dataset:CostAndUsage",
+    "column:CostAndUsage.SkuMeter",
+    "column:CostAndUsage.ChargeDescription",
+    "column:CostAndUsage.SkuPriceId",
+    "column:CostAndUsage.PricingUnit"
+   ],
+   "files_matched": true,
+   "refs": [
+    {
+     "n": 2521,
+     "title": "[FR] Distinguish AI model costs by context window size"
+    },
+    {
+     "n": 2817,
+     "title": "[AI] Draft a first model of context window pricing for FR 2521"
+    },
+    {
+     "n": 2613,
+     "title": "FR #2414: Region scope as a SkuPriceDetails property"
+    }
+   ],
+   "basis": [
+    "o2871"
+   ],
+   "events": [
+    {
+     "id": "o2871",
+     "kind": "opened",
+     "author": "jerrysr99",
+     "at": "2026-11-14T06:04:23Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871",
+     "excerpt": "Summary FR 2521 identifies that some service providers price an AI model differently depending on how many input tokens a single request consumes, and that a practitioner cannot tell from Cost and Usage or SKU Price…"
+    },
+    {
+     "id": "s6872812534",
+     "kind": "status",
+     "at": "2026-11-14T06:04:42Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871#issuecomment-6872812534",
+     "lines": [
+      "Initialized PR Approvals: 0",
+      "Initialized PR Change Requests: 0"
+     ]
+    }
+   ],
+   "summary": "jerrysr99 has opened a draft pull request implementing #2521, which asks how to tell whether an AI charge was priced at a long-context tier. Google's Gemini models charge more per token above a 200K-token input threshold, and FOCUS data currently blends those prices together. The proposal adds ContextWindowMinimum and ContextWindowMaximum to SkuPriceDetails in Cost and Usage. Task Force 1 has settled on carrying the bounds in both Cost and Usage and the SKU Price dataset for now, so practitioners read whichever they use. An unbounded top tier needs an explicit null maximum, hence the new Numeric or null data type. Providers would fill in both sides when they deliver both datasets. No reviews or comments have appeared yet, so support or objections cannot be seen. The SKU Price columns come in a stacked pull request.",
+   "gists": {
+    "o2871": "Opens the draft adding ContextWindowMinimum and ContextWindowMaximum to SkuPriceDetails with an appendix example, to implement #2521 and carry the bounds in both Cost and Usage and SKU Price."
+   },
+   "written_by": [
+    "claude-haiku-5-5"
+   ],
+   "style": 2
+  },
   {
    "number": 2870,
    "kind": "pr",
@@ -1546,166 +2079,6 @@
    "style": 2
   },
   {
-   "number": 2859,
-   "kind": "pr",
-   "title": "AI #2771: Separate Champion scope entry from PR approval",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859",
-   "state": "open",
-   "labels": [],
-   "author": "qquigley",
-   "opened": "2026-11-12",
-   "last": "2026-11-12T02:23:46Z",
-   "earlier": 0,
-   "objects": [],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2771,
-     "title": "[AI] Separate Champion Scope entry from PR approval"
-    },
-    {
-     "n": 2444,
-     "title": "AI #2381: Add `Recommendation` dataset"
-    },
-    {
-     "n": 2606,
-     "title": "FR #2099: Distinguish cached from uncached token costs"
-    },
-    {
-     "n": 2640,
-     "title": "AI #2614: Reconcile reused SkuPriceIds in the commitment discount example data"
-    },
-    {
-     "n": 2705,
-     "title": "1.6 Release Scope / Themes / Milestones"
-    }
-   ],
-   "basis": [
-    "i4545194889",
-    "i4545194903",
-    "i4545194908",
-    "i4545194914",
-    "i4545194917",
-    "i4545472823",
-    "o2859",
-    "r5867695726"
-   ],
-   "events": [
-    {
-     "id": "o2859",
-     "kind": "opened",
-     "author": "qquigley",
-     "at": "2026-11-12T00:44:20Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859",
-     "excerpt": "Summary Closes 2771. Today, a Maintainer's approval does two jobs on Champion scope PRs: it brings an out-of-scope Feature Request into Task Force discussion, and it counts as an approval to merge. That's confusing for…"
-    },
-    {
-     "id": "s6810953928",
-     "kind": "status",
-     "at": "2026-11-12T00:44:43Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#issuecomment-6810953928",
-     "lines": [
-      "Initialized PR Approvals: 0",
-      "Initialized PR Change Requests: 0"
-     ]
-    },
-    {
-     "id": "i4545194889",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T01:37:21Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4545194889",
-     "path": "guidelines/contributors/development-processes.md",
-     "parent": "r5867695726",
-     "excerpt": "The current test excludes only Submitted and Needs More Info, so a closed Feature Request would qualify. Its parenthetical also calls Needs More Info untriaged, while line 80 calls it triaged. Submitted means awaiting…"
-    },
-    {
-     "id": "i4545194903",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T01:37:21Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4545194903",
-     "path": "guidelines/contributors/development-processes.md",
-     "parent": "r5867695726",
-     "excerpt": "Lines 187 to 193 make a sponsored Feature Request eligible after seven days with no objection. At the November 9 Maintainers meeting, the interim practice ran the other way. Champion items wait until the Maintainers say…"
-    },
-    {
-     "id": "i4545194908",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T01:37:21Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4545194908",
-     "path": "guidelines/contributors/development-processes.md",
-     "parent": "r5867695726",
-     "excerpt": "Lines 188 and 190 use lowercase \"must.\" Are these meant as requirements? If so, uppercase MUST on line 188 and MUST NOT on line 190 would make that clear. The list already opens with an anchor on line 183, and lines 413…"
-    },
-    {
-     "id": "i4545194914",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T01:37:21Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4545194914",
-     "path": "guidelines/contributors/development-processes.md",
-     "parent": "r5867695726",
-     "excerpt": "What happens when an objection is upheld? Line 185 sets the Scope field to Champion before the seven-day window opens. Line 193 covers only the outcomes where the item goes ahead. A bullet for the other outcome could…"
-    },
-    {
-     "id": "i4545194917",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T01:37:21Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4545194917",
-     "path": "guidelines/contributors/development-processes.md",
-     "parent": "r5867695726",
-     "excerpt": "Does line 366 apply to every PR, or only to Champion entry? Approval Criteria (lines 400 to 405) already tie an approval to resolved comments. In 1.5, though, some PRs, such as 2606 and 2640, got one early approval…"
-    },
-    {
-     "id": "r5867695726",
-     "kind": "review",
-     "state": "commented",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T01:37:21Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#pullrequestreview-5867695726",
-     "excerpt": "Thanks, Q. My notes are targeted process questions in the line comments, plus one suggestion on the readiness check. The main question is on lines 187 to 193. The PR description says that setting Scope and informing the…"
-    },
-    {
-     "id": "i4545472823",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T02:23:46Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4545472823",
-     "path": "guidelines/contributors/development-processes.md",
-     "parent": null,
-     "excerpt": "Line 145 defines Champion scope as work that a champion chooses to lead. But line 149 says a Feature Request enters Champion scope through a sponsorship, and this line sets Scope to Champion only after one. Until then,…"
-    },
-    {
-     "id": "s6812761786",
-     "kind": "status",
-     "at": "2026-11-12T02:39:30Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#issuecomment-6812761786",
-     "lines": [
-      "Matt-Cowsert updated PR Type: Supporting",
-      "Matt-Cowsert updated Task Force: Maintainers"
-     ]
-    }
-   ],
-   "summary": "qquigley's PR #2859, closing #2771, proposes a separate Maintainer sponsorship comment to bring a Feature Request into Champion scope, so that a PR approval means only merge-ready. The Chair would then set Scope to Champion, Maintainers would get seven days to object, and the Chair would decide scheduling and which Task Force takes the work. The only review so far, from Matt-Cowsert, reads as process questions rather than opposition. The main one is whether the seven-day opt-out fits the 9 November interim practice, where Champion items wait for Maintainers to confirm readiness. Other questions cover lowercase must, what happens if an objection is upheld, whether the new approval meaning applies to all PRs, and whether Scope should change when a champion commits. No author replies appear yet, so the PR looks early and open to revision.",
-   "gists": {
-    "o2859": "qquigley proposes a Maintainer sponsorship comment as the separate Champion scope entry signal, leaving PR approval for merge readiness, with a seven-day objection window and a question about existing approvals.",
-    "i4545194889": "Matt-Cowsert says the triage test would let closed Feature Requests qualify and suggests requiring an open status other than Needs More Info.",
-    "i4545194903": "Matt-Cowsert asks whether the seven-day opt-out matches the 9 November practice, where Maintainers confirmed readiness before Champion items went to a Task Force.",
-    "i4545194908": "Matt-Cowsert asks whether the lowercase must lines are requirements and suggests uppercase MUST and MUST NOT, since the file mixes both styles.",
-    "i4545194914": "Matt-Cowsert asks what happens when an objection is upheld, since Scope is set to Champion before the window opens and the draft covers only outcomes where the item proceeds.",
-    "i4545194917": "Matt-Cowsert asks whether the approval guidance applies to every PR or only Champion entry, since early approvals on #2606 and #2640 signaled readiness before TF review.",
-    "r5867695726": "Matt-Cowsert's review asks targeted process questions in line comments, focused mainly on the seven-day opt-out, and does not state a position on the proposal overall.",
-    "i4545472823": "Matt-Cowsert asks whether Scope should change when a champion commits, since Champion scope currently needs a sponsorship and committed items have no fitting Scope value."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
    "number": 2807,
    "kind": "issue",
    "title": "[FR] Promote the SKU Price dataset to general availability",
@@ -1717,16 +2090,16 @@
    "author": "Matt-Cowsert",
    "opened": "2026-10-31",
    "last": "2026-11-12T01:16:22Z",
-   "earlier": 0,
+   "earlier": 2,
    "objects": [
     "dataset:SkuPrice",
     "dataset:CostAndUsage",
     "column:CostAndUsage.SkuMeter",
-    "column:CostAndUsage.ContractedUnitPrice",
-    "condition:IncludesUnitPricing",
     "column:CostAndUsage.SkuPriceId",
     "column:CostAndUsage.BillingAccountId",
     "column:SkuPrice.SkuPriceEligibility",
+    "column:CostAndUsage.ContractedUnitPrice",
+    "condition:IncludesUnitPricing",
     "column:SkuPrice.ContractId",
     "column:CostAndUsage.ContractApplied"
    ],
@@ -1784,39 +2157,9 @@
    "basis": [
     "c6642864158",
     "c6647189623",
-    "c6811474831",
-    "o2807"
+    "c6811474831"
    ],
    "events": [
-    {
-     "id": "o2807",
-     "kind": "opened",
-     "author": "Matt-Cowsert",
-     "at": "2026-10-31T02:10:01Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2807",
-     "excerpt": "Problem Statement FOCUS 1.5 adds the SKU Price dataset as a preview. While it is a preview, its requirements are not evaluated for conformance. The same goes for two requirements outside the dataset that refer to it.…"
-    },
-    {
-     "id": "s6537615536",
-     "kind": "status",
-     "at": "2026-10-31T02:10:31Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2807#issuecomment-6537615536",
-     "lines": [
-      "Initialized Request Type: Feature",
-      "Matt-Cowsert updated Scope: Core",
-      "Matt-Cowsert updated Candidate Release: 1.6",
-      "Matt-Cowsert updated Task Force: TF-1"
-     ]
-    },
-    {
-     "id": "s6537714939",
-     "kind": "status",
-     "at": "2026-10-31T02:20:14Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2807#issuecomment-6537714939",
-     "lines": [
-      "Matt-Cowsert updated Task Force: TF-1 → TF-2"
-     ]
-    },
     {
      "id": "c6642864158",
      "kind": "comment",
@@ -1842,12 +2185,11 @@
      "excerpt": "Status Update - TF2 - November 11, 2026 FR 2807 - Promote the SKU Price dataset to general availability Task Force 2 (TF2) worked on the path to general availability for the SKU Price dataset. It covered pull requests…"
     }
    ],
-   "summary": "FR #2807 proposes moving the SKU Price dataset out of preview for FOCUS 1.6. As a preview, its requirements and two linked Cost and Usage requirements go unchecked for conformance, and its shape can change without notice. Matt-Cowsert opened it to settle the open questions in #2768: dataset size, matching prices to charges by effective date, commitment discounts, and whether each provider price has its own record. flanakin's Azure test puts the dataset at about 0.27 times the toolkit size, but only when deliveries carry just changed prices; full monthly resends would be about three times larger, so draft PR #2826 proposes a changed-since option. One participant wants a ContractId column to help matching. Discussion looks constructive, though questions remain open. PR #2845 is set for 1.6; SkuMeter, primary keys and the dataset name are still open.",
+   "summary": "FR #2807 asks to move the SKU Price dataset out of preview, so its requirements count toward conformance and it changes only under normal deprecation rules, giving practitioners and tool vendors a price list to build on. Four open questions from #2768 gate it: size, matching prices to charges by date, commitment discounts, and whether each provider price gets its own record. On size, flanakin's 14-month Azure test came in at about 0.27 times the toolkit format, but only when deliveries carry changed prices, so draft #2826 proposes a changed-since option. Commitment discounts are a priority; spot pricing is not needed for GA. Discussion looks constructive, though some questions, such as ContractId and the dataset name, remain open. As of 11 November 2026, PR #2845 is settled for 1.6, and SkuMeter may move to 1.7.",
    "gists": {
-    "o2807": "Matt-Cowsert asks that the SKU Price dataset leave preview for GA, so its requirements count for conformance and its shape changes only under deprecation rules.",
-    "c6642864158": "flanakin's 14 months of Azure data: the 1.5 preview SkuPrice is 0.64 GB against 2.34 GB for toolkit prices, and one row per SkuPriceId gives 0.33 GB.",
-    "c6647189623": "TF2 made size, performance and usability the measures, left spot prices out of GA, and noted that size depends on changed-only deliveries the dataset cannot yet request.",
-    "c6811474831": "Matt-Cowsert's 11 November update keeps PR #2845 as written for 1.6, moves editorial fixes and renaming out of it, and lists SkuMeter, keys and name as open."
+    "c6642864158": "flanakin's 14-month Azure test: the SkuPrice preview is about 0.27 times the toolkit size, and one row per SkuPriceId cuts it to 0.14 times.",
+    "c6647189623": "TF2 status: size stays open, spot pricing is not needed for GA, and commitment discounts are a priority via #2753. Open questions cover changed-only deliveries and SkuPriceId reliability.",
+    "c6811474831": "TF2 update: #2845 stays as written and lands in 1.6; #2826 proposes a changed-since option; SkuMeter may move to 1.7; the dataset name is tracked as #2856."
    },
    "written_by": [
     "claude-haiku-5-5"
@@ -1930,7 +2272,7 @@
    "author": "ljadvey",
    "opened": "2026-02-07",
    "last": "2026-11-12T01:14:37Z",
-   "earlier": 19,
+   "earlier": 20,
    "objects": [
     "column:CostAndUsage.InvoiceIssuerName",
     "column:CostAndUsage.PricingUnit",
@@ -1970,15 +2312,6 @@
     "c6811446177"
    ],
    "events": [
-    {
-     "id": "s6537670438",
-     "kind": "status",
-     "at": "2026-10-31T02:15:49Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/1974#issuecomment-6537670438",
-     "lines": [
-      "Matt-Cowsert updated Scope: Seeking Champion"
-     ]
-    },
     {
      "id": "c6811446177",
      "kind": "comment",
@@ -3264,7 +3597,7 @@
    "author": "ijurica",
    "opened": "2026-10-08",
    "last": "2026-11-10T23:17:25Z",
-   "earlier": 3,
+   "earlier": 4,
    "objects": [
     "dataset:SkuPrice"
    ],
@@ -3279,16 +3612,6 @@
     "c6781970208"
    ],
    "events": [
-    {
-     "id": "s6537723260",
-     "kind": "status",
-     "at": "2026-10-31T02:21:06Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2751#issuecomment-6537723260",
-     "lines": [
-      "Matt-Cowsert updated Scope: Core",
-      "Matt-Cowsert updated Task Force: TF-2"
-     ]
-    },
     {
      "id": "s6781956433",
      "kind": "status",
@@ -3744,7 +4067,7 @@
    "author": "Matt-Cowsert",
    "opened": "2026-10-19",
    "last": "2026-11-10T22:03:56Z",
-   "earlier": 4,
+   "earlier": 5,
    "objects": [
     "dataset:SkuPrice",
     "dataset:CostAndUsage",
@@ -3810,15 +4133,6 @@
    ],
    "events": [
     {
-     "id": "s6537642664",
-     "kind": "status",
-     "at": "2026-10-31T02:13:10Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2782#issuecomment-6537642664",
-     "lines": [
-      "Matt-Cowsert updated Task Force: TF-1"
-     ]
-    },
-    {
      "id": "s6561104469",
      "kind": "status",
      "at": "2026-11-01T17:05:32Z",
@@ -3882,170 +4196,6 @@
    "style": 2
   },
   {
-   "number": 2521,
-   "kind": "issue",
-   "title": "[FR] Distinguish AI model costs by context window size",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521",
-   "state": "open",
-   "labels": [
-    "ai",
-    "feature"
-   ],
-   "author": "Matt-Cowsert",
-   "opened": "2026-07-07",
-   "last": "2026-11-10T22:03:47Z",
-   "earlier": 2,
-   "objects": [
-    "column:CostAndUsage.SkuPriceDetails",
-    "dataset:SkuPrice",
-    "column:CostAndUsage.SkuPriceId",
-    "column:CostAndUsage.PricingUnit",
-    "dataset:CostAndUsage",
-    "column:SkuPrice.QuantityTierMinimum"
-   ],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2018,
-     "title": "[FR] Surface AI model identity and token consumption in FOCUS"
-    },
-    {
-     "n": 2511,
-     "title": null
-    },
-    {
-     "n": 2099,
-     "title": "[FR] Distinguish cached from uncached token costs"
-    },
-    {
-     "n": 2371,
-     "title": "[FR] Standardize AI provisioned throughput commitments"
-    },
-    {
-     "n": 2414,
-     "title": "[FR] Distinguish global from regional prices by region scope"
-    },
-    {
-     "n": 2437,
-     "title": "[FR] Distinguish AI inference processing tiers"
-    },
-    {
-     "n": 1941,
-     "title": "[FR] Add examples for token and generation-based AI billing in FOCUS"
-    },
-    {
-     "n": 2416,
-     "title": null
-    },
-    {
-     "n": 2442,
-     "title": "FR #2018: AI model identity as SkuPriceDetails properties"
-    },
-    {
-     "n": 2605,
-     "title": "AI #1941: Add AI model billing examples and supported feature"
-    },
-    {
-     "n": 2606,
-     "title": "FR #2099: Distinguish cached from uncached token costs"
-    },
-    {
-     "n": 2424,
-     "title": "AI #2364: Add `SKU Price` dataset"
-    }
-   ],
-   "basis": [
-    "c6611147187",
-    "c6616230209",
-    "c6633163337",
-    "c6758415040",
-    "c6780497157"
-   ],
-   "events": [
-    {
-     "id": "s6537277991",
-     "kind": "status",
-     "at": "2026-10-31T01:38:04Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521#issuecomment-6537277991",
-     "lines": [
-      "Matt-Cowsert cleared Task Force"
-     ]
-    },
-    {
-     "id": "s6537482669",
-     "kind": "status",
-     "at": "2026-10-31T01:57:30Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521#issuecomment-6537482669",
-     "lines": [
-      "Matt-Cowsert updated Scope: Seeking Champion"
-     ]
-    },
-    {
-     "id": "s6610010405",
-     "kind": "status",
-     "at": "2026-11-03T16:48:09Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521#issuecomment-6610010405",
-     "lines": [
-      "Matt-Cowsert updated Scope: Seeking Champion → Champion",
-      "Matt-Cowsert updated Scope: Champion → Core",
-      "Matt-Cowsert updated Task Force: TF-1"
-     ]
-    },
-    {
-     "id": "c6611147187",
-     "kind": "comment",
-     "author": "jerrysr99",
-     "at": "2026-11-03T17:39:22Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521#issuecomment-6611147187",
-     "excerpt": "A quick look at current coverage for context-window pricing. Based on a review of first-party pricing pages as of November 2026, 24 models across six providers bill by prompt size: - Alibaba - Anthropic - Google -…"
-    },
-    {
-     "id": "c6616230209",
-     "kind": "comment",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-03T21:47:37Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521#issuecomment-6616230209",
-     "excerpt": "Status Update - TF1 - November 3, 2026 FR 2521 - Distinguish AI model costs by context window size This feature request (FR) is now in the 1.6 Core scope, the work this release commits to, and in Task Force 1 (TF1). AI…"
-    },
-    {
-     "id": "c6633163337",
-     "kind": "comment",
-     "author": "jerrysr99",
-     "at": "2026-11-04T14:25:21Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521#issuecomment-6633163337",
-     "excerpt": "For reference, here is how providers currently express context-window band boundaries in their first-party pricing documentation (wording only, no price data): Boundary style Providers Prompt exactly at the boundary…"
-    },
-    {
-     "id": "c6758415040",
-     "kind": "comment",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-10T03:47:44Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521#issuecomment-6758415040",
-     "excerpt": "Status Update - Maintainers - November 9, 2026 FR 2521 - Distinguish AI model costs by context window size The Maintainers reviewed this feature request (FR) for estimation. Jerry Lambert took it on at Task Force 1 on…"
-    },
-    {
-     "id": "c6780497157",
-     "kind": "comment",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-10T22:03:47Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2521#issuecomment-6780497157",
-     "excerpt": "Status Update - TF1 - November 10, 2026 FR 2521 - Distinguish AI model costs by context window size Jerry Lambert walked Task Force 1 (TF1) through a draft model of context window pricing for this feature request (FR),…"
-    }
-   ],
-   "summary": "This FR asks FOCUS to separate charges for the same AI model priced at long-context and standard-context tiers. Google prices several Gemini models by prompt size, and blended cost hides which tier applied. Practitioners could compare tiers without joining provider logs. jerrysr99 surveyed 24 models across six providers, mostly with two bands between 100K and 512K tokens. A Task Force 1 draft by jerrysr99 adds ContextWindowMinimum and ContextWindowMaximum columns to the SKU Price dataset, plus a condition and SkuPriceDetails properties. Matt-Cowsert wants it in 1.6 since the change is small, and no objections were raised to the draft. Maintainers agree it is worth doing; open questions are whether the value sits on the SKU ID or SKU Price ID, what it holds, and whether to split it out.",
-   "gists": {
-    "c6611147187": "jerrysr99 counted 24 models across six providers that bill by prompt size, mostly with two bands, and asked whether FOCUS should represent bands explicitly.",
-    "c6616230209": "Matt-Cowsert recorded the FR in 1.6 Core scope under jerrysr99, suggesting a SkuPriceDetails property or SKU Price column, with the SKU Price column as a stretch.",
-    "c6633163337": "jerrysr99 compared how providers word band boundaries, noting whether a prompt exactly at a threshold falls in the lower or upper band, and raised data model questions.",
-    "c6758415040": "Matt-Cowsert summarised the Maintainers estimation review, noting several see context window size as a SKU price attribute and three open questions remain.",
-    "c6780497157": "Matt-Cowsert reported the TF1 draft: two SKU Price columns and an IncludesContextWindowPricing condition, with bounds in both SKU Price and SkuPriceDetails as new Option D, and no objections raised."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
    "number": 2335,
    "kind": "issue",
    "title": "[FR] Revise Feature Levels to make FOCUS more globally applicable",
@@ -4057,7 +4207,7 @@
    "author": "shawnalpay",
    "opened": "2026-05-01",
    "last": "2026-11-10T21:24:46Z",
-   "earlier": 11,
+   "earlier": 12,
    "objects": [
     "column:CostAndUsage.ListCost",
     "column:CostAndUsage.ContractedCost",
@@ -4079,15 +4229,6 @@
     "c6779653074"
    ],
    "events": [
-    {
-     "id": "s6537672325",
-     "kind": "status",
-     "at": "2026-10-31T02:16:00Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2335#issuecomment-6537672325",
-     "lines": [
-      "Matt-Cowsert updated Scope: Seeking Champion"
-     ]
-    },
     {
      "id": "s6772617197",
      "kind": "status",
@@ -6165,7 +6306,7 @@
    "author": "Matt-Cowsert",
    "opened": "2026-09-22",
    "last": "2026-11-05T01:35:54Z",
-   "earlier": 1,
+   "earlier": 2,
    "objects": [
     "column:CostAndUsage.ContractedUnitPrice",
     "column:CostAndUsage.EffectiveCost",
@@ -6234,16 +6375,6 @@
    ],
    "events": [
     {
-     "id": "s6537719088",
-     "kind": "status",
-     "at": "2026-10-31T02:20:40Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2706#issuecomment-6537719088",
-     "lines": [
-      "Matt-Cowsert updated Task Force: TF-1 → TF-2",
-      "Matt-Cowsert updated Scope: Core"
-     ]
-    },
-    {
      "id": "c6647190592",
      "kind": "comment",
      "author": "Matt-Cowsert",
@@ -6273,7 +6404,7 @@
    "author": "Matt-Cowsert",
    "opened": "2026-10-06",
    "last": "2026-11-05T01:35:52Z",
-   "earlier": 4,
+   "earlier": 5,
    "objects": [
     "dataset:SkuPrice",
     "dataset:CostAndUsage",
@@ -6328,15 +6459,6 @@
     "c6647190069"
    ],
    "events": [
-    {
-     "id": "s6537716180",
-     "kind": "status",
-     "at": "2026-10-31T02:20:22Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2742#issuecomment-6537716180",
-     "lines": [
-      "Matt-Cowsert updated Task Force: TF-2"
-     ]
-    },
     {
      "id": "c6647190069",
      "kind": "comment",
@@ -6834,7 +6956,7 @@
     },
     {
      "n": 2573,
-     "title": "[AI] Apply the heading naming and supported column coverage conventions across existing supported features"
+     "title": null
     }
    ],
    "basis": [
@@ -8139,7 +8261,7 @@
    "refs": [
     {
      "n": 2654,
-     "title": "[FR] Companion Utilization dataset for usage-vs-cost decomposition"
+     "title": null
     },
     {
      "n": 2805,
@@ -8195,7 +8317,7 @@
    "author": "turso77",
    "opened": "2026-10-29",
    "last": "2026-11-02T16:58:35Z",
-   "earlier": 0,
+   "earlier": 3,
    "objects": [
     "column:CostAndUsage.SkuPriceDetails",
     "dataset:CostAndUsage",
@@ -8206,7 +8328,7 @@
    "refs": [
     {
      "n": 2487,
-     "title": "[FR] Standardize billing representation for AI reasoning tokens"
+     "title": null
     },
     {
      "n": 2018,
@@ -8218,40 +8340,13 @@
     },
     {
      "n": 2489,
-     "title": "[FR] Add input modality classification and recommended SkuMeter values for multimodal AI inputs"
+     "title": null
     }
    ],
    "basis": [
-    "c6538417663",
-    "c6539249482",
-    "c6539272741",
     "c6583065346"
    ],
    "events": [
-    {
-     "id": "c6538417663",
-     "kind": "comment",
-     "author": "Matt-Cowsert",
-     "at": "2026-10-31T03:28:54Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2805#issuecomment-6538417663",
-     "excerpt": "The use case and success criteria on this feature request need a revision, and its scope needs two questions answered, before it can move to Under Consideration, per the feature request triage guidelines. The title,…"
-    },
-    {
-     "id": "c6539249482",
-     "kind": "comment",
-     "author": "Matt-Cowsert",
-     "at": "2026-10-31T04:53:35Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2805#issuecomment-6539249482",
-     "excerpt": "Here is a revised problem statement, use case, and success criteria for you to check. They build on what we found about where billing data shows reasoning level, and on what Kion asked for. What we found Two updates to…"
-    },
-    {
-     "id": "c6539272741",
-     "kind": "comment",
-     "author": "Matt-Cowsert",
-     "at": "2026-10-31T04:56:16Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2805#issuecomment-6539272741",
-     "excerpt": "Here is a revised problem statement, use case, and success criteria for you to check. They build on what we found about where billing data shows reasoning level, and on what Kion asked for. What we found Two updates to…"
-    },
     {
      "id": "c6583065346",
      "kind": "comment",
@@ -8261,334 +8356,9 @@
      "excerpt": "Reasoning level is in a weird grey area. It’s true that it’s a request setting, but it’s also a behavioral difference post-trained into the model that causes very different outputs, even though it’s technically a…"
     }
    ],
-   "summary": "turso77 asks for a FOCUS field recording the reasoning level used for an AI request, so practitioners can compare cost by level without joining request logs to billing data. Triage asked for revisions: the use case described a spec change rather than a practitioner need, performance can't appear in cost data, and the level lives in request records that #2728 may cover. Matt-Cowsert then proposed a revised version keeping the level in FOCUS data, noting that Alibaba prices thinking mode differently and that the level lands in inconsistent places. MasonSalisbury argues the level behaves like a model choice and belongs in FOCUS data wherever known. Support for the goal looks solid, but the wording and scope are still being settled, and the thread is waiting on revised criteria.",
+   "summary": "turso77 proposes an optional usage field, such as ReasoningLevel, recording the reasoning setting behind each request, kept separate from model identity and token counts. Reasoning level can shift cost and performance a lot, but providers and gateways don't consistently expose it, so practitioners join it from logs after the fact. Kion is the only listed requester, rating it Nice to Have. In the recent comment, MasonSalisbury argues reasoning level behaves more like picking a model than setting a parameter, since it drives output quality and cost, and wants it in FOCUS data wherever generators know it. Support looks positive but thin, with no replies from others yet, so the thread seems early and unresolved.",
    "gists": {
-    "c6538417663": "Matt-Cowsert triaged it for revision: the use case describes a spec change, the criteria include performance, and the level is a request setting rather than billed data.",
-    "c6539249482": "Matt-Cowsert proposed a revised problem statement, use case and criteria that keep the level in FOCUS data and drop performance, citing that billing data rarely records the level.",
-    "c6539272741": "Matt-Cowsert repeated the same revised problem statement, use case and criteria, with identical findings on where reasoning level appears in billing data.",
-    "c6583065346": "MasonSalisbury argues the level acts like a model choice, changing cost and quality, and should sit in FOCUS data wherever known because many teams lack request logs."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2732,
-   "kind": "issue",
-   "title": "[AI] Publish FOCUS Version Sharding Insights Article",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2732",
-   "state": "open",
-   "labels": [],
-   "author": "Matt-Cowsert",
-   "opened": "2026-09-29",
-   "last": "2026-10-31T15:57:18Z",
-   "earlier": 4,
-   "objects": [],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2629,
-     "title": null
-    },
-    {
-     "n": 2731,
-     "title": null
-    }
-   ],
-   "basis": [
-    "c6545723276"
-   ],
-   "events": [
-    {
-     "id": "c6545723276",
-     "kind": "comment",
-     "author": "Matt-Cowsert",
-     "at": "2026-10-31T15:57:18Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2732#issuecomment-6545723276",
-     "parent": null,
-     "excerpt": "@beau-finopsorg, the Definition of Done here asks for the published insights article's link on this issue. Can you add it? Once the link is here, this issue and 2629 can close."
-    }
-   ],
-   "summary": "This issue tracks a short, opinionated insights article for finops.org that summarises the version sharding paper (#2731), to be published only after the paper itself. It is assigned to beau-finopsorg, with Andrew Nhem and Mike Fuller named for format, content and review, and Shawn Alpay possibly reviewing. Nothing in the last two weeks shows drafting or review progress. The only recent activity is a comment from Matt-Cowsert on 31 October 2026 asking beau-finopsorg to post the published article's link, since the thread records no draft link or review feedback yet. Once the link is added, this issue and #2629 can close. No disagreement appears in the thread, but it looks stalled, waiting on the author to deliver the article.",
-   "gists": {
-    "c6545723276": "Matt-Cowsert asks beau-finopsorg to add the published insights article link to the issue, as the definition of done requires, so this issue and #2629 can close."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2810,
-   "kind": "pr",
-   "title": "[Maintenance] Set PR Status from the draft state, and link the board from CONTRIBUTING.md",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2810",
-   "state": "draft",
-   "labels": [],
-   "author": "Matt-Cowsert",
-   "opened": "2026-10-31",
-   "last": "2026-10-31T15:14:52Z",
-   "earlier": 0,
-   "objects": [],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2809,
-     "title": "[Maintenance] Set PR Status from the draft state, and link the board from CONTRIBUTING.md"
-    },
-    {
-     "n": 2713,
-     "title": "FR #2712: Clarify the charge period scope of AllocatedRatio"
-    },
-    {
-     "n": 2759,
-     "title": "Maintenance #2758: Add Display Name casing lint rule and automatic lint fixes"
-    },
-    {
-     "n": 2765,
-     "title": "AI #2486-Ext: Review changes to entity reference and linking rules proposed in #2514"
-    },
-    {
-     "n": 2770,
-     "title": "AI #2769: Define review artifact process"
-    },
-    {
-     "n": 2755,
-     "title": "AI #2754: FOCUS 1.5 Release (`working_draft` to `candidate_recommendation`)"
-    }
-   ],
-   "basis": [
-    "o2810"
-   ],
-   "events": [
-    {
-     "id": "o2810",
-     "kind": "opened",
-     "author": "Matt-Cowsert",
-     "at": "2026-10-31T15:14:52Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2810",
-     "excerpt": "Summary A new workflow, sync-pr-status.yml, sets a pull request's Status on the project board from its draft state: PR In Draft while it is a draft, PR Open once it is ready for review. Today that is a manual board…"
-    },
-    {
-     "id": "s6545246914",
-     "kind": "status",
-     "at": "2026-10-31T15:15:16Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2810#issuecomment-6545246914",
-     "lines": [
-      "Initialized PR Approvals: 0",
-      "Initialized PR Change Requests: 0"
-     ]
-    },
-    {
-     "id": "s6586720353",
-     "kind": "status",
-     "at": "2026-11-02T19:41:19Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2810#issuecomment-6586720353",
-     "lines": [
-      "Matt-Cowsert updated Task Force: Members"
-     ]
-    },
-    {
-     "id": "s6587616717",
-     "kind": "status",
-     "at": "2026-11-02T20:24:49Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2810#issuecomment-6587616717",
-     "lines": [
-      "Matt-Cowsert updated PR Type: Maintenance"
-     ]
-    }
-   ],
-   "summary": "Matt-Cowsert proposes a workflow that sets a pull request's board Status from its draft state: PR In Draft while a draft, PR Open once ready. Today drafts stay at Submitted until edited by hand. It runs on open, reopen, ready-for-review and draft-conversion events, plus a daily sweep and manual runs. It only touches blank, Submitted, PR In Draft or PR Open values, leaving later hand-set stages alone. The nuance is that pull_request_target uses the workflow from the target branch, so pull requests aimed at another feature branch lag up to a day until that branch carries it. No review or comments yet, only the author's board field updates on 2 November 2026. The write step is untested locally, so the first real check is a manual run after merge. It also adds a board link to CONTRIBUTING.md.",
-   "gists": {
-    "o2810": "Matt-Cowsert opened this pull request to set Status from draft state and link the board from CONTRIBUTING.md, closing #2809; dry-run results covered all 36 open pull requests."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2809,
-   "kind": "issue",
-   "title": "[Maintenance] Set PR Status from the draft state, and link the board from CONTRIBUTING.md",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2809",
-   "state": "open",
-   "labels": [
-    "repo maintenance"
-   ],
-   "author": "Matt-Cowsert",
-   "opened": "2026-10-31",
-   "last": "2026-10-31T15:13:09Z",
-   "earlier": 0,
-   "objects": [],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2713,
-     "title": "FR #2712: Clarify the charge period scope of AllocatedRatio"
-    },
-    {
-     "n": 2759,
-     "title": "Maintenance #2758: Add Display Name casing lint rule and automatic lint fixes"
-    },
-    {
-     "n": 2765,
-     "title": "AI #2486-Ext: Review changes to entity reference and linking rules proposed in #2514"
-    }
-   ],
-   "basis": [
-    "o2809"
-   ],
-   "events": [
-    {
-     "id": "o2809",
-     "kind": "opened",
-     "author": "Matt-Cowsert",
-     "at": "2026-10-31T15:13:09Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2809",
-     "excerpt": "Description No workflow moves a pull request between PR In Draft and PR Open on the project board, so each move is a manual board edit. A new pull request starts at Submitted, set by the board's \"Item added to project\"…"
-    }
-   ],
-   "summary": "Matt-Cowsert opened this issue on 31 October 2026 because nothing moves a pull request between PR In Draft and PR Open on the FOCUS project board, so each move is a manual edit and drafts stay at Submitted, including #2713, #2759 and #2765. The proposal is a workflow that sets Status from draft state when a pull request is opened, marked ready or converted back to draft, touching only blank, Submitted, PR In Draft or PR Open values so later stages stay manual. It would also cover fork pull requests, offer a manual sync with dry-run, and have CONTRIBUTING.md link the board, which new contributors cannot currently find. There are no comments or reactions yet, so the working group's view is unknown. The issue remains open, with no next steps recorded.",
-   "gists": {
-    "o2809": "Matt-Cowsert proposed a workflow that sets board Status from draft state, since drafts stall at Submitted, and a manual sync plus a CONTRIBUTING.md link to the board."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2808,
-   "kind": "issue",
-   "title": "[AI] Retire Provisional Scope and decide Accepted in Scope in development-processes.md",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2808",
-   "state": "open",
-   "labels": [],
-   "author": "Matt-Cowsert",
-   "opened": "2026-10-31",
-   "last": "2026-10-31T05:20:37Z",
-   "earlier": 0,
-   "objects": [],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2787,
-     "title": "AI #1868: Apply repository naming conventions"
-    },
-    {
-     "n": 2736,
-     "title": null
-    }
-   ],
-   "basis": [
-    "o2808"
-   ],
-   "events": [
-    {
-     "id": "o2808",
-     "kind": "opened",
-     "author": "Matt-Cowsert",
-     "at": "2026-10-31T05:20:37Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2808",
-     "excerpt": "Detailed Description The project board now records a feature request's release and tier in two fields other than Status: The release milestone (e.g., v1.6) says which release the feature request is planned for. The…"
-    },
-    {
-     "id": "s6539501326",
-     "kind": "status",
-     "at": "2026-10-31T05:20:55Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2808#issuecomment-6539501326",
-     "lines": [
-      "Initialized AI Status: Open"
-     ]
-    }
-   ],
-   "summary": "Matt-Cowsert proposes removing Provisional Scope from the Status list in development-processes.md, since the release milestone and Scope field now say the same thing. The harder question is Accepted in Scope, which overlaps with Scope of Core and starts the path to a version tag. Option A keeps it alongside the Scope field; option B retires it so only the Scope field shows committed work. Either way, the issue also adds PR Open to the list, describes the milestone and Scope field in the Project section, and updates the Scope Definition diagram. Because it changes a contributor guideline, it applies to 1.6 only if approved by 28 January 2027, otherwise 1.7. Opened on 31 October 2026, it has no comments yet, so nobody has yet taken a side between A and B.",
-   "gists": {
-    "o2808": "Matt-Cowsert proposes removing Provisional Scope from the Status list and deciding whether Accepted in Scope stays, since the milestone and Scope field now record release and tier."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2489,
-   "kind": "issue",
-   "title": "[FR] Add input modality classification and recommended SkuMeter values for multimodal AI inputs",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2489",
-   "state": "open",
-   "labels": [
-    "needs triage",
-    "feature"
-   ],
-   "author": "davidearney",
-   "opened": "2026-06-25",
-   "last": "2026-10-31T03:28:39Z",
-   "earlier": 3,
-   "objects": [
-    "column:CostAndUsage.SkuMeter",
-    "column:CostAndUsage.SkuPriceDetails",
-    "dataset:SkuPrice",
-    "column:CostAndUsage.SkuId",
-    "column:CostAndUsage.SkuPriceId",
-    "attribute:UnitFormat",
-    "column:CostAndUsage.PricingUnit",
-    "dataset:CostAndUsage",
-    "column:CostAndUsage.ContractApplied"
-   ],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2405,
-     "title": null
-    },
-    {
-     "n": 2363,
-     "title": "[FR] Expand list of recommended `Unit Format` values"
-    },
-    {
-     "n": 2442,
-     "title": "FR #2018: AI model identity as SkuPriceDetails properties"
-    },
-    {
-     "n": 2487,
-     "title": "[FR] Standardize billing representation for AI reasoning tokens"
-    },
-    {
-     "n": 2805,
-     "title": "[FR] Represent AI reasoning level in usage data"
-    },
-    {
-     "n": 2488,
-     "title": "[FR] Standardize cost representation for AI context cache storage charges"
-    },
-    {
-     "n": 2606,
-     "title": "FR #2099: Distinguish cached from uncached token costs"
-    },
-    {
-     "n": 2705,
-     "title": "1.6 Release Scope / Themes / Milestones"
-    }
-   ],
-   "basis": [
-    "c6538415270"
-   ],
-   "events": [
-    {
-     "id": "c6538415270",
-     "kind": "comment",
-     "author": "Matt-Cowsert",
-     "at": "2026-10-31T03:28:39Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2489#issuecomment-6538415270",
-     "excerpt": "Yes, please update this issue to match the October 5 triage outcomes: the title, use case, and success criteria need to describe the outcome rather than the mechanism. The replacements in the October 5 triage comment…"
-    }
-   ],
-   "summary": "#2489 asks for normative SkuMeter values for multimodal inputs to AI models (image, video, audio), plus a SkuPriceDetails property to classify input modality. Providers bill in incompatible units (tokens, per image, per second), so practitioners cannot compare input costs. A maintainer comment from Matt-Cowsert on 31 October 2026 asks davidearney to reword the title, use case and success criteria to describe the outcome rather than the mechanism, following the 5 October 2026 triage. The SkuMeter values and property would stay in the Proposed Solution. Once those sections are fixed and the Maintainer Assessment is complete, it can move to Under Consideration. No reply from davidearney is visible yet, so the thread looks paused. Matt-Cowsert notes #2487 and #2488 need similar edits; all three are candidates for the AI dimensions theme in #2705.",
-   "gists": {
-    "c6538415270": "Matt-Cowsert asks for the title, use case and success criteria to describe outcomes rather than mechanism, per the 5 October 2026 triage; SkuMeter values stay in the Proposed Solution."
+    "c6583065346": "MasonSalisbury argues reasoning level works like a model choice since it drives cost and quality, and wants it in FOCUS data where generators know it."
    },
    "written_by": [
     "claude-haiku-5-5"
