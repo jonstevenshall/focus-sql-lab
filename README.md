@@ -20,6 +20,10 @@ queries in the browser, so the server only serves static files: no database, no 
   11 join-key columns also have a note on the debate behind them.
 - **Data sources:** switch between the accepted 1.0 sample, two samples proposed in open FOCUS-Sample-Data pull
   requests (1.3 and 1.4), and the specification's 1.5 worked examples. The Data model shows which joins work in each.
+- **Sample data:** one card per data source, with its status, a link to its pull request or folder and the commit the
+  files are pinned to, and its tables. Clicking a table shows its row and column counts, links to the files it was
+  read from, and its first 50 rows, with the columns the lab added underlined. The same tables are also available as
+  a sortable list.
 - **AI tokens:** how FOCUS 1.5 records charges for using AI models: the columns, and the model and token properties
   inside SkuPriceDetails, quoted from the specification; the worked examples and the four token queries; the threads
   that shaped it, with their conversations; and where the specification stops today, with the open requests behind
@@ -116,7 +120,7 @@ site/
   update-log.json             every rebuild and batch of AI-written text: what it did, escalations and cost
   focus/                      FOCUS-derived, rebuilt by the tools; not edited by hand
     data/*.parquet            sample data and the specification's worked examples
-    data/manifest.json        table list, row counts, column types and the columns the lab added
+    data/manifest.json        table list, row counts, column types, the columns the lab added, and each table's source files
     spec-queries.json         the specification's example queries, verbatim, with suggested inputs and test results
     model.json                datasets, columns and relationships from the specification
     history.json              the pull requests and issues behind each definition, with excerpts of their descriptions

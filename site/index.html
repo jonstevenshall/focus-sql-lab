@@ -133,7 +133,8 @@
   #explore perspective-viewer { display: block; height: min(640px, 78vh); }
   #explore-status { padding: 10px 12px; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--line); }
   [hidden] { display: none !important; }
-  .apptabs { display: inline-flex; gap: 2px; background: var(--bg); border-radius: 8px; padding: 2px; }
+  .apptabs { display: inline-flex; gap: 2px; background: var(--bg); border-radius: 8px; padding: 2px; max-width: 100%; overflow-x: auto; }
+  .apptabs button { flex: none; white-space: nowrap; }
   .apptabs button { border: 0; background: transparent; padding: 5px 12px; border-radius: 6px; color: var(--muted); }
   .apptabs button[aria-pressed="true"] { background: var(--panel); color: var(--fg); font-weight: 600;
     box-shadow: 0 0 0 1px var(--line); }
@@ -228,14 +229,14 @@
   #cost-pop td.num, #cost-pop th.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
   #cost-pop tr.total td { font-weight: 600; border-bottom: 0; }
   #cost-pop .hint { margin: 0; }
-  :is(#evidence, #ref) .ev-head { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-bottom: 10px; }
-  :is(#evidence, #ref) .ev-head p { margin: 0 0 4px; color: var(--muted); font-size: 13px; max-width: 80ch; flex-basis: 100%; }
-  :is(#evidence, #ref) .ev-filters { display: inline-flex; flex-wrap: wrap; gap: 4px; }
-  :is(#evidence, #ref) .ev-filters button { border: 1px solid var(--line); background: transparent; border-radius: 14px; padding: 3px 10px; font-size: 12.5px; }
-  :is(#evidence, #ref) .ev-filters button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); font-weight: 600; }
-  :is(#evidence, #ref) input[type=search] { max-width: 260px; }
-  #ev-list, #ref-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 10px; }
-  #ev-list.as-list, #ref-list.as-list { display: block; overflow-x: auto; }
+  :is(#evidence, #ref, #data) .ev-head { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-bottom: 10px; }
+  :is(#evidence, #ref, #data) .ev-head p { margin: 0 0 4px; color: var(--muted); font-size: 13px; max-width: 80ch; flex-basis: 100%; }
+  :is(#evidence, #ref, #data) .ev-filters { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+  :is(#evidence, #ref, #data) .ev-filters button { border: 1px solid var(--line); background: transparent; border-radius: 14px; padding: 3px 10px; font-size: 12.5px; }
+  :is(#evidence, #ref, #data) .ev-filters button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+  :is(#evidence, #ref, #data) input[type=search] { max-width: 260px; }
+  #ev-list, #ref-list, #data-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 10px; }
+  #ev-list.as-list, #ref-list.as-list, #data-list.as-list { display: block; overflow-x: auto; }
   .view-switch { display: inline-flex; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-left: auto; }
   .view-switch button { border: 0; background: transparent; padding: 3px 12px; font-size: 12.5px; }
   .view-switch button[aria-pressed="true"] { background: var(--panel); color: var(--accent); font-weight: 600; }
@@ -256,6 +257,16 @@
   .ref-side .detail { min-height: 0; }
   #ref-list .ev-card.sel { box-shadow: 0 0 0 1px var(--accent); border-color: var(--accent); }
   #ref-list tr.sel td { background: color-mix(in srgb, var(--accent) 14%, var(--panel)); }
+  .ev-card .data-tables { list-style: none; margin: 8px 0 2px; padding: 0; }
+  .ev-card .data-tables li { padding: 3px 6px; margin: 0 -6px; border-radius: 6px; line-height: 1.45; }
+  .ev-card .data-tables .linkish { font-family: var(--mono); font-size: 12.5px; font-weight: 600; text-decoration: none; }
+  .ev-card .data-tables li span { color: var(--muted); font-size: 12px; }
+  #data-list li.sel, #data-list tr.sel td { background: color-mix(in srgb, var(--accent) 14%, var(--panel)); }
+  #data-detail { margin-top: 16px; min-height: 0; }
+  #data-detail .files { margin: 0; padding-left: 18px; }
+  #data-detail .files a { overflow-wrap: anywhere; }
+  #data-detail .results { max-height: 70vh; }
+  th.labcol { text-decoration: underline dotted var(--warn-line); text-underline-offset: 3px; }
   @media (max-width: 1000px) { .ref-body { grid-template-columns: 1fr; } .ref-side { position: static; max-height: none; } }
   .ev-card .ref-name .linkish { font-size: 14px; font-weight: 600; text-decoration: none; }
   .ev-card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 13px; }
@@ -406,6 +417,7 @@
   <nav class="apptabs" aria-label="Views">
     <button data-tab="model" aria-pressed="true">Data model</button>
     <button data-tab="ref" aria-pressed="false">Reference</button>
+    <button data-tab="data" aria-pressed="false">Sample data</button>
     <button data-tab="query" aria-pressed="false">Query</button>
     <button data-tab="quiz" aria-pressed="false">Quiz</button>
     <button data-tab="evidence" aria-pressed="false">Evidence</button>
@@ -543,6 +555,13 @@
     <div id="ref-list"><p class="hint">Loading…</p></div>
     <div class="ref-side" id="ref-side"></div>
   </div>
+</section>
+<section id="data" hidden>
+  <div class="ev-head">
+    <div class="view-switch" data-for="data" role="group" aria-label="Show as"></div>
+  </div>
+  <div id="data-list"><p class="hint">Loading…</p></div>
+  <div class="detail" id="data-detail"></div>
 </section>
 <section id="evidence" hidden>
   <div class="ev-head">
@@ -769,6 +788,7 @@ async function init() {
     await db.registerFileBuffer(file, buffers[i]);
     await conn.query(`CREATE TABLE "${names[i]}" AS SELECT * FROM read_parquet('${file}')`);
   }
+  tablesLoaded = true;
   try { await conn.query(`SELECT '{"a":1}'::JSON ->> '$.a'`); } catch { /* json loads on first use */ }
 
   // Each FOCUS dataset name is a view onto the chosen source's table. A dataset the source doesn't have points at an
@@ -802,6 +822,7 @@ async function init() {
   if (!saved) run();
   if (tab === 'model') renderModel();
   if (tab === 'ref') renderRef();
+  if (tab === 'data') renderData();
   if (tab === 'ai') renderAi();
   if (tab === 'quiz') renderQuiz();
   if (tab === 'evidence') renderEvidence(); // again, now topic names are known
@@ -974,17 +995,26 @@ function renderResult(res, ms) {
     (rows.length > SHOW_ROWS ? ` · showing first ${SHOW_ROWS.toLocaleString()}` : '');
   $('csv').disabled = rows.length === 0;
   if (!fields.length) { $('results').innerHTML = '<div class="empty">Done.</div>'; showView(); return; }
-  const num = fields.map((f) => isNumericType(f.type));
-  const head = '<tr>' + fields.map((f) => `<th title="${escapeHtml(String(f.type))}">${escapeHtml(f.name)}</th>`).join('') + '</tr>';
-  const body = rows.slice(0, SHOW_ROWS).map((r) => '<tr>' + fields.map((f, i) => {
+  $('results').innerHTML = resultTable(fields, rows.slice(0, SHOW_ROWS));
+  showView();
+}
+
+// A result grid: each heading's title is its type, nulls are marked and numbers right-aligned. Headings named in
+// labCols are underlined, with the lab's reason for the column as their title.
+function resultTable(fields, rows, labCols = {}) {
+  const numeric = fields.map((f) => isNumericType(f.type));
+  const head = '<tr>' + fields.map((f) => {
+    const why = labCols[f.name];
+    return `<th${why ? ' class="labcol"' : ''} title="${escapeHtml(why || String(f.type))}">${escapeHtml(f.name)}</th>`;
+  }).join('') + '</tr>';
+  const body = rows.map((r) => '<tr>' + fields.map((f, i) => {
     const s = fmt(r[f.name], f);
     if (s === null) return '<td class="null">null</td>';
-    return `<td class="${num[i] ? 'num' : ''}" title="${escapeHtml(s.length > 60 ? s : '')}">${escapeHtml(s)}</td>`;
+    return `<td class="${numeric[i] ? 'num' : ''}" title="${escapeHtml(s.length > 60 ? s : '')}">${escapeHtml(s)}</td>`;
   }).join('') + '</tr>').join('');
-  $('results').innerHTML = rows.length
+  return rows.length
     ? `<table><thead>${head}</thead><tbody>${body}</tbody></table>`
     : `<table><thead>${head}</thead></table><div class="empty">No rows.</div>`;
-  showView();
 }
 
 // ---- Explore view: Perspective (FINOS), loaded the first time it's opened ----------
@@ -1210,6 +1240,7 @@ function showTab(t) {
   $('model').hidden = t !== 'model';
   $('evidence').hidden = t !== 'evidence';
   $('ref').hidden = t !== 'ref';
+  $('data').hidden = t !== 'data';
   $('ai').hidden = t !== 'ai';
   $('quiz').hidden = t !== 'quiz';
   $('recent').hidden = t !== 'recent';
@@ -1218,6 +1249,7 @@ function showTab(t) {
   if (t === 'model') renderModel();
   if (t === 'evidence') renderEvidence();
   if (t === 'ref') renderRef();
+  if (t === 'data') renderData();
   if (t === 'ai') renderAi();
   if (t === 'quiz') renderQuiz();
   if (t === 'recent') renderRecent();
@@ -1623,6 +1655,77 @@ async function renderRef() {
   markRefSelection();
 }
 
+// ---- Sample data: each data source's tables, the files they were read from, and their first rows --------------------
+// From focus/data/manifest.json, which tools/build_data.py writes.
+const DATA_STATUS = { accepted: 'Accepted', proposed: 'Proposed, not accepted', spec: 'Specification' };
+const PREVIEW_ROWS = 50;
+let tablesLoaded = false, dataSel = store.get('data-table'), dataToken = 0;
+const newTab = (url, text) => `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${text}</a>`;
+const commitLink = (c) => { const [repo, sha] = c.split('@'); return newTab(`https://github.com/${repo}/commit/${sha}`, sha.slice(0, 7)); };
+const sourceLink = (src) => { const pr = /\/pull\/(\d+)$/.exec(src.url); return newTab(src.url, pr ? `Pull request #${pr[1]}` : 'Folder on GitHub'); };
+const labCount = (m) => Object.keys(m.lab_columns || {}).length;
+const tableButton = (t) => `<button class="linkish" data-table="${escapeHtml(t)}">${escapeHtml(t)}</button>`;
+
+function renderData() {
+  if (!manifest || !model) return; // init() calls this again once the data is loaded
+  const tables = Object.entries(manifest.tables);
+  if (showList('data', 'data-list')) {
+    $('data-list').innerHTML = sortList('data', [{ key: 'table', label: 'Table' }, { key: 'dataset', label: 'Dataset' },
+      { key: 'source', label: 'Source' }, { key: 'rows', label: 'Rows', cls: 'num' }, { key: 'cols', label: 'Columns', cls: 'num' },
+      { key: 'lab', label: 'Added by the lab', cls: 'num' }, { key: 'files', label: 'Files', cls: 'num' }],
+    tables.map(([t, m]) => {
+      const src = manifest.sources[m.source];
+      return { key: t,
+        cells: { table: tableButton(t), dataset: escapeHtml(dsName(m.dataset)), source: escapeHtml(src.label),
+          rows: m.rows.toLocaleString(), cols: String(m.columns.length), lab: String(labCount(m)), files: String(m.files.length) },
+        sort: { table: t, dataset: dsName(m.dataset), source: src.label, rows: m.rows, cols: m.columns.length,
+          lab: labCount(m), files: m.files.length } };
+    }));
+  } else {
+    $('data-list').innerHTML = Object.entries(manifest.sources).map(([k, src]) => {
+      const mine = tables.filter(([, m]) => m.source === k);
+      return `<div class="ev-card">
+        <div class="ev-top"><span class="tag">${DATA_STATUS[src.status] || escapeHtml(src.status)}</span>
+          <span>${mine.reduce((n, [, m]) => n + m.rows, 0).toLocaleString()} rows</span></div>
+        <h3 class="ref-name">${escapeHtml(src.label)}</h3>
+        <p>${escapeHtml(src.about)}</p>
+        <ul class="data-tables">${mine.map(([t, m]) => `<li data-key="${escapeHtml(t)}">${tableButton(t)}
+          <span>${escapeHtml(dsName(m.dataset))} · ${m.rows.toLocaleString()} rows · ${plural(m.files.length, 'file')}</span></li>`).join('')}</ul>
+        <div class="ev-meta">${sourceLink(src)}${src.commit ? ` · files at commit ${commitLink(src.commit)}` : ''}</div>
+      </div>`;
+    }).join('');
+  }
+  $('data-list').querySelectorAll('[data-key]').forEach((el) => el.classList.toggle('sel', el.dataset.key === dataSel));
+  if ($('data-detail').dataset.shown !== `${dataSel}|${tablesLoaded}`) renderDataDetail();
+}
+
+async function renderDataDetail() {
+  const el = $('data-detail'), t = dataSel, m = t && manifest.tables[t];
+  el.dataset.shown = `${t}|${tablesLoaded}`;
+  if (!m) { el.innerHTML = `<p class="hint">Click a table to see the files it came from and its first ${PREVIEW_ROWS} rows.</p>`; return; }
+  const src = manifest.sources[m.source], labs = labCount(m), token = ++dataToken;
+  const items = `<ul class="files">${m.files.map((f) => `<li>${newTab(f.url, escapeHtml(f.name))}</li>`).join('')}</ul>`;
+  el.innerHTML = `<h3>${escapeHtml(t)}</h3>
+    <div class="sub">${escapeHtml(dsName(m.dataset))} · ${escapeHtml(src.label)}</div>
+    <p>${escapeHtml(m.description)}</p>
+    <dl><dt>Rows</dt><dd>${m.rows.toLocaleString()}</dd>
+      <dt>Columns</dt><dd>${m.columns.length}${labs ? `. The ${labs} underlined ${labs === 1 ? 'was' : 'were'} added by the lab: hover over one to see why.` : ''}</dd>
+      <dt>Files</dt><dd>${m.files.length > 6 ? `<details><summary>${plural(m.files.length, 'file')}</summary>${items}</details>` : items}</dd>
+      ${src.commit ? `<dt>Commit</dt><dd>${commitLink(src.commit)}</dd>` : ''}</dl>
+    <div class="actions"><button class="primary" data-action="open">Open in Query</button><span class="hint" id="data-meta"></span></div>
+    <div class="results" id="data-rows"><div class="empty">Loading…</div></div>`;
+  if (!tablesLoaded) return; // init() renders this again once the tables exist
+  try {
+    const res = await conn.query(`SELECT * FROM "${t}" LIMIT ${PREVIEW_ROWS}`);
+    if (token !== dataToken) return;
+    const rows = res.toArray();
+    $('data-rows').innerHTML = resultTable(res.schema.fields, rows, m.lab_columns || {});
+    $('data-meta').textContent = `The first ${rows.length.toLocaleString()} of ${m.rows.toLocaleString()} rows.`;
+  } catch (err) {
+    if (token === dataToken) $('data-rows').innerHTML = `<div class="empty">Could not read the table: ${escapeHtml(err.message || err)}</div>`;
+  }
+}
+
 // ---- Recent: what the working group discussed on GitHub in the last two weeks (site/recent.json, rebuilt daily) ------
 let recentP = null, recentKind = 'all';
 const loadRecent = () => (recentP ??= fetch('recent.json').then((r) => (r.ok ? r.json() : null)).catch(() => null));
@@ -1949,11 +2052,11 @@ function applySelection() {
   if (selection?.type === 'table') erd.querySelector(`.card[data-ds="${selection.ds}"]`)?.classList.add('sel');
 }
 
-function openInQuery(sql) {
+function openInQuery(sql, from = 'the Data model') {
   if (!sql) return;
   showTab('query');
   $('examples').value = '';
-  $('example-info').innerHTML = '<div class="source"><span class="tag lab">lab</span> Opened from the Data model. ' +
+  $('example-info').innerHTML = `<div class="source"><span class="tag lab">lab</span> Opened from ${from}. ` +
     'Written by this lab in DuckDB SQL, not from FOCUS.</div>';
   $('example-info').hidden = false;
   $('editor').value = sql;
@@ -2344,6 +2447,18 @@ $('ref-search').addEventListener('input', () => renderRef());
 $('model-detail').addEventListener('click', onDetailClick); // registered once: the panel moves between tabs
 $('ref-list').addEventListener('click', onListClick('ref', renderRef));
 document.querySelector('.view-switch[data-for="ref"]').addEventListener('click', onListClick('ref', renderRef));
+$('data-list').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-table]');
+  if (!b) return onListClick('data', renderData)(e);
+  dataSel = b.dataset.table;
+  store.set('data-table', dataSel);
+  renderData();
+  $('data-detail').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+});
+document.querySelector('.view-switch[data-for="data"]').addEventListener('click', onListClick('data', renderData));
+$('data-detail').addEventListener('click', (e) => {
+  if (e.target.closest('[data-action="open"]') && dataSel) openInQuery(`SELECT *\nFROM ${dataSel}\nLIMIT ${PREVIEW_ROWS};`, 'the Sample data tab');
+});
 $('ai-body').addEventListener('click', onAiClick);
 $('recent-filters').addEventListener('click', (e) => { const b = e.target.closest('[data-rkind]'); if (b) { recentKind = b.dataset.rkind; renderRecent(); } });
 $('recent-search').addEventListener('input', () => renderRecent());

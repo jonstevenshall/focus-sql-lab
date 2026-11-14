@@ -19,6 +19,7 @@ import json
 import pathlib
 import re
 import sys
+from urllib.parse import quote
 
 import duckdb
 
@@ -110,6 +111,14 @@ def add_missing(table, dataset):
 manifest = {"tables": {}}
 # Columns this lab added, renamed or derived, with the reason: shown on the page so they're never mistaken for FOCUS data.
 LAB_COLUMNS = {}
+# For the Sample data tab: the FOCUS dataset each table holds rows of, and the files it was read from.
+TABLE_DATASET, TABLE_FILES = {}, {}
+# The commits the sample data is pinned to, as (repository, commit, folder). The refresh workflow downloads these.
+PINNED = {
+    "sample": ("FinOps-Open-Cost-and-Usage-Spec/FOCUS-Sample-Data", "adbdd17a132984d6e8583c149c236d2199c3f5bc", "FOCUS-1.0"),
+    "pr7": ("guymano/FOCUS-Sample-Data", "99917010b27f7c0ca3586f8e0daab7e1c8103dac", "FOCUS-1.3"),
+    "pr5": ("beau-finopsorg/FOCUS-Sample-Data", "4fe60d96737ea06c64851f3a0b2bcd675125b980", "FOCUS-1.4"),
+}
 
 # ---- Sample data: FOCUS-Sample-Data 1.0, anonymised ---------------------------------
 raw_csv = RAW / "focus_sample_100000.csv.gz"
@@ -120,6 +129,7 @@ con.execute(
 parts, cols = typed_select("raw_sample", "CostAndUsage")
 parts = [p if p != '"Id"' else '"Id" AS x_SampleRowId' for p in parts]
 con.execute(f"CREATE TABLE cau_sample AS SELECT {', '.join(parts)} FROM raw_sample")
+TABLE_DATASET["cau_sample"], TABLE_FILES["cau_sample"] = "CostAndUsage", [raw_csv.name]
 lost = check_casts("raw_sample", "cau_sample", [c for c in cols if c.lower() in TYPES["CostAndUsage"]])
 # 1.0 -> 1.5 provider mapping from the spec's version migration guidance
 con.execute("ALTER TABLE cau_sample ADD COLUMN ServiceProviderName VARCHAR")
@@ -158,6 +168,7 @@ groups = {
 }
 for table, (dataset, files) in groups.items():
     files = sorted(files)
+    TABLE_DATASET[table], TABLE_FILES[table] = dataset, [f.relative_to(DATA).as_posix() for f in files]
     flist = "[" + ", ".join(f"'{f}'" for f in files) + "]"
     con.execute(
         f"CREATE TABLE raw_{table} AS SELECT * FROM read_csv({flist}, all_varchar=true, header=true, "
@@ -196,6 +207,7 @@ for src, (version, folder, tables) in PROPOSED.items():
     for table, (dataset, pattern) in tables.items():
         files = sorted(folder.glob(pattern))
         assert files, (table, pattern)
+        TABLE_DATASET[table], TABLE_FILES[table] = dataset, [f.name for f in files]
         flist = "[" + ", ".join(f"'{f}'" for f in files) + "]"
         con.execute(f"CREATE TABLE raw_{table} AS SELECT * FROM read_csv({flist}, all_varchar=true, header=true, "
                     f"union_by_name=true)")
@@ -238,19 +250,19 @@ manifest["sources"] = {
     "sample": {"abbr": "1.0 sample", "label": "FOCUS-Sample-Data 1.0, accepted", "short": "the 1.0 sample", "status": "accepted",
                "about": "The FinOps Foundation's accepted sample: anonymised FOCUS 1.0 Cost and Usage data. FOCUS 1.0 "
                         "has no other datasets. The lab added the 1.5-only columns, empty.",
-               "url": SAMPLE_REPO + "/tree/main/FOCUS-1.0",
+               "url": SAMPLE_REPO + "/tree/main/FOCUS-1.0", "commit": "@".join(PINNED["sample"][:2]),
                "tables": {"CostAndUsage": "cau_sample"}},
     "pr7": {"abbr": "1.3 PR #7", "label": "FOCUS 1.3, proposed in Sample-Data PR #7", "short": "the proposed 1.3 sample (PR #7)",
             "status": "proposed",
             "about": "Proposed, not accepted by FOCUS: synthetic FOCUS 1.3 data from an open pull request. FOCUS 1.3 "
                      "added Contract Commitment; Invoice Detail and Billing Period came in 1.4.",
-            "url": SAMPLE_REPO + "/pull/7", "commit": "guymano/FOCUS-Sample-Data@99917010b27f7c0ca3586f8e0daab7e1c8103dac",
+            "url": SAMPLE_REPO + "/pull/7", "commit": "@".join(PINNED["pr7"][:2]),
             "tables": {"CostAndUsage": "cau_pr7", "ContractCommitment": "cc_pr7"}},
     "pr5": {"abbr": "1.4 PR #5", "label": "FOCUS 1.4, proposed in Sample-Data PR #5 (draft)", "short": "the proposed 1.4 sample (PR #5)",
             "status": "proposed",
             "about": "Proposed, not accepted by FOCUS: generated FOCUS 1.4 data from an open draft pull request, "
                      "with all four 1.4 datasets.",
-            "url": SAMPLE_REPO + "/pull/5", "commit": "beau-finopsorg/FOCUS-Sample-Data@4fe60d96737ea06c64851f3a0b2bcd675125b980",
+            "url": SAMPLE_REPO + "/pull/5", "commit": "@".join(PINNED["pr5"][:2]),
             "tables": {"CostAndUsage": "cau_pr5", "ContractCommitment": "cc_pr5", "InvoiceDetail": "inv_pr5",
                        "BillingPeriod": "bp_pr5"}},
     "examples": {"abbr": "1.5 examples", "label": "Spec 1.5 worked examples", "short": "the spec 1.5 examples", "status": "spec",
@@ -260,6 +272,20 @@ manifest["sources"] = {
                  "tables": {"CostAndUsage": "cau_examples", "ContractCommitment": "cc_examples",
                             "InvoiceDetail": "inv_examples", "SkuPrice": "sku_examples"}},
 }
+# The source each table belongs to. CorrectionExamples sits behind no dataset name, but it is spec worked-example data.
+TABLE_SOURCE = {t: k for k, src in manifest["sources"].items() for t in src["tables"].values()} | {"CorrectionExamples": "examples"}
+SPEC_DATA_URL = "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/"
+
+
+def file_link(table, name):
+    """A GitHub link to one source file: at the pinned commit for sample data, on the working draft for spec examples."""
+    src = TABLE_SOURCE[table]
+    if src in PINNED:
+        repo, sha, folder = PINNED[src]
+        return {"name": name, "url": f"https://github.com/{repo}/blob/{sha}/{folder}/{quote(name)}"}
+    return {"name": name, "url": SPEC_DATA_URL + quote(name)}
+
+
 for table in ["cau_sample", "cau_pr7", "cc_pr7", "cau_pr5", "cc_pr5", "inv_pr5", "bp_pr5",
               "cau_examples", "cc_examples", "inv_examples", "sku_examples", "CorrectionExamples"]:
     path = OUT / f"{table}.parquet"
@@ -268,7 +294,9 @@ for table in ["cau_sample", "cau_pr7", "cc_pr7", "cau_pr5", "cc_pr5", "inv_pr5",
     rows = con.execute(f"SELECT count(*) FROM {table}").fetchone()[0]
     manifest["tables"][table] = {"file": path.name, "rows": rows, "bytes": path.stat().st_size,
                                  "description": DESCRIPTIONS[table], "columns": columns,
-                                 "lab_columns": LAB_COLUMNS.get(table, {})}
+                                 "lab_columns": LAB_COLUMNS.get(table, {}), "source": TABLE_SOURCE[table],
+                                 "dataset": TABLE_DATASET[table],
+                                 "files": [file_link(table, f) for f in TABLE_FILES[table]]}
     print(f"wrote {path.name}: {rows} rows, {path.stat().st_size:,} bytes, {len(columns)} columns")
 
 (OUT / "manifest.json").write_text(json.dumps(manifest, indent=1))

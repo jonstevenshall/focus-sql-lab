@@ -330,7 +330,15 @@
     "SkuMeter": "Added empty by the lab: a FOCUS 1.5 column that FOCUS 1.0 doesn't have.",
     "SkuPriceDetails": "Added empty by the lab: a FOCUS 1.5 column that FOCUS 1.0 doesn't have.",
     "SubAccountType": "Added empty by the lab: a FOCUS 1.5 column that FOCUS 1.0 doesn't have."
-   }
+   },
+   "source": "sample",
+   "dataset": "CostAndUsage",
+   "files": [
+    {
+     "name": "focus_sample_100000.csv.gz",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS-Sample-Data/blob/adbdd17a132984d6e8583c149c236d2199c3f5bc/FOCUS-1.0/focus_sample_100000.csv.gz"
+    }
+   ]
   },
   "cau_pr7": {
    "file": "cau_pr7.parquet",
@@ -630,7 +638,23 @@
     "InvoiceDetailId": "Added empty by the lab: a FOCUS 1.5 column that this FOCUS 1.3 sample doesn't have.",
     "PrincipalId": "Added empty by the lab: a FOCUS 1.5 column that this FOCUS 1.3 sample doesn't have.",
     "RequesterDetails": "Added empty by the lab: a FOCUS 1.5 column that this FOCUS 1.3 sample doesn't have."
-   }
+   },
+   "source": "pr7",
+   "dataset": "CostAndUsage",
+   "files": [
+    {
+     "name": "focus_sample_costandusage_aws_1000.csv",
+     "url": "https://github.com/guymano/FOCUS-Sample-Data/blob/99917010b27f7c0ca3586f8e0daab7e1c8103dac/FOCUS-1.3/focus_sample_costandusage_aws_1000.csv"
+    },
+    {
+     "name": "focus_sample_costandusage_azure_1000.csv",
+     "url": "https://github.com/guymano/FOCUS-Sample-Data/blob/99917010b27f7c0ca3586f8e0daab7e1c8103dac/FOCUS-1.3/focus_sample_costandusage_azure_1000.csv"
+    },
+    {
+     "name": "focus_sample_costandusage_gcp_1000.csv",
+     "url": "https://github.com/guymano/FOCUS-Sample-Data/blob/99917010b27f7c0ca3586f8e0daab7e1c8103dac/FOCUS-1.3/focus_sample_costandusage_gcp_1000.csv"
+    }
+   ]
   },
   "cc_pr7": {
    "file": "cc_pr7.parquet",
@@ -777,7 +801,23 @@
     "PricingCurrency": "Added empty by the lab: a FOCUS 1.5 column that this FOCUS 1.3 sample doesn't have.",
     "PricingCurrencyContractCommitmentCost": "Added empty by the lab: a FOCUS 1.5 column that this FOCUS 1.3 sample doesn't have.",
     "ServiceProviderName": "Added empty by the lab: a FOCUS 1.5 column that this FOCUS 1.3 sample doesn't have."
-   }
+   },
+   "source": "pr7",
+   "dataset": "ContractCommitment",
+   "files": [
+    {
+     "name": "focus_sample_contractcommitment_aws.csv",
+     "url": "https://github.com/guymano/FOCUS-Sample-Data/blob/99917010b27f7c0ca3586f8e0daab7e1c8103dac/FOCUS-1.3/focus_sample_contractcommitment_aws.csv"
+    },
+    {
+     "name": "focus_sample_contractcommitment_azure.csv",
+     "url": "https://github.com/guymano/FOCUS-Sample-Data/blob/99917010b27f7c0ca3586f8e0daab7e1c8103dac/FOCUS-1.3/focus_sample_contractcommitment_azure.csv"
+    },
+    {
+     "name": "focus_sample_contractcommitment_gcp.csv",
+     "url": "https://github.com/guymano/FOCUS-Sample-Data/blob/99917010b27f7c0ca3586f8e0daab7e1c8103dac/FOCUS-1.3/focus_sample_contractcommitment_gcp.csv"
+    }
+   ]
   },
   "cau_pr5": {
    "file": "cau_pr5.parquet",
@@ -1077,7 +1117,15 @@
     "InvoiceDetailId": "Added empty by the lab: a FOCUS 1.5 column that this FOCUS 1.4 sample doesn't have.",
     "PrincipalId": "Added empty by the lab: a FOCUS 1.5 column that this FOCUS 1.4 sample doesn't have.",
     "RequesterDetails": "Added empty by the lab: a FOCUS 1.5 column that this FOCUS 1.4 sample doesn't have."
-   }
+   },
+   "source": "pr5",
+   "dataset": "CostAndUsage",
+   "files": [
+    {
+     "name": "focus_sample_costandusage.csv",
+     "url": "https://github.com/beau-finopsorg/FOCUS-Sample-Data/blob/4fe60d96737ea06c64851f3a0b2bcd675125b980/FOCUS-1.4/focus_sample_costandusage.csv"
+    }
+   ]
   },
   "cc_pr5": {
    "file": "cc_pr5.parquet",
@@ -1206,7 +1254,15 @@
      "type": "VARCHAR"
     }
    ],
-   "lab_columns": {}
+   "lab_columns": {},
+   "source": "pr5",
+   "dataset": "ContractCommitment",
+   "files": [
+    {
+     "name": "focus_sample_contractcommitment.csv",
+     "url": "https://github.com/beau-finopsorg/FOCUS-Sample-Data/blob/4fe60d96737ea06c64851f3a0b2bcd675125b980/FOCUS-1.4/focus_sample_contractcommitment.csv"
+    }
+   ]
   },
   "inv_pr5": {
    "file": "inv_pr5.parquet",
@@ -1303,7 +1359,15 @@
      "type": "VARCHAR"
     }
    ],
-   "lab_columns": {}
+   "lab_columns": {},
+   "source": "pr5",
+   "dataset": "InvoiceDetail",
+   "files": [
+    {
+     "name": "focus_sample_invoicedetail.csv",
+     "url": "https://github.com/beau-finopsorg/FOCUS-Sample-Data/blob/4fe60d96737ea06c64851f3a0b2bcd675125b980/FOCUS-1.4/focus_sample_invoicedetail.csv"
+    }
+   ]
   },
   "bp_pr5": {
    "file": "bp_pr5.parquet",
@@ -1336,7 +1400,15 @@
      "type": "VARCHAR"
     }
    ],
-   "lab_columns": {}
+   "lab_columns": {},
+   "source": "pr5",
+   "dataset": "BillingPeriod",
+   "files": [
+    {
+     "name": "focus_sample_billingperiod.csv",
+     "url": "https://github.com/beau-finopsorg/FOCUS-Sample-Data/blob/4fe60d96737ea06c64851f3a0b2bcd675125b980/FOCUS-1.4/focus_sample_billingperiod.csv"
+    }
+   ]
   },
   "cau_examples": {
    "file": "cau_examples.parquet",
@@ -1649,7 +1721,219 @@
     "ContractApplied": "Added empty by the lab: a FOCUS 1.5 column that none of these example files include.",
     "InvoiceDetailId": "Added empty by the lab: a FOCUS 1.5 column that none of these example files include.",
     "SubAccountType": "Added empty by the lab: a FOCUS 1.5 column that none of these example files include."
-   }
+   },
+   "source": "examples",
+   "dataset": "CostAndUsage",
+   "files": [
+    {
+     "name": "ai_model_billing/cached_tokens_via_csp_marketplace.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/ai_model_billing/cached_tokens_via_csp_marketplace.csv"
+    },
+    {
+     "name": "ai_model_billing/csp_served_third_party_model.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/ai_model_billing/csp_served_third_party_model.csv"
+    },
+    {
+     "name": "ai_model_billing/drawdown_via_prepayment_ai_model_api.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/ai_model_billing/drawdown_via_prepayment_ai_model_api.csv"
+    },
+    {
+     "name": "ai_model_billing/multi_model_invoice_via_csp_marketplace.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/ai_model_billing/multi_model_invoice_via_csp_marketplace.csv"
+    },
+    {
+     "name": "ai_model_billing/multi_model_usage.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/ai_model_billing/multi_model_usage.csv"
+    },
+    {
+     "name": "ai_model_billing/per_token_ai_model_api.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/ai_model_billing/per_token_ai_model_api.csv"
+    },
+    {
+     "name": "ai_model_identity/ai_model_identity_a.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/ai_model_identity/ai_model_identity_a.csv"
+    },
+    {
+     "name": "ai_model_identity/ai_model_identity_b.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/ai_model_identity/ai_model_identity_b.csv"
+    },
+    {
+     "name": "ai_prompt_caching/ai_prompt_caching_a.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/ai_prompt_caching/ai_prompt_caching_a.csv"
+    },
+    {
+     "name": "ai_prompt_caching/ai_prompt_caching_b.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/ai_prompt_caching/ai_prompt_caching_b.csv"
+    },
+    {
+     "name": "commitment_discount_flexibility/one_hundred_percent_utilization_with_commitment_discount_flexibility_with_1_resource.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_flexibility/one_hundred_percent_utilization_with_commitment_discount_flexibility_with_1_resource.csv"
+    },
+    {
+     "name": "commitment_discount_flexibility/one_hundred_percent_utilization_with_commitment_discount_flexibility_with_2_resources.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_flexibility/one_hundred_percent_utilization_with_commitment_discount_flexibility_with_2_resources.csv"
+    },
+    {
+     "name": "commitment_discount_flexibility/one_hundred_percent_utilization_without_commitment_discount_flexibility.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_flexibility/one_hundred_percent_utilization_without_commitment_discount_flexibility.csv"
+    },
+    {
+     "name": "commitment_discount_flexibility/zero_percent_utilization_without_commitment_discount_flexibility.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_flexibility/zero_percent_utilization_without_commitment_discount_flexibility.csv"
+    },
+    {
+     "name": "commitment_discount_scenarios/aura_web_flexible_spend_plan_all_upfront_0pct.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_scenarios/aura_web_flexible_spend_plan_all_upfront_0pct.csv"
+    },
+    {
+     "name": "commitment_discount_scenarios/aura_web_flexible_spend_plan_all_upfront_100pct.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_scenarios/aura_web_flexible_spend_plan_all_upfront_100pct.csv"
+    },
+    {
+     "name": "commitment_discount_scenarios/aura_web_flexible_spend_plan_all_upfront_50pct.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_scenarios/aura_web_flexible_spend_plan_all_upfront_50pct.csv"
+    },
+    {
+     "name": "commitment_discount_scenarios/aura_web_flexible_spend_plan_all_upfront_75pct.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_scenarios/aura_web_flexible_spend_plan_all_upfront_75pct.csv"
+    },
+    {
+     "name": "commitment_discount_scenarios/aura_web_flexible_spend_plan_all_upfront_overage.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_scenarios/aura_web_flexible_spend_plan_all_upfront_overage.csv"
+    },
+    {
+     "name": "commitment_discount_scenarios/aura_web_flexible_spend_plan_no_upfront_100pct.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_scenarios/aura_web_flexible_spend_plan_no_upfront_100pct.csv"
+    },
+    {
+     "name": "commitment_discount_scenarios/aura_web_flexible_spend_plan_partial_upfront_100pct.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_scenarios/aura_web_flexible_spend_plan_partial_upfront_100pct.csv"
+    },
+    {
+     "name": "commitment_discount_scenarios/aura_web_resource_reservation_all_upfront_100pct.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_scenarios/aura_web_resource_reservation_all_upfront_100pct.csv"
+    },
+    {
+     "name": "commitment_discount_scenarios/aura_web_resource_reservation_partial_upfront_100pct.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_scenarios/aura_web_resource_reservation_partial_upfront_100pct.csv"
+    },
+    {
+     "name": "commitment_discount_scenarios/crestnode_flexible_spend_plan_all_upfront_100pct.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_scenarios/crestnode_flexible_spend_plan_all_upfront_100pct.csv"
+    },
+    {
+     "name": "commitment_discount_scenarios/crestnode_resource_reservation_all_upfront_100pct.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_scenarios/crestnode_resource_reservation_all_upfront_100pct.csv"
+    },
+    {
+     "name": "commitment_discount_scenarios/crestnode_resource_reservation_no_upfront_100pct.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_scenarios/crestnode_resource_reservation_no_upfront_100pct.csv"
+    },
+    {
+     "name": "commitment_discount_scenarios/latticescale_dynamic_compute_commitment_no_upfront_100pct.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_scenarios/latticescale_dynamic_compute_commitment_no_upfront_100pct.csv"
+    },
+    {
+     "name": "commitment_discount_scenarios/latticescale_resource_reservation_no_upfront_100pct.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_discount_scenarios/latticescale_resource_reservation_no_upfront_100pct.csv"
+    },
+    {
+     "name": "commitment_eligibility/coverage_rate_eligibility_adjusted.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_eligibility/coverage_rate_eligibility_adjusted.csv"
+    },
+    {
+     "name": "commitment_eligibility/uncovered_eligible_spend_by_program_type.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/commitment_eligibility/uncovered_eligible_spend_by_program_type.csv"
+    },
+    {
+     "name": "saas_examples/annual_commitment_billed_monthly_a.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/annual_commitment_billed_monthly_a.csv"
+    },
+    {
+     "name": "saas_examples/consumption_currency_pricing_model_a1.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/consumption_currency_pricing_model_a1.csv"
+    },
+    {
+     "name": "saas_examples/consumption_currency_pricing_model_a2.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/consumption_currency_pricing_model_a2.csv"
+    },
+    {
+     "name": "saas_examples/consumption_currency_pricing_model_b1.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/consumption_currency_pricing_model_b1.csv"
+    },
+    {
+     "name": "saas_examples/consumption_currency_pricing_model_b2.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/consumption_currency_pricing_model_b2.csv"
+    },
+    {
+     "name": "saas_examples/consumption_currency_pricing_model_b3.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/consumption_currency_pricing_model_b3.csv"
+    },
+    {
+     "name": "saas_examples/consumption_currency_pricing_model_c.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/consumption_currency_pricing_model_c.csv"
+    },
+    {
+     "name": "saas_examples/credit_based_consumption_a.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/credit_based_consumption_a.csv"
+    },
+    {
+     "name": "saas_examples/flat_rate_saas_licensing_a.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/flat_rate_saas_licensing_a.csv"
+    },
+    {
+     "name": "saas_examples/host_based_saas_monitoring_a.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/host_based_saas_monitoring_a.csv"
+    },
+    {
+     "name": "saas_examples/multi_unit_paas_database_a.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/multi_unit_paas_database_a.csv"
+    },
+    {
+     "name": "saas_examples/seat_based_saas_annual_a.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/seat_based_saas_annual_a.csv"
+    },
+    {
+     "name": "saas_examples/simple_agreements/simple_saas_agreements_a1.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/simple_agreements/simple_saas_agreements_a1.csv"
+    },
+    {
+     "name": "saas_examples/simple_agreements/simple_saas_agreements_a2.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/simple_agreements/simple_saas_agreements_a2.csv"
+    },
+    {
+     "name": "saas_examples/simple_agreements/simple_saas_agreements_a3.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/simple_agreements/simple_saas_agreements_a3.csv"
+    },
+    {
+     "name": "saas_examples/simple_agreements/simple_saas_agreements_b.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/simple_agreements/simple_saas_agreements_b.csv"
+    },
+    {
+     "name": "saas_examples/simple_agreements/simple_saas_agreements_c.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/simple_agreements/simple_saas_agreements_c.csv"
+    },
+    {
+     "name": "saas_examples/spend_agreements/saas_spend_agreements_a1.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/spend_agreements/saas_spend_agreements_a1.csv"
+    },
+    {
+     "name": "saas_examples/spend_agreements/saas_spend_agreements_a2.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/spend_agreements/saas_spend_agreements_a2.csv"
+    },
+    {
+     "name": "saas_examples/spend_agreements/saas_spend_agreements_b1.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/spend_agreements/saas_spend_agreements_b1.csv"
+    },
+    {
+     "name": "saas_examples/spend_agreements/saas_spend_agreements_b2.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/spend_agreements/saas_spend_agreements_b2.csv"
+    },
+    {
+     "name": "saas_examples/tiered_pricing_committed_minimum_a.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/saas_examples/tiered_pricing_committed_minimum_a.csv"
+    }
+   ]
   },
   "cc_examples": {
    "file": "cc_examples.parquet",
@@ -1784,7 +2068,23 @@
    ],
    "lab_columns": {
     "x_ExampleFile": "Added by the lab: the worked-example file the row came from."
-   }
+   },
+   "source": "examples",
+   "dataset": "ContractCommitment",
+   "files": [
+    {
+     "name": "contract_commitments/contract_commitment_scenario_1.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/contract_commitments/contract_commitment_scenario_1.csv"
+    },
+    {
+     "name": "contract_commitments/contract_commitment_scenario_2.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/contract_commitments/contract_commitment_scenario_2.csv"
+    },
+    {
+     "name": "contract_commitments/contract_commitment_scenario_3.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/contract_commitments/contract_commitment_scenario_3.csv"
+    }
+   ]
   },
   "inv_examples": {
    "file": "inv_examples.parquet",
@@ -1887,7 +2187,23 @@
    ],
    "lab_columns": {
     "x_ExampleFile": "Added by the lab: the worked-example file the row came from."
-   }
+   },
+   "source": "examples",
+   "dataset": "InvoiceDetail",
+   "files": [
+    {
+     "name": "invoice_detail/invoice_detail_scenario_1.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/invoice_detail/invoice_detail_scenario_1.csv"
+    },
+    {
+     "name": "invoice_detail/invoice_detail_scenario_2.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/invoice_detail/invoice_detail_scenario_2.csv"
+    },
+    {
+     "name": "invoice_detail/invoice_detail_scenario_3.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/invoice_detail/invoice_detail_scenario_3.csv"
+    }
+   ]
   },
   "sku_examples": {
    "file": "sku_examples.parquet",
@@ -1994,7 +2310,51 @@
    ],
    "lab_columns": {
     "x_ExampleFile": "Added by the lab: the worked-example file the row came from."
-   }
+   },
+   "source": "examples",
+   "dataset": "SkuPrice",
+   "files": [
+    {
+     "name": "sku_price_examples/aura_web_rate_card_full.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/sku_price_examples/aura_web_rate_card_full.csv"
+    },
+    {
+     "name": "sku_price_examples/sku_price_boundaries.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/sku_price_examples/sku_price_boundaries.csv"
+    },
+    {
+     "name": "sku_price_examples/sku_price_commitment_purchases.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/sku_price_examples/sku_price_commitment_purchases.csv"
+    },
+    {
+     "name": "sku_price_examples/sku_price_committed_usage_alongside_purchases.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/sku_price_examples/sku_price_committed_usage_alongside_purchases.csv"
+    },
+    {
+     "name": "sku_price_examples/sku_price_consumable_currency.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/sku_price_examples/sku_price_consumable_currency.csv"
+    },
+    {
+     "name": "sku_price_examples/sku_price_effectivity.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/sku_price_examples/sku_price_effectivity.csv"
+    },
+    {
+     "name": "sku_price_examples/sku_price_multi_currency.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/sku_price_examples/sku_price_multi_currency.csv"
+    },
+    {
+     "name": "sku_price_examples/sku_price_promotional.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/sku_price_examples/sku_price_promotional.csv"
+    },
+    {
+     "name": "sku_price_examples/sku_price_quantity_tiers.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/sku_price_examples/sku_price_quantity_tiers.csv"
+    },
+    {
+     "name": "sku_price_examples/sku_price_standard_and_negotiated.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/sku_price_examples/sku_price_standard_and_negotiated.csv"
+    }
+   ]
   },
   "CorrectionExamples": {
    "file": "CorrectionExamples.parquet",
@@ -2341,7 +2701,175 @@
     "SubAccountName": "Added empty by the lab: a FOCUS 1.5 column that none of these example files include.",
     "SubAccountType": "Added empty by the lab: a FOCUS 1.5 column that none of these example files include.",
     "Tags": "Added empty by the lab: a FOCUS 1.5 column that none of these example files include."
-   }
+   },
+   "source": "examples",
+   "dataset": "CostAndUsage",
+   "files": [
+    {
+     "name": "correction-handling-examples/closed-billing-period/scenario_1_partial_reallocation_delta.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/closed-billing-period/scenario_1_partial_reallocation_delta.csv"
+    },
+    {
+     "name": "correction-handling-examples/closed-billing-period/scenario_1_partial_reallocation_ledger.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/closed-billing-period/scenario_1_partial_reallocation_ledger.csv"
+    },
+    {
+     "name": "correction-handling-examples/closed-billing-period/scenario_1_partial_reallocation_original.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/closed-billing-period/scenario_1_partial_reallocation_original.csv"
+    },
+    {
+     "name": "correction-handling-examples/closed-billing-period/scenario_2_late_arriving_usage_delta.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/closed-billing-period/scenario_2_late_arriving_usage_delta.csv"
+    },
+    {
+     "name": "correction-handling-examples/closed-billing-period/scenario_2_late_arriving_usage_ledger.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/closed-billing-period/scenario_2_late_arriving_usage_ledger.csv"
+    },
+    {
+     "name": "correction-handling-examples/closed-billing-period/scenario_3_itemized_cost_only_delta.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/closed-billing-period/scenario_3_itemized_cost_only_delta.csv"
+    },
+    {
+     "name": "correction-handling-examples/closed-billing-period/scenario_3_itemized_cost_only_ledger.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/closed-billing-period/scenario_3_itemized_cost_only_ledger.csv"
+    },
+    {
+     "name": "correction-handling-examples/closed-billing-period/scenario_3_itemized_cost_only_original.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/closed-billing-period/scenario_3_itemized_cost_only_original.csv"
+    },
+    {
+     "name": "correction-handling-examples/closed-billing-period/scenario_4_bulk_cost_only_delta.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/closed-billing-period/scenario_4_bulk_cost_only_delta.csv"
+    },
+    {
+     "name": "correction-handling-examples/closed-billing-period/scenario_4_bulk_cost_only_ledger.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/closed-billing-period/scenario_4_bulk_cost_only_ledger.csv"
+    },
+    {
+     "name": "correction-handling-examples/closed-billing-period/scenario_4_bulk_cost_only_original.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/closed-billing-period/scenario_4_bulk_cost_only_original.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-current/scenario_1_partial_reallocation_delta.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-current/scenario_1_partial_reallocation_delta.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-current/scenario_1_partial_reallocation_ledger.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-current/scenario_1_partial_reallocation_ledger.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-current/scenario_1_partial_reallocation_original.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-current/scenario_1_partial_reallocation_original.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-current/scenario_1_partial_reallocation_replacement.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-current/scenario_1_partial_reallocation_replacement.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-current/scenario_2_late_arriving_usage_delta.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-current/scenario_2_late_arriving_usage_delta.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-current/scenario_2_late_arriving_usage_ledger.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-current/scenario_2_late_arriving_usage_ledger.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-current/scenario_2_late_arriving_usage_replacement.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-current/scenario_2_late_arriving_usage_replacement.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-current/scenario_3_itemized_cost_only_delta.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-current/scenario_3_itemized_cost_only_delta.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-current/scenario_3_itemized_cost_only_ledger.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-current/scenario_3_itemized_cost_only_ledger.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-current/scenario_3_itemized_cost_only_original.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-current/scenario_3_itemized_cost_only_original.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-current/scenario_3_itemized_cost_only_replacement.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-current/scenario_3_itemized_cost_only_replacement.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-current/scenario_4_bulk_cost_only_delta.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-current/scenario_4_bulk_cost_only_delta.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-current/scenario_4_bulk_cost_only_ledger.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-current/scenario_4_bulk_cost_only_ledger.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-current/scenario_4_bulk_cost_only_original.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-current/scenario_4_bulk_cost_only_original.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-current/scenario_4_bulk_cost_only_replacement.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-current/scenario_4_bulk_cost_only_replacement.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-previous/scenario_1_partial_reallocation_delta.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-previous/scenario_1_partial_reallocation_delta.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-previous/scenario_1_partial_reallocation_ledger.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-previous/scenario_1_partial_reallocation_ledger.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-previous/scenario_1_partial_reallocation_original.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-previous/scenario_1_partial_reallocation_original.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-previous/scenario_1_partial_reallocation_replacement.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-previous/scenario_1_partial_reallocation_replacement.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-previous/scenario_2_late_arriving_usage_delta.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-previous/scenario_2_late_arriving_usage_delta.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-previous/scenario_2_late_arriving_usage_ledger.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-previous/scenario_2_late_arriving_usage_ledger.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-previous/scenario_2_late_arriving_usage_replacement.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-previous/scenario_2_late_arriving_usage_replacement.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-previous/scenario_3_itemized_cost_only_delta.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-previous/scenario_3_itemized_cost_only_delta.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-previous/scenario_3_itemized_cost_only_ledger.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-previous/scenario_3_itemized_cost_only_ledger.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-previous/scenario_3_itemized_cost_only_original.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-previous/scenario_3_itemized_cost_only_original.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-previous/scenario_3_itemized_cost_only_replacement.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-previous/scenario_3_itemized_cost_only_replacement.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-previous/scenario_4_bulk_cost_only_delta.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-previous/scenario_4_bulk_cost_only_delta.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-previous/scenario_4_bulk_cost_only_ledger.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-previous/scenario_4_bulk_cost_only_ledger.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-previous/scenario_4_bulk_cost_only_original.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-previous/scenario_4_bulk_cost_only_original.csv"
+    },
+    {
+     "name": "correction-handling-examples/open-billing-period-previous/scenario_4_bulk_cost_only_replacement.csv",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/blob/working_draft/specification/data/correction-handling-examples/open-billing-period-previous/scenario_4_bulk_cost_only_replacement.csv"
+    }
+   ]
   }
  },
  "sources": {
@@ -2352,6 +2880,7 @@
    "status": "accepted",
    "about": "The FinOps Foundation's accepted sample: anonymised FOCUS 1.0 Cost and Usage data. FOCUS 1.0 has no other datasets. The lab added the 1.5-only columns, empty.",
    "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS-Sample-Data/tree/main/FOCUS-1.0",
+   "commit": "FinOps-Open-Cost-and-Usage-Spec/FOCUS-Sample-Data@adbdd17a132984d6e8583c149c236d2199c3f5bc",
    "tables": {
     "CostAndUsage": "cau_sample"
    }
