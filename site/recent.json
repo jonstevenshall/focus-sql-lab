@@ -1,10 +1,395 @@
 {
- "generated_at": "2026-11-14T23:13:27Z",
- "since": "2026-10-31T23:13:27Z",
+ "generated_at": "2026-11-15T23:27:36Z",
+ "since": "2026-11-01T23:27:36Z",
  "days": 14,
  "model": "claude-haiku-5-5",
  "about": "FOCUS_Spec issues and pull requests that people opened, commented on or reviewed in the last 14 days. Each summary (what is proposed and why, where the debate lies, how people feel and where it stands) and each one-line gist is written by an AI model from the thread and the issue it implements, and rewritten when the thread gains comments or reviews: they interpret, so check the thread before relying on one. Status changes are posted by the repository's own automation.",
  "threads": [
+  {
+   "number": 2871,
+   "kind": "pr",
+   "title": "FR #2521: Add context-window pricing properties to SKU Price Details",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871",
+   "state": "draft",
+   "labels": [],
+   "author": "jerrysr99",
+   "opened": "2026-11-14",
+   "last": "2026-11-15T07:16:11Z",
+   "earlier": 0,
+   "objects": [
+    "column:CostAndUsage.SkuPriceDetails",
+    "dataset:SkuPrice",
+    "dataset:CostAndUsage",
+    "column:CostAndUsage.SkuPriceId",
+    "column:CostAndUsage.SkuMeter",
+    "column:CostAndUsage.ChargeDescription",
+    "column:CostAndUsage.PricingUnit",
+    "column:CostAndUsage.PricingQuantity",
+    "column:CostAndUsage.ConsumedQuantity",
+    "column:CostAndUsage.ServiceProviderName"
+   ],
+   "files_matched": true,
+   "refs": [
+    {
+     "n": 2521,
+     "title": "[FR] Distinguish AI model costs by context window size"
+    },
+    {
+     "n": 2817,
+     "title": "[AI] Draft a first model of context window pricing for FR 2521"
+    },
+    {
+     "n": 2613,
+     "title": "FR #2414: Region scope as a SkuPriceDetails property"
+    },
+    {
+     "n": 2437,
+     "title": "[FR] Distinguish AI inference processing tiers"
+    }
+   ],
+   "basis": [
+    "i4577456172",
+    "i4577456185",
+    "i4577456189",
+    "i4577456192",
+    "i4577456195",
+    "i4577456199",
+    "i4577456200",
+    "i4577456203",
+    "i4577456206",
+    "i4577456207",
+    "i4577456211",
+    "o2871",
+    "r5909594156"
+   ],
+   "events": [
+    {
+     "id": "o2871",
+     "kind": "opened",
+     "author": "jerrysr99",
+     "at": "2026-11-14T06:04:23Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871",
+     "excerpt": "Summary FR 2521 identifies that some service providers price an AI model differently depending on how many input tokens a single request consumes, and that a practitioner cannot tell from Cost and Usage or SKU Price…"
+    },
+    {
+     "id": "s6872812534",
+     "kind": "status",
+     "at": "2026-11-14T06:04:42Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871#issuecomment-6872812534",
+     "lines": [
+      "Initialized PR Approvals: 0",
+      "Initialized PR Change Requests: 0"
+     ]
+    },
+    {
+     "id": "i4577456172",
+     "kind": "inline",
+     "author": "thecloudman",
+     "at": "2026-11-15T07:16:10Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871#discussion_r4577456172",
+     "path": "specification/datasets/cost_and_usage/columns/skupricedetails.md",
+     "parent": "r5909594156",
+     "excerpt": "These two lines make SkuPriceDetails non-null, and (with the MUST include lines below) make ContextWindowMinimum and ContextWindowMaximum mandatory, whenever a SKU Price depends on context-window size. The November 10…"
+    },
+    {
+     "id": "i4577456185",
+     "kind": "inline",
+     "author": "thecloudman",
+     "at": "2026-11-15T07:16:10Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871#discussion_r4577456185",
+     "path": "specification/datasets/cost_and_usage/columns/skupricedetails.md",
+     "parent": "r5909594156",
+     "excerpt": "Every other FOCUS-defined SkuPriceDetails property uses SHOULD inclusion (e.g., TokenDirection and TokenCacheAction), and the November 10 TF1 record on FR 2521 notes that SHOULD is the level for SkuPriceDetails, with…"
+    },
+    {
+     "id": "i4577456189",
+     "kind": "inline",
+     "author": "thecloudman",
+     "at": "2026-11-15T07:16:10Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871#discussion_r4577456189",
+     "path": "specification/datasets/cost_and_usage/columns/skupricedetails.md",
+     "parent": "r5909594156",
+     "excerpt": "These two bullets sit under the list for properties of a given ServiceProviderName and SkuPriceId, next to the consistency-over-time rules, but they read as per-property value rules. A JSON object key already carries…"
+    },
+    {
+     "id": "i4577456192",
+     "kind": "inline",
+     "author": "thecloudman",
+     "at": "2026-11-15T07:16:10Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871#discussion_r4577456192",
+     "path": "specification/datasets/cost_and_usage/columns/skupricedetails.md",
+     "parent": "r5909594156",
+     "excerpt": "\"Property value MUST be of the type specified for that property\" already applies the Numeric type from the FOCUS-Defined Properties table, and the TokenCacheAction and TokenDirection blocks do not restate their type.…"
+    },
+    {
+     "id": "i4577456195",
+     "kind": "inline",
+     "author": "thecloudman",
+     "at": "2026-11-15T07:16:10Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871#discussion_r4577456195",
+     "path": "specification/datasets/cost_and_usage/columns/skupricedetails.md",
+     "parent": "r5909594156",
+     "excerpt": "\"Property value MUST be of the type specified for that property\" already applies the type from the FOCUS-Defined Properties table, and the TokenCacheAction and TokenDirection blocks do not restate their type. Suggest…"
+    },
+    {
+     "id": "i4577456199",
+     "kind": "inline",
+     "author": "thecloudman",
+     "at": "2026-11-15T07:16:10Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871#discussion_r4577456199",
+     "path": "specification/datasets/cost_and_usage/columns/skupricedetails.md",
+     "parent": "r5909594156",
+     "excerpt": "\"Including cached input tokens\" fixes the counting basis for every provider in a MUST. The November 4 boundary-wording comment on FR 2521 found that only Anthropic states that cached tokens count toward the threshold;…"
+    },
+    {
+     "id": "i4577456200",
+     "kind": "inline",
+     "author": "thecloudman",
+     "at": "2026-11-15T07:16:10Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871#discussion_r4577456200",
+     "path": "specification/datasets/cost_and_usage/columns/skupricedetails.md",
+     "parent": "r5909594156",
+     "excerpt": "\"Including cached input tokens\" fixes the counting basis for every provider in a MUST. The November 4 boundary-wording comment on FR 2521 found that only Anthropic states that cached tokens count toward the threshold;…"
+    },
+    {
+     "id": "i4577456203",
+     "kind": "inline",
+     "author": "thecloudman",
+     "at": "2026-11-15T07:16:10Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871#discussion_r4577456203",
+     "path": "specification/datasets/cost_and_usage/columns/skupricedetails.md",
+     "parent": "r5909594156",
+     "excerpt": "Question on the explicit JSON null for an unbounded maximum. The presence of ContextWindowMinimum already signals that the SKU Price depends on context-window size, so an omitted ContextWindowMaximum could mean \"no…"
+    },
+    {
+     "id": "i4577456206",
+     "kind": "inline",
+     "author": "thecloudman",
+     "at": "2026-11-15T07:16:10Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871#discussion_r4577456206",
+     "path": "specification/appendix/ai_context_window_pricing_examples.md",
+     "parent": "r5909594156",
+     "excerpt": "Discussion point on converting inclusive thresholds to 127999. FR 2521 favoured the published-threshold framing because the value can be derived from the rate card rather than invented, but 127999 does not appear on any…"
+    },
+    {
+     "id": "r5909594156",
+     "kind": "review",
+     "state": "commented",
+     "author": "thecloudman",
+     "at": "2026-11-15T07:16:10Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871#pullrequestreview-5909594156",
+     "excerpt": "Thanks for the thorough draft. I checked both example CSVs: on every row PricingQuantity equals ConsumedQuantity divided by 1,000,000, the four cost columns are equal to ListUnitPrice multiplied by PricingQuantity, each…"
+    },
+    {
+     "id": "i4577456207",
+     "kind": "inline",
+     "author": "thecloudman",
+     "at": "2026-11-15T07:16:11Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871#discussion_r4577456207",
+     "path": "specification/appendix/ai_context_window_pricing_examples.md",
+     "parent": "r5909594156",
+     "excerpt": "This reads as a recommended SkuPriceId pattern. Suggest marking it as illustrative:"
+    },
+    {
+     "id": "i4577456211",
+     "kind": "inline",
+     "author": "thecloudman",
+     "at": "2026-11-15T07:16:11Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871#discussion_r4577456211",
+     "path": "specification/appendix/ai_context_window_pricing_examples.md",
+     "parent": "r5909594156",
+     "excerpt": "Meridian AI does not bill cache writes and does not include them in the uncached input meter, so those request tokens appear on no row, yet under the ContextWindowMinimum definition they still count toward tier…"
+    }
+   ],
+   "summary": "This draft pull request adds ContextWindowMinimum and ContextWindowMaximum to SkuPriceDetails in Cost and Usage, so practitioners can tell which context-window tier an AI charge was priced at. It is one part of a joint solution for #2521 under #2817. So far only thecloudman has reviewed it, on 15 November 2026. They confirmed the example CSVs and tier totals reconcile, but raised substantive points: the MUST inclusion and nullability depart from the SHOULD level noted at Task Force 1 and would make the properties mandatory on a generally available dataset; the cached-token counting basis may not fit every provider; and the explicit null for an unbounded maximum adds a new data type. Inclusive-threshold conversion is flagged for discussion. There are no approvals or change requests, and jerrysr99 has not replied, so the thread looks paused while those questions are open.",
+   "gists": {
+    "o2871": "Opened the draft adding two context-window bounds to SkuPriceDetails, with an appendix example and CSV datasets, as part of a joint solution with the SKU Price columns.",
+    "i4577456172": "Argues that non-null SkuPriceDetails with MUST inclusion makes the properties mandatory, breaking providers in 1.6; suggests MAY null, leaving MUST to SKU Price columns.",
+    "i4577456185": "Asks for SHOULD rather than MUST inclusion, since other FOCUS-defined SkuPriceDetails properties use SHOULD and the 10 November 2026 Task Force 1 record reserved MUST for SKU Price columns.",
+    "i4577456189": "Suggests removing the two 'one value' bullets, since a JSON key already holds one value, or stating explicitly that bounds stay fixed for a SkuPriceId.",
+    "i4577456192": "Suggests dropping the line restating the property type, since the FOCUS-Defined Properties table already sets it and the token blocks do not restate it.",
+    "i4577456195": "Repeats the earlier suggestion to drop the restated type requirement, noting the token blocks do not restate type either.",
+    "i4577456199": "Says the fixed 'including cached input tokens' wording assumes one counting basis for all providers, when only Anthropic states cached tokens count toward its threshold; suggests each provider's own basis.",
+    "i4577456200": "Makes the same point for ContextWindowMaximum, proposing the bound be defined against each service provider's own published threshold counting basis rather than a fixed rule.",
+    "i4577456203": "Asks whether omitting ContextWindowMaximum could mean no upper limit, avoiding a new Numeric or null type, since JSON consumers often treat null and missing alike.",
+    "i4577456206": "Raises the 127999 conversion for inclusive thresholds for discussion: it appears on no rate card and looks like an error; offers a whole-number rule or matching common wording.",
+    "r5909594156": "Confirms the example CSVs and tier totals reconcile; calls the MUST nullability and inclusion and the cached-token basis substantive, leaving the conversion and null points for discussion.",
+    "i4577456207": "Suggests marking the SkuPriceId naming pattern as illustrative, since it reads as a recommended pattern and FOCUS does not require it.",
+    "i4577456211": "Suggests a sentence noting that Meridian AI's unbilled cache-write tokens still count toward tier selection but appear on no row, so readers do not reconcile ConsumedQuantity to request sizes."
+   },
+   "written_by": [
+    "claude-haiku-5-5"
+   ],
+   "style": 2
+  },
+  {
+   "number": 2437,
+   "kind": "issue",
+   "title": "[FR] Distinguish AI inference processing tiers",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2437",
+   "state": "open",
+   "labels": [
+    "ai",
+    "feature"
+   ],
+   "author": "Matt-Cowsert",
+   "opened": "2026-06-02",
+   "last": "2026-11-15T06:16:49Z",
+   "earlier": 3,
+   "objects": [
+    "column:CostAndUsage.SkuPriceDetails",
+    "column:CostAndUsage.PricingCategory",
+    "column:CostAndUsage.SkuId",
+    "column:CostAndUsage.SkuPriceId",
+    "column:CostAndUsage.ListUnitPrice",
+    "column:CostAndUsage.ContractedUnitPrice",
+    "dataset:CostAndUsage",
+    "dataset:SkuPrice"
+   ],
+   "files_matched": false,
+   "refs": [
+    {
+     "n": 2018,
+     "title": "[FR] Surface AI model identity and token consumption in FOCUS"
+    },
+    {
+     "n": 2416,
+     "title": null
+    },
+    {
+     "n": 2371,
+     "title": "[FR] Standardize AI provisioned throughput commitments"
+    },
+    {
+     "n": 2099,
+     "title": "[FR] Distinguish cached from uncached token costs"
+    },
+    {
+     "n": 2414,
+     "title": "[FR] Distinguish global from regional prices by region scope"
+    },
+    {
+     "n": 2442,
+     "title": "FR #2018: AI model identity as SkuPriceDetails properties"
+    },
+    {
+     "n": 2521,
+     "title": "[FR] Distinguish AI model costs by context window size"
+    },
+    {
+     "n": 1045,
+     "title": null
+    },
+    {
+     "n": 2873,
+     "title": "FR #2437: Add ProcessingTier as a SkuPriceDetails property"
+    },
+    {
+     "n": 2682,
+     "title": null
+    }
+   ],
+   "basis": [
+    "c6890252064"
+   ],
+   "events": [
+    {
+     "id": "c6890252064",
+     "kind": "comment",
+     "author": "thecloudman",
+     "at": "2026-11-15T06:16:49Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2437#issuecomment-6890252064",
+     "excerpt": "Champion I'll champion this FR. A first contribution is up in 2873, targeting workingdraftinterim for 1.6. What 2873 adds: ProcessingTier as a FOCUS-defined SkuPriceDetails property, with allowed values \"Standard\",…"
+    }
+   ],
+   "summary": "This request asks for a standard way to record which processing tier an AI charge was billed under, such as Standard, Priority or Batch, since providers price the same model differently by tier. Practitioners cannot currently compare tiers or spot non-urgent workloads that could move to batch without provider-specific parsing. thecloudman has championed it and opened #2873, targeting 1.6, which adds a ProcessingTier property with five values: Standard, Priority, Flex, Batch and Other. Flex goes beyond the three proposed values because several providers price it separately. It also keeps PricingCategory at Standard and excludes provisioned capacity from #2371. Open questions for Task Force 2 cover the value set, provisioned capacity and whether the tier sits on the SKU or the SKU Price. No replies yet, so the thread looks early.",
+   "gists": {
+    "c6890252064": "thecloudman champions the request via #2873, proposing a five-value ProcessingTier property and asking Task Force 2 about the value set, the provisioned-capacity boundary and SKU versus SKU Price placement."
+   },
+   "written_by": [
+    "claude-haiku-5-5"
+   ],
+   "style": 2
+  },
+  {
+   "number": 2873,
+   "kind": "pr",
+   "title": "FR #2437: Add ProcessingTier as a SkuPriceDetails property",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2873",
+   "state": "open",
+   "labels": [],
+   "author": "thecloudman",
+   "opened": "2026-11-15",
+   "last": "2026-11-15T06:09:01Z",
+   "earlier": 0,
+   "objects": [
+    "column:CostAndUsage.SkuPriceDetails",
+    "column:CostAndUsage.PricingCategory",
+    "dataset:SkuPrice"
+   ],
+   "files_matched": true,
+   "refs": [
+    {
+     "n": 2437,
+     "title": "[FR] Distinguish AI inference processing tiers"
+    },
+    {
+     "n": 2442,
+     "title": "FR #2018: AI model identity as SkuPriceDetails properties"
+    },
+    {
+     "n": 2682,
+     "title": null
+    },
+    {
+     "n": 2613,
+     "title": "FR #2414: Region scope as a SkuPriceDetails property"
+    },
+    {
+     "n": 2371,
+     "title": "[FR] Standardize AI provisioned throughput commitments"
+    },
+    {
+     "n": 2414,
+     "title": "[FR] Distinguish global from regional prices by region scope"
+    },
+    {
+     "n": 2521,
+     "title": "[FR] Distinguish AI model costs by context window size"
+    }
+   ],
+   "basis": [
+    "o2873"
+   ],
+   "events": [
+    {
+     "id": "o2873",
+     "kind": "opened",
+     "author": "thecloudman",
+     "at": "2026-11-15T06:09:01Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2873",
+     "excerpt": "Summary Contributes to 2437. @thecloudman is championing this FR. Implements the MVP for FR 2437 (Distinguish AI inference processing tiers) by adding ProcessingTier as a FOCUS-defined SkuPriceDetails property,…"
+    },
+    {
+     "id": "s6890168483",
+     "kind": "status",
+     "at": "2026-11-15T06:09:20Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2873#issuecomment-6890168483",
+     "lines": [
+      "Initialized PR Approvals: 0",
+      "Initialized PR Change Requests: 0"
+     ]
+    }
+   ],
+   "summary": "The PR adds ProcessingTier as a FOCUS-defined SkuPriceDetails property, the MVP for #2437. Providers price the same model differently by tier, such as GCP Vertex AI's Priority at 1.8x and Flex or Batch at 0.5x Standard, and practitioners cannot currently compare tiers or spot shiftable spend consistently. If merged, producers would choose from five values (Standard, Priority, Flex, Batch, Other), omit the property on single-tier SKUs, and leave provisioned capacity to #2371. Open questions are whether Flex should stand apart from Batch, whether Other is needed, and whether the property belongs on the SKU or the SKU Price. thecloudman has asked Task Force 2 to weigh in. Opened 15 November 2026, it has no recorded reviews or comments yet, so reception is unknown. Next is Task Force 2 review, with footnote numbering to be settled against #2613.",
+   "gists": {
+    "o2873": "Proposes ProcessingTier as a SkuPriceDetails property with five allowed values for #2437, and asks Task Force 2 to weigh in on the value set, provisioned capacity and SKU placement."
+   },
+   "written_by": [
+    "claude-haiku-5-5"
+   ],
+   "style": 2
+  },
   {
    "number": 2859,
    "kind": "pr",
@@ -465,73 +850,6 @@
    "gists": {
     "o2872": "Draft PR implementing FR #2521 in SKU Price: two Conditional columns, an IncludesContextWindowPricing condition, SkuPriceId requirements and an appendix example, stacked on #2871.",
     "c6872951115": "Snapshot, as of 9 November 2026, of providers and models with context-window pricing, quoting threshold wording only, offered as context for naming those bounds as columns."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2871,
-   "kind": "pr",
-   "title": "FR #2521: Add context-window pricing properties to SKU Price Details",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871",
-   "state": "draft",
-   "labels": [],
-   "author": "jerrysr99",
-   "opened": "2026-11-14",
-   "last": "2026-11-14T06:04:23Z",
-   "earlier": 0,
-   "objects": [
-    "column:CostAndUsage.SkuPriceDetails",
-    "dataset:SkuPrice",
-    "dataset:CostAndUsage",
-    "column:CostAndUsage.SkuMeter",
-    "column:CostAndUsage.ChargeDescription",
-    "column:CostAndUsage.SkuPriceId",
-    "column:CostAndUsage.PricingUnit"
-   ],
-   "files_matched": true,
-   "refs": [
-    {
-     "n": 2521,
-     "title": "[FR] Distinguish AI model costs by context window size"
-    },
-    {
-     "n": 2817,
-     "title": "[AI] Draft a first model of context window pricing for FR 2521"
-    },
-    {
-     "n": 2613,
-     "title": "FR #2414: Region scope as a SkuPriceDetails property"
-    }
-   ],
-   "basis": [
-    "o2871"
-   ],
-   "events": [
-    {
-     "id": "o2871",
-     "kind": "opened",
-     "author": "jerrysr99",
-     "at": "2026-11-14T06:04:23Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871",
-     "excerpt": "Summary FR 2521 identifies that some service providers price an AI model differently depending on how many input tokens a single request consumes, and that a practitioner cannot tell from Cost and Usage or SKU Price…"
-    },
-    {
-     "id": "s6872812534",
-     "kind": "status",
-     "at": "2026-11-14T06:04:42Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871#issuecomment-6872812534",
-     "lines": [
-      "Initialized PR Approvals: 0",
-      "Initialized PR Change Requests: 0"
-     ]
-    }
-   ],
-   "summary": "jerrysr99 has opened a draft pull request implementing #2521, which asks how to tell whether an AI charge was priced at a long-context tier. Google's Gemini models charge more per token above a 200K-token input threshold, and FOCUS data currently blends those prices together. The proposal adds ContextWindowMinimum and ContextWindowMaximum to SkuPriceDetails in Cost and Usage. Task Force 1 has settled on carrying the bounds in both Cost and Usage and the SKU Price dataset for now, so practitioners read whichever they use. An unbounded top tier needs an explicit null maximum, hence the new Numeric or null data type. Providers would fill in both sides when they deliver both datasets. No reviews or comments have appeared yet, so support or objections cannot be seen. The SKU Price columns come in a stacked pull request.",
-   "gists": {
-    "o2871": "Opens the draft adding ContextWindowMinimum and ContextWindowMaximum to SkuPriceDetails with an appendix example, to implement #2521 and carry the bounds in both Cost and Usage and SKU Price."
    },
    "written_by": [
     "claude-haiku-5-5"
@@ -4067,7 +4385,7 @@
    "author": "Matt-Cowsert",
    "opened": "2026-10-19",
    "last": "2026-11-10T22:03:56Z",
-   "earlier": 5,
+   "earlier": 7,
    "objects": [
     "dataset:SkuPrice",
     "dataset:CostAndUsage",
@@ -4126,29 +4444,11 @@
     }
    ],
    "basis": [
-    "c6561177649",
     "c6592977525",
     "c6616230844",
     "c6780500417"
    ],
    "events": [
-    {
-     "id": "s6561104469",
-     "kind": "status",
-     "at": "2026-11-01T17:05:32Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2782#issuecomment-6561104469",
-     "lines": [
-      "Matt-Cowsert cleared Scope"
-     ]
-    },
-    {
-     "id": "c6561177649",
-     "kind": "comment",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-01T17:11:23Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2782#issuecomment-6561177649",
-     "excerpt": "Triage outcome: needs scoping. The triage labels aren't in the repository yet, so this comment records it. Under the feature request triage guidelines, a request needs scoping when more than one ambiguity factor points…"
-    },
     {
      "id": "c6592977525",
      "kind": "comment",
@@ -4183,12 +4483,11 @@
      "excerpt": "Status Update - TF1 - November 10, 2026 FR 2782 / PR 2843 - Define the preview lifecycle for whole datasets Matt Cowsert walked Task Force 1 (TF1) through the open questions in draft pull request (PR) 2843. The PR…"
     }
    ],
-   "summary": "Driven by the first preview, SKU Price, this request fills the lifecycle gap for whole datasets that PR #2762 left open: how a preview is assessed, promoted or removed, and how people tell preview content from stable content. Smaller-content and review-artifact questions went to #960, #2811 and #2770, and the request entered Core scope on 3 November 2026. The main point is that preview content is not conformance-checked, and TF1 wants that stated normatively, not in notes. Also raised: a preview flag per SKU Price column, a distinct Version Introduced value, and whether a GA feature can depend on preview content, which touches #2521. Draft PR #2843 kept it in TF1 on 10 November 2026. Open questions remain on the glossary definition of supporting entity and on preview requirement checks. Support looks constructive, but no consensus is recorded.",
+   "summary": "This request covers the preview lifecycle for whole datasets that PR #2762 left open: how a preview is marked in the specification, requirements model, schemas and delivered data, and what evidence moves it to stable or removes it. The SKU Price dataset is the first preview, so practitioners need clear rules. Triage on 3 November 2026 kept it in Core scope and moved sub-dataset questions to #960 and review artifacts to #2770. Work has since moved to draft PR #2843, which rewrites the Preview Process. Participants agree preview content should not be checked for conformance, but the wording still needs to be normative. Open points are defining a supporting entity, checking preview requirements, whether a GA feature can depend on preview content, and what Version Introduced should say. Matt-Cowsert plans a draft for TF1 on 17 November 2026.",
    "gists": {
-    "c6561177649": "Matt-Cowsert set needs-scoping because four ambiguity factors apply, saying smaller-than-dataset previews and the line between previews and review artifacts must settle first.",
-    "c6592977525": "Matt-Cowsert reported needs-scoping resolved and returned the request to Core scope, moving two questions to #960 and #2770 and keeping whole-dataset questions here.",
-    "c6616230844": "The 3 November 2026 TF1 update placed this request and related FRs in 1.6 Core scope, noted preview content is unchecked for conformance, and planned practitioner feedback collection.",
-    "c6780500417": "TF1 kept this request, with draft PR #2843 revising the Preview Process, covering glossary, requirement status, GA dependency and version wording; four questions remain open."
+    "c6592977525": "Records that the request is back in Core scope after questions on sub-dataset previews moved to #960 and review artifacts to #2770; whole-dataset questions stay here.",
+    "c6616230844": "Raises that preview content is not conformance-checked and needs normative rules, notes guideline changes will go to TFRM, and says review artifacts can wait for their own FR.",
+    "c6780500417": "Lists open questions on draft PR #2843: supporting entity definition, preview status for requirements, GA features relying on preview content, and Version Introduced wording."
    },
    "written_by": [
     "claude-haiku-5-5"
@@ -7480,7 +7779,7 @@
    "author": "Matt-Cowsert",
    "opened": "2026-11-01",
    "last": "2026-11-03T21:44:57Z",
-   "earlier": 0,
+   "earlier": 2,
    "objects": [
     "dataset:SkuPrice",
     "dataset:CostAndUsage"
@@ -7525,38 +7824,9 @@
     }
    ],
    "basis": [
-    "c6616179054",
-    "o2811"
+    "c6616179054"
    ],
    "events": [
-    {
-     "id": "o2811",
-     "kind": "opened",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-01T16:50:41Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2811",
-     "excerpt": "Problem Statement The Preview Process in the specification change guidelines, merged in pull request (PR) 2762 on October 22, lets FOCUS Members promote, extend, or remove a preview dataset at each later version. The…"
-    },
-    {
-     "id": "s6560934928",
-     "kind": "status",
-     "at": "2026-11-01T16:51:04Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2811#issuecomment-6560934928",
-     "lines": [
-      "Initialized Request Type: Feature",
-      "Initialized Candidate Release: 1.6",
-      "Initialized Task Force: TF-1"
-     ]
-    },
-    {
-     "id": "s6561103305",
-     "kind": "status",
-     "at": "2026-11-01T17:05:26Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2811#issuecomment-6561103305",
-     "lines": [
-      "Matt-Cowsert updated Scope: Core"
-     ]
-    },
     {
      "id": "c6616179054",
      "kind": "comment",
@@ -7566,10 +7836,9 @@
      "excerpt": "Status Update - TF1 - November 3, 2026 FR 2811 - Clarify preview status changes for whole datasets Task Force 1 (TF1) discussed this feature request (FR) as the requirements model side of whole-dataset previews. FR 2782…"
     }
    ],
-   "summary": "FR #2811 asks how items outside a preview dataset are handled when Members promote, extend or remove it, and for the requirements model to show that preview requirements don't count toward conformance. The Preview Process merged in #2762 covers only the dataset's own requirements, so supporting items such as the Cost and Usage requirement tied to SKU Price are left open. The model's schema accepts only Active, Deprecated and Removed, and the validator doesn't filter by status, so practitioners can't tell which preview requirements count. It answers questions 3 and 7 from #2782. Matt-Cowsert's TF1 update says the requirements model must accept Preview by the end of the 1.6 cycle. No one else has commented yet, so support looks untested. Next, Matt-Cowsert will ask whether the change needs Requirements Model task force time or only TF1 input.",
+   "summary": "Matt-Cowsert opened this request to close two gaps in the preview rules merged in October 2026. The rules do not say what happens to scope-list items outside a preview dataset when Members promote or remove it, such as the Cost and Usage requirement linking charge category to the SKU Price record. The requirements model accepts only Active, Deprecated and Removed, so preview requirements cannot be shown as outside conformance, and the validator does not filter by status. The only activity is a 3 November task force note saying the model must accept Preview by the end of the 1.6 cycle, with a follow-up on whether the requirements model task force needs to weigh in. No one else has commented, so support is unknown. The issue is open and undecided, depending on progress in FR #2782 and FR #2807.",
    "gists": {
-    "o2811": "Matt-Cowsert asks how items outside a preview dataset are handled when Members change its status, and for preview requirements to be shown as not counting toward conformance.",
-    "c6616179054": "Matt-Cowsert's TF1 update says the requirements model must accept Preview by the end of the 1.6 cycle and plans to ask whether the change needs task force time."
+    "c6616179054": "3 November task force note: the requirements model must accept Preview by the end of 1.6, and Matt-Cowsert will check whether the requirements model task force must weigh in."
    },
    "written_by": [
     "claude-haiku-5-5"
