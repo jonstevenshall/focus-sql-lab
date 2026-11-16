@@ -1,6 +1,6 @@
 # FOCUS SQL Lab
 
-A web page for practising SQL on FOCUS sample data and exploring the FOCUS data model. DuckDB-WASM runs the
+A web page for exploring SQL queries on FOCUS sample data and exploring the FOCUS data model. DuckDB-WASM runs the
 queries in the browser, so the server only serves static files: no database, no login, no API.
 
 ## What it does
