@@ -598,8 +598,9 @@
 </section>
 <section id="evidence" hidden>
   <div class="ev-head">
-    <p>How the FOCUS working group found, checked and weighed what users need, drawn from its feature requests and the
-      conversations behind each change. Each item links to its threads on GitHub and to the parts of the model it concerns.</p>
+    <p>Where FOCUS changes came from: the problems people reported, who asked, how the working group found out, what
+      people wanted to do with the data, and the trade-offs it weighed. Each note links to its GitHub threads and to the
+      columns and datasets it concerns.</p>
     <div class="ev-filters" id="ev-filters" role="group" aria-label="Kind of evidence"></div>
     <input id="ev-search" type="search" placeholder="Search the evidence" aria-label="Search the evidence">
     <div class="view-switch" data-for="evidence" role="group" aria-label="Show as"></div>
@@ -1650,6 +1651,14 @@ function onAiClick(e) {
 
 // ---- Evidence: how the working group found and weighed user needs (site/evidence.json) --------------------
 const EV_KINDS = { pain: 'Pain point', demand: 'Who asked', discovery: 'How they found out', use_case: 'Use case', tradeoff: 'Trade-off' };
+const EV_TIPS = {
+  all: 'Every note',
+  pain: 'The problem people had with their cost data or with the spec',
+  demand: 'The organisations and groups that asked for or backed a change',
+  discovery: 'How the working group learned of a need: who raised it and where, such as a Slack thread, a call, an interview, a test or a check of provider data',
+  use_case: 'What people wanted to do with the data',
+  tradeoff: 'What the working group weighed before deciding',
+};
 let evidenceP = null, evKind = 'all';
 const loadEvidence = () => (evidenceP ??= fetch('evidence.json').then((r) => (r.ok ? r.json() : null)).catch(() => null));
 const GH_ISSUE = 'https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/';
@@ -1665,7 +1674,7 @@ async function renderEvidence() {
   const counts = { all: ev.items.length };
   ev.items.forEach((i) => { counts[i.category] = (counts[i.category] || 0) + 1; });
   $('ev-filters').innerHTML = [['all', 'All'], ...Object.entries(EV_KINDS)].map(([k, label]) =>
-    `<button data-kind="${k}" aria-pressed="${k === evKind}">${label} · ${counts[k] || 0}</button>`).join('');
+    `<button data-kind="${k}" aria-pressed="${k === evKind}" title="${EV_TIPS[k]}">${label} · ${counts[k] || 0}</button>`).join('');
   const items = ev.items.filter((i) => (evKind === 'all' || i.category === evKind)
     && (!q || [i.statement, i.quote, ...(i.who || []), ...(i.objects || []).map(objLabel)].join(' ').toLowerCase().includes(q)));
   if (showList('evidence', 'ev-list')) {

@@ -73,7 +73,7 @@
   },
   {
    "category": "pain",
-   "statement": "Azure-sourced exports showed the same tag key as Application, APPLICATION and application, forcing every consumer of the Tags column to write defensive matching logic; TI724, which raised the feedback, maintained case-insensitive matching in its query tool.",
+   "statement": "Azure-sourced exports showed the same tag key as Application, APPLICATION and application, forcing every consumer of the Tags column to write defensive matching logic and risking silent data loss for anyone unaware of the variation.",
    "quote": "forcing every consumer to implement defensive matching logic",
    "quote_from": "#2325",
    "threads": [
@@ -138,22 +138,6 @@
    "objects": [
     "column:CostAndUsage.ListUnitPrice",
     "column:CostAndUsage.ListCost"
-   ]
-  },
-  {
-   "category": "pain",
-   "statement": "A maintainer reported that AWS fills ListUnitPrice and ListCost from the highest pricing tier, inflating savings, and asked that requirements state which tier they reflect; a reviewer argued list price should follow the row's SKU Price ID.",
-   "quote": "",
-   "quote_from": "",
-   "threads": [
-    1625
-   ],
-   "date": "2025-11",
-   "who": [],
-   "objects": [
-    "column:CostAndUsage.ListUnitPrice",
-    "column:CostAndUsage.ListCost",
-    "condition:IncludesQuantityTierPricing"
    ]
   },
   {
@@ -337,7 +321,7 @@
   },
   {
    "category": "pain",
-   "statement": "The Tags column banned altering user-defined keys, so providers with two tagging systems, AWS resource tags and cost categories or GCP tags and labels, would overwrite one value when the same key existed in both; an AWS contributor raised it.",
+   "statement": "The Tags column banned altering user-defined keys, so providers with two tagging systems, AWS resource tags and cost categories or GCP tags and labels, would overwrite one value when the same key existed in both.",
    "quote": "persisting both in the Tags column key/value map will cause clobbering",
    "quote_from": "#540",
    "threads": [
@@ -641,7 +625,7 @@
   },
   {
    "category": "discovery",
-   "statement": "Checking provider sources showed one commitment term written three ways, Google Cloud's TWELVE_MONTH, Azure's 1 Year and AWS's number with a separate unit, so provider data could not pick one ContractCommitmentDurationType value; 1 Year and 12 Months both conformed.",
+   "statement": "Checking the providers' own APIs and price lists showed one commitment term written three ways: the Google Cloud Compute Engine API says TWELVE_MONTH, the Azure Retail Prices API says 1 Year, and the AWS Savings Plans price list gives a number with a separate unit. Provider data could not settle which ContractCommitmentDurationType value to use, and 1 Year and 12 Months both conformed.",
    "quote": "Service provider data does not settle the choice",
    "quote_from": "#2709",
    "threads": [
@@ -657,13 +641,28 @@
   },
   {
    "category": "discovery",
-   "statement": "The Actor dimensions and Unit Format requests both illustrated practitioner need with quotes explicitly labelled hypothetical, unlike the AI billing examples request, which cited named organisations and practitioner interviews.",
+   "statement": "After TF-2 asked on 1 July 2026 for cross-provider evidence that AllocatedServiceName was not an AWS-only need, the column's author checked how GKE and AKS allocate cluster costs: splitting shared cost was needed on all three clouds, but, as far as the author could find, only AWS's Cost and Usage Report moved split rows to a different service, from EC2 to EKS. The author argued for a FOCUS column anyway.",
+   "quote": "dug into GKE and AKS's native cost-allocation mechanisms",
+   "quote_from": "#2395",
+   "threads": [
+    2395,
+    2315
+   ],
+   "date": "2026-07",
+   "who": [],
+   "objects": [
+    "column:CostAndUsage.AllocatedServiceName",
+    "attribute:DataGeneratorCalculatedSplitCostAllocationHandling"
+   ]
+  },
+  {
+   "category": "discovery",
+   "statement": "The Actor dimensions and Unit Format requests cited vendors' own billing and APIs as evidence, such as user IDs in the Anthropic Enterprise Analytics API, AWS role ARNs and per-page document pricing, but the practitioner quotes in both were labelled hypothetical.",
    "quote": "Practitioner quotes (hypothetical)",
    "quote_from": "#2358",
    "threads": [
     2358,
-    2363,
-    1941
+    2363
    ],
    "date": "2026-05",
    "who": [
@@ -694,38 +693,26 @@
   },
   {
    "category": "discovery",
-   "statement": "Community feedback that the spec gave too little guidance on split cost allocation led to an AllocatedServiceName column, so a consuming service such as EKS on EC2 could be queried by name; the author found the pattern AWS-specific but argued for a FOCUS column anyway.",
-   "quote": "",
-   "quote_from": "",
-   "threads": [
-    2315,
-    2395
-   ],
-   "date": "2026-04",
-   "who": [],
-   "objects": [
-    "column:CostAndUsage.AllocatedServiceName",
-    "attribute:DataGeneratorCalculatedSplitCostAllocationHandling"
-   ]
-  },
-  {
-   "category": "discovery",
-   "statement": "Feedback that Azure exports showed one tag key in several casings led to restoring a Tags column requirement, dropped in an earlier revision, that user-defined tag keys match the keys as provided, framed as fidelity to user input rather than normalisation.",
-   "quote": "",
-   "quote_from": "",
+   "statement": "TI724, a FinOps services firm, found the mixed tag-key casing while building its FOCUS Query tool on Azure FOCUS exports, and reported it as a feedback issue (#2322). When maintainers discussed that feedback, Walmart's sponsor pointed out that a requirement to keep user-defined tag keys as provided had been dropped in an earlier revision (#691); pull request #2434 restored it.",
+   "quote": "raised the gap during maintainers discussion of #2322 and identified the original normative requirement that was removed",
+   "quote_from": "#2325",
    "threads": [
     2325,
+    2322,
     2434
    ],
    "date": "2026-04",
-   "who": [],
+   "who": [
+    "TI724",
+    "Walmart"
+   ],
    "objects": [
     "column:CostAndUsage.Tags"
    ]
   },
   {
    "category": "discovery",
-   "statement": "Reviewing provider billing artifacts showed cached tokens already labelled differently by AWS usage types, Azure meter names, Anthropic and OpenAI, so a cross-provider cache query on the free-form SkuMeter column relied on brittle string matching.",
+   "statement": "A survey of provider billing artifacts for the cached-token request showed AWS usage types, Azure meter names, Anthropic and OpenAI already labelling cached tokens differently, so a cross-provider cache query on the free-form SkuMeter column relied on brittle string matching.",
    "quote": "a cross-provider cache query against meter names is a string match that breaks",
    "quote_from": "#2099",
    "threads": [
@@ -740,7 +727,7 @@
   },
   {
    "category": "discovery",
-   "statement": "In a January 2026 task force meeting on column selection, contributors checked provider behaviour: AWS and GCP already let users choose columns, while Azure had offered it through its API only and then removed it.",
+   "statement": "At the TF-2 meeting on 7 January 2026 the group went through what providers already offered for column selection: AWS and GCP let users choose columns, while Azure had offered it through its API only and then removed it.",
    "quote": "Azure previously supported it (API only) but removed it",
    "quote_from": "#1811",
    "threads": [
@@ -753,7 +740,7 @@
   },
   {
    "category": "discovery",
-   "statement": "The AI billing examples request cited practitioner quotes and Community Director practitioner interviews from Q4 2025; one practitioner said they worked with over 20 AI vendors, each with a different data format.",
+   "statement": "The AI billing examples request drew on the Community Director's practitioner interviews in Q4 2025 and on FinOps for AI Working Group discussions, and quoted practitioners by name; one said they worked with over 20 AI vendors, each with a different data format.",
    "quote": "every single one has a different data format... I need FOCUS for AI.",
    "quote_from": "#1941",
    "threads": [
@@ -776,7 +763,21 @@
   },
   {
    "category": "discovery",
-   "statement": "Before finalising the Commitment Eligibility pull request, the task force made consulting a Datadog contributor on SaaS pricing tier scenarios both a dependency and a definition-of-done item.",
+   "statement": "TF-2 tested the tag details options against billing data: a sponsor's BigQuery queries led it to pick the key-driven TagDetails structure over a schema-driven one in January 2026, and a contributor's AWS analysis found the column made the data seven to eight times larger with only seven tags.",
+   "quote": "7-8x data size increase with only 7 tags",
+   "quote_from": "#1124",
+   "threads": [
+    1124
+   ],
+   "date": "2026-01",
+   "who": [],
+   "objects": [
+    "column:CostAndUsage.Tags"
+   ]
+  },
+  {
+   "category": "discovery",
+   "statement": "Before the commitment eligibility pull request was drafted, the task force made consulting a Datadog contributor on SaaS pricing tier scenarios a dependency; the draft waited a week in January 2026 until that conversation could happen.",
    "quote": "to clarify SaaS pricing scenarios before finalizing the PR",
    "quote_from": "#1793",
    "threads": [
@@ -790,9 +791,25 @@
   },
   {
    "category": "discovery",
-   "statement": "For an Invoice dataset letting finance teams reconcile FOCUS data against invoices, a contributor urged involving finance personas; Task Force 1 then modelled it with finance experts while data generator input was gathered, producing the Invoice Detail and Billing Period datasets.",
-   "quote": "",
-   "quote_from": "",
+   "statement": "The tier request rested on AWS's own Cost and Usage Report documentation for the columns AWS uses to fill List Cost and List Unit Price, which it quoted. A reviewer replied that list price should follow the row's SKU Price ID, so existing rules might already cover tiers.",
+   "quote": "If you have SKUs with multiple On-Demand public costs, the equivalent cost for the highest tier is displayed.",
+   "quote_from": "#1625",
+   "threads": [
+    1625
+   ],
+   "date": "2025-11",
+   "who": [],
+   "objects": [
+    "column:CostAndUsage.ListUnitPrice",
+    "column:CostAndUsage.ListCost",
+    "condition:IncludesQuantityTierPricing"
+   ]
+  },
+  {
+   "category": "discovery",
+   "statement": "The Invoice dataset was modelled with finance specialists: after a contributor asked for finance personas on the request, accounting and finance specialists joined Task Force 1 calls, including on 2 December 2025, and an action item was opened to collect invoice examples from current and future data generators. The work became the Invoice Detail and Billing Period datasets.",
+   "quote": "attended by a couple of accounting/finance SMEs",
+   "quote_from": "#1500",
    "threads": [
     1500,
     1900
@@ -807,27 +824,13 @@
   },
   {
    "category": "discovery",
-   "statement": "Because practitioners could not tell which charges can be tagged or where a tag value came from, TF-2 weighed eleven candidate structures, chose a key-driven TagDetails column after BigQuery tests, and an AWS test showed data growing seven to eight times.",
-   "quote": "",
-   "quote_from": "",
-   "threads": [
-    1124
-   ],
-   "date": "2025-06",
-   "who": [],
-   "objects": [
-    "column:CostAndUsage.Tags"
-   ]
-  },
-  {
-   "category": "discovery",
-   "statement": "In marketplace deals the cloud provider held the purchase record and the SaaS provider the usage, and both might report EffectiveCost; a task force meeting reframed the problem from double counting to data generators reporting estimated, inaccurate values.",
+   "statement": "TF-3 meetings checked the EffectiveCost and BilledCost definitions against real cases: on 31 October 2025 the group agreed the marketplace problem was data generators filling EffectiveCost with estimates when they lacked usage data, not double counting, and in December 2025 it tested the new definitions against Datadog SaaS scenarios.",
    "quote": "The Oct 31 meeting reframed this from \"double counting\" to \"accuracy.\"",
    "quote_from": "#982",
    "threads": [
     982
    ],
-   "date": "2025-05",
+   "date": "2025-10",
    "who": [],
    "objects": [
     "column:CostAndUsage.EffectiveCost"
@@ -835,7 +838,7 @@
   },
   {
    "category": "discovery",
-   "statement": "Early column proposals asked supporters to vote with a thumbs-up for FOCUS 1.0 GA; later feature requests asked organisations to comment with their name and reason, and maintainers aggregated supporting organisations and triaged by adoption impact.",
+   "statement": "The working group gathered support on the GitHub issues themselves: early column proposals asked supporters to give a thumbs-up for FOCUS 1.0 GA, and later feature requests asked organisations to comment with their name and reason, which maintainers aggregated and triaged by adoption impact.",
    "quote": "FOCUS Staff & Maintainers will aggregate supporting orgs over time.",
    "quote_from": "#966",
    "threads": [
@@ -851,7 +854,7 @@
   },
   {
    "category": "discovery",
-   "statement": "Considering Snowflake, a FinOps vendor representative argued that FOCUS should not lose the underlying AWS, Azure or GCP cloud, because organisations using Snowflake across clouds and regions lost that rollup; practitioners wanted SaaS spend rolled up by underlying provider.",
+   "statement": "The host provider request was built on a FinOps vendor representative's written comment, which it quoted: mapping Snowflake to FOCUS would make Provider, Publisher and Invoice Issuer all Snowflake and lose the AWS, Azure or GCP cloud underneath, which organisations using Snowflake across clouds and regions wanted to roll up.",
    "quote": "we shouldn't lose that AWS/Azure/GCP underlying cloud for Snowflake",
    "quote_from": "#1073",
    "threads": [
@@ -865,9 +868,9 @@
   },
   {
    "category": "discovery",
-   "statement": "Before replacing RECOMMENDED with SHOULD throughout the spec, the requester asked whether practitioners had reported problems; none were known and it was expected to be low priority. When the change was made, Google and Microsoft representatives confirmed they were content.",
-   "quote": "",
-   "quote_from": "",
+   "statement": "When asked whether practitioners had reported problems with RECOMMENDED versus SHOULD, the contributors knew of none; one supporter said the mix had tripped them up while reviewing earlier normative requirements work. Google and Microsoft representatives confirmed by email in December 2025 that the change could go ahead.",
+   "quote": "I am not aware of any feedback on SHOULD vs RECOMMENDED.",
+   "quote_from": "#1026",
    "threads": [
     1026,
     1647
@@ -881,13 +884,13 @@
   },
   {
    "category": "discovery",
-   "statement": "A reviewer supported adding pricing currency columns but feared moving too fast without modelled data, so a sample sheet modelling the proposal was shared before members approved the four new columns in April 2025.",
-   "quote": "",
-   "quote_from": "",
+   "statement": "The pricing currency columns were checked against modelled data before approval: a reviewer said they could support the change only with modelled data, so a contributor reworked the Atlas example in the sample-data workbook with values for the proposed columns in March 2025. Members approved the four columns in April 2025.",
+   "quote": "the door is not completely closed for me IFF I can see modeled data asap",
+   "quote_from": "#848",
    "threads": [
     848
    ],
-   "date": "2025-04",
+   "date": "2025-03",
    "who": [],
    "objects": [
     "column:CostAndUsage.PricingCurrency",
@@ -898,11 +901,13 @@
   },
   {
    "category": "discovery",
-   "statement": "A practitioner quoted in the InvoiceId work item said chargeback per business unit had to match the invoices to the cent, and that without InvoiceId they lost track when an account moved between billing accounts.",
+   "statement": "InvoiceId came back to the group through a practitioner's feedback issue in October 2024 (#607), which the work item quoted: chargeback per business unit had to match the invoices to the cent, and without InvoiceId they lost track when an account moved between billing accounts. An Invoice ID column had already been proposed for FOCUS 1.0 (#302).",
    "quote": "must match to the cent the sum of the chargeback per business unit",
    "quote_from": "#615",
    "threads": [
-    615
+    615,
+    607,
+    302
    ],
    "date": "2024-10",
    "who": [],
@@ -914,7 +919,7 @@
   },
   {
    "category": "discovery",
-   "statement": "FOCUS members and user group members asked for SKU properties such as terms, tiers and regions, which SkuPriceDetails held only as provider-specific keys needing extensive parsing; eight backlog issues were closed into one consolidated work item.",
+   "statement": "FOCUS members and user group members had asked for SKU properties such as term, tier and region over several months; eight backlog issues holding those requests were closed into one work item in October 2024. From November 2024 the task force drafted a practitioner survey on SKU properties, to be run in SurveyMonkey and shared by the AWS, Google Cloud and Microsoft representatives in their own forums.",
    "quote": "both focus members and user group members have expressed interest in various SKU",
    "quote_from": "#619",
    "threads": [
@@ -929,9 +934,9 @@
   },
   {
    "category": "discovery",
-   "statement": "Because FOCUS had been built around cloud providers and offered SaaS vendors no onramp, a time-boxed analysis of SaaS billing was run toward an MVP: task forces built a billing model and provider matrix, and members gathered examples from Datadog, Twilio, GitHub and Salesforce.",
-   "quote": "",
-   "quote_from": "",
+   "statement": "To learn how SaaS vendors bill, TF-2 planned outreach in October 2024 to Datadog, Twilio and GitHub to test its billing models and gather requirements; from November members added Twilio and Salesforce use cases to a billing model and provider matrix and reviewed provider attributes for Domo and OCI.",
+   "quote": "Facilitate outreach to high-priority SaaS providers, including Datadog, Twilio, and GitHub",
+   "quote_from": "#616",
    "threads": [
     616
    ],
@@ -943,25 +948,12 @@
   },
   {
    "category": "discovery",
-   "statement": "To give practitioners standardised SKU and SKU price properties such as term, tier and region, the group organised a practitioner survey to shape the SkuPriceDetails work and split the scope to protect the v1.2 release.",
-   "quote": "",
-   "quote_from": "",
-   "threads": [
-    619
-   ],
-   "date": "2024-10",
-   "who": [],
-   "objects": [
-    "column:CostAndUsage.SkuPriceDetails"
-   ]
-  },
-  {
-   "category": "discovery",
-   "statement": "After two dataset producers interpreted the normative requirements for two FOCUS 1.0 columns differently, the group reviewed every column and attribute to remove ambiguity and to show which requirements could be validated automatically and which manually.",
+   "statement": "The group learned its normative requirements were ambiguous when two dataset producers read the requirements for two FOCUS 1.0 columns differently. After fixing those columns in 1.1, it reviewed the requirements of every column and attribute on a preview pull request (#664), with reviewers claiming columns through a spreadsheet, and set out which requirements could be validated automatically and which manually.",
    "quote": "were interpreted differently by two dataset producers",
    "quote_from": "#557",
    "threads": [
-    557
+    557,
+    664
    ],
    "date": "2024-09",
    "who": [],
@@ -969,9 +961,9 @@
   },
   {
    "category": "discovery",
-   "statement": "Contributors found that the rule against altering user-defined tag keys caused collisions when a provider has several tag systems, such as AWS resource tags and cost categories; a January 2025 poll favoured prefixing, implemented in the Tags column following a community survey.",
-   "quote": "",
-   "quote_from": "",
+   "statement": "An AWS contributor pointed out the tag-key collision in a discussion with the work item's author, and the TF-2 call on 16 October 2024 agreed to make it a work item. The choice between prefixing options was then put to polls in the FinOps and FOCUS Slack channels, which TF-1 closed in January 2025.",
+   "quote": "aggregated across both the FinOps and FOCUS slack channels",
+   "quote_from": "#540",
    "threads": [
     540,
     691
@@ -985,34 +977,7 @@
   },
   {
    "category": "discovery",
-   "statement": "After two data producers read FOCUS 1.0 differently, a review of the normative requirements of every column and attribute was proposed; TF-2 made it a backward-compatibility work item because of possible breaking changes, and a requirements-writing cookbook followed.",
-   "quote": "",
-   "quote_from": "",
-   "threads": [
-    557,
-    664
-   ],
-   "date": "2024-09",
-   "who": [],
-   "objects": []
-  },
-  {
-   "category": "discovery",
-   "statement": "SKU Meter, a column describing what a SKU meters, was named through naming spreadsheets and polls across task force, maintainer and member calls, including a revote with alternatives from a contributor who did not want the name to look chosen by Microsoft.",
-   "quote": "",
-   "quote_from": "",
-   "threads": [
-    516
-   ],
-   "date": "2024-09",
-   "who": [],
-   "objects": [
-    "column:CostAndUsage.SkuMeter"
-   ]
-  },
-  {
-   "category": "discovery",
-   "statement": "To align SKU properties across providers, a working document asked providers which columns distinguish their SKUs and SKU price IDs, and task force and maintainer calls assigned work to gather example data, map provider columns and define common attributes.",
+   "statement": "An AWS contributor's working document asked the other providers which of their columns distinguish SKUs and SKU price IDs, and task force and maintainer calls in July and August 2024 assigned work to gather example data, map provider columns and define common attributes.",
    "quote": "",
    "quote_from": "",
    "threads": [
@@ -1027,7 +992,7 @@
   },
   {
    "category": "discovery",
-   "statement": "The original coverage eligibility work item catalogued real exclusions across providers, such as AWS Spot, P5 and Mac instances and Ubuntu Pro, Azure Spot and older VM series, and GCP preemptible VMs, noting providers already knew SKU eligibility.",
+   "statement": "The coverage eligibility work item drew on provider documentation: it listed commitment exclusions at AWS (Spot, P5 and Mac instances, Ubuntu Pro), Azure (Spot and older VM series) and GCP (preemptible, N1 shared-core and extended-memory VMs), and noted that no provider showed eligibility in its cost and usage data, though their own cost tools showed coverage.",
    "quote": "SKU eligibility for discounts is a known property by providers",
    "quote_from": "#406",
    "threads": [
@@ -1041,7 +1006,7 @@
   },
   {
    "category": "discovery",
-   "statement": "Mapping account entities across providers showed BillingAccountId could mean an AWS Management Account, a GCP Billing Account or a Microsoft Billing Profile or Subscription, with Microsoft alone using three types, so BillingAccountType and SubAccountType columns were proposed.",
+   "statement": "Comparing the account entities each provider uses showed BillingAccountId could mean an AWS Management Account, a GCP Billing Account or a Microsoft Billing Profile or Subscription, with Microsoft alone using three types, so BillingAccountType and SubAccountType columns were proposed.",
    "quote": "Microsoft has 3 different types of entities that could be used for `BillingAccountId`",
    "quote_from": "#317",
    "threads": [
@@ -1058,7 +1023,7 @@
   },
   {
    "category": "discovery",
-   "statement": "The billing account terminology change started from internal discussion rather than research: the proposer admitted not yet talking to practitioners and wanted to hear from Microsoft customers, for whom billing account meant a top-level account, not the invoice scope.",
+   "statement": "The billing account terminology change came from internal discussion, where several people felt the term did not make clear it was the scope at which an invoice is generated; the proposer had not yet talked to practitioners and wanted to hear from Microsoft customers, for whom billing account meant a top-level account.",
    "quote": "I haven't talked to practitioners yet",
    "quote_from": "#300",
    "threads": [
@@ -1073,9 +1038,9 @@
   },
   {
    "category": "discovery",
-   "statement": "The Amortized Cost metric was renamed Effective Cost because of extensive feedback about the name, with its supporting documents updated to match.",
-   "quote": "",
-   "quote_from": "",
+   "statement": "Feedback on the name, from sources the pull request does not name, led to Amortized Cost being renamed Effective Cost in August 2023, with its supporting documents updated to match.",
+   "quote": "due to excessive feedback on the name",
+   "quote_from": "#144",
    "threads": [
     144
    ],
@@ -1781,6 +1746,20 @@
    "objects": [
     "column:CostAndUsage.ConsumedQuantity",
     "column:CostAndUsage.ConsumedUnit"
+   ]
+  },
+  {
+   "category": "tradeoff",
+   "statement": "Naming the column that describes what a SKU meters was put to the community: from August 2024 TF-2, maintainer and member calls used naming spreadsheets and polls, and a revote added alternatives from a contributor who did not want the name to look chosen by Microsoft. SKU Meter was the result.",
+   "quote": "",
+   "quote_from": "",
+   "threads": [
+    516
+   ],
+   "date": "2024-09",
+   "who": [],
+   "objects": [
+    "column:CostAndUsage.SkuMeter"
    ]
   },
   {
