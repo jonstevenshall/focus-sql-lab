@@ -442,6 +442,49 @@
     aside { position: static; max-height: none; border-right: 0; border-bottom: 1px solid var(--line); }
     #meta { margin-left: 0; width: 100%; }
   }
+
+  /* Interpretations: a reading panel over the Evidence tab. It shows only when site/interpretations/index.json exists,
+     which is git-ignored, so the public site never has it. */
+  .ev-read { display: block; text-align: right; margin-top: 8px; font-size: 12.5px; }
+  .ev-read-inline { margin-left: 6px; font-size: 12px; white-space: nowrap; }
+  #ip-scrim { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.25); z-index: 40; }
+  #ip-reader { position: fixed; top: 0; right: 0; bottom: 0; width: min(820px, 100vw); z-index: 41; background: var(--panel);
+    border-left: 1px solid var(--line); box-shadow: -8px 0 24px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; }
+  #ip-reader.full { width: 100vw; border-left: 0; }
+  .ip-bar { display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-bottom: 1px solid var(--line); }
+  .ip-bar .ip-thread { margin-right: auto; font-size: 12.5px; color: var(--muted); }
+  .ip-bar button { border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 4px 10px; font-size: 12.5px; cursor: pointer; }
+  .ip-bar .ip-back { display: none; }
+  #ip-body { overflow-y: auto; flex: 1; padding: 18px 24px 48px; }
+  .ip-doc { max-width: 70ch; margin: 0 auto; font-size: 15px; line-height: 1.62; }
+  .ip-doc .ip-label { font-size: 12px; color: var(--muted); margin: 0 0 6px; }
+  .ip-doc h2 { font-size: 23px; line-height: 1.25; margin: 0 0 12px; text-wrap: balance; text-transform: none; letter-spacing: normal; color: var(--fg); font-weight: 700; }
+  .ip-doc h3 { font-size: 16.5px; margin: 26px 0 8px; }
+  .ip-doc h4 { font-size: 15px; margin: 18px 0 6px; }
+  .ip-doc p { margin: 0 0 12px; }
+  .ip-doc ul, .ip-doc ol { margin: 0 0 12px; padding-left: 22px; }
+  .ip-doc li { margin-bottom: 6px; }
+  .ip-doc code { font-family: var(--mono); font-size: 0.86em; background: var(--code-bg); border: 1px solid var(--line); border-radius: 4px; padding: 0 3px; overflow-wrap: anywhere; }
+  .ip-doc pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; overflow-x: auto; font: 12.5px/1.5 var(--mono); }
+  .ip-doc pre code { border: 0; padding: 0; background: none; }
+  .ip-doc .ip-scroll { overflow-x: auto; margin: 4px 0 14px; }
+  .ip-doc table { border-collapse: collapse; font-size: 13.5px; min-width: 100%; }
+  .ip-doc th, .ip-doc td { border-bottom: 1px solid var(--line); padding: 6px 10px 6px 0; text-align: left; vertical-align: top; }
+  .ip-doc th { font-size: 12px; color: var(--muted); }
+  .ip-doc .cite { border: 0; background: none; padding: 0 1px; color: var(--accent); cursor: pointer; font-size: 11px; vertical-align: super; line-height: 0; }
+  .ip-doc .cite-note { font-size: 11px; color: var(--muted); vertical-align: super; line-height: 0; }
+  .ip-doc details { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; margin: 0 0 16px; font-size: 13.5px; background: var(--bg); }
+  .ip-doc details summary { cursor: pointer; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .ip-doc .ip-warn { border: 1px solid var(--warn-line); background: var(--warn-bg); border-radius: 8px; padding: 8px 12px; font-size: 13.5px; }
+  .ip-doc .ip-sources li.hl { background: var(--row-alt); outline: 1px solid var(--accent); border-radius: 4px; }
+  .ip-doc .ip-prov { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; margin-top: 20px; }
+  .ip-doc .ip-sql-act { margin: -6px 0 14px; }
+  @media (max-width: 900px) {
+    #ip-reader { width: 100vw; border-left: 0; }
+    .ip-bar #ip-expand { display: none; }
+    .ip-bar .ip-back { display: inline-block; }
+    #ip-body { padding: 16px; }
+  }
 </style>
 </head>
 <body>
@@ -606,6 +649,16 @@
     <div class="view-switch" data-for="evidence" role="group" aria-label="Show as"></div>
   </div>
   <div id="ev-list"><p class="hint">Loading…</p></div>
+</section>
+<div id="ip-scrim" hidden></div>
+<section id="ip-reader" role="dialog" aria-modal="true" aria-labelledby="ip-title" hidden>
+  <div class="ip-bar">
+    <button type="button" class="ip-back" id="ip-back">← Back to Evidence</button>
+    <span class="ip-thread" id="ip-thread"></span>
+    <button type="button" id="ip-expand" aria-pressed="false">Expand to full page</button>
+    <button type="button" id="ip-close" aria-label="Close the interpretation">✕</button>
+  </div>
+  <div id="ip-body" tabindex="-1"></div>
 </section>
 <section id="ai" hidden><div id="ai-body"><p class="hint">Loading…</p></div></section>
 <section id="recent" hidden>
@@ -1243,7 +1296,8 @@ const AREA = { CostAndUsage: 'cau', SkuPrice: 'sku', InvoiceDetail: 'inv', Contr
 const SHORT = { 'cau-sku': 'SKU Price ID', 'cau-cc': 'Commitment ID', 'cau-inv': 'Invoice ID',
   'cau-bp': 'Billing period', 'inv-bp': 'Billing period', 'sku-cc': 'Contract ID',
   'inv-pay': 'Payment record', 'inv-ref': 'Adjusted invoice' };
-let tab = location.hash === '#recent' ? 'recent' : 'model'; // the page opens on the Data model, or on Recent at #recent
+// The page opens on the Data model, on Recent at #recent, or on Evidence at #i-<evidence id> (a private interpretation).
+let tab = location.hash === '#recent' ? 'recent' : location.hash.startsWith('#i-') ? 'evidence' : 'model';
 let modelBuilt = false, selection = null, detailToken = 0, detailSql = {};
 
 const dsById = (id) => model.datasets.find((d) => d.id === id);
@@ -1278,6 +1332,7 @@ function moveDetail(t) {
 }
 
 function showTab(t) {
+  if (t !== 'evidence' && location.hash.startsWith('#i-')) { closeInterp(true); history.replaceState(null, '', location.pathname + location.search); }
   tab = t;
   moveDetail(t);
   store.set('tab', t);
@@ -1670,6 +1725,9 @@ const threadLinks = (list) => list.map((n) => `<a href="${GH_ISSUE}${n}" target=
 async function renderEvidence() {
   const ev = await loadEvidence();
   if (!ev) { $('ev-list').innerHTML = '<p class="hint">Could not load the evidence.</p>'; return; }
+  const iv = await loadInterp(); // null on the public site: the folder isn't published
+  const readLink = (i, inline) => (iv && i.id && iv.by_evidence_id[i.id]
+    ? `<a href="#i-${escapeHtml(i.id)}" class="${inline ? 'ev-read-inline' : 'ev-read'}" data-ip="${escapeHtml(i.id)}">Read interpretation</a>` : '');
   const q = $('ev-search').value.trim().toLowerCase();
   const counts = { all: ev.items.length };
   ev.items.forEach((i) => { counts[i.category] = (counts[i.category] || 0) + 1; });
@@ -1681,7 +1739,7 @@ async function renderEvidence() {
     $('ev-list').innerHTML = items.length ? sortList('evidence', [
       { key: 'kind', label: 'Kind' }, { key: 'what', label: 'What' }, { key: 'date', label: 'Date', cls: 'nowrap' },
       { key: 'threads', label: 'Threads' }, { key: 'model', label: 'In the model' }], items.map((i) => ({
-      cells: { kind: `<span class="tag">${EV_KINDS[i.category]}</span>`, what: linkRefs(i.statement), date: escapeHtml(i.date || ''),
+      cells: { kind: `<span class="tag">${EV_KINDS[i.category]}</span>`, what: linkRefs(i.statement) + readLink(i, true), date: escapeHtml(i.date || ''),
         threads: threadLinks(i.threads || []), model: (i.objects || []).map(objButton).join(', ') },
       sort: { kind: EV_KINDS[i.category], what: i.statement, date: i.date || '', threads: (i.threads || [])[0] || 0,
         model: (i.objects || []).map(objLabel).join(', ') } }))) : '<p class="hint">Nothing matches.</p>';
@@ -1693,7 +1751,125 @@ async function renderEvidence() {
       ${i.quote ? `<blockquote>“${escapeHtml(i.quote)}”<cite>From ${escapeHtml(i.quote_from || 'the issue')}</cite></blockquote>` : ''}
       <div class="ev-meta">${(i.who || []).length ? `Asked for or backed by: ${escapeHtml(i.who.join(', '))}<br>` : ''}Threads: ${threadLinks(i.threads || [])}${
         (i.objects || []).length ? `<br>In the model: ${i.objects.map(objButton).join(', ')}` : ''}</div>
+      ${readLink(i)}
     </div>`).join('') || '<p class="hint">Nothing matches.</p>';
+}
+
+// ---- Interpretations: private reading panel (site/interpretations/, git-ignored, so only a local copy has it) ----------
+// Each interpretation is Markdown written by an AI model. It is escaped first; only headings, paragraphs, lists, tables,
+// fenced code, bold, italic, inline code, #1234 links and [s1] citations are turned into HTML.
+let interpP = null, ipCurrent = null, ipFromList = false, ipToken = 0;
+const ipCache = new Map();
+// Only a local copy looks for them, so the public site never even requests the folder.
+const IP_LOCAL = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
+const loadInterp = () => (interpP ??= IP_LOCAL
+  ? fetch('interpretations/index.json').then((r) => (r.ok ? r.json() : null)).catch(() => null)
+  : Promise.resolve(null));
+
+function ipInline(s, cite) {
+  return escapeHtml(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[^*\w])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>').replace(/\\\*/g, '*')
+    .replace(/(^|[\s(])#(\d{3,5})\b/g, `$1<a href="${GH_ISSUE}$2" target="_blank" rel="noopener">#$2</a>`)
+    .replace(/\[([^\]]*\bs\d+\b[^\]]*)\]/g, (m, inner) => inner.split(/,\s*|\]\[/)
+      .map((t) => (/^s\d+$/.test(t.trim()) ? cite(t.trim()) : `<span class="cite-note">${t}</span>`)).join(''));
+}
+function ipBlocks(md, cite) {
+  const lines = md.replace(/\r/g, '').split('\n'), out = [];
+  let i = 0;
+  while (i < lines.length) {
+    const l = lines[i];
+    if (/^```/.test(l)) {
+      const lang = l.slice(3).trim().toLowerCase(), code = [];
+      i++; while (i < lines.length && !/^```/.test(lines[i])) code.push(lines[i++]);
+      i++;
+      const text = code.join('\n');
+      out.push(`<pre><code>${escapeHtml(text)}</code></pre>`);
+      if (lang === 'sql') out.push(`<p class="ip-sql-act"><button type="button" class="linkish" data-ip-sql="${escapeHtml(text)}">Open in Query</button> <span class="hint">runs it on the chosen data source</span></p>`);
+      continue;
+    }
+    if (!l.trim() || /^-{3,}$/.test(l.trim())) { i++; continue; }
+    const h = l.match(/^(#{1,4})\s+(.*)$/);
+    if (h) { const tag = h[1].length <= 2 ? 'h3' : 'h4'; out.push(`<${tag}>${ipInline(h[2], cite)}</${tag}>`); i++; continue; }
+    if (/^\s*\|/.test(l)) {
+      const rows = []; while (i < lines.length && /^\s*\|/.test(lines[i])) rows.push(lines[i++]);
+      const cells = (r) => r.trim().replace(/^\||\|$/g, '').split('|').map((c) => c.trim());
+      const body = rows.filter((r, n) => !(n === 1 && /^[\s|:-]+$/.test(r)));
+      const [head, ...rest] = body;
+      out.push(`<div class="ip-scroll"><table><thead><tr>${cells(head).map((c) => `<th scope="col">${ipInline(c, cite)}</th>`).join('')}</tr></thead><tbody>${
+        rest.map((r) => `<tr>${cells(r).map((c) => `<td>${ipInline(c, cite)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`);
+      continue;
+    }
+    if (/^\s*([-*]|\d+\.)\s+/.test(l)) {
+      const ordered = /^\s*\d+\./.test(l), items = [];
+      while (i < lines.length && /^\s*([-*]|\d+\.)\s+/.test(lines[i])) items.push(lines[i++].replace(/^\s*([-*]|\d+\.)\s+/, ''));
+      const tag = ordered ? 'ol' : 'ul';
+      out.push(`<${tag}>${items.map((t) => `<li>${ipInline(t, cite)}</li>`).join('')}</${tag}>`);
+      continue;
+    }
+    const para = [];
+    while (i < lines.length && lines[i].trim() && !/^(#{1,4}\s|\s*\||\s*([-*]|\d+\.)\s|```)/.test(lines[i])) para.push(lines[i++].trim());
+    out.push(`<p>${ipInline(para.join(' '), cite)}</p>`);
+  }
+  return out.join('');
+}
+
+function ipRender(r) {
+  const num = Object.fromEntries(r.sources.map((s, n) => [s.id, n + 1]));
+  const cite = (id) => (num[id] ? `<button type="button" class="cite" data-ip-src="${id}" aria-label="Source ${num[id]}">[${num[id]}]</button>` : `<span class="cite-note">[${escapeHtml(id)}?]</span>`);
+  const body = r.markdown.replace(/^\s*#\s+[^\n]*\n/, ''); // the first line is the title
+  const c = r.card, p = r.provenance;
+  return `<article class="ip-doc">
+    <p class="ip-label">Private · written by an AI model (Claude Haiku 5.5) from the cited sources, reviewed once by the same model${r.revised ? ' and revised' : ''} · not official FOCUS guidance · shown only on a copy of the site that has the interpretations folder</p>
+    <h2 id="ip-title" tabindex="-1">${escapeHtml(r.title)}</h2>
+    <details open><summary>The evidence this explains</summary>
+      <p><span class="tag">${EV_KINDS[c.category]}</span> ${escapeHtml(c.date || '')}</p><p>${linkRefs(c.statement)}</p>
+      ${c.quote ? `<blockquote>“${escapeHtml(c.quote)}”<cite>From ${escapeHtml(c.quote_from || 'the issue')}</cite></blockquote>` : ''}
+      <p class="hint" style="margin:0">Threads: ${threadLinks(c.threads || [])}${(c.objects || []).length ? ` · In the model: ${c.objects.map(objButton).join(', ')}` : ''}</p></details>
+    ${r.checks_final.length ? `<p class="ip-warn">The automatic checks still found: ${r.checks_final.map(escapeHtml).join(' ')}</p>` : ''}
+    ${ipBlocks(body, cite)}
+    <h3>Sources given to the model</h3>
+    <ol class="ip-sources">${r.sources.map((s) => `<li id="ip-src-${s.id}"><a href="${escapeHtml(s.url)}" target="_blank" rel="noopener">${escapeHtml(s.label)}</a> <span class="tag">${escapeHtml(s.kind)}</span></li>`).join('')}</ol>
+    <details><summary>The model's review of its first draft (verdict: ${escapeHtml(r.review_verdict)})</summary>${ipBlocks(r.review_markdown, (id) => `<span class="cite-note">[${escapeHtml(id)}]</span>`)}</details>
+    <p class="ip-prov">Generated ${escapeHtml(p.generated.slice(0, 10))} from the specification working draft ${escapeHtml(p.spec_ref)}, in ${p.seconds} seconds for US$${p.cost_usd.toFixed(4)}${r.shortened ? `. To fit, the threads were shortened (${escapeHtml(r.shortened)})` : ''}. Source numbers without a link were not checked by a person.</p>
+  </article>`;
+}
+
+async function openInterp(id) {
+  const my = ++ipToken, iv = await loadInterp(), m = iv && iv.by_evidence_id[id];
+  if (!m) { closeInterp(true); return; }
+  ipCurrent = id;
+  $('ip-scrim').hidden = false; $('ip-reader').hidden = false;
+  document.body.style.overflow = 'hidden';
+  $('ip-thread').textContent = '';
+  $('ip-body').innerHTML = '<p class="hint" role="status">Loading the interpretation…</p>';
+  let r = ipCache.get(id);
+  if (!r) {
+    try { r = await fetch(m.path).then((x) => { if (!x.ok) throw new Error(x.status); return x.json(); }); ipCache.set(id, r); }
+    catch { if (my === ipToken) $('ip-body').innerHTML = '<p class="hint" role="alert">Could not load this interpretation.</p>'; return; }
+  }
+  if (my !== ipToken) return; // another card was opened while this one loaded
+  $('ip-thread').textContent = (r.card.threads || []).map((n) => `#${n}`).join(' ');
+  $('ip-body').innerHTML = ipRender(r);
+  $('ip-body').scrollTop = 0;
+  $('ip-title')?.focus();
+}
+
+function closeInterp(fromRoute = false) {
+  if ($('ip-reader').hidden) { ipCurrent = null; return; }
+  ++ipToken;
+  const was = ipCurrent;
+  $('ip-scrim').hidden = true; $('ip-reader').hidden = true; $('ip-reader').classList.remove('full');
+  $('ip-expand').setAttribute('aria-pressed', 'false'); $('ip-expand').textContent = 'Expand to full page';
+  document.body.style.overflow = '';
+  ipCurrent = null;
+  if (!fromRoute) { if (ipFromList) history.back(); else history.replaceState(null, '', location.pathname + location.search); }
+  ipFromList = false;
+  document.querySelector(`[data-ip="${CSS.escape(was || '')}"]`)?.focus();
+}
+
+function routeInterp() {
+  const m = location.hash.match(/^#i-([\w-]+)$/);
+  if (m) { if (tab !== 'evidence') showTab('evidence'); openInterp(m[1]); } else closeInterp(true);
 }
 
 // ---- Cards or a sortable list: the switch on the Evidence and Reference tabs, remembered per tab ----------------------
@@ -2613,7 +2789,39 @@ $('recent-list').addEventListener('click', (e) => {
   const o = e.target.closest('[data-obj]');
   if (o) openObject(o.dataset.obj);
 });
-window.addEventListener('hashchange', () => { if (location.hash === '#recent') showTab('recent'); });
+window.addEventListener('hashchange', () => { if (location.hash === '#recent') showTab('recent'); else routeInterp(); });
+$('ev-list').addEventListener('click', (e) => { if (e.target.closest('[data-ip]')) ipFromList = true; });
+$('ip-close').addEventListener('click', () => closeInterp());
+$('ip-back').addEventListener('click', () => closeInterp());
+$('ip-scrim').addEventListener('click', () => closeInterp());
+$('ip-expand').addEventListener('click', () => {
+  const full = $('ip-reader').classList.toggle('full');
+  $('ip-expand').setAttribute('aria-pressed', String(full));
+  $('ip-expand').textContent = full ? 'Back to panel' : 'Expand to full page';
+});
+document.addEventListener('keydown', (e) => {
+  if ($('ip-reader').hidden) return;
+  if (e.key === 'Escape') { e.preventDefault(); closeInterp(); }
+  if (e.key === 'Tab') { // keep focus inside the panel while it is open
+    const f = [...$('ip-reader').querySelectorAll('button, a[href], summary, [tabindex="-1"]')].filter((x) => x.offsetParent !== null && x.tabIndex >= -1);
+    if (!f.length) return;
+    if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+    else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+  }
+});
+$('ip-body').addEventListener('click', (e) => {
+  const c = e.target.closest('[data-ip-src]');
+  if (c) {
+    $('ip-body').querySelectorAll('.ip-sources li.hl').forEach((x) => x.classList.remove('hl'));
+    const li = $('ip-src-' + c.dataset.ipSrc);
+    if (li) { li.classList.add('hl'); li.scrollIntoView({ block: 'center' }); }
+    return;
+  }
+  const s = e.target.closest('[data-ip-sql]');
+  if (s) { closeInterp(); openInQuery(s.dataset.ipSql, 'an interpretation'); return; }
+  const o = e.target.closest('[data-obj]');
+  if (o) { closeInterp(); openObject(o.dataset.obj); }
+});
 document.addEventListener('click', (e) => { if (e.target.closest('.log-open')) { if ($('cost-pop').matches(':popover-open')) $('cost-pop').hidePopover(); openLog(); } });
 $('log').querySelector('.about-close').addEventListener('click', () => $('log').close());
 $('log').addEventListener('click', (e) => { if (e.target === $('log')) $('log').close(); }); // click outside to close
@@ -2753,6 +2961,7 @@ quizWide.addEventListener('change', placeQuizModel);
 placeQuizModel();
 $('model-dataset').addEventListener('change', () => setDataset($('model-dataset').value));
 showTab(tab);
+if (location.hash.startsWith('#i-')) routeInterp(); // a direct link to a private interpretation
 
 init().catch((err) => {
   console.error(err);

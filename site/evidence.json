@@ -2,6 +2,7 @@
  "about": "Evidence of how the FOCUS working group found, checked and weighed user needs, curated by an AI model from the FOCUS_Spec issues and the conversation summaries. Quotes are verbatim from the issue named.",
  "items": [
   {
+   "id": "ev-2619-1",
    "category": "pain",
    "statement": "ContractedUnitPrice was null in the SKU Price dataset when no contract existed but equalled ListUnitPrice in Cost and Usage, so a practitioner joining the datasets on SkuPriceId saw an equality check fail for every never-negotiated charge.",
    "quote": "An equality check fails across that entire population",
@@ -22,6 +23,7 @@
    ]
   },
   {
+   "id": "ev-2335-1",
    "category": "pain",
    "statement": "Mandatory columns such as HostProviderName, ListCost and ContractedCost left flat-fee SaaS, managed service and on-premises vendors unable to pass conformance without fabricating artificial data; the FinOps Foundation working group rated this an adoption blocker.",
    "quote": "without fabricating redundant or artificial data",
@@ -40,6 +42,7 @@
    ]
   },
   {
+   "id": "ev-2377-1",
    "category": "pain",
    "statement": "ServiceCategory values were biased toward public cloud, so practitioners with hybrid or SaaS-heavy estates force-fitted data centre, licensing and support costs into inaccurate categories or Other; new values such as Facilities, Hardware and Software Licensing were proposed, backward-compatibly.",
    "quote": "force-fit their billing data into inaccurate categories",
@@ -56,6 +59,7 @@
    ]
   },
   {
+   "id": "ev-2315-1",
    "category": "pain",
    "statement": "Once rows were split for split cost allocation, practitioners could no longer read an EC2 instance's full hours or cost from one row and had to combine allocated and unallocated rows, risking double counting and missed remainders.",
    "quote": "you lose ec2 data so to view full ec2 hours you have to change queries",
@@ -72,6 +76,7 @@
    ]
   },
   {
+   "id": "ev-2325-1",
    "category": "pain",
    "statement": "Azure-sourced exports showed the same tag key as Application, APPLICATION and application, forcing every consumer of the Tags column to write defensive matching logic and risking silent data loss for anyone unaware of the variation.",
    "quote": "forcing every consumer to implement defensive matching logic",
@@ -89,6 +94,7 @@
    ]
   },
   {
+   "id": "ev-2018-1",
    "category": "pain",
    "statement": "Without model identity or an input versus output token split in FOCUS, practitioners segmenting AI spend had to join billing data with separate API usage logs through custom per-provider pipelines that broke when provider APIs changed.",
    "quote": "which is fragile and breaks across provider API changes",
@@ -105,6 +111,7 @@
    ]
   },
   {
+   "id": "ev-1835-1",
    "category": "pain",
    "statement": "Because Contracted Unit Price excluded negotiated commitment discounts \"or any other discounts\" without listing them, data generators and practitioners guessed which discounts to include, giving inconsistent implementations and misleading savings figures; practitioners wanted negotiation savings separated from commitment savings.",
    "quote": "leading to inconsistent implementations and potentially misleading savings calculations",
@@ -124,6 +131,7 @@
    ]
   },
   {
+   "id": "ev-1625-1",
    "category": "pain",
    "statement": "AWS populated List Unit Price and List Cost from public on-demand fields that show the highest pricing tier, inflating practitioners' savings calculations; because the List columns said nothing about tiers, AWS remained conformant.",
    "quote": "AWS is technically conformant while producing misleading results",
@@ -141,6 +149,7 @@
    ]
   },
   {
+   "id": "ev-1500-1",
    "category": "pain",
    "statement": "Finance teams spent hours manually matching Cost and Usage data to provider invoices, often in separate ERP or procurement systems, because invoice totals, line items and payment status were not standardised; this drove the request for a FOCUS Invoice dataset.",
    "quote": "Finance teams spend hours manually matching FOCUS Cost & Usage data to provider invoices",
@@ -163,6 +172,7 @@
    ]
   },
   {
+   "id": "ev-1459-1",
    "category": "pain",
    "statement": "Practitioners needed the Contract Commitment dataset to track commitment consumption and remaining balances continuously, because otherwise they ran weeks-long manual reconciliation cycles with providers.",
    "quote": "eliminate weeks-long manual reconciliation cycles with providers",
@@ -178,6 +188,7 @@
    ]
   },
   {
+   "id": "ev-1124-1",
    "category": "pain",
    "statement": "Because FOCUS did not show which charges could be tagged, tag coverage reports penalised teams for untaggable resources and made governance targets unrealistic; practitioners also could not tell where an inherited value in the Tags column came from.",
    "quote": "tag coverage reports penalize teams for resources that cannot be tagged",
@@ -192,6 +203,7 @@
    ]
   },
   {
+   "id": "ev-956-1",
    "category": "pain",
    "statement": "Container platforms split applications into pods, tasks and executors below the machine level, while providers reported compute cost per virtual machine, so practitioners could not report accurate showback and chargeback without provider-calculated split cost allocation.",
    "quote": "This has created an enormous cost-allocation problem",
@@ -207,6 +219,7 @@
    ]
   },
   {
+   "id": "ev-976-1",
    "category": "pain",
    "statement": "FOCUS supported only pre-purchased burn-down commitments such as RIs and Savings Plans; contract-negotiated commitments could not be identified or linked, burn-down and build-up progress could not be tracked, and threshold deals without a pre-purchase could not be represented.",
    "quote": "negotiated burn-down and build-up commitments are incompletely represented in FOCUS",
@@ -223,6 +236,7 @@
    ]
   },
   {
+   "id": "ev-1070-1",
    "category": "pain",
    "statement": "The umbrella term Commitment Discount excluded negotiated agreements and assumed pre-purchased burn-down commitments, so the spec kept adding disclaimers; that broke down for SaaS and for negotiated deals such as OCI Universal Credits, Microsoft MACC and AWS EDP.",
    "quote": "it becomes problematic when applied more broadly",
@@ -238,6 +252,7 @@
    ]
   },
   {
+   "id": "ev-406-1",
    "category": "pain",
    "statement": "Without a commitment eligibility indicator, practitioners could not tell which on-demand charges could move to commitment discounts or public pricing tiers; effective savings rate calculations meant joining external datasets and switching to provider consoles.",
    "quote": "Optimization recommendations require context-switching between FOCUS data and provider consoles",
@@ -254,6 +269,7 @@
    ]
   },
   {
+   "id": "ev-982-1",
    "category": "pain",
    "statement": "A BilledCost rule requiring zero for charges paid to a third party zeroed out every marketplace purchase, even where the cloud marketplace issued the invoice, breaking invoice reconciliation; the fix proposed tying the rule to the invoice issuer.",
    "quote": "This creates invoice reconciliation problems because it zeros out BilledCost for ALL marketplace purchases",
@@ -269,6 +285,7 @@
    ]
   },
   {
+   "id": "ev-1082-1",
    "category": "pain",
    "statement": "Because the InvoiceId definition did not require every invoiced charge to appear in FOCUS, total BilledCost could differ from the invoice, leaving practitioners making manual adjustments and chasing variances during invoice reconciliation.",
    "quote": "eliminate variance-chasing fire drills",
@@ -289,6 +306,7 @@
    ]
   },
   {
+   "id": "ev-780-1",
    "category": "pain",
    "statement": "A contributor argued that setting BilledCost to zero for marketplace-billed SaaS charges would block chargeback; BilledCost rules were later changed to prevent double counting between vendor and marketplace records by tying sums to the invoice issuer's invoices.",
    "quote": "",
@@ -305,6 +323,7 @@
    ]
   },
   {
+   "id": "ev-615-1",
    "category": "pain",
    "statement": "Cloud provider invoices usually summarised charges and referred to the cost export rather than listing every item, leaving the procure-to-pay 3-way match immature; InvoiceId was proposed so teams could identify which charges, credits and adjustments belonged to each invoice.",
    "quote": "invoices do not typically contain a complete list of all goods and services purchased",
@@ -320,6 +339,7 @@
    ]
   },
   {
+   "id": "ev-540-1",
    "category": "pain",
    "statement": "The Tags column banned altering user-defined keys, so providers with two tagging systems, AWS resource tags and cost categories or GCP tags and labels, would overwrite one value when the same key existed in both.",
    "quote": "persisting both in the Tags column key/value map will cause clobbering",
@@ -335,6 +355,7 @@
    ]
   },
   {
+   "id": "ev-436-1",
    "category": "pain",
    "statement": "Summing ListCost or ContractedCost double-counted commitment discounts, because the purchase row and every amortized usage row carried those costs; a worked example summed $1,095 of list cost against an actual $730, with no provider-agnostic way to exclude rows.",
    "quote": "Given the extreme likelihood that nearly every practitioner will get caught by this",
@@ -352,6 +373,7 @@
    ]
   },
   {
+   "id": "ev-314-1",
    "category": "pain",
    "statement": "Providers did not know what value to put in SkuId because its definition was too loose to choose among a SKU's many attributes; the proposal was to borrow existing retail product thinking rather than invent a definition, and closure took over a year.",
    "quote": "As a provider, I don't know what value to use for `SkuId`.",
@@ -366,6 +388,7 @@
    ]
   },
   {
+   "id": "ev-1941-1",
    "category": "demand",
    "statement": "Eight organisations, including NatWest, Shutterstock, Syngenta, SLB and the UK Government Digital Service alongside AWS and Anglepoint, backed worked examples for token and image-generation billing in FOCUS.",
    "quote": "I'm looking for guidance on how to get the cost data from model-as-a-service vendors",
@@ -389,6 +412,7 @@
    ]
   },
   {
+   "id": "ev-1488-1",
    "category": "demand",
    "statement": "AWS, Google and Microsoft, with Neos and Amadeus, asked for line-item commitment discount examples with validation notes, because providers found implementation errors only after customers reported data quality issues, and practitioners could not tell correct data from buggy.",
    "quote": "Providers discover implementation errors only after customers report data quality issues",
@@ -412,6 +436,7 @@
    ]
   },
   {
+   "id": "ev-956-2",
    "category": "demand",
    "statement": "At least 15 organisations, from Datadog, Atlassian and Twilio to Eli Lilly, BBVA, Workday and the U.S. Federal Government, backed provider-calculated split cost allocation; the request cited AWS, GCP, OCI and Azure services that already allocated shared costs.",
    "quote": "I want to consume allocated costs for shared resources as calculated by the provider",
@@ -443,6 +468,7 @@
    ]
   },
   {
+   "id": "ev-975-1",
    "category": "demand",
    "statement": "Eleven organisations, including Swiss Post, the European Parliament, JP Morgan Chase, the LEGO Group, Cloudability and Walmart, asked for a recommendations dataset to combine optimisation recommendations each provider published in its own format; maintainers ranked it second by org count.",
    "quote": "the second-highest org count in the 1.5 backlog after #959",
@@ -467,6 +493,7 @@
    "objects": []
   },
   {
+   "id": "ev-976-2",
    "category": "demand",
    "statement": "Eleven organisations, including Datadog, NASA, Autodesk, American Family Insurance, Google and Cloudability, backed contractual commitment support so practitioners could track spend against contract commits and take corrective action before the contract period ended.",
    "quote": "track progress (cost/usage) against my contractual commits with my providers",
@@ -494,6 +521,7 @@
    ]
   },
   {
+   "id": "ev-966-1",
    "category": "demand",
    "statement": "Domo, Eli Lilly, Hill Associates, Workday, Grafana and Delivery Hero backed a way to declare how recent and complete a FOCUS dataset was; the request did not demand an exact accuracy declaration, letting providers document what their recency metadata meant.",
    "quote": "Practitioners want to understand how up-to-date FOCUS data is and how complete.",
@@ -517,6 +545,7 @@
    ]
   },
   {
+   "id": "ev-1094-1",
    "category": "demand",
    "statement": "Neos, Twilio, Microsoft, FinOps Guys, Electronic Arts and Salesforce asked that providers carry non-FOCUS custom columns, so practitioners migrating from native billing exports could retire native queries without losing billing context.",
    "quote": "adopt FOCUS without losing critical billing context needed for accurate analysis",
@@ -538,6 +567,7 @@
    ]
   },
   {
+   "id": "ev-956-3",
    "category": "demand",
    "statement": "A request for provider-calculated split cost allocation below the machine level, for containers, pods and tasks, citing existing AWS, GCP, OCI and Azure features, drew support from many organisations and led to the Allocated columns merged in September 2025.",
    "quote": "",
@@ -556,6 +586,7 @@
    ]
   },
   {
+   "id": "ev-975-2",
    "category": "demand",
    "statement": "A normalised recommendations dataset, for rightsizing and commitment-purchase advice that practitioners receive from many providers in different formats, was backed by eleven organisations, yet it moved to the 1.6 cycle in October 2026 for lack of consensus on its shape and names.",
    "quote": "",
@@ -570,6 +601,7 @@
    "objects": []
   },
   {
+   "id": "ev-976-3",
    "category": "demand",
    "statement": "A request to represent contract-negotiated commitments such as burn-down and build-up agreements, so practitioners could track progress against them, drew support from NASA, Autodesk, Atlassian, Google and others, leading to the Contract Commitment dataset and ContractApplied column.",
    "quote": "",
@@ -593,6 +625,7 @@
    ]
   },
   {
+   "id": "ev-616-1",
    "category": "demand",
    "statement": "Strong demand reported from an APJ user group backed the October 2024 work item to document and add initial support for SaaS billing concepts, which FOCUS had lacked.",
    "quote": "",
@@ -607,6 +640,7 @@
    ]
   },
   {
+   "id": "ev-2712-1",
    "category": "discovery",
    "statement": "Technology One, testing split cost allocation conformance, found that a generator calculating hourly AllocatedRatio values but publishing daily rows could look conformant while its daily ratios no longer summed to 1 or matched cost shares.",
    "quote": "the current text allows non-conformant data to pass as conformant",
@@ -624,6 +658,7 @@
    ]
   },
   {
+   "id": "ev-2709-1",
    "category": "discovery",
    "statement": "Checking the providers' own APIs and price lists showed one commitment term written three ways: the Google Cloud Compute Engine API says TWELVE_MONTH, the Azure Retail Prices API says 1 Year, and the AWS Savings Plans price list gives a number with a separate unit. Provider data could not settle which ContractCommitmentDurationType value to use, and 1 Year and 12 Months both conformed.",
    "quote": "Service provider data does not settle the choice",
@@ -640,6 +675,7 @@
    ]
   },
   {
+   "id": "ev-2395-1",
    "category": "discovery",
    "statement": "After TF-2 asked on 1 July 2026 for cross-provider evidence that AllocatedServiceName was not an AWS-only need, the column's author checked how GKE and AKS allocate cluster costs: splitting shared cost was needed on all three clouds, but, as far as the author could find, only AWS's Cost and Usage Report moved split rows to a different service, from EC2 to EKS. The author argued for a FOCUS column anyway.",
    "quote": "dug into GKE and AKS's native cost-allocation mechanisms",
@@ -656,6 +692,7 @@
    ]
   },
   {
+   "id": "ev-2358-1",
    "category": "discovery",
    "statement": "The Actor dimensions and Unit Format requests cited vendors' own billing and APIs as evidence, such as user IDs in the Anthropic Enterprise Analytics API, AWS role ARNs and per-page document pricing, but the practitioner quotes in both were labelled hypothetical.",
    "quote": "Practitioner quotes (hypothetical)",
@@ -674,6 +711,7 @@
    ]
   },
   {
+   "id": "ev-2315-2",
    "category": "discovery",
    "statement": "Gaps in split cost allocation guidance surfaced in the FinOps Foundation's FOCUS Slack channel in April 2026, where a TechnologyOne implementer said mapping AWS CUR split columns meant splitting the underlying rows, not copying columns across.",
    "quote": "I had huge difficulty in designing the split Data.",
@@ -692,6 +730,7 @@
    ]
   },
   {
+   "id": "ev-2325-2",
    "category": "discovery",
    "statement": "TI724, a FinOps services firm, found the mixed tag-key casing while building its FOCUS Query tool on Azure FOCUS exports, and reported it as a feedback issue (#2322). When maintainers discussed that feedback, Walmart's sponsor pointed out that a requirement to keep user-defined tag keys as provided had been dropped in an earlier revision (#691); pull request #2434 restored it.",
    "quote": "raised the gap during maintainers discussion of #2322 and identified the original normative requirement that was removed",
@@ -711,6 +750,7 @@
    ]
   },
   {
+   "id": "ev-2099-1",
    "category": "discovery",
    "statement": "A survey of provider billing artifacts for the cached-token request showed AWS usage types, Azure meter names, Anthropic and OpenAI already labelling cached tokens differently, so a cross-provider cache query on the free-form SkuMeter column relied on brittle string matching.",
    "quote": "a cross-provider cache query against meter names is a string match that breaks",
@@ -726,6 +766,7 @@
    ]
   },
   {
+   "id": "ev-1811-1",
    "category": "discovery",
    "statement": "At the TF-2 meeting on 7 January 2026 the group went through what providers already offered for column selection: AWS and GCP let users choose columns, while Azure had offered it through its API only and then removed it.",
    "quote": "Azure previously supported it (API only) but removed it",
@@ -739,6 +780,7 @@
    "objects": []
   },
   {
+   "id": "ev-1941-2",
    "category": "discovery",
    "statement": "The AI billing examples request drew on the Community Director's practitioner interviews in Q4 2025 and on FinOps for AI Working Group discussions, and quoted practitioners by name; one said they worked with over 20 AI vendors, each with a different data format.",
    "quote": "every single one has a different data format... I need FOCUS for AI.",
@@ -762,6 +804,7 @@
    ]
   },
   {
+   "id": "ev-1124-2",
    "category": "discovery",
    "statement": "TF-2 tested the tag details options against billing data: a sponsor's BigQuery queries led it to pick the key-driven TagDetails structure over a schema-driven one in January 2026, and a contributor's AWS analysis found the column made the data seven to eight times larger with only seven tags.",
    "quote": "7-8x data size increase with only 7 tags",
@@ -776,6 +819,7 @@
    ]
   },
   {
+   "id": "ev-1793-1",
    "category": "discovery",
    "statement": "Before the commitment eligibility pull request was drafted, the task force made consulting a Datadog contributor on SaaS pricing tier scenarios a dependency; the draft waited a week in January 2026 until that conversation could happen.",
    "quote": "to clarify SaaS pricing scenarios before finalizing the PR",
@@ -790,6 +834,7 @@
    ]
   },
   {
+   "id": "ev-1625-2",
    "category": "discovery",
    "statement": "The tier request rested on AWS's own Cost and Usage Report documentation for the columns AWS uses to fill List Cost and List Unit Price, which it quoted. A reviewer replied that list price should follow the row's SKU Price ID, so existing rules might already cover tiers.",
    "quote": "If you have SKUs with multiple On-Demand public costs, the equivalent cost for the highest tier is displayed.",
@@ -806,6 +851,7 @@
    ]
   },
   {
+   "id": "ev-1500-2",
    "category": "discovery",
    "statement": "The Invoice dataset was modelled with finance specialists: after a contributor asked for finance personas on the request, accounting and finance specialists joined Task Force 1 calls, including on 2 December 2025, and an action item was opened to collect invoice examples from current and future data generators. The work became the Invoice Detail and Billing Period datasets.",
    "quote": "attended by a couple of accounting/finance SMEs",
@@ -823,6 +869,7 @@
    ]
   },
   {
+   "id": "ev-982-2",
    "category": "discovery",
    "statement": "TF-3 meetings checked the EffectiveCost and BilledCost definitions against real cases: on 31 October 2025 the group agreed the marketplace problem was data generators filling EffectiveCost with estimates when they lacked usage data, not double counting, and in December 2025 it tested the new definitions against Datadog SaaS scenarios.",
    "quote": "The Oct 31 meeting reframed this from \"double counting\" to \"accuracy.\"",
@@ -837,6 +884,7 @@
    ]
   },
   {
+   "id": "ev-300-1",
    "category": "discovery",
    "statement": "The working group gathered support on the GitHub issues themselves: early column proposals asked supporters to give a thumbs-up for FOCUS 1.0 GA, and later feature requests asked organisations to comment with their name and reason, which maintainers aggregated and triaged by adoption impact.",
    "quote": "FOCUS Staff & Maintainers will aggregate supporting orgs over time.",
@@ -853,6 +901,7 @@
    "objects": []
   },
   {
+   "id": "ev-1073-1",
    "category": "discovery",
    "statement": "The host provider request was built on a FinOps vendor representative's written comment, which it quoted: mapping Snowflake to FOCUS would make Provider, Publisher and Invoice Issuer all Snowflake and lose the AWS, Azure or GCP cloud underneath, which organisations using Snowflake across clouds and regions wanted to roll up.",
    "quote": "we shouldn't lose that AWS/Azure/GCP underlying cloud for Snowflake",
@@ -867,6 +916,7 @@
    ]
   },
   {
+   "id": "ev-1026-1",
    "category": "discovery",
    "statement": "When asked whether practitioners had reported problems with RECOMMENDED versus SHOULD, the contributors knew of none; one supporter said the mix had tripped them up while reviewing earlier normative requirements work. Google and Microsoft representatives confirmed by email in December 2025 that the change could go ahead.",
    "quote": "I am not aware of any feedback on SHOULD vs RECOMMENDED.",
@@ -883,6 +933,7 @@
    "objects": []
   },
   {
+   "id": "ev-848-1",
    "category": "discovery",
    "statement": "The pricing currency columns were checked against modelled data before approval: a reviewer said they could support the change only with modelled data, so a contributor reworked the Atlas example in the sample-data workbook with values for the proposed columns in March 2025. Members approved the four columns in April 2025.",
    "quote": "the door is not completely closed for me IFF I can see modeled data asap",
@@ -900,6 +951,7 @@
    ]
   },
   {
+   "id": "ev-615-2",
    "category": "discovery",
    "statement": "InvoiceId came back to the group through a practitioner's feedback issue in October 2024 (#607), which the work item quoted: chargeback per business unit had to match the invoices to the cent, and without InvoiceId they lost track when an account moved between billing accounts. An Invoice ID column had already been proposed for FOCUS 1.0 (#302).",
    "quote": "must match to the cent the sum of the chargeback per business unit",
@@ -918,6 +970,7 @@
    ]
   },
   {
+   "id": "ev-619-1",
    "category": "discovery",
    "statement": "FOCUS members and user group members had asked for SKU properties such as term, tier and region over several months; eight backlog issues holding those requests were closed into one work item in October 2024. From November 2024 the task force drafted a practitioner survey on SKU properties, to be run in SurveyMonkey and shared by the AWS, Google Cloud and Microsoft representatives in their own forums.",
    "quote": "both focus members and user group members have expressed interest in various SKU",
@@ -933,6 +986,7 @@
    ]
   },
   {
+   "id": "ev-616-2",
    "category": "discovery",
    "statement": "To learn how SaaS vendors bill, TF-2 planned outreach in October 2024 to Datadog, Twilio and GitHub to test its billing models and gather requirements; from November members added Twilio and Salesforce use cases to a billing model and provider matrix and reviewed provider attributes for Domo and OCI.",
    "quote": "Facilitate outreach to high-priority SaaS providers, including Datadog, Twilio, and GitHub",
@@ -947,6 +1001,7 @@
    ]
   },
   {
+   "id": "ev-557-1",
    "category": "discovery",
    "statement": "The group learned its normative requirements were ambiguous when two dataset producers read the requirements for two FOCUS 1.0 columns differently. After fixing those columns in 1.1, it reviewed the requirements of every column and attribute on a preview pull request (#664), with reviewers claiming columns through a spreadsheet, and set out which requirements could be validated automatically and which manually.",
    "quote": "were interpreted differently by two dataset producers",
@@ -960,6 +1015,7 @@
    "objects": []
   },
   {
+   "id": "ev-540-2",
    "category": "discovery",
    "statement": "An AWS contributor pointed out the tag-key collision in a discussion with the work item's author, and the TF-2 call on 16 October 2024 agreed to make it a work item. The choice between prefixing options was then put to polls in the FinOps and FOCUS Slack channels, which TF-1 closed in January 2025.",
    "quote": "aggregated across both the FinOps and FOCUS slack channels",
@@ -976,6 +1032,7 @@
    ]
   },
   {
+   "id": "ev-495-1",
    "category": "discovery",
    "statement": "An AWS contributor's working document asked the other providers which of their columns distinguish SKUs and SKU price IDs, and task force and maintainer calls in July and August 2024 assigned work to gather example data, map provider columns and define common attributes.",
    "quote": "",
@@ -991,6 +1048,7 @@
    ]
   },
   {
+   "id": "ev-406-2",
    "category": "discovery",
    "statement": "The coverage eligibility work item drew on provider documentation: it listed commitment exclusions at AWS (Spot, P5 and Mac instances, Ubuntu Pro), Azure (Spot and older VM series) and GCP (preemptible, N1 shared-core and extended-memory VMs), and noted that no provider showed eligibility in its cost and usage data, though their own cost tools showed coverage.",
    "quote": "SKU eligibility for discounts is a known property by providers",
@@ -1005,6 +1063,7 @@
    ]
   },
   {
+   "id": "ev-317-1",
    "category": "discovery",
    "statement": "Comparing the account entities each provider uses showed BillingAccountId could mean an AWS Management Account, a GCP Billing Account or a Microsoft Billing Profile or Subscription, with Microsoft alone using three types, so BillingAccountType and SubAccountType columns were proposed.",
    "quote": "Microsoft has 3 different types of entities that could be used for `BillingAccountId`",
@@ -1022,6 +1081,7 @@
    ]
   },
   {
+   "id": "ev-300-2",
    "category": "discovery",
    "statement": "The billing account terminology change came from internal discussion, where several people felt the term did not make clear it was the scope at which an invoice is generated; the proposer had not yet talked to practitioners and wanted to hear from Microsoft customers, for whom billing account meant a top-level account.",
    "quote": "I haven't talked to practitioners yet",
@@ -1037,6 +1097,7 @@
    ]
   },
   {
+   "id": "ev-144-1",
    "category": "discovery",
    "statement": "Feedback on the name, from sources the pull request does not name, led to Amortized Cost being renamed Effective Cost in August 2023, with its supporting documents updated to match.",
    "quote": "due to excessive feedback on the name",
@@ -1051,6 +1112,7 @@
    ]
   },
   {
+   "id": "ev-2414-1",
    "category": "use_case",
    "statement": "Practitioners wanted region scope in billing data to separate globally routed from region-pinned AI model serving, both to evidence data-residency reviews and to size savings, after a task force discussion cited a 10 to 20 percent price gap.",
    "quote": "cited a delta of roughly 10-20% between the two for the same model",
@@ -1064,6 +1126,7 @@
    "objects": []
   },
   {
+   "id": "ev-2358-2",
    "category": "use_case",
    "statement": "On shared AI platforms, practitioners wanted separate system-actor (PrincipalId) and end-actor columns, so they could audit which credentials authorised spend and charge the consuming business unit, using opaque identifiers instead of employee emails.",
    "quote": "audit which system credentials authorized the spend and which internal business unit consumed the output",
@@ -1080,6 +1143,7 @@
    ]
   },
   {
+   "id": "ev-2363-1",
    "category": "use_case",
    "statement": "Adding Character, Image, Job, Message, Page and Session to Unit Format aimed to let practitioners compare cost per page, image or character across vendors, since document AI, image and translation services already billed in those units.",
    "quote": "AWS Textract and Azure AI Document Intelligence bill by the page",
@@ -1096,6 +1160,7 @@
    ]
   },
   {
+   "id": "ev-1057-1",
    "category": "use_case",
    "statement": "Microsoft, Autodesk, Adobe, MongoDB and an independent consultant asked for a SKU price dataset because practitioners could not look up prices for SKUs they had not used, blocking cost estimation and capacity planning and forcing external lookups.",
    "quote": "Practitioners cannot look up prices for SKUs they have not yet used.",
@@ -1116,6 +1181,7 @@
    ]
   },
   {
+   "id": "ev-556-1",
    "category": "use_case",
    "statement": "Neos, Hill Associates, Twilio, GoldmanSachs and Domo backed a correction-handling attribute so practitioners could reconcile corrections with invoices, learn how providers treated closed billing periods, and see corrections broken down by resource rather than one catch-all line.",
    "quote": "I want to know how my provider handles corrections for closed billing periods",
@@ -1138,6 +1204,7 @@
    ]
   },
   {
+   "id": "ev-1091-1",
    "category": "use_case",
    "statement": "Practitioners with bandwidth or cost limits wanted to choose which FOCUS columns a provider exported, for example only Tags, BilledCost, EffectiveCost and account columns for allocation work, to cut egress costs, transfer times and storage.",
    "quote": "reduce egress costs, data transfer times, and storage requirements for large billing datasets",
@@ -1153,6 +1220,7 @@
    "objects": []
   },
   {
+   "id": "ev-615-3",
    "category": "use_case",
    "statement": "Practitioners needed InvoiceId to analyse credit memos: AWS credit memos appeared in the cost data when issued but had to be manually applied to a regular invoice, so teams reassigned their billing period and needed InvoiceId to find the right rows.",
    "quote": "you cannot usually include the credit memo in the same billing period",
@@ -1168,6 +1236,7 @@
    ]
   },
   {
+   "id": "ev-382-1",
    "category": "use_case",
    "statement": "CommitmentDiscountStatus was added as its own column, rather than as ChargeCategory values, because practitioners wanted unused commitment amounts included when filtering on Usage; its name was settled by a naming poll.",
    "quote": "",
@@ -1183,6 +1252,7 @@
    ]
   },
   {
+   "id": "ev-318-1",
    "category": "use_case",
    "statement": "Many providers priced in one currency and billed in another, but FOCUS 1.0 preview had only BillingCurrency, so practitioners could not spot such charges or reconcile them with prices shown elsewhere; PricingCurrency and exchange rate columns were proposed.",
    "quote": "Practitioners should be able to identify when charges are priced in a different currency",
@@ -1199,6 +1269,7 @@
    ]
   },
   {
+   "id": "ev-2335-2",
    "category": "tradeoff",
    "statement": "To open FOCUS to flat-fee vendors without breaking practitioners' schemas, the proposal kept ListCost and ContractedCost in the schema but made them conditionally nullable, so complex cloud providers still had to supply detailed metrics.",
    "quote": "the columns remain present in the schema but become conditionally nullable",
@@ -1216,6 +1287,7 @@
    ]
   },
   {
+   "id": "ev-2335-3",
    "category": "tradeoff",
    "statement": "To let flat-fee SaaS and non-cloud vendors conform without inventing data, columns such as ListCost and ContractedCost were proposed as conditional; a reviewer objected most were essential for FinOps use cases, so work narrowed to a classification rubric, deferring existing columns to 1.6.",
    "quote": "",
@@ -1233,6 +1305,7 @@
    ]
   },
   {
+   "id": "ev-2358-3",
    "category": "tradeoff",
    "statement": "To attribute SaaS and GenAI spend to actors while avoiding personal data, PrincipalId shipped first with ConsumerId carved out; maintainers kept one IAM-based identifier rather than an object with names and emails, and high-cardinality opt-in moved to 1.6.",
    "quote": "",
@@ -1253,6 +1326,7 @@
    ]
   },
   {
+   "id": "ev-1501-1",
    "category": "tradeoff",
    "statement": "Contributors warned that limits on correcting closed billing periods could deter vendors, while others held data must be accurate before being marked final; the Correction Handling work converged on separating invoice status from data delivery status.",
    "quote": "",
@@ -1268,6 +1342,7 @@
    ]
   },
   {
+   "id": "ev-2099-2",
    "category": "tradeoff",
    "statement": "Cache duration was deferred from the cached-token request because only one surveyed provider priced retention as a user choice, values did not align and a task force discussion could not classify duration; retention price points stayed visible through separate SkuPriceId values.",
    "quote": "The cache duration portion of these criteria is deferred.",
@@ -1283,6 +1358,7 @@
    ]
   },
   {
+   "id": "ev-1900-1",
    "category": "tradeoff",
    "statement": "A reviewer argued an exchange rate column was vital in the Invoice Detail dataset, but TF-1 had not supported it, since one invoice rate would create rounding errors against daily rates and an effective rate can be derived; payment-related statuses were ruled out.",
    "quote": "",
@@ -1299,6 +1375,7 @@
    ]
   },
   {
+   "id": "ev-2018-2",
    "category": "tradeoff",
    "statement": "The AI model identity request was limited to data appearing in or alongside billing records; telemetry such as latency, CPU utilisation and sampling parameters like temperature was ruled out of scope as belonging to observability tools.",
    "quote": "Those belong in observability tooling, not cost and usage data.",
@@ -1315,6 +1392,7 @@
    ]
   },
   {
+   "id": "ev-2018-3",
    "category": "tradeoff",
    "statement": "For AI model identity and input versus output token costs, maintainers kept the request narrow, chose FOCUS-defined SkuPriceDetails properties over new columns, reused existing unit and quantity columns, and dropped ModelVariant because market naming was unsettled.",
    "quote": "",
@@ -1331,6 +1409,7 @@
    ]
   },
   {
+   "id": "ev-1811-2",
    "category": "tradeoff",
    "statement": "Column selection was framed as a data delivery requirement that offset the bloat of FR #1094's rule to carry all native provider columns; the group agreed to test an existing attribute construct before inventing new specification sections.",
    "quote": "stress-test against existing constructs (attribute) before inventing new spec sections",
@@ -1344,6 +1423,7 @@
    "objects": []
   },
   {
+   "id": "ev-1941-3",
    "category": "tradeoff",
    "statement": "The AI billing request was scoped as supporting content rather than new columns, because FOCUS 1.3 already had ConsumedQuantity, ConsumedUnit, PricingQuantity, PricingUnit and ServiceCategory; the gap was practitioners' understanding of how to map tokens and generations.",
    "quote": "The gap is not in the specification schema but in practitioner understanding",
@@ -1372,6 +1452,7 @@
    ]
   },
   {
+   "id": "ev-1904-1",
    "category": "tradeoff",
    "statement": "The TagDetails column was descoped from FOCUS 1.4 when maintainers judged it would not survive member review: its scope had grown without re-review, a reviewer backed SHOULD presence on dataset-size grounds, and another opposed adding a Recommended column without solid reason.",
    "quote": "",
@@ -1387,6 +1468,7 @@
    ]
   },
   {
+   "id": "ev-1793-2",
    "category": "tradeoff",
    "statement": "The task force chose a JSON structure rather than a Boolean for Commitment Eligibility, carrying both the provider's own eligibility term and a FOCUS category (spend-based or usage-based), to support true coverage rates and effective savings rate.",
    "quote": "uses a JSON structure (not Boolean) to indicate commitment eligibility",
@@ -1401,6 +1483,7 @@
    ]
   },
   {
+   "id": "ev-1139-1",
    "category": "tradeoff",
    "statement": "Deprecating ProviderName and PublisherName for Service Provider and Host Provider columns, FOCUS's first deprecation, drew an objection that customers would have to change their queries; the author replied naming was better fixed now, and the deprecation window was shortened to one release.",
    "quote": "",
@@ -1418,6 +1501,7 @@
    ]
   },
   {
+   "id": "ev-1459-2",
    "category": "tradeoff",
    "statement": "FOCUS 1.3 shipped only a basic foundation of Contract Commitment columns; further columns shown in a modelling spreadsheet were held back for more discussion and refinement in a future release, and a follow-on request gathered the use cases for them.",
    "quote": "require further discussion and refinement, to be added in a future release",
@@ -1433,6 +1517,7 @@
    ]
   },
   {
+   "id": "ev-958-1",
    "category": "tradeoff",
    "statement": "The commitment eligibility request was scoped to non-negotiated programs, publicly listed reduced rates open to every customer, covering CSP commitments and SaaS public pricing tiers; negotiated discounts set by spend volume or relationship were declared out of scope.",
    "quote": "The provider would not refuse any customer seeking to enter the program",
@@ -1447,6 +1532,7 @@
    ]
   },
   {
+   "id": "ev-1055-1",
    "category": "tradeoff",
    "statement": "User feedback said the provider and publisher columns were confusing and inconsistent, but the working group chose not to make aggressive corrective changes in FOCUS 1.2, deferring a fix to 1.3 so marketplace buyers would know whom they bought from.",
    "quote": "In 1.2 it was decided that we not make any aggressive corrective changes",
@@ -1465,6 +1551,7 @@
    ]
   },
   {
+   "id": "ev-1057-2",
    "category": "tradeoff",
    "statement": "Rather than add more SKU details to cost and usage rows, which would duplicate data massively, the request proposed a separate SKU Price dataset joined to Cost and Usage by SkuId, extending analysis without modifying existing columns.",
    "quote": "given the massive amount of duplication",
@@ -1482,6 +1569,7 @@
    ]
   },
   {
+   "id": "ev-976-4",
    "category": "tradeoff",
    "statement": "For the ContractApplied column, most participants in August 2025 favoured always requiring the proposed JSON datapoints for usability, while some prioritised dataset size; maintainers let data generators omit inapplicable cost, quantity or unit values.",
    "quote": "",
@@ -1498,6 +1586,7 @@
    ]
   },
   {
+   "id": "ev-956-4",
    "category": "tradeoff",
    "statement": "For split cost allocation, TF-2 compared split lines, double-entry rows and a secondary dataset; a poll favoured split lines despite worries about breaking existing reports, and allocations had to reconcile to the original charge and be flagged.",
    "quote": "",
@@ -1515,6 +1604,7 @@
    ]
   },
   {
+   "id": "ev-962-1",
    "category": "tradeoff",
    "statement": "In October 2025 maintainers deferred the Correction Handling attribute until an Invoice dataset existed, so rules on when data generators may revise invoiced data had something to stand on; it shipped with a Delivery Handling attribute in April 2026.",
    "quote": "",
@@ -1531,6 +1621,7 @@
    ]
   },
   {
+   "id": "ev-966-2",
    "category": "tradeoff",
    "statement": "Because TF-2 found the original scope for dataset recency and completeness hard for providers, it was narrowed to optional metadata with data generators setting their own completeness thresholds, and completeness declarations became a SHOULD rather than a MUST.",
    "quote": "",
@@ -1547,6 +1638,7 @@
    ]
   },
   {
+   "id": "ev-982-3",
    "category": "tradeoff",
    "statement": "After ambiguous EffectiveCost and BilledCost definitions led data generators to implement them inconsistently, the work got a late-September deadline, was cut from 1.3 when no path emerged, and was reframed for 1.4 around accuracy, avoiding the term amortization.",
    "quote": "",
@@ -1563,6 +1655,7 @@
    ]
   },
   {
+   "id": "ev-1094-2",
    "category": "tradeoff",
    "statement": "To let practitioners rely on FOCUS alone, datasets were required to carry x_ custom columns for uncovered native billing data; a provider-side request for SHOULD warned AWS exports would exceed 100 columns, so MUST stayed while data generators could default to a column subset.",
    "quote": "",
@@ -1580,6 +1673,7 @@
    ]
   },
   {
+   "id": "ev-1090-1",
    "category": "tradeoff",
    "statement": "Asked to organise FOCUS as related datasets for BI tools without bloating the main dataset, the group ran a six-week spike, ruled out a star schema for 1.3, and rejected fact and dimension terminology as too database-specific.",
    "quote": "",
@@ -1594,6 +1688,7 @@
    ]
   },
   {
+   "id": "ev-1057-3",
    "category": "tradeoff",
    "statement": "The SKU Price dataset, requested for lookups, joins and pre-purchase estimation, took a current-snapshot model with one row per price so each keeps its own dates; a sustained objection was met by releasing it as a preview in FOCUS 1.5.",
    "quote": "",
@@ -1612,6 +1707,7 @@
    ]
   },
   {
+   "id": "ev-848-2",
    "category": "tradeoff",
    "statement": "Because some members rejected redefining existing unit price columns, pricing currency support was added as four new columns, leaving existing ones unchanged; maintainers struck the exchange rate column and deferred exchange rates, a problem first moved past 1.0 in 2024.",
    "quote": "",
@@ -1632,6 +1728,7 @@
    ]
   },
   {
+   "id": "ev-891-1",
    "category": "tradeoff",
    "statement": "A request to relax the BillingCurrency rule from MUST to SHOULD, because AWS exports bill in USD while invoices may be in other currencies, was refused during consistency review because the MUST dated from release 0.5, and was closed pending an advocate.",
    "quote": "",
@@ -1646,6 +1743,7 @@
    ]
   },
   {
+   "id": "ev-686-1",
    "category": "tradeoff",
    "statement": "To spare providers from updating every row when an invoice is issued, the InvoiceId proposal noted a possible separate table mapping invoices to rows; a reviewer worried that providers such as GCP cannot restate exported data.",
    "quote": "",
@@ -1661,6 +1759,7 @@
    ]
   },
   {
+   "id": "ev-647-1",
    "category": "tradeoff",
    "statement": "The follow-up work item struck out splitting ListCost and ContractedCost into separate actual and amortized columns, proposing instead a flag column such as AmortizationCategory, deliberately named to cover future amortized recurring purchases, not just commitment purchases and usage.",
    "quote": "I avoided the words \"purchase\" and \"usage\" here since we could have purchases amortized",
@@ -1677,6 +1776,7 @@
    ]
   },
   {
+   "id": "ev-643-1",
    "category": "tradeoff",
    "statement": "Because breaking changes forced upgrading practitioners to rewrite SQL queries or reshape exports, the working group set rules to avoid them unless the benefit outweighed the adoption cost, and to weigh that in its development process.",
    "quote": "when the benefit of the change outweighs the cost it presents to practitioners",
@@ -1691,6 +1791,7 @@
    "objects": []
   },
   {
+   "id": "ev-647-2",
    "category": "tradeoff",
    "statement": "To stop savings calculations double counting commitment purchases in ListCost and ContractedCost, an AmortizationClass column won a naming poll, but reviewers called the name misleading and the scope too narrow for SaaS; it was pushed to 1.3 and closed unmerged.",
    "quote": "",
@@ -1707,6 +1808,7 @@
    ]
   },
   {
+   "id": "ev-643-2",
    "category": "tradeoff",
    "statement": "A November 2024 work item set out to define what counts as a breaking change and how to weigh its cost to practitioners against its benefit, with use cases classified by whether they changed between FOCUS 1.0 and 1.1.",
    "quote": "",
@@ -1720,6 +1822,7 @@
    "objects": []
   },
   {
+   "id": "ev-616-3",
    "category": "tradeoff",
    "statement": "Because FOCUS had been built around cloud providers and offered SaaS providers no onramp beyond custom columns, the work item proposed a time-boxed analysis of major SaaS providers first, with an MVP only if time allowed, mirroring FOCUS 0.5 for clouds.",
    "quote": "We propose performing a time-boxed analysis of SaaS concepts",
@@ -1734,6 +1837,7 @@
    ]
   },
   {
+   "id": "ev-549-1",
    "category": "tradeoff",
    "statement": "Because of deadlines, a consistency review standardising how columns handle correction charges was cut to ConsumedUnit and ConsumedQuantity, leaving the other columns unchanged for 1.1.",
    "quote": "",
@@ -1749,6 +1853,7 @@
    ]
   },
   {
+   "id": "ev-516-1",
    "category": "tradeoff",
    "statement": "Naming the column that describes what a SKU meters was put to the community: from August 2024 TF-2, maintainer and member calls used naming spreadsheets and polls, and a revote added alternatives from a contributor who did not want the name to look chosen by Microsoft. SKU Meter was the result.",
    "quote": "",
@@ -1763,6 +1868,7 @@
    ]
   },
   {
+   "id": "ev-540-3",
    "category": "tradeoff",
    "statement": "Rather than prefix every tag, the Tags fix let providers prefix keys for all but one user-defined tagging scheme, so practitioners could still reference one scheme without a prefix.",
    "quote": "This allows for 1 tagging scheme to remain without a user-defined `prefix`",
@@ -1777,6 +1883,7 @@
    ]
   },
   {
+   "id": "ev-523-1",
    "category": "tradeoff",
    "statement": "Capacity Reservation ID was made a SHOULD rather than a MUST because AWS would not initially provide values and conformance had to stay possible without labelling used reservation charges; a status was required only when an ID is present.",
    "quote": "",
@@ -1794,6 +1901,7 @@
    ]
   },
   {
+   "id": "ev-503-1",
    "category": "tradeoff",
    "statement": "For SkuPriceDetails, a maintainer asked for SHOULD rather than MUST on consistent properties, fearing it would block support, but maintainers kept MUST on the principle that no data is better than bad data; TF-2 also merged two proposed columns into one.",
    "quote": "",
@@ -1808,6 +1916,7 @@
    ]
   },
   {
+   "id": "ev-400-1",
    "category": "tradeoff",
    "statement": "When approval of commitment burndown columns failed amid fears that redundant columns would bloat datasets, separate consumed and purchased quantity columns were merged into one CommitmentDiscountQuantity column, which members approved in September 2024.",
    "quote": "",
@@ -1823,6 +1932,7 @@
    ]
   },
   {
+   "id": "ev-534-1",
    "category": "tradeoff",
    "statement": "Commitment discount unit price and cost columns, wanted by practitioners with high commitment coverage for forecasting and rated high impact, were moved out of 1.2 for lack of consensus; one maintainer called them a niche case that would burden providers without commitments.",
    "quote": "",
@@ -1839,6 +1949,7 @@
    ]
   },
   {
+   "id": "ev-436-2",
    "category": "tradeoff",
    "statement": "For the ListCost and ContractedCost double counting, the proposer weighed three routes: a prescriptive cross-provider filter, leaving both columns null on affected rows, or polling practitioners on whether double-reported costs were acceptable.",
    "quote": "Poll practitioners to confirm that they find it adequate to double-report the costs",
@@ -1854,6 +1965,7 @@
    ]
   },
   {
+   "id": "ev-364-1",
    "category": "tradeoff",
    "statement": "Columns for negotiated prices were debated as Negotiated or OnDemand, the latter because many organisations have no negotiated discounts; a vote produced ContractedUnitPrice and ContractedCost, though one member objected that negotiated discount is established FinOps parlance.",
    "quote": "",
@@ -1870,6 +1982,7 @@
    ]
   },
   {
+   "id": "ev-406-3",
    "category": "tradeoff",
    "statement": "A commitment coverage-eligibility indicator split TF-2 on priority but became a work item rated medium effort and high impact; scoped for 1.3, it was repeatedly bumped and descoped, then shipped as Commitment Program Eligibility Details once a sponsor drafted it.",
    "quote": "",
@@ -1887,6 +2000,7 @@
    ]
   },
   {
+   "id": "ev-379-1",
    "category": "tradeoff",
    "statement": "A request to add ServiceCategory values so AWS could represent its own service groupings met the reply that a normalised list could not match every provider, and TF2 deferred it to 1.1 pending a subcategory column.",
    "quote": "",
@@ -1904,6 +2018,7 @@
    ]
   },
   {
+   "id": "ev-369-1",
    "category": "tradeoff",
    "statement": "Making AvailabilityZone mandatory was withdrawn until after the v1 GA because it does not affect cost and had been left as SHOULD to avoid blocking adoption; the group expected it to become a MUST for providers that support zones.",
    "quote": "",
@@ -1920,6 +2035,7 @@
    ]
   },
   {
+   "id": "ev-343-1",
    "category": "tradeoff",
    "statement": "EffectiveCost's wording, inclusive of all reduced rates, left unclear whether tier-blended rates like AWS BlendedCost counted; the proposal kept EffectiveCost unblended and said so explicitly, because most practitioners worked with unblended rates.",
    "quote": "Most practitioners use and are familiar with rates that do not blend rates",
@@ -1934,6 +2050,7 @@
    ]
   },
   {
+   "id": "ev-330-1",
    "category": "tradeoff",
    "statement": "Unsure what the top-level breakdown of usage charges in ChargeSubcategory should be, the group moved Used and Unused Commitment to a dedicated column for 1.0 GA and left the breakdown to revisit with post-GA feedback.",
    "quote": "We did not have a clear idea of what this should be",
@@ -1949,6 +2066,7 @@
    ]
   },
   {
+   "id": "ev-296-1",
    "category": "tradeoff",
    "statement": "Asked whether small SaaS vendors must provide every column even when most would be null, contributors favoured a smaller required core; 16 columns were chosen as FOCUS Essential, later reworked into mandatory, conditional and optional feature levels.",
    "quote": "",
@@ -1962,6 +2080,7 @@
    "objects": []
   },
   {
+   "id": "ev-317-2",
    "category": "tradeoff",
    "statement": "BillingAccountType and SubAccountType were held back from v1.0 after members questioned their practical value and added schema size and maintainers leaned toward metadata; moved to v1.1, they were finally added as conditional columns in 1.2.",
    "quote": "",
@@ -1980,6 +2099,7 @@
    ]
   },
   {
+   "id": "ev-179-1",
    "category": "tradeoff",
    "statement": "Pricing Unit was renamed PricingMeasure and left non-normalised, but after objections that Measure means something else in reporting models, the group reversed within days to a semi-normalised Pricing Unit, with a separate PricingBlockSize proposed as a v1.x follow-up.",
    "quote": "",
@@ -1995,6 +2115,7 @@
    ]
   },
   {
+   "id": "ev-252-1",
    "category": "tradeoff",
    "statement": "Custom columns were first to start with an underscore; a working-group call then chose a vendor prefix, a reviewer warned leading underscores need special handling in engines such as Athena, and the rule settled on a required x_ prefix that others may extend.",
    "quote": "",
@@ -2009,6 +2130,7 @@
    ]
   },
   {
+   "id": "ev-166-1",
    "category": "tradeoff",
    "statement": "Rather than drop the word discount from CommitmentDiscountId so it also covered on-demand capacity reservations, which have no term, the group kept the column to commitment discounts and put a separate capacity reservation column on the backlog.",
    "quote": "",
