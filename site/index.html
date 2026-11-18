@@ -183,7 +183,38 @@
     border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; margin: 6px 0; }
   .quiz-foot { font-size: 12px; color: var(--muted); margin-top: 18px; max-width: 85ch; line-height: 1.5; }
   .quiz-foot .linkish, #quiz-result .linkish { border: 0; background: none; padding: 0; color: var(--accent); text-decoration: underline; cursor: pointer; font-size: inherit; }
-  @media (max-width: 760px) { .quiz-wrap { grid-template-columns: 1fr; } }
+  @media (max-width: 760px) { .quiz-wrap { grid-template-columns: minmax(0, 1fr); } }
+  .quiz-main { min-width: 0; }
+  /* The quiz's data model panel: the Data model tab's cards and column rows, its joins as a list, and its detail panel */
+  .quiz-model { border: 1px solid var(--line); border-radius: 10px; background: var(--panel); margin-top: 10px; min-width: 0; }
+  .quiz-model > summary { cursor: pointer; padding: 8px 12px; font-size: 13px; font-weight: 600; }
+  .quiz-model > summary .hint { display: inline; font-weight: 400; margin-left: 4px; }
+  .qm-in { padding: 0 12px 12px; }
+  .quiz-model.detail-open .qm-list, .quiz-model:not(.detail-open) .qm-detail { display: none; }
+  .qm-list > p.hint { margin: 0 0 8px; line-height: 1.45; }
+  .qm-list input[type=search] { width: 100%; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px;
+    background: var(--code-bg); color: var(--fg); font: inherit; font-size: 13px; }
+  .qm-list .card { margin: 8px 0; }
+  .qm-list .card.nodata .card-head b { color: var(--muted); }
+  .qm-list .allcols { max-height: 360px; }
+  .col.labcol .n { text-decoration: underline dotted var(--warn-line); text-underline-offset: 3px; }
+  .col.xcol { cursor: default; }
+  .col.xcol:hover { background: none; }
+  .qm-list h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 14px 0 4px; }
+  .qm-rels { list-style: none; margin: 0; padding: 0; }
+  .qm-rels button { display: block; width: 100%; text-align: left; border: 0; border-top: 1px solid var(--line); border-radius: 0;
+    background: none; padding: 6px 4px; font-size: 13px; color: var(--fg); }
+  .qm-rels button:hover { background: var(--row-alt); }
+  .qm-rels .k { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--muted); overflow-wrap: anywhere; }
+  .qm-rels .hint { display: block; margin: 2px 0 0; }
+  .qm-back { border: 0; background: none; padding: 2px 0 8px; color: var(--accent); cursor: pointer; font-size: 13px; }
+  .quiz-model .detail { border: 0; padding: 0; background: none; min-height: 0; }
+  @media (min-width: 1200px) {
+    .quiz-wrap:has(> .quiz-model) { grid-template-columns: 220px minmax(0, 1fr) minmax(300px, 360px); max-width: 1640px; }
+    .quiz-wrap:has(> .quiz-model:not([open])) { grid-template-columns: 220px minmax(0, 1fr) auto; }
+    .quiz-wrap > .quiz-model { margin-top: 0; position: sticky; top: 12px; align-self: start;
+      max-height: calc(100vh - 24px); overflow-y: auto; }
+  }
   .about-link { border: 0; background: none; color: var(--accent); text-decoration: underline; cursor: pointer; font-size: 13px; padding: 4px 6px; }
   #about { max-width: 640px; width: calc(100% - 32px); border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px 14px;
     background: var(--panel); color: var(--fg); font-size: 14px; line-height: 1.55; }
@@ -589,6 +620,17 @@
     <nav class="quiz-list" id="quiz-list" aria-label="Quiz questions"><p class="hint">Loading…</p></nav>
     <div class="quiz-main">
       <div id="quiz-q"></div>
+      <!-- The data model for the question's data source. Below the question on narrow screens; on wide screens the
+           script moves it into .quiz-wrap as a third column. -->
+      <details class="quiz-model" id="quiz-model">
+        <summary>Data model <span class="hint" id="quiz-model-src"></span></summary>
+        <div class="qm-in">
+          <div class="qm-list" id="quiz-model-list"><p class="hint">Loading…</p></div>
+          <div class="qm-detail" id="quiz-model-detail">
+            <button class="linkish qm-back" id="quiz-model-back" type="button">← Datasets and joins</button>
+          </div>
+        </div>
+      </details>
       <textarea id="quiz-editor" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Your SQL"></textarea>
       <div class="actions">
         <button id="quiz-check" class="primary">Check</button>
@@ -1219,14 +1261,15 @@ function keyColumns(dsId) {
   return out;
 }
 
-// The Data model and Reference tabs share one detail panel (#model-detail): it moves to the tab being shown, and
+// The Data model, Reference and Quiz tabs share one detail panel (#model-detail): it moves to the tab being shown, and
 // each tab keeps its own selection, so previewing on Reference leaves the Data model's choice as it was.
 let detailOwner = 'model';
-const tabSelection = { model: null, ref: null };
+const tabSelection = { model: null, ref: null, quiz: null };
+const DETAIL_HOME = { model: () => document.querySelector('#model .model-bottom'), ref: () => $('ref-side'), quiz: () => $('quiz-model-detail') };
 function moveDetail(t) {
-  if ((t !== 'model' && t !== 'ref') || t === detailOwner) return;
+  if (!DETAIL_HOME[t] || t === detailOwner) return;
   tabSelection[detailOwner] = selection;
-  (t === 'ref' ? $('ref-side') : document.querySelector('#model .model-bottom')).appendChild($('model-detail'));
+  DETAIL_HOME[t]().appendChild($('model-detail'));
   detailOwner = t;
   selection = tabSelection[t];
   if (model) applySelection();
@@ -1306,6 +1349,95 @@ function pickQuestion(id) {
   $('quiz-feedback').hidden = true;
   quizLast = null;
   renderQuizList();
+  renderQuizModel(q.source);
+}
+
+// ---- Quiz: the data model beside the questions, for the data source the question runs on ----------------------------
+// It reuses the Data model tab's cards and column rows (colRow), lists its joins, and borrows its detail panel
+// (#model-detail, see moveDetail): clicking a name shows the detail in place of the list, with a way back.
+let qmSource = null, qmScroll = null;
+const capFirst = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+// The quiz runs on the question's source, so anything the quiz profiles or checks switches to it first.
+async function quizSource() {
+  if (quizQ && $('dataset').value !== quizQ.source) await setDataset(quizQ.source, `Switched to ${manifest.sources[quizQ.source].short} for the quiz.`);
+}
+
+function renderQuizModel(key) {
+  if (key === qmSource) return;
+  qmSource = key;
+  const src = manifest.sources[key];
+  const find = $('quiz-model-find') ? $('quiz-model-find').value : '';
+  let anyLab = false;
+  const cards = model.datasets.map((d) => {
+    const t = src.tables[d.id], m = t && manifest.tables[t];
+    const lab = (m && m.lab_columns) || {};
+    if (Object.keys(lab).length) anyLab = true;
+    const keys = keyColumns(d.id), spec = new Set(d.columns.map((c) => c.id));
+    // Columns in the source's table that aren't FOCUS 1.5 columns of this dataset: the lab's x_ columns, and 1.0 ones kept
+    const extra = m ? m.columns.filter((c) => !spec.has(c.name)) : [];
+    const xrow = (c) => `<div class="col xcol${lab[c.name] ? ' labcol' : ''}" title="${escapeHtml(lab[c.name] ||
+      `In ${t}, but not a FOCUS 1.5 ${d.name} column.`)}"><span class="n">${escapeHtml(c.name)}</span><span class="t">${
+      escapeHtml(c.type.toLowerCase())}${lab[c.name] ? ' · lab' : ''}</span></div>`;
+    const open = d.id === 'CostAndUsage', n = d.columns.length + extra.length; // every question reads CostAndUsage
+    return `<div class="card${m ? '' : ' nodata'}" data-ds="${d.id}">
+      <div class="card-head" data-ds="${d.id}" title="About the ${escapeHtml(d.name)} dataset">
+        <div class="top"><b>${escapeHtml(d.name)}${d.preview ? '<span class="badge">preview</span>' : ''}</b>
+          <span class="rows">${m ? `${Number(m.rows).toLocaleString()} rows` : 'no data'}</span></div>
+        <div class="tname">${d.id}</div>
+      </div>
+      <div class="keys">${keys.map((k) => colRow(d.id, colOf(d.id, k), true, lab[k])).join('')}</div>
+      <button class="more" aria-expanded="${open}">${open ? `Hide the ${n} columns ▾` : `All ${n} columns ▸`}</button>
+      <div class="allcols"${open ? '' : ' hidden'}>${d.columns.map((c) => colRow(d.id, c, keys.includes(c.id), lab[c.id])).join('')}${
+        extra.map(xrow).join('')}</div>
+    </div>`;
+  }).join('');
+  const rels = model.relationships.map((r) => {
+    const missing = [...new Set([r.a, r.b])].filter((id) => !src.tables[id]).map(dsName);
+    const status = missing.length ? `${capFirst(src.short)} has no ${missing.join(' or ')} data.`
+      : `${r.a === r.b ? `${dsName(r.a)} has` : 'Both have'} data in ${src.short}.`;
+    return `<li><button type="button" data-rel="${r.id}">${escapeHtml(r.name)}<span class="k">${r.keys.map((k) =>
+      `${r.a}.${k[0]} = ${r.b}.${k[1]}${k[2] ? ' (optional)' : ''}`).join('<br>')}</span><span class="hint">${escapeHtml(status)}</span></button></li>`;
+  }).join('');
+  $('quiz-model-src').textContent = `· ${src.short}`;
+  $('quiz-model-list').innerHTML = `<p class="hint">Row counts and columns are for ${escapeHtml(src.label)}, the data this
+      question runs on. Click a dataset, column or join to see the specification's definition and how it looks in that data.${
+      anyLab ? ' A dotted underline marks a column the lab added or derived: hover over it to see why.' : ''}</p>
+    <input type="search" id="quiz-model-find" placeholder="Find a column" aria-label="Find a column" value="${escapeHtml(find)}">
+    <p class="hint" id="quiz-model-found" hidden></p>
+    <div id="quiz-model-cards">${cards}</div>
+    <h4>How they join<span class="tag lab" title="The relationship names and key pairs are the lab's reading of the specification's prose.">lab</span></h4>
+    <ul class="qm-rels">${rels}</ul>`;
+  if (find) filterQuizModel();
+}
+
+// Show only the columns whose names contain the search text, with each dataset's full list open.
+function filterQuizModel() {
+  const q = $('quiz-model-find').value.trim().toLowerCase();
+  let hits = 0;
+  $('quiz-model-cards').querySelectorAll('.card').forEach((card) => {
+    const all = card.querySelector('.allcols'), more = card.querySelector('.more');
+    let n = 0;
+    all.querySelectorAll('.col').forEach((el) => {
+      const match = !q || el.querySelector('.n').textContent.toLowerCase().includes(q);
+      el.hidden = !match;
+      n += match;
+    });
+    hits += n;
+    card.querySelector('.keys').hidden = more.hidden = !!q;
+    all.hidden = q ? false : more.getAttribute('aria-expanded') !== 'true';
+    card.hidden = !!q && !n;
+  });
+  $('quiz-model-found').hidden = !q;
+  $('quiz-model-found').textContent = hits ? `${plural(hits, 'column')} match.` : 'No column matches.';
+}
+
+// Wide screens show the panel as a third column; narrower ones put it under the question, closed.
+const quizWide = matchMedia('(min-width: 1200px)');
+function placeQuizModel() {
+  const panel = $('quiz-model');
+  if (quizWide.matches) { document.querySelector('.quiz-wrap').appendChild(panel); panel.open = true; }
+  else { $('quiz-q').after(panel); panel.open = false; }
 }
 
 // Run SQL and keep every column by position, so two columns with the same name don't collide.
@@ -1382,7 +1514,7 @@ async function quizCheck() {
   $('quiz-result').innerHTML = '<p class="hint">Checking…</p>';
   $('quiz-extra').innerHTML = '';
   try {
-    if ($('dataset').value !== q.source) await setDataset(q.source, `Switched to ${manifest.sources[q.source].short} for the quiz.`);
+    await quizSource();
     const expected = await quizRun(q.answer);
     let yours = null, error = null;
     try { yours = await quizRun(sql); } catch (err) { error = String(err && err.message ? err.message : err); }
@@ -1876,11 +2008,12 @@ async function fillEvidence(key, token) {
     linkRefs(i.statement)} <span class="hint">${escapeHtml(i.date || '')} · ${threadLinks(i.threads || [])}</span></div>`).join('')}` : '');
 }
 
-function colRow(ds, c, isKey) {
+// labWhy: in the quiz's panel, why the lab added or derived this column in the chosen source (dotted underline)
+function colRow(ds, c, isKey, labWhy = '') {
   if (!c) return '';
   const level = (c.feature_level || '').charAt(0);
-  return `<div class="col${isKey ? ' key' : ''}" data-ds="${ds}" data-col="${escapeHtml(c.id)}" ` +
-    `title="${escapeHtml(c.name)} · ${escapeHtml(c.feature_level || '')}"><span class="n">${escapeHtml(c.id)}</span>` +
+  return `<div class="col${isKey ? ' key' : ''}${labWhy ? ' labcol' : ''}" data-ds="${ds}" data-col="${escapeHtml(c.id)}" ` +
+    `title="${escapeHtml(c.name)} · ${escapeHtml(c.feature_level || '')}${labWhy ? ` · ${escapeHtml(labWhy)}` : ''}"><span class="n">${escapeHtml(c.id)}</span>` +
     `<span class="t">${escapeHtml((c.data_type || '').toLowerCase())} · ${level}</span></div>`;
 }
 
@@ -2073,6 +2206,7 @@ function openInQuery(sql, from = 'the Data model') {
 function renderDetail() {
   const token = ++detailToken;
   const el = $('model-detail');
+  $('quiz-model').classList.toggle('detail-open', detailOwner === 'quiz' && !!selection); // the quiz shows a list or a detail
   if (!selection) {
     el.innerHTML = detailOwner === 'ref' ? '<p class="hint">Click a name to preview it here.</p>'
       : '<p class="hint">Click a line, a table name or a column to see its definition from the specification and how it looks in the loaded data. Conditions, attributes and the supporting material are in the Reference tab.</p>';
@@ -2589,6 +2723,25 @@ $('quiz-editor').addEventListener('keydown', (e) => {
     ed.selectionStart = ed.selectionEnd = s + 2;
   }
 });
+$('quiz-model-list').addEventListener('input', (e) => { if (e.target.id === 'quiz-model-find') filterQuizModel(); });
+$('quiz-model-list').addEventListener('click', async (e) => {
+  if (e.target.closest('.more')) return onModelClick(e); // open or close a dataset's column list
+  if (e.target.closest('.xcol') || !e.target.closest('.col, .card-head, [data-rel]')) return;
+  const panel = $('quiz-model');
+  qmScroll = { panel: panel.scrollTop, page: window.scrollY };
+  await quizSource();
+  onModelClick(e); // selects it, and the detail takes the list's place
+  panel.scrollTop = 0;
+  const top = panel.getBoundingClientRect().top;
+  if (top < 0) window.scrollBy(0, top - 8);
+});
+$('quiz-model-back').addEventListener('click', () => {
+  selection = null;
+  renderDetail();
+  if (qmScroll) { $('quiz-model').scrollTop = qmScroll.panel; window.scrollTo(0, qmScroll.page); }
+});
+quizWide.addEventListener('change', placeQuizModel);
+placeQuizModel();
 $('model-dataset').addEventListener('change', () => setDataset($('model-dataset').value));
 showTab(tab);
 

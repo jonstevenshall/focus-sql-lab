@@ -30,7 +30,9 @@ queries in the browser, so the server only serves static files: no database, no 
   each gap and their status on GitHub.
 - **Quiz:** 21 SQL questions on the FOCUS data, at two levels. "Write it" asks for a query that answers a common cost
   question; "Change it" gives a query and asks for a specific change. A check runs your query and the model answer in
-  the browser and compares their results. Hints and model answers are there when you want them.
+  the browser and compares their results. Hints and model answers are there when you want them. A data model panel
+  beside the questions (under the question on a phone) lists the five datasets, their columns and the lab's join keys
+  for the data the question runs on. Clicking a dataset, column or join shows the same detail as the Data model tab.
 - **Recent** (also at `#recent`): the FOCUS_Spec issues and pull requests people opened, commented on or reviewed in
   the last two weeks, newest activity first, rebuilt every morning. Each card has a summary of the fortnight, the
   comments and reviews as a reply tree with a one-line gist of each and a link to it on GitHub, the status changes the
