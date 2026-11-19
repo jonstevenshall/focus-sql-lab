@@ -34,7 +34,7 @@ LIMIT = int(FLAGS[FLAGS.index("--limit") + 1]) if "--limit" in FLAGS else 50
 BASIS = pathlib.Path(__file__).parent / "summary-basis.json"
 OBJ, THR = SITE / "object-summaries.json", SITE / "thread-summaries.json"
 sys.path.insert(0, str(pathlib.Path(__file__).parent))  # python -I leaves the script's folder off the path
-from common import Spend, cut, escalation, fallback_from, gh, gh_all, log_run, model_from, problems  # noqa: E402
+from common import THREAD_RULES, Spend, escalation, fallback_from, log_run, model_from, thread_limit, thread_text, write_text  # noqa: E402
 
 MODEL, SETTINGS = model_from(FLAGS)
 FALLBACK, FALLBACK_SETTINGS = fallback_from(FLAGS, MODEL)
@@ -136,24 +136,6 @@ if "--write" not in FLAGS or not due:
 # ---- writing ---------------------------------------------------------------------------------------------------
 import anthropic  # only needed to write
 
-THREAD_RULES = """You write summaries of GitHub discussion threads from the FOCUS specification repository (FinOps Open Cost and Usage Specification) for a learning website. The reader wants to know what each conversation was about and how it ended.
-
-Cover, in plain English and the past tense:
-1. What was proposed or asked, and why.
-2. The main points raised or disputed: who held which position (by GitHub username), alternatives considered, concerns, compromises.
-3. How it ended: merged, approved by members, closed as complete, deferred, cut from a release, superseded by another issue or pull request, or still open. Give the month and year when the thread states it.
-
-Rules:
-- State only what the thread says. Don't speculate, evaluate or add background knowledge. If the thread doesn't record the outcome, say "The thread doesn't record the outcome."
-- Name people only by their GitHub username exactly as shown, with the same capital and small letters even at the start of a sentence. Never guess real names. Refer to people by username or with they/them, never he or she.
-- Write dates as 29 October 2026, or as a month and year (October 2026).
-- Refer to other issues and pull requests as #123. No URLs, no Markdown, no emoji, no bullet lists.
-- Paraphrase. Quote at most 10 words, and only when the exact wording matters.
-- Skip bot comments, CLA notices and routine housekeeping (scheduling, moving to member review, reassigning) unless they record a decision or the outcome.
-- If a thread is mostly editorial or mechanical, say so briefly.
-
-Reply with the summary text only."""
-
 PAGE_RULES = """You write plain-language summaries of pages from the FOCUS specification (FinOps Open Cost and Usage Specification) for a learning website's data model view. The reader is a technical product manager who wants to understand each part of the model without reading the page itself. Accuracy matters more than style: every statement must come from the page.
 
 What to cover:
@@ -170,33 +152,6 @@ Rules:
 Reply with the summary text only."""
 
 
-
-def thread_text(n):
-    i = gh(f"issues/{n}")
-    is_pr = "pull_request" in i
-    head = [f"Title: #{n} {i['title']}", f"{'Pull request' if is_pr else 'Issue'} opened by {i['user']['login']} on {i['created_at'][:10]}."]
-    if is_pr:
-        p = gh(f"pulls/{n}")
-        head.append(f"Merged on {p['merged_at'][:10]}." if p.get("merged_at") else f"State: {p['state']}.")
-    else:
-        head.append(f"State: {i['state']}{' (' + i['state_reason'] + ')' if i.get('state_reason') else ''}.")
-    head.append("Description:\n" + cut(i.get("body"), 6000))
-    events = []
-    bot = lambda u: u.get("type") == "Bot" or u["login"].endswith("[bot]")
-    for c in gh_all(f"issues/{n}/comments"):
-        if not bot(c["user"]):
-            events.append((c["created_at"], f"Comment by {c['user']['login']} on {c['created_at'][:10]}:\n{cut(c['body'])}"))
-    if is_pr:
-        for r in gh_all(f"pulls/{n}/reviews"):
-            if r.get("submitted_at") and not bot(r["user"]) and (r.get("body") or r["state"] != "COMMENTED"):
-                events.append((r["submitted_at"], f"Review by {r['user']['login']} ({r['state'].lower()}) on {r['submitted_at'][:10]}:\n{cut(r.get('body'))}"))
-        for c in gh_all(f"pulls/{n}/comments"):
-            if not bot(c["user"]):
-                events.append((c["created_at"], f"Inline comment by {c['user']['login']} on {c['path']}, {c['created_at'][:10]}:\n{cut(c['body'], 1500)}"))
-    text = "\n\n".join(head + [e for _, e in sorted(events)])
-    return text[:600_000]  # about 150,000 tokens: the longest thread so far (#2424) is about 400,000 characters
-
-
 def page_text(key):
     kind, files, what = pages[key]
     body = "\n\n".join(f"--- {f} ---\n{(SPEC / f).read_text()}" for f in files)
@@ -207,30 +162,9 @@ client = anthropic.Anthropic()
 spend = Spend()
 
 
-def attempt(model, settings, system, content, limit, thread):
-    """One model's try at a summary, checked, with one retry naming the problems. Returns (text, problems)."""
-    messages = [{"role": "user", "content": f"{content}\n\nLength: at most {limit} words."}]
-    for n in (1, 2):
-        # The retry sends back only the text of the first reply, not its thinking, which the API allows.
-        r = client.messages.create(model=model, max_tokens=settings["max_tokens"], system=system, messages=messages,
-                                   thinking=settings["thinking"], output_config={"effort": settings["effort"]})
-        spend.add(model, r.usage)
-        text = "".join(b.text for b in r.content if b.type == "text").strip()
-        found = problems(text, limit, content, thread) if r.stop_reason == "end_turn" else [f"the reply stopped early ({r.stop_reason})"]
-        if not found or n == 2:
-            return text, found
-        messages += [{"role": "assistant", "content": text},
-                     {"role": "user", "content": "That summary fails these checks: " + "; ".join(found) + ". Rewrite it so it passes, following the same rules. Reply with the summary text only."}]
-
-
 def write_one(system, content, limit, thread=False):
     """A summary from the first model, or from the fallback if the first fails twice. Returns (text, problems, model, escalated)."""
-    text, found = attempt(MODEL, SETTINGS, system, content, limit, thread)
-    if not found or not FALLBACK:
-        return text, found, MODEL, False
-    print(f"  escalated to {FALLBACK}: {'; '.join(found)[:200]}")
-    text, found = attempt(FALLBACK, FALLBACK_SETTINGS, system, content, limit, thread)
-    return text, found, FALLBACK, True
+    return write_text(client, spend, system, content, limit, thread, (MODEL, SETTINGS), (FALLBACK, FALLBACK_SETTINGS))
 
 
 skipped, tally = [], {"first_pass": 0, "escalated": 0, "escalated_passed": 0}
@@ -245,7 +179,7 @@ for kind, key in due[:LIMIT]:
                 objs.setdefault("written_by", {})[key] = writer
                 basis["pages"][key] = page_hash(pages[key][1])
         else:
-            text, found, writer, escalated = write_one(THREAD_RULES, thread_text(key), 70 if weight[key] < 20 else 130, thread=True)
+            text, found, writer, escalated = write_one(THREAD_RULES, thread_text(key), thread_limit(weight[key]), thread=True)
             if not found:
                 threads["summaries"][key] = text
                 threads.setdefault("written_by", {})[key] = writer

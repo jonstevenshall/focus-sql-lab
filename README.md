@@ -16,8 +16,13 @@ queries in the browser, so the server only serves static files: no database, no 
   the pull requests that changed its definition file, newest first, with an excerpt of each one's description, the
   issue it addressed, and how much discussion each had, with a summary of the conversation in each pull request and
   issue that had one. Each entry shows its status on GitHub (merged, open, or closed and why), and a "Not merged" list
-  shows pull requests that proposed changes to the definition but were closed without merging or are still open. The
-  11 join-key columns also have a note on the debate behind them.
+  shows pull requests that proposed changes to the definition but were closed without merging or are still open (on a
+  dataset or column, the open ones are under open requests instead). Above the history, each
+  dataset and column lists its **open requests**: the open FOCUS_Spec issues and pull requests that concern it, with
+  each one's kind (feature request, action item, pull request), status, milestone, when it was opened and last active,
+  how it was matched and a summary of its conversation. Threads that only name it in their description are in a
+  collapsed list. The history and the open requests are rebuilt every day. The 11 join-key columns also have a note on
+  the debate behind them.
 - **Data sources:** switch between the accepted 1.0 sample, two samples proposed in open FOCUS-Sample-Data pull
   requests (1.3 and 1.4), and the specification's 1.5 worked examples. The Data model shows which joins work in each.
 - **Sample data:** one card per data source, with its status, a link to its pull request or folder and the commit the
@@ -85,6 +90,9 @@ Everything the lab made is labelled on the page:
 - **Conversation summaries:** [site/thread-summaries.json](site/thread-summaries.json) summarises the conversation in
   each FOCUS_Spec issue and pull request in the history that has three or more comments or reviews, written by an AI model
   from each thread. Threads with less discussion show only their own description.
+- **Open requests:** [site/open-requests.json](site/open-requests.json) matches the open FOCUS_Spec issues and pull
+  requests to the datasets and columns they concern; the matching rules are the lab's. Each thread's summary is written
+  by an AI model from the thread, or reused from the conversation summaries or the Recent tab.
 
 ## Findings
 
@@ -119,6 +127,7 @@ site/
   practice-queries.json       the practice queries, with test results (built from tools/practice.json)
   quiz.json                   the quiz, with each model answer's tested row count (built from tools/quiz.json)
   recent.json                 the last two weeks of FOCUS_Spec discussion, rebuilt daily by tools/recent.py
+  open-requests.json          the open FOCUS_Spec issues and pull requests behind each dataset and column, rebuilt daily
   update-log.json             every rebuild and batch of AI-written text: what it did, escalations and cost
   focus/                      FOCUS-derived, rebuilt by the tools; not edited by hand
     data/*.parquet            sample data and the specification's worked examples
@@ -194,9 +203,10 @@ GH_TOKEN=<GitHub token> python -I tools/extract_ai.py <FOCUS_Spec clone> site
 ### Refreshing on GitHub
 
 The workflow [.github/workflows/refresh.yml](.github/workflows/refresh.yml) does the same on GitHub, against the latest
-`working_draft`. It runs only when started by hand: Actions, then "Refresh from FOCUS_Spec", then "Run workflow". It
-downloads the sample data at the pinned commits, rebuilds, and pushes to `main` only if something changed, which
-redeploys the site. The page header shows when the site was last updated by any run (a refresh or the daily Recent
+`working_draft`. It runs every day at 18:30 UTC, and can be started by hand: Actions, then "Refresh from FOCUS_Spec",
+then "Run workflow". It downloads the sample data at the pinned commits, rebuilds, writes the summaries that are due
+(below), and pushes to `main` only if something changed, which redeploys the site. So the definitions, each one's
+history, and the status of every pull request and issue in it are at most a day old. The page header shows when the site was last updated by any run (a refresh or the daily Recent
 rebuild), in the reader's own time zone, with that update's cost in API calls and the total to date; both come from
 `site/update-log.json`. The footer adds the specification commit and when the AI summaries were last written, from
 `site/focus/refresh.json`, which records the refresh time in UTC.
@@ -228,8 +238,9 @@ whether due or not, for comparing models on the same items. Each summary must pa
 they/them pronouns, usernames and dates as written, no URLs or Markdown, quotes found word for word in the source).
 One that fails twice is escalated to the fallback model (`--fallback`, Claude Sonnet 5.5 by default, `none` to turn it
 off) for two more tries, and skipped if it fails those too; each summary records the model that wrote it
-(`written_by`). The checks can't tell whether a summary is accurate. The workflow does this only when its "summaries" box is ticked,
-with the `ANTHROPIC_API_KEY` repository secret, up to the "limit" given, and offers the same model and "only" choices.
+(`written_by`). The checks can't tell whether a summary is accurate. The daily run of the workflow writes up to 40 a
+day with Claude Haiku 5.5 at high effort, using the `ANTHROPIC_API_KEY` repository secret. Started by hand, it writes
+them only when its "summaries" box is ticked, up to the "limit" given, and offers the same model and "only" choices.
 The debate notes and evidence are curated and aren't refreshed.
 
 ### Recent discussion, daily
@@ -243,10 +254,32 @@ thread is summarised again only when it gains comments or reviews from people, o
 [.github/workflows/daily.yml](.github/workflows/daily.yml) runs it every day at 19:30 UTC (05:30 in Brisbane) and
 pushes the result; it can also be started by hand. It shares a queue with the refresh, so the two never push at once.
 
+### Open requests, daily
+
+[tools/open_requests.py](tools/open_requests.py) builds `site/open-requests.json` from GitHub, in the same daily
+workflow, after the Recent tab: every open FOCUS_Spec issue and pull request, matched to the datasets and columns it
+concerns. A strong match is a pull request that changes the definition's file (under its current name or an earlier
+one, from `history.json`), or a title that names the column's ID or the dataset's name or ID. A pull request that adds
+a page under a dataset's `columns/` folder, or a title that proposes a column the model doesn't have, counts for the
+dataset it names. A name that appears only in the description is a weak match. Pull requests that change more than 15
+files and match only by their files are kept apart, as in the history. Each matched thread gets a summary of the whole
+thread: the one written here before, until the thread gains comments or reviews; otherwise the conversation summary
+from `thread-summaries.json` if it is up to date, or the thread's Recent brief; otherwise a new one, written and
+checked like the conversation summaries (Claude Haiku 5.5 at high effort, Claude Sonnet 5.5 as the fallback), at most
+30 a run, strong matches first. Before writing, it compares its counts with the last run's and stops if the open
+threads or the matches fell by more than half (`--force` writes anyway). If the step fails, the Recent tab is still
+published.
+
+```bash
+GH_TOKEN=... python -I tools/open_requests.py site                          # dry run: the matches, what's due, its cost
+GH_TOKEN=... ANTHROPIC_API_KEY=... python -I tools/open_requests.py site --write --effort high [--limit 30]
+GH_TOKEN=... python -I tools/open_requests.py site --write --no-ai          # write it without calling the API
+```
+
 ### Update log
 
 Every rebuild (`summarise.py --stamp --data`) and every batch of AI-written text (`summarise.py --write`,
-`recent.py --write`) adds an entry to `site/update-log.json`: when it ran, the GitHub run, what it did, how many items
+`recent.py --write`, `open_requests.py --write`) adds an entry to `site/update-log.json`: when it ran, the GitHub run, what it did, how many items
 passed first time, how many (and what share) were escalated to the fallback model and how many of those passed, and the
 tokens and cost per model at list price. The page shows it when you click the update time in the header (or the
 "Updated" time on the Recent tab), with the total spend and the overall share escalated. Clicking the cost in the header

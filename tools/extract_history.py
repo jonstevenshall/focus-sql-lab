@@ -310,9 +310,12 @@ print(f"blamed {sum(len(b) for b in lines.values())} requirement lines to {len(b
       f"{sum(1 for b in lines.values() for n in b.values() if not n)} lines to commits naming no pull request; "
       f"not in the history: {sorted(blamed_prs - set(out_prs))[:5]}")
 
+# Each definition file's earlier names, for tools/open_requests.py, which matches open pull requests by the files they
+# change and has no FOCUS_Spec clone to look them up in.
+names = {path: sorted(names_of(path) - {path}) for path in paths if len(names_of(path)) > 1}
 history = {"spec": {"repo": f"https://github.com/{OWNER}/{NAME}", "commit": git("rev-parse", COMMIT).strip()},
            "wide": WIDE, "status_checked": datetime.date.today().isoformat(),
-           "prs": out_prs, "issues": out_issues, "files": files, "lines": lines}
+           "prs": out_prs, "issues": out_issues, "files": files, "lines": lines, "names": names}
 (SITE / "focus" / "history.json").write_text(json.dumps(history, separators=(",", ":")))
 
 focused = [p for p in out_prs.values() if (p["files"] or 0) <= WIDE]

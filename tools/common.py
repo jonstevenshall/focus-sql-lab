@@ -1,5 +1,6 @@
-"""Shared by summarise.py and recent.py: the models they can use, the checks every AI-written text must pass, and
-reading FOCUS_Spec from GitHub's REST API (GH_TOKEN)."""
+"""Shared by summarise.py, recent.py and open_requests.py: the models they can use, the checks every AI-written text
+must pass, writing a text with one retry and a fallback model, the summary brief for a whole thread, the parts of the
+data model by file and by name, and reading FOCUS_Spec from GitHub's REST and GraphQL APIs (GH_TOKEN)."""
 import datetime
 import json
 import os
@@ -7,6 +8,7 @@ import re
 import sys
 import urllib.parse
 import urllib.request
+from collections import defaultdict
 
 REPO = "FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec"
 
@@ -144,6 +146,18 @@ def gh_all(path, **params):
         page += 1
 
 
+def graphql(query):
+    """FOCUS_Spec's repository object from a GraphQL query written inside repository(...) { }. Stops on any error."""
+    owner, name = REPO.split("/")
+    req = urllib.request.Request("https://api.github.com/graphql", headers={"Authorization": f"Bearer {os.environ['GH_TOKEN']}"},
+                                 data=json.dumps({"query": f'query {{ repository(owner: "{owner}", name: "{name}") {{ {query} }} }}'}).encode())
+    with urllib.request.urlopen(req) as r:
+        out = json.load(r)
+    if out.get("errors"):
+        raise RuntimeError("GraphQL: " + "; ".join(e.get("message", "") for e in out["errors"][:3]))
+    return out["data"]["repository"]
+
+
 def cut(s, n=3000):
     s = (s or "").strip()
     return s if len(s) <= n else s[:n] + " […cut]"
@@ -151,3 +165,115 @@ def cut(s, n=3000):
 
 def is_bot(user):
     return (user or {}).get("type") == "Bot" or (user or {}).get("login", "").endswith("[bot]")
+
+
+# ---- the parts of the data model, by file and by the words that name them -----------------------------------------
+CAMEL = re.compile(r"[A-Z][a-z0-9]+(?:[A-Z][A-Za-z0-9]*)+")  # BilledCost, SkuPriceDetails: not plain English words
+
+
+def model_index(model):
+    """by_file: each definition file -> the model keys it defines ("column:CostAndUsage.BilledCost"). by_word: each name
+    that identifies a part (a column ID in CamelCase, a dataset's ID or name, an attribute or condition ID; four letters
+    or more) -> its key. words: a pattern that finds those names in text."""
+    by_file, by_word = defaultdict(list), {}
+    for d in model["datasets"]:
+        by_file[d["source"]].append(f"dataset:{d['id']}")
+        by_word.setdefault(d["id"], f"dataset:{d['id']}")
+        by_word.setdefault(d["name"], f"dataset:{d['id']}")  # "Cost and Usage", "SKU Price"
+        for c in d["columns"]:
+            by_file[c["source"]].append(f"column:{d['id']}.{c['id']}")
+            if CAMEL.fullmatch(c["id"]):
+                by_word.setdefault(c["id"], f"column:{d['id']}.{c['id']}")  # the first dataset that has it (Cost and Usage first)
+    for kind in ("attributes", "conditions"):
+        for a in model.get(kind, []):
+            if not a.get("id"):  # the conditions overview page has no ID of its own
+                continue
+            key = f"{kind[:-1]}:{a['id']}"
+            by_file[a["source"]].append(key)
+            by_word.setdefault(a["id"], key)
+    for t in model.get("topics", []):
+        for f in t["files"] or [t["source"]]:
+            by_file[f].append(f"topic:{t['id']}")
+    by_word = {w: k for w, k in by_word.items() if len(w) >= 4}
+    words = re.compile(r"(?<![A-Za-z0-9_])(" + "|".join(sorted(map(re.escape, by_word), key=len, reverse=True)) + r")(?![A-Za-z0-9_])")
+    return by_file, by_word, words
+
+
+# ---- writing a text, checked, with a fallback model -----------------------------------------------------------
+def write_text(client, spend, system, content, limit, thread, primary, fallback, log=print):
+    """A text from the first model, checked with problems(), with one retry naming the problems. One that fails twice
+    goes to the fallback model for two more tries. primary and fallback are (model, settings) pairs; the fallback's
+    model may be None. Returns (text, problems, the model that wrote it, whether it was escalated)."""
+
+    def attempt(model, settings):
+        messages = [{"role": "user", "content": f"{content}\n\nLength: at most {limit} words."}]
+        for n in (1, 2):
+            # The retry sends back only the text of the first reply, not its thinking, which the API allows.
+            r = client.messages.create(model=model, max_tokens=settings["max_tokens"], system=system, messages=messages,
+                                       thinking=settings["thinking"], output_config={"effort": settings["effort"]})
+            spend.add(model, r.usage)
+            text = "".join(b.text for b in r.content if b.type == "text").strip()
+            found = problems(text, limit, content, thread) if r.stop_reason == "end_turn" else [f"the reply stopped early ({r.stop_reason})"]
+            if not found or n == 2:
+                return text, found
+            messages += [{"role": "assistant", "content": text},
+                         {"role": "user", "content": "That summary fails these checks: " + "; ".join(found) + ". Rewrite it so it passes, following the same rules. Reply with the summary text only."}]
+
+    text, found = attempt(*primary)
+    if not found or not fallback[0]:
+        return text, found, primary[0], False
+    log(f"  escalated to {fallback[0]}: {'; '.join(found)[:200]}")
+    text, found = attempt(*fallback)
+    return text, found, fallback[0], True
+
+
+# ---- a whole thread, and the brief for summarising it ----------------------------------------------------------
+THREAD_RULES = """You write summaries of GitHub discussion threads from the FOCUS specification repository (FinOps Open Cost and Usage Specification) for a learning website. The reader wants to know what each conversation was about and how it ended.
+
+Cover, in plain English and the past tense:
+1. What was proposed or asked, and why.
+2. The main points raised or disputed: who held which position (by GitHub username), alternatives considered, concerns, compromises.
+3. How it ended: merged, approved by members, closed as complete, deferred, cut from a release, superseded by another issue or pull request, or still open. Give the month and year when the thread states it.
+
+Rules:
+- State only what the thread says. Don't speculate, evaluate or add background knowledge. If the thread doesn't record the outcome, say "The thread doesn't record the outcome."
+- Name people only by their GitHub username exactly as shown, with the same capital and small letters even at the start of a sentence. Never guess real names. Refer to people by username or with they/them, never he or she.
+- Write dates as 29 October 2026, or as a month and year (October 2026).
+- Refer to other issues and pull requests as #123. No URLs, no Markdown, no emoji, no bullet lists.
+- Paraphrase. Quote at most 10 words, and only when the exact wording matters.
+- Skip bot comments, CLA notices and routine housekeeping (scheduling, moving to member review, reassigning) unless they record a decision or the outcome.
+- If a thread is mostly editorial or mechanical, say so briefly.
+
+Reply with the summary text only."""
+
+
+def thread_limit(weight):
+    """The word limit for a thread's summary, from its comments and reviews."""
+    return 70 if weight < 20 else 130
+
+
+def thread_text(n):
+    """A FOCUS_Spec issue or pull request as text to summarise: its description, comments, reviews and inline comments."""
+    i = gh(f"issues/{n}")
+    is_pr = "pull_request" in i
+    head = [f"Title: #{n} {i['title']}", f"{'Pull request' if is_pr else 'Issue'} opened by {i['user']['login']} on {i['created_at'][:10]}."]
+    if is_pr:
+        p = gh(f"pulls/{n}")
+        head.append(f"Merged on {p['merged_at'][:10]}." if p.get("merged_at") else f"State: {p['state']}.")
+    else:
+        head.append(f"State: {i['state']}{' (' + i['state_reason'] + ')' if i.get('state_reason') else ''}.")
+    head.append("Description:\n" + cut(i.get("body"), 6000))
+    events = []
+    bot = lambda u: u.get("type") == "Bot" or u["login"].endswith("[bot]")
+    for c in gh_all(f"issues/{n}/comments"):
+        if not bot(c["user"]):
+            events.append((c["created_at"], f"Comment by {c['user']['login']} on {c['created_at'][:10]}:\n{cut(c['body'])}"))
+    if is_pr:
+        for r in gh_all(f"pulls/{n}/reviews"):
+            if r.get("submitted_at") and not bot(r["user"]) and (r.get("body") or r["state"] != "COMMENTED"):
+                events.append((r["submitted_at"], f"Review by {r['user']['login']} ({r['state'].lower()}) on {r['submitted_at'][:10]}:\n{cut(r.get('body'))}"))
+        for c in gh_all(f"pulls/{n}/comments"):
+            if not bot(c["user"]):
+                events.append((c["created_at"], f"Inline comment by {c['user']['login']} on {c['path']}, {c['created_at'][:10]}:\n{cut(c['body'], 1500)}"))
+    text = "\n\n".join(head + [e for _, e in sorted(events)])
+    return text[:600_000]  # about 150,000 tokens: the longest thread so far (#2424) is about 400,000 characters

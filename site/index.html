@@ -2115,7 +2115,8 @@ function recentCard(t, inWindow, since) {
 const MODEL_NAME = { 'claude-haiku-5-5': 'Claude Haiku 5.5', 'claude-sonnet-5-5': 'Claude Sonnet 5.5' };
 const modelName = (m) => MODEL_NAME[m] || m;
 const usd = (n) => `US$${(n || 0).toFixed(n && n < 0.1 ? 4 : 2)}`;
-const LOG_TASK = { rebuild: 'Rebuilt from the specification', summaries: 'Spec page and thread summaries', recent: 'Recent discussion' };
+const LOG_TASK = { rebuild: 'Rebuilt from the specification', summaries: 'Spec page and thread summaries', recent: 'Recent discussion',
+  'open-requests': 'Open request summaries' };
 
 function logEntry(r) {
   const when = new Date(r.at).toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' });
@@ -2128,14 +2129,18 @@ function logEntry(r) {
   } else {
     const items = r.task === 'recent'
       ? `${plural(r.threads, 'thread')} in the window, ${r.kept} unchanged; ${r.attempted} summarised.`
+      : r.task === 'open-requests'
+      ? `${plural(r.threads, 'open thread')} linked to a dataset or column, ${r.kept} with a current summary; ${r.attempted} summarised${
+        r.left ? `, ${r.left} left for the next run` : ''}.`
       : `${r.attempted === 1 ? '1 summary' : `${r.attempted} summaries`} due (${plural(r.pages, 'page')}, ${plural(r.threads, 'thread')}).`;
     const first = `${modelName(r.model)}${r.effort ? ` (${r.effort} effort)` : ''} wrote ${r.first_pass} that passed the checks first time.`;
     const esc = r.fallback ? ` ${r.escalated} (${r.escalated_pct}%) went to ${modelName(r.fallback)}, which passed ${r.escalated_passed}.` : '';
     const left = r.failed ? ` ${r.failed} ${r.task === 'recent' ? 'kept a plain excerpt for some parts' : 'skipped'}.` : '';
     what = `${items} ${first}${esc}${left} Cost ${usd(r.cost)}${byModel && Object.keys(r.spend).length > 1 ? ` (${byModel})` : ''} at list price.`;
   }
-  // The refresh workflow (rebuilds and spec summaries) only runs when started by hand; the Recent tab's runs are daily.
-  const manual = r.task === 'rebuild' || r.task === 'summaries' || r.trigger === 'workflow_dispatch';
+  // How the run started (common.log_run records it). Older entries don't say: until the refresh was scheduled, its
+  // rebuilds and spec summaries only ran when started by hand, and the Recent tab's runs were daily.
+  const manual = r.trigger ? r.trigger === 'workflow_dispatch' : r.task === 'rebuild' || r.task === 'summaries';
   const tag = (manual ? '<span class="tag">Manually triggered</span>' : '')
     + (!r.attempted ? '' : r.fallback ? `<span class="tag${r.escalated ? ' esc' : ''}">Escalated ${r.escalated_pct}%</span>`
       : `<span class="tag">${escapeHtml(modelName(r.model))} only</span>`);
@@ -2430,9 +2435,12 @@ const plural = (n, word) => `${n.toLocaleString()} ${word}${n === 1 ? '' : 's'}`
 let summariesP = null;
 const loadSummaries = () => (summariesP ??= fetch('thread-summaries.json').then((r) => (r.ok ? r.json() : null)).catch(() => null));
 
-async function fillHistory(path, token) {
-  const [h, sums] = await Promise.all([loadHistory(), loadSummaries()]);
+// key: the dataset or column whose panel this is. Its open pull requests are listed under Open requests, so they are
+// left out of Not merged here.
+async function fillHistory(path, token, key = null) {
+  const [h, sums, open] = await Promise.all([loadHistory(), loadSummaries(), key ? loadOpen() : null]);
   const said = (sums && sums.summaries) || {};
+  const above = new Set(((open && open.objects[key]) || []).map(([n]) => String(n)));
   // GitHub's status for a pull request or issue, as last checked by tools/extract_history.py.
   const stateTag = (x) => {
     if (!x || !x.state) return '';
@@ -2450,7 +2458,8 @@ async function fillHistory(path, token) {
     .sort((x, y) => y.merged.localeCompare(x.merged) || y.n - x.n);
   const focused = prs.filter((p) => p.files <= h.wide), wide = prs.filter((p) => p.files > h.wide);
   // Pull requests that touched this file but were never merged: open ones first, then newest first.
-  const un = (f.unmerged || []).map(([n, a, d]) => ({ n, a, d, ...h.prs[n] })).filter((p) => p.title)
+  const moved = (f.unmerged || []).filter(([n]) => above.has(String(n))).length;
+  const un = (f.unmerged || []).filter(([n]) => !above.has(String(n))).map(([n, a, d]) => ({ n, a, d, ...h.prs[n] })).filter((p) => p.title)
     .sort((x, y) => (x.state === 'open' ? 0 : 1) - (y.state === 'open' ? 0 : 1)
       || (y.closed || y.opened).localeCompare(x.closed || x.opened) || y.n - x.n);
   const unFocused = un.filter((p) => p.files <= h.wide), unWide = un.filter((p) => p.files > h.wide);
@@ -2475,12 +2484,53 @@ async function fillHistory(path, token) {
       <ul class="history">${wide.map(item).join('')}</ul></details>` : ''}
     ${un.length ? `<h4>Not merged</h4>
       <p class="hint">Pull requests that proposed changes to <code>${escapeHtml(file)}</code> but were closed without
-        merging, or are still open. They are found by the files they changed, including the file's earlier names.</p>
+        merging, or are still open. They are found by the files they changed, including the file's earlier names.${moved
+        ? ` ${moved === 1 ? 'One that is still open is' : `${moved} that are still open are`} listed under Open requests instead.` : ''}</p>
       <ul class="history">${unFocused.map(item).join('') || '<li class="hint">None that changed only a few files.</li>'}</ul>
       ${unWide.length ? `<details><summary>${plural(unWide.length, 'spec-wide pull request')} that changed more than ${h.wide} files</summary>
         <ul class="history">${unWide.map(item).join('')}</ul></details>` : ''}` : ''}
     <p>${link(`${h.spec.repo}/commits/working_draft/${f.link || path}`, `Every commit to ${escapeHtml(file)} on GitHub`)}${f.unlinked
       ? ` (${plural(f.unlinked, 'commit')} there name${f.unlinked === 1 ? 's' : ''} no pull request, so ${f.unlinked === 1 ? 'it isn\'t' : 'they aren\'t'} listed here)` : ''}</p>`;
+}
+
+// ---- Open requests: the open FOCUS_Spec issues and pull requests that concern a dataset or column ---------------
+// Built every day by tools/open_requests.py (site/open-requests.json). Strong matches: a pull request that changes the
+// definition's file, or a title that names it. Weak: the name appears only in the description.
+let openP = null;
+const loadOpen = () => (openP ??= fetch('open-requests.json').then((r) => (r.ok ? r.json() : null)).catch(() => null));
+const OPEN_KIND = { 'pull request': 'Pull request', 'feature request': 'Feature request', 'action item': 'Action item' };
+
+// key: "column:CostAndUsage.ListCost" or "dataset:SkuPrice"; file: its page; names: what a title must name to match.
+async function fillOpen(key, file, names, token) {
+  const o = await loadOpen();
+  const box = $('open-reqs');
+  if (token !== detailToken || !box) return;
+  if (!o) { box.innerHTML = '<h4>Open requests</h4><p class="hint">Could not load the open requests.</p>'; return; }
+  const list = (o.objects[key] || []).map(([n, level, how]) => ({ ...o.threads[n], level, how }));
+  const strong = list.filter((t) => t.level === 'strong'), wide = list.filter((t) => t.level === 'wide'),
+    weak = list.filter((t) => t.level === 'weak');
+  const link = (url, text) => `<a href="${url}" target="_blank" rel="noopener">${text}</a>`;
+  const conv = (t) => {
+    if (!t.summary) return '';
+    const label = t.summary_from === 'recent' && t.opened < t.recent_since ? `The two weeks to ${t.summary_to}` : 'The conversation';
+    return `<p class="conv"><span class="conv-label">${label}</span>${linkRefs(t.summary)}${
+      t.stale ? ' <span class="hint">(written before its latest comments)</span>' : ''}</p>`;
+  };
+  const item = (t) => `<li class="pr">
+    <div class="pr-head"><span class="state open">${t.state === 'draft' ? 'open draft' : 'open'}</span>${link(t.url, `#${t.number}`)} ${escapeHtml(t.title)}</div>
+    <div class="pr-meta">${escapeHtml(OPEN_KIND[t.kind] || t.kind.charAt(0).toUpperCase() + t.kind.slice(1))}${
+      t.milestone ? ` · milestone ${escapeHtml(t.milestone)}` : ''} · opened ${t.opened}${t.author ? ` by ${escapeHtml(t.author)}` : ''} ·
+      last activity ${t.last.slice(0, 10)} · ${plural(t.comments, 'comment')}${t.kind === 'pull request' ? ` · ${plural(t.reviews, 'review')}` : ''}</div>
+    <div class="pr-meta">Matched: ${escapeHtml(t.how)}</div>${conv(t)}</li>`;
+  box.innerHTML = `<h4>Open requests</h4>
+    <p class="hint">Open FOCUS_Spec issues and pull requests that concern this ${key.startsWith('dataset:') ? 'dataset' : 'column'}:
+      pull requests that change <code>${escapeHtml(file)}</code>${key.startsWith('dataset:') ? ' or add a column to it' : ''}, and
+      threads whose title names ${names}. Most recent activity first, from GitHub, checked ${o.checked_at.slice(0, 10)}.</p>
+    <ul class="history">${strong.map(item).join('') || '<li class="hint">None.</li>'}</ul>
+    ${wide.length ? `<details><summary>${plural(wide.length, 'spec-wide pull request')} that change${wide.length === 1 ? 's' : ''} more than ${o.wide} files, <code>${escapeHtml(file)}</code> among them</summary>
+      <ul class="history">${wide.map(item).join('')}</ul></details>` : ''}
+    ${weak.length ? `<details><summary>Also mentioned in ${plural(weak.length, 'open thread')}, in the description only</summary>
+      <ul class="history">${weak.map(item).join('')}</ul></details>` : ''}`;
 }
 
 // ---- Notes on the debate behind each key column, written by the lab (site/column-notes.json) ---------------
@@ -2696,11 +2746,12 @@ async function tableDetail(d, el, token) {
     <h4>Relationships</h4>
     <ul>${rels.map((r) => `<li><button class="linkish" data-rel="${r.id}">${escapeHtml(r.name)}</button></li>`).join('')}</ul>
     <div class="actions"><button class="primary" data-action="open" data-key="summarize">Profile every column</button></div>
-    ${REQS}<p>${specLink(d.source)}</p><div id="obj-evidence"></div>${HISTORY}`;
+    ${REQS}<p>${specLink(d.source)}</p><div id="obj-evidence"></div><div id="open-reqs"></div>${HISTORY}`;
   fillEvidence(`dataset:${d.id}`, token);
   fillSummary(d.source, token);
   fillReqs(d, token);
-  fillHistory(d.source, token);
+  fillOpen(`dataset:${d.id}`, d.source.split('/').slice(-2).join('/'), `${escapeHtml(d.name)} or <code>${d.id}</code>`, token);
+  fillHistory(d.source, token, `dataset:${d.id}`);
   try {
     const n = num((await conn.query(`SELECT count(*) AS n FROM "${d.id}"`)).toArray()[0].n);
     if (token === detailToken) $('tbl-rows').textContent = n ? `${n.toLocaleString()} (${srcShort()})` : `none (${srcShort()} has no ${d.name} data)`;
@@ -2730,12 +2781,13 @@ async function colDetail(d, c, el, token) {
     <h4>In the loaded data</h4><div id="col-stats"><p class="hint">Profiling…</p></div>
     <div class="actions"><button class="primary" data-action="open" data-key="values">Query its values</button>
       <button class="linkish" data-table="${d.id}" style="margin-left:10px">About ${escapeHtml(d.name)}</button></div>
-    ${REQS}<p>${specLink(c.source)}</p><div id="col-note"></div><div id="obj-evidence"></div>${HISTORY}`;
+    ${REQS}<p>${specLink(c.source)}</p><div id="col-note"></div><div id="obj-evidence"></div><div id="open-reqs"></div>${HISTORY}`;
   fillEvidence(`column:${d.id}.${c.id}`, token);
   fillSummary(c.source, token);
   fillReqs(c, token);
   fillNote(c.id, token);
-  fillHistory(c.source, token);
+  fillOpen(`column:${d.id}.${c.id}`, c.source.split('/').pop(), `<code>${escapeHtml(c.id)}</code>`, token);
+  fillHistory(c.source, token, `column:${d.id}.${c.id}`);
   const q = `"${c.id}"`;
   try {
     const s = (await conn.query(`SELECT count(*) AS total, count(${q}) AS non_null, approx_count_distinct(${q}) AS distinct_values,

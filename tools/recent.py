@@ -23,7 +23,7 @@ import sys
 from collections import Counter, defaultdict
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))  # python -I leaves the script's folder off the path
-from common import Spend, cut, escalation, fallback_from, gh, gh_all, is_bot, log_run, model_from, norm, problems  # noqa: E402
+from common import Spend, cut, escalation, fallback_from, gh, gh_all, is_bot, log_run, model_from, model_index, norm, problems  # noqa: E402
 
 SITE, FLAGS = pathlib.Path(sys.argv[1]), sys.argv[2:]
 DAYS = 14
@@ -41,29 +41,7 @@ history = json.loads((SITE / "focus" / "history.json").read_text())
 before = json.loads(OUT.read_text()) if OUT.exists() else {"threads": []}
 kept = {t["number"]: t for t in before["threads"]}
 
-# ---- the parts of the data model, by file and by the words that name them -----------------------------------------
-by_file, by_word = defaultdict(list), {}
-CAMEL = re.compile(r"[A-Z][a-z0-9]+(?:[A-Z][A-Za-z0-9]*)+")  # BilledCost, SkuPriceDetails: not plain English words
-for d in model["datasets"]:
-    by_file[d["source"]].append(f"dataset:{d['id']}")
-    by_word.setdefault(d["id"], f"dataset:{d['id']}")
-    by_word.setdefault(d["name"], f"dataset:{d['id']}")  # "Cost and Usage", "SKU Price"
-    for c in d["columns"]:
-        by_file[c["source"]].append(f"column:{d['id']}.{c['id']}")
-        if CAMEL.fullmatch(c["id"]):
-            by_word.setdefault(c["id"], f"column:{d['id']}.{c['id']}")  # the first dataset that has it (Cost and Usage first)
-for kind in ("attributes", "conditions"):
-    for a in model.get(kind, []):
-        if not a.get("id"):  # the conditions overview page has no ID of its own
-            continue
-        key = f"{kind[:-1]}:{a['id']}"
-        by_file[a["source"]].append(key)
-        by_word.setdefault(a["id"], key)
-for t in model.get("topics", []):
-    for f in t["files"] or [t["source"]]:
-        by_file[f].append(f"topic:{t['id']}")
-by_word = {w: k for w, k in by_word.items() if len(w) >= 4}
-WORDS = re.compile(r"(?<![A-Za-z0-9_])(" + "|".join(sorted(map(re.escape, by_word), key=len, reverse=True)) + r")(?![A-Za-z0-9_])")
+by_file, by_word, WORDS = model_index(model)  # the parts of the data model, by file and by the words that name them
 REF = re.compile(r"(?<![\w&/#])#(\d{2,5})\b|FOCUS_Spec/(?:issues|pull)/(\d+)")
 
 

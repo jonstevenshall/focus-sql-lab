@@ -1,8 +1,12 @@
-# Refresh the site from the latest FOCUS_Spec working draft. It runs only when started by hand
-# (Actions > Refresh from FOCUS_Spec > Run workflow), and pushes to main only if something changed.
+# Refresh the site from the latest FOCUS_Spec working draft: the definitions, each one's History (the pull requests that
+# changed it, merged or not, with their current status) and the summaries of what changed. It runs every day, writing
+# up to 40 summaries with Claude Haiku 5.5 at high effort (it calls the Claude API, which costs money), and can be
+# started by hand (Actions > Refresh from FOCUS_Spec > Run workflow). It pushes to main only if something changed.
 name: Refresh from FOCUS_Spec
 
 on:
+  schedule:
+    - cron: "30 18 * * *"  # 18:30 UTC, an hour before "Daily discussions"
   workflow_dispatch:
     inputs:
       summaries:
@@ -84,15 +88,16 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: tools/refresh.sh .spec .raw
 
+      # A scheduled run has no inputs: it writes up to 40 summaries with Claude Haiku 5.5 at high effort.
       - name: Write summaries for what changed
-        if: ${{ inputs.summaries }}
+        if: ${{ github.event_name == 'schedule' || inputs.summaries }}
         env:
           GH_TOKEN: ${{ github.token }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          LIMIT: ${{ inputs.limit }}
-          MODEL: ${{ inputs.model }}
+          LIMIT: ${{ inputs.limit || 40 }}
+          MODEL: ${{ inputs.model || 'claude-haiku-5-5' }}
           ONLY: ${{ inputs.only }}
-          EFFORT: ${{ inputs.effort }}
+          EFFORT: ${{ inputs.effort || 'high' }}
         run: |
           pip install anthropic
           args=(--write --limit "$LIMIT" --model "$MODEL" --only "$ONLY")
@@ -105,7 +110,7 @@ jobs:
           git diff --cached --stat
 
       - name: Keep the rebuilt files (trial run)
-        if: ${{ !inputs.publish }}
+        if: ${{ github.event_name == 'workflow_dispatch' && !inputs.publish }}
         uses: actions/upload-artifact@v4
         with:
           name: trial-run
@@ -114,8 +119,9 @@ jobs:
             site/focus/*.json
           retention-days: 7
 
+      # A scheduled run has no inputs, so it always publishes.
       - name: Commit and push, if anything changed
-        if: ${{ inputs.publish }}
+        if: ${{ github.event_name == 'schedule' || inputs.publish }}
         run: |
           if git diff --cached --quiet; then echo "Nothing changed."; exit 0; fi
           git config user.name "github-actions[bot]"
