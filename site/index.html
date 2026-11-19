@@ -1763,7 +1763,7 @@ const ipCache = new Map();
 // Only a local copy looks for them, so the public site never even requests the folder.
 const IP_LOCAL = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
 const loadInterp = () => (interpP ??= IP_LOCAL
-  ? fetch('interpretations/index.json').then((r) => (r.ok ? r.json() : null)).catch(() => null)
+  ? fetch('interpretations/index.json', { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : null)).catch(() => null)
   : Promise.resolve(null));
 
 function ipInline(s, cite) {
@@ -1844,7 +1844,7 @@ async function openInterp(id) {
   $('ip-body').innerHTML = '<p class="hint" role="status">Loading the interpretation…</p>';
   let r = ipCache.get(id);
   if (!r) {
-    try { r = await fetch(m.path).then((x) => { if (!x.ok) throw new Error(x.status); return x.json(); }); ipCache.set(id, r); }
+    try { r = await fetch(m.path, { cache: 'no-cache' }).then((x) => { if (!x.ok) throw new Error(x.status); return x.json(); }); ipCache.set(id, r); }
     catch { if (my === ipToken) $('ip-body').innerHTML = '<p class="hint" role="alert">Could not load this interpretation.</p>'; return; }
   }
   if (my !== ipToken) return; // another card was opened while this one loaded
