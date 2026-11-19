@@ -2128,13 +2128,17 @@ function logEntry(r) {
   } else {
     const items = r.task === 'recent'
       ? `${plural(r.threads, 'thread')} in the window, ${r.kept} unchanged; ${r.attempted} summarised.`
-      : `${r.attempted === 1 ? '1 summary' : `${r.attempted} summaries`} due (${r.pages} pages, ${r.threads} threads).`;
+      : `${r.attempted === 1 ? '1 summary' : `${r.attempted} summaries`} due (${plural(r.pages, 'page')}, ${plural(r.threads, 'thread')}).`;
     const first = `${modelName(r.model)}${r.effort ? ` (${r.effort} effort)` : ''} wrote ${r.first_pass} that passed the checks first time.`;
     const esc = r.fallback ? ` ${r.escalated} (${r.escalated_pct}%) went to ${modelName(r.fallback)}, which passed ${r.escalated_passed}.` : '';
     const left = r.failed ? ` ${r.failed} ${r.task === 'recent' ? 'kept a plain excerpt for some parts' : 'skipped'}.` : '';
     what = `${items} ${first}${esc}${left} Cost ${usd(r.cost)}${byModel && Object.keys(r.spend).length > 1 ? ` (${byModel})` : ''} at list price.`;
   }
-  const tag = r.attempted ? `<span class="tag${r.escalated ? ' esc' : ''}">Escalated ${r.fallback ? `${r.escalated_pct}%` : '— no fallback'}</span>` : '';
+  // The refresh workflow (rebuilds and spec summaries) only runs when started by hand; the Recent tab's runs are daily.
+  const manual = r.task === 'rebuild' || r.task === 'summaries' || r.trigger === 'workflow_dispatch';
+  const tag = (manual ? '<span class="tag">Manually triggered</span>' : '')
+    + (!r.attempted ? '' : r.fallback ? `<span class="tag${r.escalated ? ' esc' : ''}">Escalated ${r.escalated_pct}%</span>`
+      : `<span class="tag">${escapeHtml(modelName(r.model))} only</span>`);
   return `<li><div class="log-h"><b>${escapeHtml(LOG_TASK[r.task] || r.task)}</b>${tag}<span class="when">${escapeHtml(when)}</span>${where}</div>
     <div class="log-d">${what}</div>${r.note ? `<div class="log-note">${escapeHtml(r.note)}</div>` : ''}</li>`;
 }
