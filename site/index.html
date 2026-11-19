@@ -2147,7 +2147,7 @@ async function openLog() {
   const ai = d.runs.filter((r) => r.attempted !== undefined && r.fallback);
   const attempted = ai.reduce((n, r) => n + r.attempted, 0), escalated = ai.reduce((n, r) => n + r.escalated, 0);
   const cost = d.runs.reduce((n, r) => n + (r.cost || 0), 0);
-  box.innerHTML = `<p class="hint" style="margin:0">${escapeHtml(d.about || '')}</p>
+  box.innerHTML = `${d.about ? `<p class="hint" style="margin:0">${escapeHtml(d.about)}</p>` : ''}
     <div class="log-totals">
       <div><b>${usd(cost)}</b>API spend at list price</div>
       <div><b>${attempted ? `${(100 * escalated / attempted).toFixed(1)}%` : '—'}</b>${attempted
