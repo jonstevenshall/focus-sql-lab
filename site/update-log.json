@@ -1,6 +1,38 @@
 {
  "runs": [
   {
+   "at": "2026-11-19T20:39:13Z",
+   "task": "summaries",
+   "model": "claude-sonnet-5-5",
+   "effort": "medium",
+   "fallback": null,
+   "pages": 1,
+   "threads": 14,
+   "attempted": 15,
+   "first_pass": 14,
+   "escalated": 0,
+   "escalated_passed": 0,
+   "failed": 1,
+   "escalated_pct": 0.0,
+   "left": 0,
+   "spend": {
+    "claude-sonnet-5-5": {
+     "input": 135054,
+     "output": 5421,
+     "cost": 0.3243
+    }
+   },
+   "cost": 0.3243,
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/44610279804"
+  },
+  {
+   "at": "2026-11-19T20:37:44Z",
+   "task": "rebuild",
+   "spec": "87fcbc8",
+   "spec_date": "2026-11-19",
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/44610279804"
+  },
+  {
    "at": "2026-11-19T20:31:58Z",
    "task": "rebuild",
    "spec": "87fcbc8",
