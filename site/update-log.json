@@ -1,6 +1,449 @@
 {
  "runs": [
   {
+   "at": "2026-11-19T21:48:08Z",
+   "task": "open-requests",
+   "model": "claude-haiku-5-5",
+   "effort": "high",
+   "fallback": "claude-sonnet-5-5",
+   "threads": 233,
+   "kept": 63,
+   "attempted": 170,
+   "first_pass": 161,
+   "escalated": 9,
+   "escalated_passed": 8,
+   "failed": 1,
+   "escalated_pct": 5.3,
+   "left": 1,
+   "spend": {
+    "claude-haiku-5-5": {
+     "input": 626530,
+     "output": 414141,
+     "cost": 0.2697,
+     "price": [
+      0.1,
+      0.5
+     ]
+    },
+    "claude-sonnet-5-5": {
+     "input": 44539,
+     "output": 2309,
+     "cost": 0.1122,
+     "price": [
+      2.0,
+      10.0
+     ]
+    }
+   },
+   "cost": 0.3819,
+   "estimate": {
+    "input": 664266,
+    "output": 301360,
+    "cost": 0.2462
+   },
+   "escalations": [
+    {
+     "key": "2674",
+     "title": "ContractApplied property-presence requirements conflict with optional JTD properties and three-key Spend examples after erratum #5",
+     "result": "passed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "problems": [
+        "it has 139 words; the limit is 70"
+       ],
+       "input": 2698,
+       "output": 1613,
+       "cost": 0.00108
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "problems": [
+        "it has 82 words; the limit is 70"
+       ],
+       "input": 3102,
+       "output": 174,
+       "cost": 0.0004
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "problems": [],
+       "input": 2697,
+       "output": 181,
+       "cost": 0.0072
+      }
+     ],
+     "cost": 0.00868
+    },
+    {
+     "key": "1936",
+     "title": "[FR] Invoice Detail Dataset Enhancements",
+     "result": "passed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "problems": [
+        "it has 72 words; the limit is 70"
+       ],
+       "input": 2864,
+       "output": 1832,
+       "cost": 0.0012
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "problems": [
+        "it has 72 words; the limit is 70"
+       ],
+       "input": 3079,
+       "output": 164,
+       "cost": 0.00039
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "problems": [
+        "it has 72 words; the limit is 70"
+       ],
+       "input": 2863,
+       "output": 174,
+       "cost": 0.00747
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 2,
+       "problems": [],
+       "input": 3091,
+       "output": 167,
+       "cost": 0.00785
+      }
+     ],
+     "cost": 0.01691
+    },
+    {
+     "key": "2805",
+     "title": "[FR] Represent AI reasoning level in usage data",
+     "result": "passed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "problems": [
+        "it has 75 words; the limit is 70"
+       ],
+       "input": 6517,
+       "output": 4268,
+       "cost": 0.00279
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "problems": [
+        "it has 75 words; the limit is 70"
+       ],
+       "input": 6729,
+       "output": 151,
+       "cost": 0.00075
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "problems": [],
+       "input": 6516,
+       "output": 146,
+       "cost": 0.01449
+      }
+     ],
+     "cost": 0.01803
+    },
+    {
+     "key": "2654",
+     "title": "[FR] Companion Utilization dataset for usage-vs-cost decomposition",
+     "result": "passed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "problems": [
+        "it has 71 words; the limit is 70"
+       ],
+       "input": 5284,
+       "output": 3898,
+       "cost": 0.00248
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "problems": [
+        "it has 71 words; the limit is 70"
+       ],
+       "input": 5503,
+       "output": 167,
+       "cost": 0.00063
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "problems": [
+        "it has 142 words; the limit is 70"
+       ],
+       "input": 5283,
+       "output": 329,
+       "cost": 0.01386
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 2,
+       "problems": [],
+       "input": 5666,
+       "output": 177,
+       "cost": 0.0131
+      }
+     ],
+     "cost": 0.03007
+    },
+    {
+     "key": "2701",
+     "title": "[AI] Decide the uniqueness scope for identifier columns and apply it consistently",
+     "result": "failed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "problems": [
+        "it has 71 words; the limit is 70"
+       ],
+       "input": 1297,
+       "output": 2684,
+       "cost": 0.00147
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "problems": [
+        "it has 71 words; the limit is 70"
+       ],
+       "input": 1494,
+       "output": 146,
+       "cost": 0.00022
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "problems": [
+        "it has 83 words; the limit is 70"
+       ],
+       "input": 1296,
+       "output": 175,
+       "cost": 0.00434
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 2,
+       "problems": [
+        "it has 74 words; the limit is 70"
+       ],
+       "input": 1525,
+       "output": 163,
+       "cost": 0.00468
+      }
+     ],
+     "cost": 0.01071
+    },
+    {
+     "key": "1977",
+     "title": "[FR] Add Resource Size Dataset",
+     "result": "passed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "problems": [
+        "it has 71 words; the limit is 70"
+       ],
+       "input": 4202,
+       "output": 3680,
+       "cost": 0.00226
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "problems": [
+        "it has 75 words; the limit is 70"
+       ],
+       "input": 4433,
+       "output": 181,
+       "cost": 0.00053
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "problems": [],
+       "input": 4201,
+       "output": 158,
+       "cost": 0.00998
+      }
+     ],
+     "cost": 0.01277
+    },
+    {
+     "key": "1832",
+     "title": "[FR] Clarify List Cost and List Unit Price defaulting when unit prices exclusive of discounts are not published",
+     "result": "passed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "problems": [
+        "it has 72 words; the limit is 70"
+       ],
+       "input": 2937,
+       "output": 2151,
+       "cost": 0.00137
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "problems": [
+        "it has 72 words; the limit is 70"
+       ],
+       "input": 3132,
+       "output": 144,
+       "cost": 0.00039
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "problems": [
+        "it has 87 words; the limit is 70"
+       ],
+       "input": 2936,
+       "output": 182,
+       "cost": 0.00769
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 2,
+       "problems": [],
+       "input": 3172,
+       "output": 150,
+       "cost": 0.00784
+      }
+     ],
+     "cost": 0.01729
+    },
+    {
+     "key": "1489",
+     "title": "[FR] Add Line-Item Examples for Adjustment Scenarios",
+     "result": "passed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "problems": [
+        "it has 73 words; the limit is 70"
+       ],
+       "input": 2636,
+       "output": 1977,
+       "cost": 0.00125
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "problems": [
+        "it has 75 words; the limit is 70"
+       ],
+       "input": 2859,
+       "output": 173,
+       "cost": 0.00037
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "problems": [],
+       "input": 2635,
+       "output": 155,
+       "cost": 0.00682
+      }
+     ],
+     "cost": 0.00844
+    },
+    {
+     "key": "1043",
+     "title": "[FR] Add mutability indicator to column normative requirements",
+     "result": "passed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "problems": [
+        "it has 72 words; the limit is 70"
+       ],
+       "input": 2659,
+       "output": 1906,
+       "cost": 0.00122
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "problems": [
+        "it has 71 words; the limit is 70"
+       ],
+       "input": 2857,
+       "output": 146,
+       "cost": 0.00036
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "problems": [],
+       "input": 2658,
+       "output": 152,
+       "cost": 0.00684
+      }
+     ],
+     "cost": 0.00842
+    }
+   ],
+   "trigger": "workflow_dispatch",
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/44616317298"
+  },
+  {
+   "at": "2026-11-19T21:18:55Z",
+   "task": "recent",
+   "model": "claude-haiku-5-5",
+   "effort": "high",
+   "fallback": "claude-sonnet-5-5",
+   "threads": 82,
+   "kept": 64,
+   "attempted": 18,
+   "first_pass": 18,
+   "escalated": 0,
+   "escalated_passed": 0,
+   "failed": 0,
+   "escalated_pct": 0.0,
+   "partly": 0,
+   "spend": {
+    "claude-haiku-5-5": {
+     "input": 135536,
+     "output": 95631,
+     "cost": 0.0614,
+     "price": [
+      0.1,
+      0.5
+     ]
+    }
+   },
+   "cost": 0.0614,
+   "escalations": [],
+   "trigger": "workflow_dispatch",
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/44616317298"
+  },
+  {
    "at": "2026-11-19T20:39:13Z",
    "task": "summaries",
    "model": "claude-sonnet-5-5",
