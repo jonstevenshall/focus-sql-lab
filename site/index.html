@@ -468,9 +468,12 @@
   .ip-doc pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; overflow-x: auto; font: 12.5px/1.5 var(--mono); }
   .ip-doc pre code { border: 0; padding: 0; background: none; }
   .ip-doc .ip-scroll { overflow-x: auto; margin: 4px 0 14px; }
-  .ip-doc table { border-collapse: collapse; font-size: 13.5px; min-width: 100%; }
-  .ip-doc th, .ip-doc td { border-bottom: 1px solid var(--line); padding: 6px 10px 6px 0; text-align: left; vertical-align: top; }
-  .ip-doc th { font-size: 12px; color: var(--muted); }
+  .ip-doc table { border-collapse: collapse; font-size: 13.5px; width: auto; min-width: 100%; }
+  /* the site-wide table rule (made for query results) cuts cells off at 420px with an ellipsis; wrap them in full here */
+  .ip-doc th, .ip-doc td { border-bottom: 1px solid var(--line); padding: 6px 10px 6px 0; text-align: left; vertical-align: top;
+    white-space: normal; max-width: none; overflow: visible; text-overflow: clip; overflow-wrap: break-word; }
+  .ip-doc th { font-size: 12px; color: var(--muted); position: static; background: none; font-family: inherit; }
+  .ip-doc .nw { white-space: nowrap; }
   .ip-doc .cite { border: 0; background: none; padding: 0 1px; color: var(--accent); cursor: pointer; font-size: 11px; vertical-align: super; line-height: 0; }
   .ip-doc .cite-note { font-size: 11px; color: var(--muted); vertical-align: super; line-height: 0; }
   .ip-doc details { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; margin: 0 0 16px; font-size: 13.5px; background: var(--bg); }
@@ -1767,7 +1770,7 @@ const loadInterp = () => (interpP ??= IP_LOCAL
   : Promise.resolve(null));
 
 function ipInline(s, cite) {
-  return escapeHtml(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+  return escapeHtml(s).replace(/\b(\d{4}-\d{2}(?:-\d{2})?)\b/g, '<span class="nw">$1</span>').replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/(^|[^*\w])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>').replace(/\\\*/g, '*')
     .replace(/(^|[\s(])#(\d{3,5})\b/g, `$1<a href="${GH_ISSUE}$2" target="_blank" rel="noopener">#$2</a>`)
     .replace(/\[([^\]]*\bs\d+\b[^\]]*)\]/g, (m, inner) => inner.split(/,\s*|\]\[/)
