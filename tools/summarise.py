@@ -34,11 +34,11 @@ LIMIT = int(FLAGS[FLAGS.index("--limit") + 1]) if "--limit" in FLAGS else 50
 BASIS = pathlib.Path(__file__).parent / "summary-basis.json"
 OBJ, THR = SITE / "object-summaries.json", SITE / "thread-summaries.json"
 sys.path.insert(0, str(pathlib.Path(__file__).parent))  # python -I leaves the script's folder off the path
-from common import THREAD_RULES, Spend, escalation, fallback_from, log_run, model_from, thread_limit, thread_text, write_text  # noqa: E402
+from common import (THREAD_RULES, Spend, escalated_item, escalated_share, escalation, estimate, estimate_line,  # noqa: E402
+                    fallback_from, log_run, model_from, thread_limit, thread_text, write_text)
 
 MODEL, SETTINGS = model_from(FLAGS)
 FALLBACK, FALLBACK_SETTINGS = fallback_from(FLAGS, MODEL)
-PRICE_IN, PRICE_OUT = SETTINGS["price"]
 ONLY = [k.strip() for k in (FLAGS[FLAGS.index("--only") + 1] if "--only" in FLAGS else "").split(",") if k.strip()]
 TODAY = datetime.date.today().isoformat()
 
@@ -111,31 +111,6 @@ if ONLY:
     due = [("page" if k in pages else "thread", k) for k in ONLY]
 
 
-def estimate(kind, key):
-    """Rough tokens in and out: about four characters a token, plus the instructions."""
-    if kind == "page":
-        chars = sum(len((SPEC / f).read_text()) for f in pages[key][1])
-        return 900 + chars // 4, 300
-    return 900 + min(400 + 250 * weight[key], 150_000), 200  # thread_text() keeps at most 600,000 characters
-
-
-tin, tout = map(sum, zip(*(estimate(*d) for d in due))) if due else (0, 0)
-print(f"Due: {len(new_pages)} new and {len(changed_pages)} changed pages, {len(new_threads)} new and "
-      f"{len(changed_threads)} changed threads ({len(new_pages + changed_pages + new_threads + changed_threads)} summaries).")
-if ONLY:
-    print(f"--only: writing just these {len(due)}.")
-print(f"Estimated cost of writing all of them with {MODEL}: about {tin:,} input and {tout:,} output tokens, "
-      f"US${tin * PRICE_IN / 1e6 + tout * PRICE_OUT / 1e6:.2f} at list price.")
-for kind, key in due[:30]:
-    print(f"  {kind}: {key}")
-if len(due) > 30:
-    print(f"  … and {len(due) - 30} more")
-if "--write" not in FLAGS or not due:
-    sys.exit()
-
-# ---- writing ---------------------------------------------------------------------------------------------------
-import anthropic  # only needed to write
-
 PAGE_RULES = """You write plain-language summaries of pages from the FOCUS specification (FinOps Open Cost and Usage Specification) for a learning website's data model view. The reader is a technical product manager who wants to understand each part of the model without reading the page itself. Accuracy matters more than style: every statement must come from the page.
 
 What to cover:
@@ -158,28 +133,67 @@ def page_text(key):
     return f"This page defines: {what}.\n\n{body[:120_000]}"
 
 
+texts = {}  # the text each item sends, built once: measured for the estimate, then sent
+
+
+def text_of(kind, key):
+    if (kind, key) not in texts:
+        texts[(kind, key)] = page_text(key) if kind == "page" else thread_text(key)
+    return texts[(kind, key)]
+
+
+def sent_chars(kind, key):
+    """The characters an item sends: its instructions, its text and the length line."""
+    return len(PAGE_RULES if kind == "page" else THREAD_RULES) + len(text_of(kind, key)) + 30
+
+
+print(f"Due: {len(new_pages)} new and {len(changed_pages)} changed pages, {len(new_threads)} new and "
+      f"{len(changed_threads)} changed threads ({len(new_pages + changed_pages + new_threads + changed_threads)} summaries).")
+if ONLY:
+    print(f"--only: writing just these {len(due)}.")
+todo = due[:LIMIT]
+chars, unread = [], []
+for kind, key in todo:
+    try:
+        chars.append(sent_chars(kind, key))
+    except Exception as e:  # GitHub's rate limit, say: estimate without it, and try it again when writing
+        unread.append(f"{kind} {key} ({type(e).__name__})")
+SHARE = escalated_share(SITE, MODEL)
+EST = estimate(chars, (MODEL, SETTINGS), (FALLBACK, FALLBACK_SETTINGS), SHARE)
+print(f"This run writes {len(todo)} (--limit {LIMIT}), measured at {sum(chars):,} characters sent. "
+      + estimate_line(EST, len(todo), SHARE, FALLBACK) + (f" Could not read {', '.join(unread)}." if unread else ""))
+for kind, key in due[:30]:
+    print(f"  {kind}: {key}")
+if len(due) > 30:
+    print(f"  … and {len(due) - 30} more")
+if "--write" not in FLAGS or not due:
+    sys.exit()
+
+# ---- writing ---------------------------------------------------------------------------------------------------
+import anthropic  # only needed to write
+
 client = anthropic.Anthropic()
 spend = Spend()
 
 
-def write_one(system, content, limit, thread=False):
+def write_one(system, content, limit, thread=False, tries=None):
     """A summary from the first model, or from the fallback if the first fails twice. Returns (text, problems, model, escalated)."""
-    return write_text(client, spend, system, content, limit, thread, (MODEL, SETTINGS), (FALLBACK, FALLBACK_SETTINGS))
+    return write_text(client, spend, system, content, limit, thread, (MODEL, SETTINGS), (FALLBACK, FALLBACK_SETTINGS), tries=tries)
 
 
-skipped, tally = [], {"first_pass": 0, "escalated": 0, "escalated_passed": 0}
+skipped, tally, escalations = [], {"first_pass": 0, "escalated": 0, "escalated_passed": 0}, []
 for kind, key in due[:LIMIT]:
     # An error on one item (the API, or GitHub's rate limit) skips it rather than losing the run; a bad key stops it.
-    escalated = False
+    escalated, tries = False, []
     try:
         if kind == "page":
-            text, found, writer, escalated = write_one(PAGE_RULES, page_text(key), LIMITS.get(pages[key][0], 160))
+            text, found, writer, escalated = write_one(PAGE_RULES, text_of(kind, key), LIMITS.get(pages[key][0], 160), tries=tries)
             if not found:
                 objs["summaries"][key] = text
                 objs.setdefault("written_by", {})[key] = writer
                 basis["pages"][key] = page_hash(pages[key][1])
         else:
-            text, found, writer, escalated = write_one(THREAD_RULES, thread_text(key), thread_limit(weight[key]), thread=True)
+            text, found, writer, escalated = write_one(THREAD_RULES, text_of(kind, key), thread_limit(weight[key]), thread=True, tries=tries)
             if not found:
                 threads["summaries"][key] = text
                 threads.setdefault("written_by", {})[key] = writer
@@ -188,6 +202,10 @@ for kind, key in due[:LIMIT]:
         raise
     except Exception as e:
         text, found = "", [f"error: {type(e).__name__}: {str(e)[:200]}"]
+        escalated = escalated or any(t["model"] != MODEL for t in tries)
+    if escalated:
+        escalations.append(escalated_item(key, pages[key][2] if kind == "page" else everything[key]["title"], tries,
+                                          "failed" if found else "passed"))
     tally["first_pass"] += not found and not escalated
     tally["escalated"] += escalated
     tally["escalated_passed"] += escalated and not found
@@ -211,7 +229,8 @@ done = due[:LIMIT]
 counts_ = escalation(len(done), tally["first_pass"], tally["escalated"], tally["escalated_passed"], len(skipped))
 log_run(SITE, {"task": "summaries", "model": MODEL, "effort": SETTINGS["effort"], "fallback": FALLBACK,
                "pages": sum(1 for k, _ in done if k == "page"), "threads": sum(1 for k, _ in done if k == "thread"),
-               **counts_, "left": max(0, len(due) - LIMIT), "spend": spend.report(), "cost": round(spend.cost(), 4)})
+               **counts_, "left": max(0, len(due) - LIMIT), "spend": spend.report(), "cost": round(spend.cost(), 4),
+               "estimate": {k: EST[k] for k in ("input", "output", "cost")}, "escalations": escalations})
 print(f"Wrote {len(done) - len(skipped)}, skipped {len(skipped)}, {max(0, len(due) - LIMIT)} left for the next run. "
       f"Escalated {tally['escalated']} of {len(done)} ({counts_['escalated_pct']}%) to {FALLBACK or 'no fallback'}, "
       f"{tally['escalated_passed']} of them written. {spend.line()}")

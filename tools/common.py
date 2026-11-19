@@ -64,7 +64,9 @@ class Spend:
                    for m, (i, o) in self.tokens.items() if model in (None, m))
 
     def report(self):
-        return {m: {"input": i, "output": o, "cost": round(self.cost(m), 4)} for m, (i, o) in self.tokens.items()}
+        """Per model: tokens, cost, and the list prices it was costed at (US$ per million input and output tokens)."""
+        return {m: {"input": i, "output": o, "cost": round(self.cost(m), 4), "price": list(MODELS[m]["price"])}
+                for m, (i, o) in self.tokens.items()}
 
     def line(self):
         parts = [f"{m}: {i:,} input and {o:,} output tokens, US${self.cost(m):.4f}" for m, (i, o) in self.tokens.items()]
@@ -78,13 +80,28 @@ def escalation(attempted, first_pass, escalated, escalated_passed, failed):
             "escalated_pct": round(100 * escalated / attempted, 1) if attempted else 0.0}
 
 
+def call_cost(model, usage):
+    """What one API call cost at list price."""
+    p_in, p_out = MODELS[model]["price"]
+    return usage.input_tokens * p_in / 1e6 + usage.output_tokens * p_out / 1e6
+
+
+def escalated_item(key, title, tries, result):
+    """The working for one item the first model failed twice, for the update log: each try's model, the checks' exact
+    findings (none on the try that passed), its tokens and cost; and the outcome (passed, partly or failed)."""
+    return {"key": str(key), "title": title, "result": result, "tries": tries,
+            "cost": round(sum(t["cost"] for t in tries), 5)}
+
+
 def log_run(site, entry):
-    """Add an entry to <site>/update-log.json, newest first: what ran, what it did and what it cost."""
+    """Add an entry to <site>/update-log.json, newest first: what ran, what it did and what it cost, and how it was
+    started (on GitHub: schedule or workflow_dispatch)."""
     path = site / "update-log.json"
     log = json.loads(path.read_text()) if path.exists() else {"runs": []}
     run = os.environ.get("GITHUB_RUN_ID")
     url = f"{os.environ.get('GITHUB_SERVER_URL', 'https://github.com')}/{os.environ.get('GITHUB_REPOSITORY')}/actions/runs/{run}" if run else None
-    log["runs"].insert(0, {"at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), **entry, "run": url})
+    trigger = {"trigger": os.environ["GITHUB_EVENT_NAME"]} if os.environ.get("GITHUB_EVENT_NAME") else {}
+    log["runs"].insert(0, {"at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), **entry, **trigger, "run": url})
     log["runs"] = log["runs"][:400]
     path.write_text(json.dumps(log, indent=1, ensure_ascii=False))
 
@@ -200,10 +217,11 @@ def model_index(model):
 
 
 # ---- writing a text, checked, with a fallback model -----------------------------------------------------------
-def write_text(client, spend, system, content, limit, thread, primary, fallback, log=print):
+def write_text(client, spend, system, content, limit, thread, primary, fallback, log=print, tries=None):
     """A text from the first model, checked with problems(), with one retry naming the problems. One that fails twice
     goes to the fallback model for two more tries. primary and fallback are (model, settings) pairs; the fallback's
-    model may be None. Returns (text, problems, the model that wrote it, whether it was escalated)."""
+    model may be None. Each call is added to tries, if given: its model, try number, the checks' findings, tokens and
+    cost. Returns (text, problems, the model that wrote it, whether it was escalated)."""
 
     def attempt(model, settings):
         messages = [{"role": "user", "content": f"{content}\n\nLength: at most {limit} words."}]
@@ -214,6 +232,9 @@ def write_text(client, spend, system, content, limit, thread, primary, fallback,
             spend.add(model, r.usage)
             text = "".join(b.text for b in r.content if b.type == "text").strip()
             found = problems(text, limit, content, thread) if r.stop_reason == "end_turn" else [f"the reply stopped early ({r.stop_reason})"]
+            if tries is not None:
+                tries.append({"model": model, "try": n, "problems": found, "input": r.usage.input_tokens,
+                              "output": r.usage.output_tokens, "cost": round(call_cost(model, r.usage), 5)})
             if not found or n == 2:
                 return text, found
             messages += [{"role": "assistant", "content": text},
@@ -225,6 +246,62 @@ def write_text(client, spend, system, content, limit, thread, primary, fallback,
     log(f"  escalated to {fallback[0]}: {'; '.join(found)[:200]}")
     text, found = attempt(*fallback)
     return text, found, fallback[0], True
+
+
+# ---- what a batch of summaries will cost --------------------------------------------------------------------------
+# Calibrated on the logged summary runs in site/update-log.json, against the text each of their items sent (measured
+# again from the thread or page on 20 November 2026). Input: tokens per character sent (instructions, text and the
+# length line), which includes the retries that failed first tries needed: most first tries fail a check (often the word
+# limit), and a retry sends the text again. Output: tokens per item, which for Haiku is mostly its thinking, billed as
+# output. Haiku 5.5 at high effort: 202 items in two runs (12 and 13 November 2026), 781,806 characters sent, 341,190
+# input and 357,049 output tokens. Sonnet 5.5 at medium effort: 15 items in one run (19 November 2026), 232,829
+# characters, 135,054 input and 5,421 output tokens. Settings with no logged run borrow the nearest that has one, and
+# the estimate says so.
+INPUT_PER_CHAR = {"claude-haiku-5-5": 0.436, "claude-sonnet-5-5": 0.580}
+OUTPUT_PER_ITEM = {("claude-haiku-5-5", "high"): 1768, ("claude-sonnet-5-5", "medium"): 361}
+
+
+def escalated_share(site, model, tasks=("summaries", "open-requests", "recent")):
+    """The share of items the first model failed twice and passed to the fallback, in logged runs with this first model
+    and a fallback. Every task's runs count: they use the same checks, and each has few escalations on its own."""
+    path = site / "update-log.json"
+    runs = [r for r in (json.loads(path.read_text())["runs"] if path.exists() else [])
+            if r.get("task") in tasks and r.get("model") == model and r.get("fallback") and r.get("attempted")]
+    attempted = sum(r["attempted"] for r in runs)
+    return sum(r.get("escalated", 0) for r in runs) / attempted if attempted else 0.0
+
+
+def estimate(chars, primary, fallback, share):
+    """What writing items that send these many characters each should cost: every item on the first model, and the
+    share that escalate again on the fallback. primary and fallback are (model, settings) pairs; the fallback's model
+    may be None. Returns tokens and cost per model, the totals, and notes on any setting that wasn't measured."""
+    notes, per = [], {}
+
+    def per_item(model, settings):
+        key = (model, settings["effort"])
+        if key in OUTPUT_PER_ITEM:
+            return OUTPUT_PER_ITEM[key]
+        near = next(k for k in OUTPUT_PER_ITEM if k[0] == model)
+        notes.append(f"{model} at {settings['effort']} effort has no logged run; its output is estimated from {near[1]} effort")
+        return OUTPUT_PER_ITEM[near]
+
+    for (model, settings), weight in ((primary, 1.0), (fallback, share)):
+        if not model or not weight:
+            continue
+        i, o = sum(chars) * INPUT_PER_CHAR[model] * weight, len(chars) * per_item(model, settings) * weight
+        p_in, p_out = MODELS[model]["price"]
+        per[model] = {"input": round(i), "output": round(o), "cost": i * p_in / 1e6 + o * p_out / 1e6}
+    return {"models": per, "input": sum(v["input"] for v in per.values()), "output": sum(v["output"] for v in per.values()),
+            "cost": round(sum(v["cost"] for v in per.values()), 4), "notes": notes}
+
+
+def estimate_line(est, n, share, fallback):
+    """The estimate as one plain sentence."""
+    parts = "; ".join(f"{m}: {v['input']:,} input and {v['output']:,} output tokens, US${v['cost']:.4f}" for m, v in est["models"].items())
+    esc = f", with {share:.1%} escalating to {fallback} as in the logged runs" if fallback and share else ""
+    total = f"{est['cost']:.{2 if est['cost'] >= 0.1 else 4}f}"
+    return (f"Estimated cost of these {n}{esc}: {parts or 'nothing'}. In all about US${total} at list price."
+            + "".join(f" Note: {x}." for x in est["notes"]))
 
 
 # ---- a whole thread, and the brief for summarising it ----------------------------------------------------------

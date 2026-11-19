@@ -23,7 +23,7 @@ import sys
 from collections import Counter, defaultdict
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))  # python -I leaves the script's folder off the path
-from common import Spend, cut, escalation, fallback_from, gh, gh_all, is_bot, log_run, model_from, model_index, norm, problems  # noqa: E402
+from common import Spend, call_cost, cut, escalated_item, escalation, fallback_from, gh, gh_all, is_bot, log_run, model_from, model_index, norm, problems  # noqa: E402
 
 SITE, FLAGS = pathlib.Path(sys.argv[1]), sys.argv[2:]
 DAYS = 14
@@ -237,13 +237,15 @@ SCHEMA = {"type": "object", "additionalProperties": False, "required": ["summary
 
 spend = Spend()
 written = partly = failed = first_pass = escalated = escalated_passed = 0
+escalations = []
 if "--no-ai" not in FLAGS and due:
     import anthropic
 
     client = anthropic.Anthropic()
 
-    def attempt(model, settings, src, ids):
-        """One model's try at a thread, with one retry naming the problems. Returns (problems, summary, gists)."""
+    def attempt(model, settings, src, ids, tries):
+        """One model's try at a thread, with one retry naming the problems. Returns (problems, summary, gists). Each call
+        is added to tries: its model, try number, the checks' findings, tokens and cost."""
         messages = [{"role": "user", "content": src}]
         for n in (1, 2):
             r = client.messages.create(model=model, max_tokens=16000, system=RULES, messages=messages,
@@ -255,6 +257,8 @@ if "--no-ai" not in FLAGS and due:
                 found, summary, gists = [f"the reply stopped early ({r.stop_reason})"], None, {}
             else:
                 found, summary, gists = review(json.loads(reply), src, ids)
+            tries.append({"model": model, "try": n, "problems": found, "input": r.usage.input_tokens,
+                          "output": r.usage.output_tokens, "cost": round(call_cost(model, r.usage), 5)})
             if not found or n == 2:
                 return found, summary, gists
             messages += [{"role": "assistant", "content": reply},
@@ -280,15 +284,15 @@ if "--no-ai" not in FLAGS and due:
     for t in due:
         src = source_text(t)
         ids = [e["id"] for e in t["events"] if e["kind"] != "status"]
-        up = False
+        up, tries = False, []
         try:
-            found, summary, gists = attempt(MODEL, SETTINGS, src, ids)
+            found, summary, gists = attempt(MODEL, SETTINGS, src, ids, tries)
             writers = {MODEL} if summary or gists else set()
             if found and FALLBACK:
                 # Escalate the whole thread; keep whichever parts pass, preferring the fallback's.
                 up = True
                 print(f"#{t['number']}: escalated to {FALLBACK}: {'; '.join(found)[:200]}")
-                found2, summary2, gists2 = attempt(FALLBACK, FALLBACK_SETTINGS, src, ids)
+                found2, summary2, gists2 = attempt(FALLBACK, FALLBACK_SETTINGS, src, ids, tries)
                 if summary2 or gists2:
                     writers.add(FALLBACK)
                 summary = summary2 or summary
@@ -298,6 +302,10 @@ if "--no-ai" not in FLAGS and due:
             raise
         except Exception as e:  # one thread's error (the API, or GitHub's rate limit) doesn't lose the run
             found, summary, gists, writers = [f"error: {type(e).__name__}: {str(e)[:200]}"], None, {}, set()
+            up = any(x["model"] != MODEL for x in tries)
+        if up:
+            escalations.append(escalated_item(t["number"], t["title"], tries,
+                                              "passed" if not found else "partly" if summary else "failed"))
         first_pass += not found and not up
         escalated += up
         escalated_passed += up and not found
@@ -336,7 +344,7 @@ counts_ = escalation(len(due), first_pass, escalated, escalated_passed, partly +
 if "--no-ai" not in FLAGS:
     log_run(SITE, {"task": "recent", "model": MODEL, "effort": SETTINGS["effort"], "fallback": FALLBACK,
                    "threads": len(feed), "kept": len(feed) - len(due), **counts_, "partly": partly,
-                   "spend": spend.report(), "cost": round(spend.cost(), 4)})
+                   "spend": spend.report(), "cost": round(spend.cost(), 4), "escalations": escalations})
 print(f"Wrote {OUT}: {len(feed)} threads. Summaries: {written} written in full, {partly} with some gists missing, "
       f"{failed} failed, {len(feed) - len(due)} kept. Escalated {escalated} of {len(due)} ({counts_['escalated_pct']}%) "
       f"to {FALLBACK or 'no fallback'}, {escalated_passed} of them in full. {spend.line()}")

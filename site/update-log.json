@@ -67,7 +67,29 @@
     }
    },
    "cost": 0.1783,
-   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/44436132522"
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/44436132522",
+   "escalations": [
+    {
+     "key": "2871",
+     "title": "FR #2521: Add context-window pricing properties to SKU Price Details",
+     "result": "passed",
+     "from_log": true,
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "problems": [
+        "the reply stopped early (max_tokens)"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": null,
+       "problems": []
+      }
+     ]
+    }
+   ]
   },
   {
    "at": "2026-11-18T01:54:53Z",
@@ -97,7 +119,32 @@
     }
    },
    "cost": 0.1858,
-   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/44218265271"
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/44218265271",
+   "escalations": [
+    {
+     "key": "2871",
+     "title": "FR #2521: Add context-window pricing properties to SKU Price Details",
+     "result": "partly",
+     "from_log": true,
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "cut": true,
+       "problems": [
+        "gist i4577456199: it has 31 words; the limit is 30; gist i4580734713: it has 31 words; the limit is 30; gist i4580735093: it has 33 words; the limit is 30; gist c6903180754: it has 31 words; the limit"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 2,
+       "problems": [
+        "gist c6936725110: it has 31 words; the limit is 30"
+       ]
+      }
+     ]
+    }
+   ]
   },
   {
    "at": "2026-11-17T02:40:54Z",
@@ -246,7 +293,49 @@
     }
    },
    "cost": 0.027,
-   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/43338794209"
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/43338794209",
+   "escalations": [
+    {
+     "key": "1616",
+     "title": "AI #1613: Change ChargeType reference to ChargeCategory",
+     "result": "passed",
+     "from_log": true,
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "problems": [
+        "it has 76 words; the limit is 70"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": null,
+       "problems": []
+      }
+     ]
+    },
+    {
+     "key": "2140",
+     "title": "[AI] Pivot scaled-down tables from horizontal to vertical",
+     "result": "passed",
+     "from_log": true,
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "problems": [
+        "it has 92 words; the limit is 70"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": null,
+       "problems": []
+      }
+     ]
+    }
+   ]
   },
   {
    "at": "2026-11-13T00:41:10Z",

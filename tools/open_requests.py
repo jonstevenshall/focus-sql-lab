@@ -37,8 +37,9 @@ import sys
 from collections import defaultdict
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))  # python -I leaves the script's folder off the path
-from common import (CAMEL, THREAD_RULES, Spend, escalation, fallback_from, gh_all, graphql, log_run,  # noqa: E402
-                    model_from, model_index, thread_limit, thread_text, write_text)
+from common import (CAMEL, THREAD_RULES, Spend, escalated_item, escalated_share, escalation, estimate,  # noqa: E402
+                    estimate_line, fallback_from, gh_all, graphql, log_run, model_from, model_index, thread_limit,
+                    thread_text, write_text)
 
 SITE, FLAGS = pathlib.Path(sys.argv[1]), sys.argv[2:]
 OUT = SITE / "open-requests.json"
@@ -214,17 +215,21 @@ for n in sorted(matched):
 due = sorted(sorted(due, key=lambda n: threads[n]["last"], reverse=True), key=lambda n: level_of[n] != "strong")  # strong first, then the most recently active
 todo = due[:LIMIT]
 
-# The estimate: the average cost of a summary in earlier runs with this model and effort, from the update log.
-log = json.loads((SITE / "update-log.json").read_text())["runs"] if (SITE / "update-log.json").exists() else []
-past = [r for r in log if r.get("task") in ("summaries", "open-requests") and r.get("model") == MODEL
-        and r.get("effort") == SETTINGS["effort"] and r.get("attempted")]
-each = sum(r["cost"] for r in past) / sum(r["attempted"] for r in past) if past else None
+# The estimate, from the text each thread to write will send (fetched once here, and sent as it is when writing).
+texts, chars, unread = {}, [], []
+for n in todo:
+    try:
+        texts[n] = thread_text(n)
+        chars.append(len(THREAD_RULES) + len(texts[n]) + 30)
+    except Exception as e:  # GitHub's rate limit, say: estimate without it, and fetch it again when writing
+        unread.append(f"#{n} ({type(e).__name__})")
+SHARE = escalated_share(SITE, MODEL)
+EST = estimate(chars, (MODEL, SETTINGS), (FALLBACK, FALLBACK_SETTINGS), SHARE)
 kept = {k: sum(threads[n].get("summary_from") == k and not threads[n].get("stale") for n in matched) for k in ("written", "history", "recent")}
 print(f"Summaries: {kept['written']} written here before and still current, {kept['history']} reused from History, "
-      f"{kept['recent']} from Recent; {len(due)} due, {len(todo)} to write in this run (--limit {LIMIT}). Estimated cost of "
-      + (f"those {len(todo)} with {MODEL} at {SETTINGS['effort']} effort: US${each * len(todo):.2f} at list price, from the "
-         f"average of US${each:.4f} a summary over {len(past)} earlier runs with them, plus any escalations to {FALLBACK}."
-         if each is not None else f"those {len(todo)}: no earlier runs with {MODEL} at {SETTINGS['effort']} effort to go by."))
+      f"{kept['recent']} from Recent; {len(due)} due, {len(todo)} to write in this run (--limit {LIMIT}), measured at "
+      f"{sum(chars):,} characters sent. " + estimate_line(EST, len(todo), SHARE, FALLBACK)
+      + (f" Could not read {', '.join(unread)}." if unread else ""))
 for n in todo[:40]:
     t = threads[n]
     print(f"  #{n} [{level_of[n]}] {t['title'][:80]} ({t['comments']} comments, {t['reviews']} reviews)")
@@ -236,20 +241,24 @@ if "--write" not in FLAGS:
 
 spend = Spend()
 written = failed = first_pass = escalated = escalated_passed = 0
+escalations = []
 if "--no-ai" not in FLAGS and todo:
     import anthropic
 
     client = anthropic.Anthropic()
     for n in todo:
         t = threads[n]
-        up = False
+        up, tries = False, []
         try:
-            text, found, writer, up = write_text(client, spend, THREAD_RULES, thread_text(n), thread_limit(t["comments"] + t["reviews"]),
-                                                 True, (MODEL, SETTINGS), (FALLBACK, FALLBACK_SETTINGS))
+            text, found, writer, up = write_text(client, spend, THREAD_RULES, texts.get(n) or thread_text(n), thread_limit(t["comments"] + t["reviews"]),
+                                                 True, (MODEL, SETTINGS), (FALLBACK, FALLBACK_SETTINGS), tries=tries)
         except anthropic.AuthenticationError:
             raise
         except Exception as e:  # one thread's error (the API, or GitHub's rate limit) doesn't lose the run
             text, found = "", [f"error: {type(e).__name__}: {str(e)[:200]}"]
+            up = any(x["model"] != MODEL for x in tries)
+        if up:
+            escalations.append(escalated_item(n, t["title"], tries, "failed" if found else "passed"))
         first_pass += not found and not up
         escalated += up
         escalated_passed += up and not found
@@ -283,7 +292,8 @@ if attempted:
     log_run(SITE, {"task": "open-requests", "model": MODEL, "effort": SETTINGS["effort"], "fallback": FALLBACK,
                    "threads": len(matched), "kept": len(matched) - len(due),
                    **escalation(attempted, first_pass, escalated, escalated_passed, failed),
-                   "left": len(due) - written, "spend": spend.report(), "cost": round(spend.cost(), 4)})
+                   "left": len(due) - written, "spend": spend.report(), "cost": round(spend.cost(), 4),
+                   "estimate": {k: EST[k] for k in ("input", "output", "cost")}, "escalations": escalations})
 print(f"Wrote {OUT}: {len(matched)} threads for {len(matches)} datasets and columns. Summaries: {written} written, {failed} "
       f"failed, {len(due) - len(todo)} left for the next run. Escalated {escalated} of {attempted} to "
       f"{FALLBACK or 'no fallback'}, {escalated_passed} of them written. {spend.line()}")

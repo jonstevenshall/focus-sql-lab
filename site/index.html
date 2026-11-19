@@ -243,6 +243,12 @@
   #log .log-note { margin-top: 2px; font-size: 12px; color: var(--muted); }
   #log .tag { margin-left: 0; }
   #log .tag.esc { border-color: var(--warn-line); background: var(--warn-bg); color: var(--fg); }
+  #log .log-work { margin-top: 4px; font-size: 12.5px; }
+  #log .log-work > summary { cursor: pointer; color: var(--accent); }
+  #log .lw-h { margin: 8px 0 2px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+  #log .lw { margin: 2px 0; font-variant-numeric: tabular-nums; }
+  #log .lw-item { margin: 6px 0; padding-left: 10px; border-left: 2px solid var(--line); }
+  #log .lw-item .hint { font-size: 12px; color: var(--muted); }
   .log-open { border: 0; background: none; padding: 0; font: inherit; color: inherit; cursor: pointer;
     text-decoration: underline dotted; text-underline-offset: 3px; }
   .log-open:hover { color: var(--accent); }
@@ -2145,7 +2151,61 @@ function logEntry(r) {
     + (!r.attempted ? '' : r.fallback ? `<span class="tag${r.escalated ? ' esc' : ''}">Escalated ${r.escalated_pct}%</span>`
       : `<span class="tag">${escapeHtml(modelName(r.model))} only</span>`);
   return `<li><div class="log-h"><b>${escapeHtml(LOG_TASK[r.task] || r.task)}</b>${tag}<span class="when">${escapeHtml(when)}</span>${where}</div>
-    <div class="log-d">${what}</div>${r.note ? `<div class="log-note">${escapeHtml(r.note)}</div>` : ''}</li>`;
+    <div class="log-d">${what}</div>${r.note ? `<div class="log-note">${escapeHtml(r.note)}</div>` : ''}${logWorking(r)}</li>`;
+}
+
+// The working behind an entry: each model's tokens × its list price, the run total, the estimate made before the run,
+// and, for each item the first model failed twice, what the checks found on each try and what the fallback did.
+// Entries from before these were recorded show only what they recorded.
+const usd4 = (n) => `US$${(n || 0).toFixed(4)}`;
+const num0 = (n) => (n || 0).toLocaleString('en-GB');
+function logWorking(r) {
+  const spend = Object.entries(r.spend || {});
+  const priced = spend.length && spend.every(([, s]) => s.price);
+  const esc = r.escalations || [];
+  if (!priced && !esc.length) return '';
+  let html = '';
+  if (priced) {
+    const parts = spend.map(([m, s]) => {
+      const a = (s.input * s.price[0]) / 1e6, b = (s.output * s.price[1]) / 1e6;
+      return { m, s, a, b, total: a + b };
+    });
+    html += `<div class="lw-h">Cost at list price</div>${parts.map(({ m, s, a, b, total }) => `<div class="lw">${escapeHtml(modelName(m))}:
+      ${num0(s.input)} input tokens × US$${s.price[0].toFixed(2)} per million = ${usd4(a)}; ${num0(s.output)} output tokens ×
+      US$${s.price[1].toFixed(2)} per million = ${usd4(b)}; together ${usd4(total)}.</div>`).join('')}
+      <div class="lw"><b>Run total: ${parts.length > 1 ? `${parts.map((p) => usd4(p.total)).join(' + ')} = ` : ''}${
+        usd4(parts.reduce((n, p) => n + p.total, 0))}</b></div>`;
+  }
+  if (r.estimate) {
+    html += `<div class="lw">Estimated before the run: ${usd4(r.estimate.cost)} (${num0(r.estimate.input)} input and ${
+      num0(r.estimate.output)} output tokens).</div>`;
+  }
+  if (esc.length) {
+    const short = (m) => modelName(m).replace(/^Claude /, '').replace(/ [\d.]+$/, '');
+    const item = (x) => {
+      const head = /^\d+$/.test(x.key) ? `<a href="${GH_ISSUE}${x.key}" target="_blank" rel="noopener">#${x.key}</a>` : `<code>${escapeHtml(x.key)}</code>`;
+      const byModel = {};
+      x.tries.forEach((t) => (byModel[t.model] ||= []).push(t));
+      const steps = Object.entries(byModel).map(([m, ts]) => {
+        const last = ts[ts.length - 1];
+        const said = ts.filter((t) => t.problems && t.problems.length)
+          .map((t, i) => `${i ? 'Try' : 'try'} ${t.try}: ${escapeHtml(t.problems.join('; '))}${t.cut ? '… (the log cut it off at 200 characters)' : ''}`).join('. ');
+        const passed = !last.problems || last.problems.length ? ''
+          : `${said ? ' Passed' : ' passed'}${last.try ? ` on try ${last.try}` : ''}.`;
+        return `<div>${escapeHtml(modelName(m))}${said ? `, ${said}.` : ''}${passed}</div>`;
+      }).join('');
+      const outcome = { passed: '', partly: '<div>Written, with some parts still failing the checks.</div>',
+        failed: '<div>Not written: it failed the checks on both models.</div>' }[x.result] || '';
+      const costed = x.tries.some((t) => t.cost !== undefined);
+      const calls = costed ? Object.entries(byModel).map(([m, ts]) => `${escapeHtml(short(m))}: ${plural(ts.length, 'call')}, ${
+        num0(ts.reduce((n, t) => n + t.input, 0))} input and ${num0(ts.reduce((n, t) => n + t.output, 0))} output tokens, ${
+        usd4(ts.reduce((n, t) => n + t.cost, 0))}`).join('. ') + `. This item: ${usd4(x.cost)}.`
+        : 'From the run\'s GitHub log, which printed only the findings that sent it to the fallback; tokens per item were not recorded then.';
+      return `<div class="lw-item"><div>${head} ${escapeHtml(x.title || '')}</div>${steps}${outcome}<div class="hint">${calls}</div></div>`;
+    };
+    html += `<div class="lw-h">Escalated to ${escapeHtml(modelName(r.fallback))}</div>${esc.map(item).join('')}`;
+  }
+  return `<details class="log-work"><summary>Show the working</summary>${html}</details>`;
 }
 
 async function openLog() {

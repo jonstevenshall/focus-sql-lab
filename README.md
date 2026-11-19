@@ -231,6 +231,9 @@ python -I tools/summarise.py <FOCUS_Spec clone> site                         # d
 GH_TOKEN=... ANTHROPIC_API_KEY=... python -I tools/summarise.py <FOCUS_Spec clone> site --write --limit 50
 ```
 
+The dry run's estimate is measured from the text each item will send (the thread or page, and the instructions),
+using input tokens per character and output tokens per item calibrated on the logged runs, plus the share of items
+that escalated to the fallback in those runs. Each run that writes records its estimate next to what it spent.
 `--write` calls the Claude API and prints what it spent. `--model` picks the model: `claude-sonnet-5-5` (the default,
 US$2 / $10 per million input / output tokens at list price) or `claude-haiku-5-5` (US$0.10 / $0.50). Haiku always
 thinks, and its thinking is billed as output; `--effort` (low, the default for Haiku, medium or high) sets how much. `--only` names the pages or threads to write,
@@ -281,7 +284,12 @@ GH_TOKEN=... python -I tools/open_requests.py site --write --no-ai          # wr
 Every rebuild (`summarise.py --stamp --data`) and every batch of AI-written text (`summarise.py --write`,
 `recent.py --write`, `open_requests.py --write`) adds an entry to `site/update-log.json`: when it ran, the GitHub run, what it did, how many items
 passed first time, how many (and what share) were escalated to the fallback model and how many of those passed, and the
-tokens and cost per model at list price. The page shows it when you click the update time in the header (or the
+tokens and cost per model at list price, with the list prices used and how the run started (scheduled or by hand). Each
+entry's "Show the working" gives each model's tokens times its list price, the run total, the estimate made before the
+run, and for every item the first model failed twice: what the checks found on each try (their exact messages), which
+try the fallback passed on or that it failed, and the item's tokens and cost per model. Entries from before
+20 November 2026 recorded counts only and show them as they are; their four escalations are filled in from the runs'
+GitHub logs, which printed only the findings that sent each item to the fallback. The page shows it when you click the update time in the header (or the
 "Updated" time on the Recent tab), with the total spend and the overall share escalated. Clicking the cost in the header
 opens a breakdown by model for the latest update and to date: what the main model wrote and how much passed first time,
 what went to the fallback, and the tokens and cost of each.
