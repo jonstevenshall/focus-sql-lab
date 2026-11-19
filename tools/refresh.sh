@@ -21,4 +21,5 @@ $PY -I tools/extract_sql.py "$SPEC" site
 $PY -I tools/extract_history.py "$HISTORY" "$COMMIT" site ${CACHE:+"$CACHE"}
 $PY -I tools/extract_ai.py "$SPEC" site             # reads model.json and spec-queries.json
 $PY -I tools/summarise.py "$SPEC" site --stamp --data
+$PY -I tools/build_search.py site || echo "Could not rebuild site/search.json; the old one is kept" >&2  # the search box's index
 $PY -I tools/summarise.py "$SPEC" site              # dry run: what's due, and an estimated cost

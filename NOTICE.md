@@ -9,6 +9,10 @@ Everything outside `site/focus/`:
 
 - `site/index.html`: the page (query editor, response explorer, data model view)
 - `site/lab-setup.sql`: what the lab adds to DuckDB so the specification's queries run as published
+- `site/search.json`: the index behind the page's search box, built by `tools/build_search.py` from the other files
+  in `site/`. It repeats their text, including the specification's definitions and requirement lines from
+  `site/focus/model.json` (Markdown link and emphasis marks removed) and the example queries from
+  `site/focus/spec-queries.json`; that text stays under the FOCUS licence and attribution below.
 - `site/column-notes.json`: notes on the debate behind the 11 join-key columns, written by an AI model from
   the FOCUS_Spec GitHub issues and pull requests each note lists. They paraphrase those discussions and name
   participants by their GitHub usernames.

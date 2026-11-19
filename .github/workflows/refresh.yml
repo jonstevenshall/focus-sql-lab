@@ -104,6 +104,12 @@ jobs:
           if [ "$EFFORT" != default ]; then args+=(--effort "$EFFORT"); fi
           python -I tools/summarise.py .spec site "${args[@]}"
 
+      # refresh.sh built it; again here so it has any summaries written above. No network or API calls. If it fails,
+      # the rest is still published and the site keeps the previous index.
+      - name: Rebuild the search index
+        continue-on-error: true
+        run: python -I tools/build_search.py site
+
       - name: List what changed
         run: |
           git add site tools/summary-basis.json

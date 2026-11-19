@@ -43,6 +43,19 @@ queries in the browser, so the server only serves static files: no database, no 
   comments and reviews as a reply tree with a one-line gist of each and a link to it on GitHub, the status changes the
   repository's automation posted, and links to the parts of the data model the thread touches (from a pull request's
   changed files, and the column and dataset names in the text). Each of those parts lists its recent threads in turn.
+- **Search:** a box in the page header, on every tab (Ctrl-K, or Cmd-K on a Mac, goes to it). It searches the
+  columns, datasets, joins, attributes, conditions and supporting material, the specification's requirement lines, the
+  example queries, the pull requests and issues in the history, the evidence and the Recent threads, and groups the
+  results by kind. Every word typed must match the start of a word, and CamelCase IDs count as their parts, so
+  "contracted unit price" finds ContractedUnitPrice. An exact ID comes first, then an exact name, then matches in IDs,
+  names, titles and the rest of the text, in that order. It runs in the browser on `site/search.json`; nothing typed is
+  sent anywhere.
+- **Addresses:** everything a link or a search result opens has an address to bookmark or share:
+  `#model/CostAndUsage/BilledCost` (or `#model/BilledCost`), `#model/CostAndUsage`, `#model/join/cau-sku`,
+  `#ref/CorrectionHandling` (attributes, conditions and supporting material), `#query/<example id>`,
+  `#evidence/<evidence id>`, `#recent/<number>` and `#thread/<number>` (the panel whose history lists that pull
+  request or issue). A panel address can end in `/line-<n>` to point at one requirement line. Each tab has its own
+  address too (`#ref`, `#quiz`, ...).
   Anything older links out to the thread on GitHub.
 
 ## How the spec's queries run unchanged
@@ -120,6 +133,7 @@ Dockerfile, nginx.conf        serve site/ with nginx
 tools/                        build scripts, plus practice.json (the practice queries)
 site/
   index.html                  the page
+  search.json                 the index behind the header's search box, rebuilt from the other files by tools/build_search.py
   lab-setup.sql               what the lab adds to DuckDB so the spec's queries run as published
   column-notes.json           the lab's notes on the debate behind each join-key column, with the threads each draws on
   thread-summaries.json       summaries of the conversation in each discussed FOCUS_Spec issue and pull request
@@ -298,6 +312,19 @@ what went to the fallback, and the tokens and cost of each.
 GH_TOKEN=... python -I tools/recent.py site                                   # dry run: what's in the window, what's due
 GH_TOKEN=... ANTHROPIC_API_KEY=... python -I tools/recent.py site --write     # summarise and write site/recent.json
 GH_TOKEN=... python -I tools/recent.py site --write --no-ai                   # write it without calling the API
+```
+
+### Search index
+
+[tools/build_search.py](tools/build_search.py) writes `site/search.json` from files already in `site/`: the
+definitions, joins and requirement lines in `focus/model.json` with the plain-language summaries, the example queries,
+the pull requests and issues in `focus/history.json` with their conversation summaries, the evidence, the Recent
+threads and, where it exists, `open-requests.json`. It needs no network and no API key. `tools/refresh.sh` runs it, the
+refresh workflow runs it again after writing summaries, and the daily workflow runs it after the Recent tab, so the
+index always matches what the panels show. The page loads it the first time someone uses the search box.
+
+```bash
+python -I tools/build_search.py site
 ```
 
 ## Run locally

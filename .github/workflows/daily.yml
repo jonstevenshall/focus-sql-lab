@@ -77,6 +77,15 @@ jobs:
             site/update-log.json
           retention-days: 7
 
+      # The search box's index (site/search.json), so it finds what the steps above wrote. It reads only files in site/:
+      # no network or API calls. Staged here, so the next step commits it with the rest. If it fails, the rest is still
+      # published and the site keeps the previous index.
+      - name: Rebuild the search index
+        continue-on-error: true
+        run: |
+          python -I tools/build_search.py site
+          git add site/search.json
+
       # A scheduled run has no inputs, so it always publishes.
       - name: Commit and push, if anything changed
         if: ${{ github.event_name == 'schedule' || inputs.publish }}
