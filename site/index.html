@@ -1410,7 +1410,7 @@ function moveDetail(t) {
   renderDetail(); // with nothing selected this only writes the tab's own hint, so it is safe before the model loads
 }
 
-function showTab(t) {
+function showTab(t, keepAddress = false) { // keepAddress: the caller is opening an address and sets it itself
   if (t !== 'evidence' && location.hash.startsWith('#i-')) { closeInterp(true); history.replaceState(null, '', location.pathname + location.search); }
   tab = t;
   moveDetail(t);
@@ -1426,7 +1426,7 @@ function showTab(t) {
   $('recent').hidden = t !== 'recent';
   // Each tab has an address, so it can be bookmarked. One that already names this tab is left alone: it may name
   // something on it that is still to open.
-  if (hashTab(location.hash) !== t) setAddress(addressOf(t));
+  if (!keepAddress && hashTab(location.hash) !== t) setAddress(addressOf(t));
   if (t === 'model') renderModel();
   if (t === 'evidence') renderEvidence();
   if (t === 'ref') renderRef();
@@ -3035,7 +3035,7 @@ async function route(h = location.hash) {
   }
 }
 async function openPanel(t, parts, address, thread = null) {
-  if (tab !== t) showTab(t);
+  if (tab !== t) showTab(t, true);
   if (!parts.length) return;
   if (!model || !conn) { routeLater = address; return; }
   const line = /^line-\d+$/.test(parts[parts.length - 1]) ? parts.pop().slice(5) : null;
@@ -3500,7 +3500,7 @@ $('quiz-model-back').addEventListener('click', () => {
 quizWide.addEventListener('change', placeQuizModel);
 placeQuizModel();
 $('model-dataset').addEventListener('change', () => setDataset($('model-dataset').value));
-showTab(tab);
+showTab(tab, true);
 route(); // open what the address names: a panel, an example query, an evidence note, a thread, an interpretation
 
 init().catch((err) => {
