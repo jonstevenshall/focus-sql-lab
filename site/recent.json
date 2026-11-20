@@ -1,10 +1,424 @@
 {
- "generated_at": "2026-11-19T21:12:05Z",
- "since": "2026-11-05T21:12:05Z",
+ "generated_at": "2026-11-20T01:23:25Z",
+ "since": "2026-11-06T01:23:25Z",
  "days": 14,
  "model": "claude-haiku-5-5",
  "about": "FOCUS_Spec issues and pull requests that people opened, commented on or reviewed in the last 14 days. Each summary (what is proposed and why, where the debate lies, how people feel and where it stands) and each one-line gist is written by an AI model from the thread and the issue it implements, and rewritten when the thread gains comments or reviews: they interpret, so check the thread before relying on one. Status changes are posted by the repository's own automation.",
  "threads": [
+  {
+   "number": 2842,
+   "kind": "pr",
+   "title": "AI #2841: Add 1.4 to 1.5 migration guide",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842",
+   "state": "open",
+   "labels": [],
+   "author": "Matt-Cowsert",
+   "opened": "2026-11-06",
+   "last": "2026-11-19T22:16:52Z",
+   "earlier": 0,
+   "objects": [
+    "dataset:SkuPrice",
+    "column:CostAndUsage.SkuPriceId",
+    "dataset:CostAndUsage",
+    "column:CostAndUsage.ServiceSubcategory",
+    "column:ContractCommitment.ContractCommitmentDurationType",
+    "column:CostAndUsage.PricingCurrencyContractedUnitPrice",
+    "column:CostAndUsage.ContractedUnitPrice",
+    "column:CostAndUsage.ChargeCategory",
+    "column:CostAndUsage.ServiceProviderName",
+    "column:ContractCommitment.ContractCommitmentDiscountPercentage"
+   ],
+   "files_matched": false,
+   "refs": [
+    {
+     "n": 2841,
+     "title": "[AI] Add 1.4 to 1.5 version migration guidance"
+    },
+    {
+     "n": 2485,
+     "title": null
+    },
+    {
+     "n": 2840,
+     "title": "AI #2825: Add 1.5 Changelog"
+    },
+    {
+     "n": 2768,
+     "title": null
+    },
+    {
+     "n": 2832,
+     "title": "[Editorial] Correct the Contract Commitment and commitment program examples for the 1.5 release"
+    },
+    {
+     "n": 2835,
+     "title": "[Editorial] Correct summary tables, glossary entries, labels, and links for the 1.5 release"
+    },
+    {
+     "n": 2821,
+     "title": "[Feedback] Replace undefined Entry references in Requester Details object requirements"
+    },
+    {
+     "n": 2827,
+     "title": "Feedback #2821: Replace undefined Entry references with RequesterDetailsObject paths"
+    },
+    {
+     "n": 2833,
+     "title": "[Editorial] Correct the split cost allocation and commitment discount examples for the 1.5 release"
+    },
+    {
+     "n": 2834,
+     "title": "[Editorial] Correct the metadata links, key names, and examples for the 1.5 release"
+    },
+    {
+     "n": 2836,
+     "title": "[Feedback] Correct casing, IDs, and links in 1.5 requirement text"
+    },
+    {
+     "n": 2837,
+     "title": "[Feedback] Correct the Payment Currency, Contract ID, and Time Sector End requirements"
+    }
+   ],
+   "basis": [
+    "c7017887582",
+    "c7023748522",
+    "i4631850464",
+    "i4632000545",
+    "i4632025312",
+    "i4632364594",
+    "i4633036197",
+    "i4633375107",
+    "i4633539720",
+    "i4635741283",
+    "i4635747367",
+    "i4635748513",
+    "o2842"
+   ],
+   "events": [
+    {
+     "id": "o2842",
+     "kind": "opened",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-06T18:03:03Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842",
+     "excerpt": "Summary Adds a \"Migrating from FOCUS 1.4 to FOCUS 1.5\" section to supportingcontent/appendix/versionmigrationguidance.md, above the 1.3 to 1.4 section. Closes 2841. The section follows the structure of the 1.3 to 1.4…"
+    },
+    {
+     "id": "s6691824777",
+     "kind": "status",
+     "at": "2026-11-06T18:03:22Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#issuecomment-6691824777",
+     "lines": [
+      "Initialized PR Approvals: 0",
+      "Initialized PR Change Requests: 0"
+     ]
+    },
+    {
+     "id": "i4631850464",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-19T16:33:51Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4631850464",
+     "path": "supporting_content/appendix/version_migration_guidance.md",
+     "parent": null,
+     "excerpt": "two options for this bullet. Option 1: limit the gap to discount-bearing commitment programs Capacity reservations are commitment programs (\"Commitment programs include commitment discounts, capacity reservations, and…"
+    },
+    {
+     "id": "i4632000545",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-19T16:45:49Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4632000545",
+     "path": "supporting_content/appendix/version_migration_guidance.md",
+     "parent": "i4631850464",
+     "excerpt": "Option 2: Option 1, plus where negotiated commitment program terms go The argument for Option 1 above. The Contracted Unit Price Implementation Guidance notes that \"The terms of a commitment program can also be…"
+    },
+    {
+     "id": "i4632025312",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-19T16:47:48Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4632025312",
+     "path": "supporting_content/appendix/version_migration_guidance.md",
+     "parent": null,
+     "excerpt": "\"commitment programs\" also covers capacity reservations, which do not provide discounts (\"Capacity reservations are fundamentally different: they secure resource availability rather than provide discounts\",…"
+    },
+    {
+     "id": "i4632364594",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-19T17:13:50Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4632364594",
+     "path": "supporting_content/appendix/version_migration_guidance.md",
+     "parent": null,
+     "excerpt": "Nit: The FOCUS 1.4 cell leaves out the FX rule FOCUS 1.4 already had: \"When negotiated discounts do not apply to unit prices and instead are applied to exchange rates, the Pricing Currency Contracted Unit Price defaults…"
+    },
+    {
+     "id": "i4633036197",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-19T18:09:52Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4633036197",
+     "path": "supporting_content/appendix/version_migration_guidance.md",
+     "parent": null,
+     "excerpt": "@Matt-Cowsert I'm struggling with this sentence: I'm not sure whether you and others agree, but I see most of the updates to the unit price and cost columns as clarifications rather than substantive changes. In other…"
+    },
+    {
+     "id": "c7017887582",
+     "kind": "comment",
+     "author": "ijurica",
+     "at": "2026-11-19T18:14:57Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#issuecomment-7017887582",
+     "excerpt": "Just flagging this: Milestone and base branch don't match: The PR is assigned to the v1.6 milestone but targets workingdraft."
+    },
+    {
+     "id": "i4633375107",
+     "kind": "inline",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-19T18:39:49Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4633375107",
+     "path": "supporting_content/appendix/version_migration_guidance.md",
+     "parent": "i4631850464",
+     "excerpt": "Applied the discount-bearing scope from this option in c72bbe8b, together with Option 2 in the next thread. 🤖 Addressed by Claude Code"
+    },
+    {
+     "id": "i4633539720",
+     "kind": "inline",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-19T18:54:04Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4633539720",
+     "path": "supporting_content/appendix/version_migration_guidance.md",
+     "parent": "i4631850464",
+     "excerpt": "Applied Option 2 in c72bbe8b. The gap to Effective Cost now covers discount-bearing commitment programs being applied to the charge. Negotiated commitment program terms that do not depend on the program being applied…"
+    },
+    {
+     "id": "i4635741283",
+     "kind": "inline",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-19T22:06:32Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4635741283",
+     "path": "supporting_content/appendix/version_migration_guidance.md",
+     "parent": "i4632025312",
+     "excerpt": "Applied as suggested in c72bbe8b. 🤖 Addressed by Claude Code"
+    },
+    {
+     "id": "i4635747367",
+     "kind": "inline",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-19T22:07:06Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4635747367",
+     "path": "supporting_content/appendix/version_migration_guidance.md",
+     "parent": "i4632364594",
+     "excerpt": "Applied as suggested in c72bbe8b. The FOCUS 1.4 cell now includes the default to Pricing Currency List Unit Price when negotiated discounts apply to exchange rates. 🤖 Addressed by Claude Code"
+    },
+    {
+     "id": "i4635748513",
+     "kind": "inline",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-19T22:07:13Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4635748513",
+     "path": "supporting_content/appendix/version_migration_guidance.md",
+     "parent": "i4633036197",
+     "excerpt": "I made a first pass at this in c72bbe8b. It drops the List Cost clause about negotiated tier configurations and exchange rates. It adds a sentence saying that most of the revision makes explicit the boundaries that…"
+    },
+    {
+     "id": "c7023748522",
+     "kind": "comment",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-19T22:16:52Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#issuecomment-7023748522",
+     "excerpt": "Thanks for flagging it. The v1.6 milestone is intentional, so the PR stays on workingdraft. I moved 2841 to v1.6 so the issue and the PR match."
+    }
+   ],
+   "summary": "This pull request adds a 1.4 to 1.5 migration section to the version migration guidance, implementing #2841 ahead of the planned v1.5 approval. The main point is that 1.5 removes and renames no columns, so the impact is on values, such as how List, Contracted and Effective Cost relate. ijurica, reviewing the negotiated pricing wording, suggested limiting the gap to Effective Cost to discount-bearing commitment programs and placing non-discount negotiated terms in Contracted Cost; Matt-Cowsert applied both in c72bbe8b. ijurica also sees most unit price and cost changes as clarifications rather than substantive change and questioned a sentence on List Cost; Matt-Cowsert dropped that clause and invited alternative wording. A milestone mismatch was raised and explained as intentional. No approvals are recorded, and the List Cost wording remains open.",
+   "gists": {
+    "o2842": "Adds a 1.4 to 1.5 migration section following the 1.3 to 1.4 structure, covering Migration Compatible changes, presence changes, renames, and SKU Price preview exclusions.",
+    "i4631850464": "Offers Option 1: limit the gap between Contracted Cost and Effective Cost to discount-bearing commitment programs, since capacity reservations do not provide discounts, and suggests replacement wording.",
+    "i4632000545": "Option 2 adds that negotiated commitment terms independent of the program being applied, such as purchase price, sit in Contracted Cost rather than the gap to Effective Cost.",
+    "i4632025312": "Notes capacity reservations are commitment programs that provide no discount, and suggests rewording the table row to refer to discount-bearing commitment programs.",
+    "i4632364594": "Nit: the FOCUS 1.4 PricingCurrencyContractedUnitPrice cell omits the default to list price when discounts apply to exchange rates, so the non-FX wording could be misread; suggests adding it.",
+    "i4633036197": "Questions the sentence on List Cost and savings, arguing most unit price and cost changes are clarifications, since negotiated tiers keep their own List Unit Price in 1.5.",
+    "c7017887582": "Flags that the PR is on the v1.6 milestone but targets working_draft, so the milestone and base branch do not match.",
+    "i4633375107": "Says Option 1 scope was applied in c72bbe8b, with Option 2 in the next thread.",
+    "i4633539720": "Reports Option 2 applied in c72bbe8b: the gap to Effective Cost covers discount-bearing programs, and negotiated terms independent of the program sit in Contracted Cost.",
+    "i4635741283": "Reports the capacity reservation wording suggestion was applied as proposed in c72bbe8b.",
+    "i4635747367": "Reports the FX default suggestion was applied in c72bbe8b, so the FOCUS 1.4 cell now mentions defaulting to Pricing Currency List Unit Price.",
+    "i4635748513": "Says a first pass at the List Cost sentence drops the tier and exchange rate clause and adds that most revisions make existing boundaries explicit; invites ijurica's preferred wording.",
+    "c7023748522": "Explains the v1.6 milestone is intentional, keeping the PR on working_draft, and says #2841 was moved to v1.6 to match."
+   },
+   "written_by": [
+    "claude-haiku-5-5"
+   ],
+   "style": 2
+  },
+  {
+   "number": 2846,
+   "kind": "pr",
+   "title": "Editorial #2832: Correct the Contract Commitment and commitment program examples",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846",
+   "state": "open",
+   "labels": [
+    "editorial"
+   ],
+   "author": "Matt-Cowsert",
+   "opened": "2026-11-10",
+   "last": "2026-11-19T22:06:24Z",
+   "earlier": 0,
+   "objects": [
+    "topic:contract-commitments",
+    "topic:json-object-examples",
+    "column:ContractCommitment.ContractCommitmentApplicability",
+    "column:ContractCommitment.ContractCommitmentDiscountPercentage",
+    "column:ContractCommitment.ContractCommitmentPeriodEnd",
+    "column:ContractCommitment.ContractCommitmentPeriodStart",
+    "column:ContractCommitment.ContractPeriodEnd",
+    "column:ContractCommitment.ContractPeriodStart",
+    "column:CostAndUsage.CommitmentProgramEligibilityDetails",
+    "dataset:ContractCommitment"
+   ],
+   "files_matched": true,
+   "refs": [
+    {
+     "n": 2832,
+     "title": "[Editorial] Correct the Contract Commitment and commitment program examples for the 1.5 release"
+    },
+    {
+     "n": 2661,
+     "title": "FR #1974: Update SaaS examples to the FOCUS 1.3 schema"
+    }
+   ],
+   "basis": [
+    "i4592316523",
+    "i4625394593",
+    "i4625830414",
+    "i4633564622",
+    "i4635740024",
+    "o2846",
+    "r5929292635",
+    "r5943499515"
+   ],
+   "events": [
+    {
+     "id": "o2846",
+     "kind": "opened",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-10T02:34:21Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846",
+     "excerpt": "Summary This PR fixes each item in 2832. Each is an example or description in the Contract Commitment or Commitment Program Eligibility Details text that does not match a requirement or an allowed value. Shawn Alpay…"
+    },
+    {
+     "id": "s6757346301",
+     "kind": "status",
+     "at": "2026-11-10T02:34:41Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#issuecomment-6757346301",
+     "lines": [
+      "Initialized PR Approvals: 0",
+      "Initialized PR Change Requests: 0"
+     ]
+    },
+    {
+     "id": "i4592316523",
+     "kind": "inline",
+     "author": "kk09v",
+     "at": "2026-11-16T22:10:52Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#discussion_r4592316523",
+     "path": "specification/appendix/appendix_overview.md",
+     "parent": null,
+     "excerpt": "I was trying to figure out whether we need to scrub \"Monthly/Annual\" from the Datadog reference and went down a rabbit hole. I see different billing frequencies listed that I can understand as a minimum-usage agreement,…"
+    },
+    {
+     "id": "r5929292635",
+     "kind": "review",
+     "state": "approved",
+     "author": "kk09v",
+     "at": "2026-11-16T22:50:35Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#pullrequestreview-5929292635",
+     "excerpt": "I checked through all of it and what changed made sense. There was one definition I'm confused on, but it isn't necessarily related to the PR other than the fact that the line was touched."
+    },
+    {
+     "id": "s6931767465",
+     "kind": "status",
+     "at": "2026-11-16T22:50:55Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#issuecomment-6931767465",
+     "lines": [
+      "Review Bot updated PR Approvals: 0 → 1"
+     ]
+    },
+    {
+     "id": "r5943499515",
+     "kind": "review",
+     "state": "approved",
+     "author": "jpradocueva",
+     "at": "2026-11-17T17:37:20Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#pullrequestreview-5943499515",
+     "excerpt": "It passes validation using the current AGENTS.md"
+    },
+    {
+     "id": "s6955923735",
+     "kind": "status",
+     "at": "2026-11-17T17:37:43Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#issuecomment-6955923735",
+     "lines": [
+      "Review Bot updated PR Approvals: 1 → 2"
+     ]
+    },
+    {
+     "id": "i4625394593",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-19T07:04:17Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#discussion_r4625394593",
+     "path": "specification/appendix/json_object_examples/commitment_program_eligibility_details_examples.md",
+     "parent": null,
+     "excerpt": "This paragraph calls monthly and annual \"terms\", while the Fictitious Commitment Program Reference table defines Interval Spend Commitment by its intervals (appendixoverview.md L77): The glossary also uses term for \"An…"
+    },
+    {
+     "id": "i4625830414",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-19T07:57:06Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#discussion_r4625830414",
+     "path": "specification/appendix/appendix_overview.md",
+     "parent": "i4592316523",
+     "excerpt": "@kk09v I think the overlap comes from L77 not saying what makes Interval Spend Commitment different. The Common Offering Examples table in contractcommitments.md (L48 and L54) does: Offering Example CC Category CC Model…"
+    },
+    {
+     "id": "i4633564622",
+     "kind": "inline",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-19T18:56:17Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#discussion_r4633564622",
+     "path": "specification/appendix/appendix_overview.md",
+     "parent": "i4592316523",
+     "excerpt": "@kk09v @ijurica Thanks both. I'll take Irena's first reading: \"monthly, annual\" in specification/appendix/appendixoverview.md:77 is the fulfillment interval. The minimum is measured each month or year and then resets.…"
+    },
+    {
+     "id": "i4635740024",
+     "kind": "inline",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-19T22:06:24Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#discussion_r4635740024",
+     "path": "specification/appendix/json_object_examples/commitment_program_eligibility_details_examples.md",
+     "parent": "i4625394593",
+     "excerpt": "Thanks @ijurica. I answered Karl's question in that thread with the interval reading, so \"intervals\" now matches specification/appendix/appendixoverview.md:77. I'll accept this and make the same change on line 65 with…"
+    }
+   ],
+   "summary": "This pull request corrects examples in the Contract Commitment and Commitment Program Eligibility Details text that don't match allowed values or requirements, closing #2832. Fixes include allowed ServiceCategory and ServiceSubcategory values, the UsageType and CDN filters, the discount percentage formula, and merging StackLens's monthly and annual programs into one Interval Spend Commitment. No requirement lines change. The main point under discussion was what Interval Spend Commitment means. ijurica read the monthly and annual intervals as resetting minimums, which conflicted with a Full Period row. Matt-Cowsert agreed and changed that row to Monthly. kk09v and jpradocueva approved. kk09v's question on the Datadog reference and Flexible Spend Plan was answered in-thread. Last activity was 19 November 2026, with Matt-Cowsert saying they would make the line 65 change too. No merge is recorded.",
+   "gists": {
+    "o2846": "Matt-Cowsert opened the pull request to fix each item in #2832, changing only informative examples, data and descriptions, not requirement lines.",
+    "i4592316523": "kk09v asked whether the Datadog reference needs Monthly and Annual removed, and how a recurring minimum-spend differs from a Flexible Spend Plan's monetary commitment.",
+    "r5929292635": "kk09v approved, saying the changes made sense and noting one unrelated definition on a touched line that they find confusing.",
+    "r5943499515": "jpradocueva approved, noting the pull request passes validation using the current AGENTS.md.",
+    "i4625394593": "ijurica suggested replacing terms with intervals in the eligibility examples to match the Fictitious Commitment Program Reference table, and the same change for line 65.",
+    "i4625830414": "ijurica said the Full Period row contradicts the fixed-interval meaning of Interval Spend Commitment, and that the table should show how it differs from a Flexible Spend Plan.",
+    "i4633564622": "Matt-Cowsert accepted the resetting-interval reading, changed the row to Monthly keeping 1 Year, and left line 77 and the Datadog cell as they are.",
+    "i4635740024": "Matt-Cowsert accepted ijurica's wording for the eligibility examples and said they would apply the same change to line 65."
+   },
+   "written_by": [
+    "claude-haiku-5-5"
+   ],
+   "style": 2
+  },
   {
    "number": 2827,
    "kind": "pr",
@@ -15,14 +429,12 @@
    "author": "Matt-Cowsert",
    "opened": "2026-11-04",
    "last": "2026-11-19T20:25:09Z",
-   "earlier": 1,
+   "earlier": 2,
    "objects": [
     "column:CostAndUsage.RequesterDetails",
     "column:ContractCommitment.ContractCommitmentId",
     "column:SkuPrice.ContractId",
     "dataset:SkuPrice",
-    "column:CostAndUsage.PrincipalId",
-    "column:CostAndUsage.CredentialId",
     "column:CostAndUsage.SkuPriceDetails"
    ],
    "files_matched": true,
@@ -53,12 +465,7 @@
     }
    ],
    "basis": [
-    "c6670959136",
     "c7020231974",
-    "i4486381776",
-    "i4486410001",
-    "i4486444872",
-    "i4486444891",
     "i4494266612",
     "i4494280573",
     "i4587916971",
@@ -69,7 +476,6 @@
     "i4625115845",
     "i4627607682",
     "i4628249507",
-    "r5792587756",
     "r5862899684",
     "r5973561052",
     "r5980918034",
@@ -79,64 +485,6 @@
     "r5982770385"
    ],
    "events": [
-    {
-     "id": "i4486381776",
-     "kind": "inline",
-     "author": "kk09v",
-     "at": "2026-11-05T21:38:33Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2827#discussion_r4486381776",
-     "path": "specification/datasets/cost_and_usage/columns/requesterdetails.md",
-     "parent": null,
-     "excerpt": "@ refers to the current element in JSONPATH, but I'm not sure that you could use it in a meaningful way here."
-    },
-    {
-     "id": "i4486410001",
-     "kind": "inline",
-     "author": "kk09v",
-     "at": "2026-11-05T21:41:39Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2827#discussion_r4486410001",
-     "path": "specification/datasets/cost_and_usage/columns/requesterdetails.md",
-     "parent": null,
-     "excerpt": "Yeah, sorry on the initial comment. I realized I had looked at the wrong JSON schema when I was writing it and then nuked that comment because I found that it was stated correctly when comparing it against the correct…"
-    },
-    {
-     "id": "i4486444872",
-     "kind": "inline",
-     "author": "finops-DaveMoreau",
-     "at": "2026-11-05T21:45:23Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2827#discussion_r4486444872",
-     "path": "specification/datasets/cost_and_usage/columns/requesterdetails.md",
-     "parent": "r5792587756",
-     "excerpt": "This line has two [] paths, and each [] is an independent wildcard. As written, the trailing RequesterDetailsObject[].key can be read as the key of any entry in the array, not the entry whose value is the subject. The…"
-    },
-    {
-     "id": "i4486444891",
-     "kind": "inline",
-     "author": "finops-DaveMoreau",
-     "at": "2026-11-05T21:45:23Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2827#discussion_r4486444891",
-     "path": "specification/datasets/cost_and_usage/columns/requesterdetails.md",
-     "parent": "r5792587756",
-     "excerpt": "These lines end with a bare RequesterDetailsObject[] used as a noun (\"the entity described by RequesterDetailsObject[\\]\"). In JSONPath (RFC 9535) that path selects every element of the array, not the single entry the…"
-    },
-    {
-     "id": "r5792587756",
-     "kind": "review",
-     "state": "commented",
-     "author": "finops-DaveMoreau",
-     "at": "2026-11-05T21:45:23Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2827#pullrequestreview-5792587756",
-     "excerpt": "Replacing the undefined Entry placeholder with Object ID paths is the right fix. Lines 35, 36, and 38 read correctly under the singular [] convention: each entry's key is not \"Principal\" (or \"Credential\") when…"
-    },
-    {
-     "id": "c6670959136",
-     "kind": "comment",
-     "author": "finops-DaveMoreau",
-     "at": "2026-11-05T22:16:03Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2827#issuecomment-6670959136",
-     "parent": null,
-     "excerpt": "@Matt-Cowsert If people agree with my suggestions here for handling the jsonpath text, I also opened a maintenance issue for other items:"
-    },
     {
      "id": "i4494266612",
      "kind": "inline",
@@ -183,7 +531,7 @@
      "at": "2026-11-16T15:45:14Z",
      "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2827#discussion_r4587917434",
      "path": "specification/datasets/cost_and_usage/columns/requesterdetails.md",
-     "parent": "i4486444872",
+     "parent": null,
      "excerpt": "Dave, on the \"in the same entry\" qualifier: I took Irena's option 1 from the line 42 thread (c2118baf), so this line stays as it is. Requester Details now reads like contractapplied.md and allocatedmethoddetails.md…"
     },
     {
@@ -193,7 +541,7 @@
      "at": "2026-11-16T15:45:16Z",
      "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2827#discussion_r4587917833",
      "path": "specification/datasets/cost_and_usage/columns/requesterdetails.md",
-     "parent": "i4486444891",
+     "parent": null,
      "excerpt": "Dave, lines 41 and 42 now end on RequesterDetailsObject[].key with no qualifier, from Irena's option 1 on the other line 42 thread (c2118baf). That replaces the bare RequesterDetailsObject[] you flagged here, and the…"
     },
     {
@@ -338,32 +686,26 @@
      ]
     }
    ],
-   "summary": "PR #2827 replaces the undefined Entry placeholder in the Requester Details requirements with RequesterDetailsObject[*] paths, such as RequesterDetailsObject[*].key, fixing #2821. It is editorial: the data shape and constraints are unchanged. The debate was over how repeated [*] paths bind to the same array item. finops-DaveMoreau wanted an explicit 'in the same entry' qualifier; ijurica preferred 'element' and offered either deferring the binding for all columns to #2838 or fixing them all here. jerrysr99 backed deferral, and Matt-Cowsert took it, so the back-references end on RequesterDetailsObject[*].key and the binding moves to #2838. Approvals came from ijurica, flanakin, davidearney, finops-DaveMoreau and jpradocueva, and it merged on 19 November 2026. Flattening the list and the custom entry line are left for follow-up work.",
+   "summary": "Matt-Cowsert's pull request fixes #2821 by replacing the undefined Entry term in the Requester Details requirements with paths from RequesterDetailsObject[*], with no change to constraints or data shape. The open question was how repeated [*] paths bind to the same array element. ijurica preferred \"in the same element\", offering either deferral of the binding for all columns or fixing them here; jerrysr99 backed deferral, and Matt-Cowsert took that route, moving the question to #2838. In late review, ijurica and jpradocueva noted that flattening the list would leave the custom entry requirement without a path subject, and that line 43 may need follow-up on whether it stays a MUST, through #2838 or a separate issue. Five approvals came in on 19 November 2026 and the PR is merged, so the fix lands as an editorial change in 1.5.",
    "gists": {
-    "i4486381776": "kk09v questioned whether the JSONPath @ current-element form could be used meaningfully in these requirements, doubting that it could.",
-    "i4486410001": "kk09v withdrew the earlier comment, having checked against the correct JSON schema, which states the requirement correctly.",
-    "i4486444872": "finops-DaveMoreau noted two independent [*] paths can be read as different entries and suggested adding 'in the same entry' to bind the value requirement to its key.",
-    "i4486444891": "finops-DaveMoreau said a bare RequesterDetailsObject[*] selects every element in JSONPath and suggested ending the Name and Email back-references on .key with 'in the same entry'.",
-    "r5792587756": "Backed the path change for lines 35, 36 and 38, and said lines 39 to 42 need an explicit same-entry binding, with other columns tracked in #2838.",
-    "c6670959136": "finops-DaveMoreau opened #2838 as a maintenance issue covering the same repeated [*] wording in other columns, if people agree with the suggestions.",
-    "i4494266612": "ijurica suggested 'element' over 'entry', citing RFC 8259 and other columns' use of entries for properties, and offered to defer the binding to #2838 or fix all columns here.",
-    "i4494280573": "ijurica proposed the Option 2 fix, adding 'in the same element' to four requesterdetails.md back-references and listing the matching four lines in other columns as plain text.",
-    "r5862899684": "jerrysr99 supported Option 1, deferring the binding to #2838 to keep this change editorial, and said 'element' fits better if the binding is stated later.",
-    "i4587916971": "Matt-Cowsert took Option 1 in c2118baf, ending lines 40 to 42 on RequesterDetailsObject[*].key and moving the binding to #2838.",
-    "i4587917434": "Matt-Cowsert answered finops-DaveMoreau that the same-entry qualifier is not added here, matching other columns until #2838, and asked for lines 39 to 42 to be added to its table.",
-    "i4587917833": "Matt-Cowsert said lines 41 and 42 now end on RequesterDetailsObject[*].key, replacing the bare form finops-DaveMoreau had flagged.",
-    "i4587918281": "Matt-Cowsert said this line now ends on .key so the bare form is gone, and that #2838 will settle whether two [*] paths mean the same element for every column.",
-    "i4625067995": "ijurica (non-blocking) argued the grouping bullet on line 37 adds nothing now and proposed flattening the list as other columns do, since it also splits the key requirements.",
-    "i4625115845": "ijurica proposed removing the two-space indentation of lines 38 to 43 to match the flattened list, to be applied together with the line 37 change.",
-    "i4627607682": "jpradocueva noted the custom entry line lost its path subject without the grouping bullet, proposed a path form depending on #2838, and asked for it in that table.",
-    "r5973561052": "jpradocueva left a comment-only review with no body text.",
-    "i4628249507": "ijurica asked whether the custom entry line should stay a MUST, since no custom key can match a FOCUS key; relaxing it would change conformance, so follow-up is needed.",
-    "r5980918034": "ijurica approved the pull request with no comment text.",
-    "r5982018219": "flanakin approved the pull request with no comment text.",
-    "r5982062291": "davidearney approved after reviewing during the call, saying it looks good.",
-    "r5982078886": "finops-DaveMoreau approved the pull request with no comment text.",
-    "c7020231974": "jpradocueva posted a comment containing only an image, with no written text.",
-    "r5982770385": "jpradocueva approved the pull request with no comment text."
+    "i4494266612": "ijurica preferred the qualifier \"in the same element\", citing RFC 8259 terms, and offered deferring the binding for all columns to #2838 or fixing four related requirements here.",
+    "i4494280573": "ijurica supplied replacement wording adding \"in the same element\" to the four Requester Details bullets, and to four repeated [*] requirements in other columns, as an alternative to deferral.",
+    "r5862899684": "jerrysr99 supported the rename and backed deferring the binding for all columns to #2838, keeping this change editorial, noting \"element\" fits better than \"entry\" if it is stated.",
+    "i4587916971": "Matt-Cowsert took option 1, removing the qualifier so lines 40 to 42 end on RequesterDetailsObject[*].key, and moved the binding and entry-versus-element choice to #2838.",
+    "i4587917434": "Matt-Cowsert told finops-DaveMoreau that the \"in the same entry\" qualifier was dropped in favour of option 1, and asked for lines 39 to 42 to go on #2838's table.",
+    "i4587917833": "Matt-Cowsert replied to finops-DaveMoreau that lines 41 and 42 now end on RequesterDetailsObject[*].key, replacing the bare RequesterDetailsObject[*] they had flagged.",
+    "i4587918281": "Matt-Cowsert said the bare RequesterDetailsObject[*] is gone with option 1, leaving whether two [*] paths in one bullet share an element to #2838.",
+    "i4625067995": "ijurica noted, as non-blocking, that the RequesterDetailsObject entries grouping bullet is redundant with the paths, and proposed flattening the object requirements into flat bullets like other columns.",
+    "i4625115845": "ijurica supplied the flattened text, removing the two-space indentation of lines 38 to 43 so each requirement sits as a flat bullet, to be applied with the grouping-bullet removal.",
+    "i4627607682": "jpradocueva noted line 43 would lack a path subject once flattened, proposed a two-path form, and asked for it to be added to #2838's table.",
+    "r5973561052": "jpradocueva's review is a pointer to their own comment on line 43, adding nothing new.",
+    "i4628249507": "ijurica asked whether line 43 should stay a MUST, since the data can't check it and other columns soften similar duplication, but said relaxing it needs separate follow-up.",
+    "r5980918034": "ijurica approved the PR with no written comment.",
+    "r5982018219": "flanakin approved the PR with no written comment.",
+    "r5982062291": "davidearney approved after reviewing the PR during the working group call.",
+    "r5982078886": "finops-DaveMoreau approved the PR with no written comment.",
+    "c7020231974": "jpradocueva posted an image with no accompanying text, so its content is not clear from the thread.",
+    "r5982770385": "jpradocueva approved the PR with no written comment."
    },
    "written_by": [
     "claude-haiku-5-5"
@@ -380,7 +722,7 @@
    "author": "Matt-Cowsert",
    "opened": "2026-11-05",
    "last": "2026-11-19T19:40:29Z",
-   "earlier": 1,
+   "earlier": 2,
    "objects": [],
    "files_matched": false,
    "refs": [
@@ -435,7 +777,6 @@
     "i4632787031",
     "i4632787063",
     "i4632787071",
-    "r5793163596",
     "r5880428799",
     "r5880783779",
     "r5880807149",
@@ -445,24 +786,6 @@
     "r5982052315"
    ],
    "events": [
-    {
-     "id": "r5793163596",
-     "kind": "review",
-     "state": "approved",
-     "author": "thecloudman",
-     "at": "2026-11-05T22:39:00Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2830#pullrequestreview-5793163596",
-     "excerpt": ""
-    },
-    {
-     "id": "s6671396127",
-     "kind": "status",
-     "at": "2026-11-05T22:39:20Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2830#issuecomment-6671396127",
-     "lines": [
-      "Review Bot updated PR Approvals: 0 → 1"
-     ]
-    },
     {
      "id": "i4553094504",
      "kind": "inline",
@@ -613,21 +936,20 @@
      ]
     }
    ],
-   "summary": "This pull request updates the Credits section of contributors.md for FOCUS v1.5, part of #2825 (which also covers the changelog). It rebuilds the Maintainers, Contributors and Steering Committee lists from activity between 30 April and 29 October 2026, and states the selection rule, since meeting attendance alone doesn't count. Seven approvals are in by 19 November 2026, mostly brief. The one substantive review, from shawnalpay, found the lists matching their source files but asked whether four unlisted participants were covered by a CLA while active, and noted MAINTAINERS.md still shows old affiliations. No reply appears yet, so the PR looks close to approval but unsettled.",
+   "summary": "This pull request refreshes the Credits section for FOCUS v1.5, the credits half of #2825, with the changelog handled separately. Each release gets fresh lists built from v1.5 activity between 30 April and 29 October 2026, and the selection rule is now written down. The lists add two Maintainers, keep 13 Contributors, and remove three Steering Committee members whose terms ended before the cycle. Support looks solid: seven approvals by 19 November, and shawnalpay checked the lists against source files and found them matching. Open points are whether four non-Maintainers who gave v1.5 feedback should be credited, which depends on whether they had a CLA at the time, and two affiliations in the Maintainers file that still differ from this PR. Matt-Cowsert has not yet replied to the CLA question.",
    "gists": {
-    "r5793163596": "thecloudman approved the pull request on 5 November 2026 without a written comment.",
-    "i4553094504": "jpradocueva suggested adding an entry for Irena Jurica with the affiliation Neos / CloudVane to the credits list.",
-    "r5880428799": "davidearney approved the pull request, with a short LGTM.",
-    "r5880783779": "finops-DaveMoreau approved the pull request without a written comment.",
-    "r5880807149": "jpradocueva approved the pull request, with a short LGTM.",
-    "r5880843786": "kk09v approved the pull request without a written comment.",
-    "c6833933562": "kk09v commented in passing on how long ago one listed contributor joined the FinOps Foundation.",
-    "r5969960363": "ijurica approved the pull request without a written comment.",
-    "i4632787031": "shawnalpay asked whether four unlisted participants with substantive v1.5 feedback had a signed CLA at the time, since only activity while a member counts.",
-    "i4632787063": "shawnalpay pointed out that MAINTAINERS.md still lists Salesforce and asked for it to be aligned with this PR.",
-    "i4632787071": "shawnalpay pointed out that MAINTAINERS.md still lists Neos and asked for it to be aligned with this PR.",
-    "r5980349389": "shawnalpay checked all lists against source files and activity, found them matching, and raised inline questions on CLA coverage, seats and affiliations.",
-    "r5982052315": "flanakin approved the pull request without a written comment."
+    "i4553094504": "Suggests a change to one Contributors line so that a person's affiliation reads Neos / CloudVane.",
+    "r5880428799": "Approves the pull request with a brief LGTM.",
+    "r5880783779": "Approves the pull request with no written comment.",
+    "r5880807149": "Approves the pull request with a brief LGTM.",
+    "r5880843786": "Approves the pull request with no written comment.",
+    "c6833933562": "Remarks on how long ago a longstanding member joined the FinOps Foundation; no change is requested.",
+    "r5969960363": "Approves the pull request with no written comment.",
+    "i4632787031": "Asks whether four unlisted non-Maintainers who gave v1.5 feedback (Tom Cross, GH Adiko, Ivan Karpusheff, Neco) were covered by a CLA at the time.",
+    "i4632787063": "Points out the Maintainers file still shows only Salesforce as one person's affiliation and asks for it to match this PR.",
+    "i4632787071": "Points out the Maintainers file still shows only Neos as another person's affiliation and asks for it to match this PR.",
+    "r5980349389": "Reports that the Maintainers, Steering Committee and Contributors lists match source files and qualifying activity, and raises the CLA question, the Adobe and Datadog seats, and two affiliations inline.",
+    "r5982052315": "Approves the pull request with no written comment."
    },
    "written_by": [
     "claude-haiku-5-5"
@@ -741,362 +1063,6 @@
     "r5981933125": "finops-DaveMoreau approved the PR; the review carries no written comment.",
     "c7020048377": "jpradocueva reported that the group approved the PR without objections or abstentions during the 19 November 2026 members' call.",
     "r5981981880": "flanakin approved the PR; the review carries no written comment."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2846,
-   "kind": "pr",
-   "title": "Editorial #2832: Correct the Contract Commitment and commitment program examples",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846",
-   "state": "open",
-   "labels": [
-    "editorial"
-   ],
-   "author": "Matt-Cowsert",
-   "opened": "2026-11-10",
-   "last": "2026-11-19T18:56:17Z",
-   "earlier": 0,
-   "objects": [
-    "topic:contract-commitments",
-    "topic:json-object-examples",
-    "column:ContractCommitment.ContractCommitmentApplicability",
-    "column:ContractCommitment.ContractCommitmentDiscountPercentage",
-    "column:ContractCommitment.ContractCommitmentPeriodEnd",
-    "column:ContractCommitment.ContractCommitmentPeriodStart",
-    "column:ContractCommitment.ContractPeriodEnd",
-    "column:ContractCommitment.ContractPeriodStart",
-    "column:CostAndUsage.CommitmentProgramEligibilityDetails",
-    "dataset:ContractCommitment"
-   ],
-   "files_matched": true,
-   "refs": [
-    {
-     "n": 2832,
-     "title": "[Editorial] Correct the Contract Commitment and commitment program examples for the 1.5 release"
-    },
-    {
-     "n": 2661,
-     "title": "FR #1974: Update SaaS examples to the FOCUS 1.3 schema"
-    }
-   ],
-   "basis": [
-    "i4592316523",
-    "i4625394593",
-    "i4625830414",
-    "i4633564622",
-    "o2846",
-    "r5929292635",
-    "r5943499515"
-   ],
-   "events": [
-    {
-     "id": "o2846",
-     "kind": "opened",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-10T02:34:21Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846",
-     "excerpt": "Summary This PR fixes each item in 2832. Each is an example or description in the Contract Commitment or Commitment Program Eligibility Details text that does not match a requirement or an allowed value. Shawn Alpay…"
-    },
-    {
-     "id": "s6757346301",
-     "kind": "status",
-     "at": "2026-11-10T02:34:41Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#issuecomment-6757346301",
-     "lines": [
-      "Initialized PR Approvals: 0",
-      "Initialized PR Change Requests: 0"
-     ]
-    },
-    {
-     "id": "i4592316523",
-     "kind": "inline",
-     "author": "kk09v",
-     "at": "2026-11-16T22:10:52Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#discussion_r4592316523",
-     "path": "specification/appendix/appendix_overview.md",
-     "parent": null,
-     "excerpt": "I was trying to figure out whether we need to scrub \"Monthly/Annual\" from the Datadog reference and went down a rabbit hole. I see different billing frequencies listed that I can understand as a minimum-usage agreement,…"
-    },
-    {
-     "id": "r5929292635",
-     "kind": "review",
-     "state": "approved",
-     "author": "kk09v",
-     "at": "2026-11-16T22:50:35Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#pullrequestreview-5929292635",
-     "excerpt": "I checked through all of it and what changed made sense. There was one definition I'm confused on, but it isn't necessarily related to the PR other than the fact that the line was touched."
-    },
-    {
-     "id": "s6931767465",
-     "kind": "status",
-     "at": "2026-11-16T22:50:55Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#issuecomment-6931767465",
-     "lines": [
-      "Review Bot updated PR Approvals: 0 → 1"
-     ]
-    },
-    {
-     "id": "r5943499515",
-     "kind": "review",
-     "state": "approved",
-     "author": "jpradocueva",
-     "at": "2026-11-17T17:37:20Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#pullrequestreview-5943499515",
-     "excerpt": "It passes validation using the current AGENTS.md"
-    },
-    {
-     "id": "s6955923735",
-     "kind": "status",
-     "at": "2026-11-17T17:37:43Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#issuecomment-6955923735",
-     "lines": [
-      "Review Bot updated PR Approvals: 1 → 2"
-     ]
-    },
-    {
-     "id": "i4625394593",
-     "kind": "inline",
-     "author": "ijurica",
-     "at": "2026-11-19T07:04:17Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#discussion_r4625394593",
-     "path": "specification/appendix/json_object_examples/commitment_program_eligibility_details_examples.md",
-     "parent": null,
-     "excerpt": "This paragraph calls monthly and annual \"terms\", while the Fictitious Commitment Program Reference table defines Interval Spend Commitment by its intervals (appendixoverview.md L77): The glossary also uses term for \"An…"
-    },
-    {
-     "id": "i4625830414",
-     "kind": "inline",
-     "author": "ijurica",
-     "at": "2026-11-19T07:57:06Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#discussion_r4625830414",
-     "path": "specification/appendix/appendix_overview.md",
-     "parent": "i4592316523",
-     "excerpt": "@kk09v I think the overlap comes from L77 not saying what makes Interval Spend Commitment different. The Common Offering Examples table in contractcommitments.md (L48 and L54) does: Offering Example CC Category CC Model…"
-    },
-    {
-     "id": "i4633564622",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-19T18:56:17Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2846#discussion_r4633564622",
-     "path": "specification/appendix/appendix_overview.md",
-     "parent": "i4592316523",
-     "excerpt": "@kk09v @ijurica Thanks both. I'll take Irena's first reading: \"monthly, annual\" in specification/appendix/appendixoverview.md:77 is the fulfillment interval. The minimum is measured each month or year and then resets.…"
-    }
-   ],
-   "summary": "PR #2846 from Matt-Cowsert closes #2832 by correcting examples in the Contract Commitment and Commitment Program Eligibility Details text so they match allowed values and requirements. Changes are informative only: allowed values such as Databases and NoSQL Databases, a SkuMeter filter in place of the non-FOCUS UsageType, a Content Delivery CDN filter, a discount formula that gives the 28% in its example, corrected contract period dates, and one merged Interval Spend Commitment for StackLens. kk09v and jpradocueva have approved, and the changes themselves draw no objection. The open point from ijurica is that the Interval Spend Commitment table row said Full Period, contradicting the recurring-interval description; Matt-Cowsert agreed to change it to Monthly, keeping the 1 Year duration. The thread records no merge yet, and the PR overlaps with #2661 on the same SaaS rows.",
-   "gists": {
-    "o2846": "Matt-Cowsert opened the PR to fix each item in #2832 in the Contract Commitment and eligibility text, changing examples, example data and guidance only, with no requirement changes.",
-    "i4592316523": "kk09v asked whether Monthly and Annual must be removed from the Datadog reference, and how a recurring minimum-spend differs from a Flexible Spend Plan.",
-    "r5929292635": "kk09v approved, saying the changes made sense and noting one definition they were unsure of, though it is not really part of this PR beyond being touched.",
-    "r5943499515": "jpradocueva approved, reporting that the PR passes validation against the current AGENTS.md.",
-    "i4625394593": "ijurica noted the paragraph calls monthly and annual terms while the table defines intervals, and suggested rewording to intervals, also flagging the same wording at line 65.",
-    "i4625830414": "Replying to kk09v, ijurica said line 77 does not separate the two, and the Full Period row conflicts with its monthly and annual description, so it should be Monthly.",
-    "i4633564622": "Matt-Cowsert agreed with the interval reading, will change the table row to Monthly keeping 1 Year, leave line 77 as is, and keep the Datadog cell as a real-world example."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2842,
-   "kind": "pr",
-   "title": "AI #2841: Add 1.4 to 1.5 migration guide",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842",
-   "state": "open",
-   "labels": [],
-   "author": "Matt-Cowsert",
-   "opened": "2026-11-06",
-   "last": "2026-11-19T18:54:04Z",
-   "earlier": 0,
-   "objects": [
-    "dataset:SkuPrice",
-    "column:CostAndUsage.SkuPriceId",
-    "dataset:CostAndUsage",
-    "column:CostAndUsage.ServiceSubcategory",
-    "column:ContractCommitment.ContractCommitmentDurationType",
-    "column:CostAndUsage.ContractedUnitPrice",
-    "column:CostAndUsage.ChargeCategory",
-    "column:CostAndUsage.ServiceProviderName",
-    "column:ContractCommitment.ContractCommitmentDiscountPercentage",
-    "column:CostAndUsage.PricingCurrency"
-   ],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2841,
-     "title": "[AI] Add 1.4 to 1.5 version migration guidance"
-    },
-    {
-     "n": 2485,
-     "title": null
-    },
-    {
-     "n": 2840,
-     "title": "AI #2825: Add 1.5 Changelog"
-    },
-    {
-     "n": 2768,
-     "title": null
-    },
-    {
-     "n": 2832,
-     "title": "[Editorial] Correct the Contract Commitment and commitment program examples for the 1.5 release"
-    },
-    {
-     "n": 2835,
-     "title": "[Editorial] Correct summary tables, glossary entries, labels, and links for the 1.5 release"
-    },
-    {
-     "n": 2821,
-     "title": "[Feedback] Replace undefined Entry references in Requester Details object requirements"
-    },
-    {
-     "n": 2827,
-     "title": "Feedback #2821: Replace undefined Entry references with RequesterDetailsObject paths"
-    },
-    {
-     "n": 2833,
-     "title": "[Editorial] Correct the split cost allocation and commitment discount examples for the 1.5 release"
-    },
-    {
-     "n": 2834,
-     "title": "[Editorial] Correct the metadata links, key names, and examples for the 1.5 release"
-    },
-    {
-     "n": 2836,
-     "title": "[Feedback] Correct casing, IDs, and links in 1.5 requirement text"
-    },
-    {
-     "n": 2837,
-     "title": "[Feedback] Correct the Payment Currency, Contract ID, and Time Sector End requirements"
-    }
-   ],
-   "basis": [
-    "c7017887582",
-    "i4631850464",
-    "i4632000545",
-    "i4632025312",
-    "i4632364594",
-    "i4633036197",
-    "i4633375107",
-    "i4633539720",
-    "o2842"
-   ],
-   "events": [
-    {
-     "id": "o2842",
-     "kind": "opened",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-06T18:03:03Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842",
-     "excerpt": "Summary Adds a \"Migrating from FOCUS 1.4 to FOCUS 1.5\" section to supportingcontent/appendix/versionmigrationguidance.md, above the 1.3 to 1.4 section. Closes 2841. The section follows the structure of the 1.3 to 1.4…"
-    },
-    {
-     "id": "s6691824777",
-     "kind": "status",
-     "at": "2026-11-06T18:03:22Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#issuecomment-6691824777",
-     "lines": [
-      "Initialized PR Approvals: 0",
-      "Initialized PR Change Requests: 0"
-     ]
-    },
-    {
-     "id": "i4631850464",
-     "kind": "inline",
-     "author": "ijurica",
-     "at": "2026-11-19T16:33:51Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4631850464",
-     "path": "supporting_content/appendix/version_migration_guidance.md",
-     "parent": null,
-     "excerpt": "two options for this bullet. Option 1: limit the gap to discount-bearing commitment programs Capacity reservations are commitment programs (\"Commitment programs include commitment discounts, capacity reservations, and…"
-    },
-    {
-     "id": "i4632000545",
-     "kind": "inline",
-     "author": "ijurica",
-     "at": "2026-11-19T16:45:49Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4632000545",
-     "path": "supporting_content/appendix/version_migration_guidance.md",
-     "parent": "i4631850464",
-     "excerpt": "Option 2: Option 1, plus where negotiated commitment program terms go The argument for Option 1 above. The Contracted Unit Price Implementation Guidance notes that \"The terms of a commitment program can also be…"
-    },
-    {
-     "id": "i4632025312",
-     "kind": "inline",
-     "author": "ijurica",
-     "at": "2026-11-19T16:47:48Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4632025312",
-     "path": "supporting_content/appendix/version_migration_guidance.md",
-     "parent": null,
-     "excerpt": "\"commitment programs\" also covers capacity reservations, which do not provide discounts (\"Capacity reservations are fundamentally different: they secure resource availability rather than provide discounts\",…"
-    },
-    {
-     "id": "i4632364594",
-     "kind": "inline",
-     "author": "ijurica",
-     "at": "2026-11-19T17:13:50Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4632364594",
-     "path": "supporting_content/appendix/version_migration_guidance.md",
-     "parent": null,
-     "excerpt": "Nit: The FOCUS 1.4 cell leaves out the FX rule FOCUS 1.4 already had: \"When negotiated discounts do not apply to unit prices and instead are applied to exchange rates, the Pricing Currency Contracted Unit Price defaults…"
-    },
-    {
-     "id": "i4633036197",
-     "kind": "inline",
-     "author": "ijurica",
-     "at": "2026-11-19T18:09:52Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4633036197",
-     "path": "supporting_content/appendix/version_migration_guidance.md",
-     "parent": null,
-     "excerpt": "@Matt-Cowsert I'm struggling with this sentence: I'm not sure whether you and others agree, but I see most of the updates to the unit price and cost columns as clarifications rather than substantive changes. In other…"
-    },
-    {
-     "id": "c7017887582",
-     "kind": "comment",
-     "author": "ijurica",
-     "at": "2026-11-19T18:14:57Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#issuecomment-7017887582",
-     "excerpt": "Just flagging this: Milestone and base branch don't match: The PR is assigned to the v1.6 milestone but targets workingdraft."
-    },
-    {
-     "id": "i4633375107",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-19T18:39:49Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4633375107",
-     "path": "supporting_content/appendix/version_migration_guidance.md",
-     "parent": "i4631850464",
-     "excerpt": "Applied the discount-bearing scope from this option in c72bbe8b, together with Option 2 in the next thread. 🤖 Addressed by Claude Code"
-    },
-    {
-     "id": "i4633539720",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-19T18:54:04Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2842#discussion_r4633539720",
-     "path": "supporting_content/appendix/version_migration_guidance.md",
-     "parent": "i4631850464",
-     "excerpt": "Applied Option 2 in c72bbe8b. The gap to Effective Cost now covers discount-bearing commitment programs being applied to the charge. Negotiated commitment program terms that do not depend on the program being applied…"
-    }
-   ],
-   "summary": "Matt-Cowsert added a FOCUS 1.4 to 1.5 migration section to the version migration guidance. Its main point is that 1.5 removes and renames no columns, so the impact is on values: queries can run without error and return different results. It also covers revised presence requirements, two tool-facing renames and the optional SKU Price preview. Only ijurica has commented so far. They see most unit price and cost changes as clarifications of boundaries already implicit in 1.4, and questioned the wording on shifts between the List, Contracted and Effective Cost gaps. Matt-Cowsert applied both of ijurica's options on 19 November, limiting the Effective Cost gap to discount-bearing commitment programs. A milestone mismatch flagged by ijurica has no reply yet, and no approvals are recorded. Members approve it before WG approval of v1.5 on 3 December 2026.",
-   "gists": {
-    "o2842": "Adds the 1.4 to 1.5 migration section, built from the v1.4 to v1.5 diff, covering the Migration Compatible changes, presence changes, renames and the optional SKU Price preview.",
-    "i4631850464": "Proposes limiting the gap between Contracted and Effective Cost to discount-bearing commitment programs, since capacity reservations give no discount and the gap should reflect discounts only.",
-    "i4632000545": "Proposes, as a second option, also stating that negotiated commitment program terms independent of the program being applied sit in Contracted Cost, citing the Contracted Unit Price requirement.",
-    "i4632025312": "Points out that the commitment programs wording covers capacity reservations, which secure availability rather than give discounts, and suggests a table wording change for the price and cost row.",
-    "i4632364594": "Says the FOCUS 1.4 table cell omits the rule that Pricing Currency Contracted Unit Price defaults to list when discounts apply to exchange rates, and suggests adding it.",
-    "i4633036197": "Questions wording that List Cost can change with negotiated tiers and exchange rates, arguing most changes clarify boundaries already implicit in 1.4 and tiers keep their own List Unit Price.",
-    "c7017887582": "Flags that the PR is on the v1.6 milestone but targets the working draft branch, so the milestone and base branch do not match.",
-    "i4633375107": "Matt-Cowsert reports applying the discount-bearing scope from the first option in the latest commit.",
-    "i4633539720": "Matt-Cowsert reports applying option 2: the gap to Effective Cost covers discount-bearing programs applied to the charge, and negotiated program terms independent of that sit in Contracted Cost."
    },
    "written_by": [
     "claude-haiku-5-5"
@@ -1290,11 +1256,11 @@
     "dataset:CostAndUsage",
     "dataset:ContractCommitment",
     "attribute:UnitFormat",
+    "column:CostAndUsage.ConsumedQuantity",
     "column:CostAndUsage.ListUnitPrice",
     "column:ContractCommitment.ContractCommitmentDurationType",
     "column:CostAndUsage.ServiceProviderName",
-    "column:CostAndUsage.BillingCurrency",
-    "column:CostAndUsage.ChargePeriodStart"
+    "column:CostAndUsage.BillingCurrency"
    ],
    "files_matched": false,
    "refs": [
@@ -7890,68 +7856,6 @@
    "summary": "ijurica's feature request, opened 29 June 2026, says the definitions and normative rules for ListCost, ListUnitPrice, ContractedCost and ContractedUnitPrice leave gaps that undermine savings calculations. Main concerns include unclear discount boundaries in ContractedUnitPrice, no rule on which tier a tiered-pricing SKU must report (so the highest tier could inflate savings rates), and loose wording on Tax and Credit charge categories. Recent activity is a 6 November 2026 comment by ijurica noting that tier-terminology pull request #2564 is still unmerged, so the ambiguous use of tier and tiered remains, and that #2839 was opened to track it. The issue is marked completed, but the thread does not record what changed or whether the tier requirement was adopted, so the outcome is unclear.",
    "gists": {
     "c6691626597": "ijurica noted that #2563 and #2570 closed when #2564 was opened, but unmerged #2564 leaves ambiguous tier and tiered wording, so ijurica opened #2839 to track it."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2839,
-   "kind": "issue",
-   "title": "[FR] Clarify Tier and Tiered Terminology in the Specification",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2839",
-   "state": "open",
-   "labels": [
-    "needs triage",
-    "feature"
-   ],
-   "author": "ijurica",
-   "opened": "2026-11-05",
-   "last": "2026-11-05T21:51:12Z",
-   "earlier": 0,
-   "objects": [
-    "dataset:SkuPrice"
-   ],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2564,
-     "title": "AI #2563: Add tiered-pricing-related glossary terms"
-    },
-    {
-     "n": 2563,
-     "title": "[AI] Draft PR adding Tiered Pricing-related glossary entries"
-    },
-    {
-     "n": 2570,
-     "title": "[AI] Draft PR addressing critical tier mentions (focus: tiered pricing)"
-    },
-    {
-     "n": 2739,
-     "title": null
-    },
-    {
-     "n": 2748,
-     "title": "AI #2364: Add `QuantityTierCategory` to `SkuPrice` dataset"
-    }
-   ],
-   "basis": [
-    "o2839"
-   ],
-   "events": [
-    {
-     "id": "o2839",
-     "kind": "opened",
-     "author": "ijurica",
-     "at": "2026-11-05T21:51:12Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2839",
-     "excerpt": "Problem Statement The specification uses \"tier\" and \"tiered\" inconsistently, for several distinct concepts: tiered pricing based on quantity, spend, or duration thresholds, tiered commitment discounts, storage tiers,…"
-    }
-   ],
-   "summary": "Issue #2839, opened by ijurica on 5 November 2026, says 'tier' and 'tiered' mean several different things in the specification: pricing by quantity, spend or duration, tiered commitment discounts, storage tiers and SaaS feature tiers. The minimum ask is glossary terms for the tiered pricing concepts, with ambiguous mentions reworded and linked to them; an appendix on how the concepts relate is a possible follow-up. It builds on PR #2564, an earlier unmerged attempt from the 1.5 cycle, and notes that FR #2739 and PR #2748 could use the new terms. If it goes ahead, practitioners could tell from a column definition which pricing model is meant. Nobody has commented yet, so the working group's view of the scope or wording is unknown. The issue remains open with no decision or next step recorded.",
-   "gists": {
-    "o2839": "Opened the issue asking for tier-related glossary terms and consistent rewording, since 'tier' and 'tiered' currently cover several distinct concepts, making mentions hard to interpret."
    },
    "written_by": [
     "claude-haiku-5-5"
