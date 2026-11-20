@@ -43,20 +43,26 @@ queries in the browser, so the server only serves static files: no database, no 
   comments and reviews as a reply tree with a one-line gist of each and a link to it on GitHub, the status changes the
   repository's automation posted, and links to the parts of the data model the thread touches (from a pull request's
   changed files, and the column and dataset names in the text). Each of those parts lists its recent threads in turn.
-- **Search:** a box in the page header, on every tab (Ctrl-K, or Cmd-K on a Mac, goes to it). It searches the
-  columns, datasets, joins, attributes, conditions and supporting material, the specification's requirement lines, the
-  example queries, the pull requests and issues in the history, the evidence and the Recent threads, and groups the
-  results by kind. Every word typed must match the start of a word, and CamelCase IDs count as their parts, so
-  "contracted unit price" finds ContractedUnitPrice. An exact ID comes first, then an exact name, then matches in IDs,
-  names, titles and the rest of the text, in that order. It runs in the browser on `site/search.json`; nothing typed is
-  sent anywhere.
+  Anything older links out to the thread on GitHub.
+- **Search:** a box in the page header, on every tab (Ctrl-K, or Cmd-K on a Mac, goes to it). It searches what every
+  tab shows: the columns, datasets, joins and requirement lines, the conditions, attributes and supporting material,
+  the pull requests and issues in the history and open requests, the sample tables, the example queries, the quiz
+  questions (not their hints or answers), the evidence, the AI tokens tab and the Recent threads. Results are grouped
+  by the tab each one opens on, in the tab bar's order and under its label, with a count; the Data model and Reference
+  groups are split by kind. A row of chips above them (All, then one per tab with results, with its count) shows one
+  tab at a time; it stays chosen while you refine the words and goes back to All when the search is closed or emptied.
+  Each thing is listed once, under its main tab: a column under the Data model, not again under the Quiz's panel, and
+  a pull request or issue discussed in the last two weeks under Recent, not again under the history. Every word typed
+  must match the start of a word, and CamelCase IDs count as their parts, so "contracted unit price" finds
+  ContractedUnitPrice. An exact ID comes first, then an exact name, then matches in IDs, names, titles and the rest of
+  the text, in that order. It runs in the browser on `site/search.json`; nothing typed is sent anywhere.
 - **Addresses:** everything a link or a search result opens has an address to bookmark or share:
   `#model/CostAndUsage/BilledCost` (or `#model/BilledCost`), `#model/CostAndUsage`, `#model/join/cau-sku`,
-  `#ref/CorrectionHandling` (attributes, conditions and supporting material), `#query/<example id>`,
-  `#evidence/<evidence id>`, `#recent/<number>` and `#thread/<number>` (the panel whose history lists that pull
-  request or issue). A panel address can end in `/line-<n>` to point at one requirement line. Each tab has its own
-  address too (`#ref`, `#quiz`, ...).
-  Anything older links out to the thread on GitHub.
+  `#ref/CorrectionHandling` (attributes, conditions and supporting material), `#data/<table>`, `#query/<example id>`,
+  `#quiz/<question id>`, `#evidence/<evidence id>`, `#ai/<part>` (`how`, a SkuPriceDetails key such as
+  `#ai/ModelDeveloper`, or one of the gaps), `#recent/<number>` and `#thread/<number>` (the Recent card for a thread
+  discussed in the last two weeks, or else the panel whose history or open requests list it). A panel address can end
+  in `/line-<n>` to point at one requirement line. Each tab has its own address too (`#ref`, `#quiz`, ...).
 
 ## How the spec's queries run unchanged
 
@@ -318,8 +324,10 @@ GH_TOKEN=... python -I tools/recent.py site --write --no-ai                   # 
 
 [tools/build_search.py](tools/build_search.py) writes `site/search.json` from files already in `site/`: the
 definitions, joins and requirement lines in `focus/model.json` with the plain-language summaries, the example queries,
-the pull requests and issues in `focus/history.json` with their conversation summaries, the evidence, the Recent
-threads and, where it exists, `open-requests.json`. It needs no network and no API key. `tools/refresh.sh` runs it, the
+the pull requests and issues in `focus/history.json` with their conversation summaries, the Sample data tables
+(`focus/data/manifest.json`), the quiz questions, the AI tokens tab (`focus/ai-tokens.json`), the evidence, the Recent
+threads and, where it exists, `open-requests.json`. Each entry records the address it opens, which is how the page
+groups the results by tab. It needs no network and no API key. `tools/refresh.sh` runs it, the
 refresh workflow runs it again after writing summaries, and the daily workflow runs it after the Recent tab, so the
 index always matches what the panels show. The page loads it the first time someone uses the search box.
 

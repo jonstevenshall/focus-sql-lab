@@ -268,9 +268,9 @@
   #cost-pop .hint { margin: 0; }
   :is(#evidence, #ref, #data) .ev-head { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-bottom: 10px; }
   :is(#evidence, #ref, #data) .ev-head p { margin: 0 0 4px; color: var(--muted); font-size: 13px; max-width: 80ch; flex-basis: 100%; }
-  :is(#evidence, #ref, #data) .ev-filters { display: inline-flex; flex-wrap: wrap; gap: 4px; }
-  :is(#evidence, #ref, #data) .ev-filters button { border: 1px solid var(--line); background: transparent; border-radius: 14px; padding: 3px 10px; font-size: 12.5px; }
-  :is(#evidence, #ref, #data) .ev-filters button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+  :is(#evidence, #ref, #data, #ss-results) .ev-filters { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+  :is(#evidence, #ref, #data, #ss-results) .ev-filters button { border: 1px solid var(--line); background: transparent; border-radius: 14px; padding: 3px 10px; font-size: 12.5px; }
+  :is(#evidence, #ref, #data, #ss-results) .ev-filters button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); font-weight: 600; }
   :is(#evidence, #ref, #data) input[type=search] { max-width: 260px; }
   #ev-list, #ref-list, #data-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 10px; }
   #ev-list.as-list, #ref-list.as-list, #data-list.as-list { display: block; overflow-x: auto; }
@@ -508,11 +508,16 @@
   .site-search input:focus ~ kbd, .site-search input:not(:placeholder-shown) ~ kbd { display: none; }
   #ss-results { position: absolute; top: calc(100% + 6px); right: 0; width: min(620px, calc(100vw - 32px)); z-index: 30;
     max-height: min(72vh, 680px); overflow-y: auto; overscroll-behavior: contain; background: var(--panel); color: var(--fg);
-    border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22); padding: 4px 0 6px; }
+    border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22); padding: 0 0 6px; }
   #ss-results .ss-note { padding: 8px 12px; font-size: 12.5px; color: var(--muted); line-height: 1.5; margin: 0; }
   #ss-results .ss-note kbd { font: 11px var(--mono); border: 1px solid var(--line); border-radius: 4px; padding: 0 3px; }
-  .ss-group-h { display: flex; justify-content: space-between; gap: 8px; padding: 8px 12px 3px; font-size: 11.5px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+  /* The chips: one per tab with results, like the Evidence tab's filters, kept in view while the results scroll */
+  #ss-results .ss-chips { display: flex; position: sticky; top: 0; z-index: 1; background: var(--panel); padding: 8px 12px;
+    border-bottom: 1px solid var(--line); }
+  .ss-group-h { display: flex; justify-content: space-between; gap: 8px; padding: 10px 12px 2px; font-size: 13px; font-weight: 600;
+    color: var(--fg); }
+  .ss-group-h span + span { color: var(--muted); font-weight: 400; font-size: 12px; }
+  .ss-kind-h { padding: 6px 12px 2px; font-size: 11.5px; color: var(--muted); }
   .ss-opt { display: block; padding: 6px 12px; cursor: pointer; border-left: 3px solid transparent; font-size: 13px; line-height: 1.4;
     overflow-wrap: anywhere; }
   .ss-opt[aria-selected="true"] { background: color-mix(in srgb, var(--accent) 13%, var(--panel)); border-left-color: var(--accent); }
@@ -557,9 +562,9 @@
   <div class="site-search" role="search">
     <svg class="ss-glass" viewBox="0 0 16 16" aria-hidden="true"><circle cx="6.8" cy="6.8" r="4.8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.4 10.4 14.5 14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
     <input id="ss-input" type="search" placeholder="Search the lab" aria-label="Search the whole lab" autocomplete="off"
-      spellcheck="false" autocapitalize="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="ss-results">
+      spellcheck="false" autocapitalize="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="ss-list">
     <kbd id="ss-kbd" aria-hidden="true">Ctrl K</kbd>
-    <div id="ss-results" role="listbox" aria-label="Search results" hidden></div>
+    <div id="ss-results" hidden></div> <!-- the filter chips, then the results (#ss-list, a listbox) -->
     <div id="ss-status" class="sr-only" role="status"></div>
   </div>
   <button id="about-open" class="about-link" type="button">What is this?</button>
@@ -1365,7 +1370,9 @@ const SHORT = { 'cau-sku': 'SKU Price ID', 'cau-cc': 'Commitment ID', 'cau-inv':
 //   #ref/CorrectionHandling, #ref/<condition ID>, #ref/<topic id>     the same panel, beside the Reference list
 //     (either can end in /line-<n>: that requirement line of the page, outlined)
 //   #query/<example id>, #evidence/<evidence id>, #recent/<number>
-//   #thread/<number>       the panel whose History lists that pull request or issue (from the search index)
+//   #data/<table>, #quiz/<question id>, #ai/<part of the AI tokens tab: how, a SkuPriceDetails key, or a gap's id>
+//   #thread/<number>       its Recent card if it was discussed in the last two weeks, or else the panel whose History
+//                          or open requests list it (from the search index)
 //   #i-<evidence id>       a private interpretation, over the Evidence tab
 // The page opens on the tab its address names, or on the Data model.
 const TABS = ['model', 'ref', 'data', 'query', 'quiz', 'evidence', 'ai', 'recent'];
@@ -1486,6 +1493,7 @@ function pickQuestion(id) {
   quizLast = null;
   renderQuizList();
   renderQuizModel(q.source);
+  if (tab === 'quiz') setAddress(addressOf('quiz'));
 }
 
 // ---- Quiz: the data model beside the questions, for the data source the question runs on ----------------------------
@@ -1725,7 +1733,7 @@ async function renderAi() {
       specification stops today. Quoted text is the specification's, as published. The rest is the lab's reading, linked to
       the GitHub threads behind it. Thread statuses are GitHub's, checked ${escapeHtml(ai.checked)}.</p>
 
-    <div class="detail"><h3>How a token charge is recorded</h3>
+    <div class="detail" data-key="how"><h3>How a token charge is recorded</h3>
       <ul class="how">${ai.how.map((t) => `<li>${escapeHtml(t)}</li>`).join('')}</ul>
       ${quote({ text: f.description, source: f.source })}
       <p class="cols"><b>Columns the AI Model Billing feature depends on:</b> ${f.dependent.map(col).join(', ')}</p>
@@ -1736,7 +1744,7 @@ async function renderAi() {
       <p class="hint" style="margin:0 0 6px">The FOCUS-defined keys inside ${col('SkuPriceDetails')} that describe AI models and
         tokens, from the specification's table. That column's panel lists all its requirements, with their history.</p>
       <div class="table-wrap"><table><thead><tr><th>Key</th><th>Description</th><th>Type</th><th>Values</th></tr></thead><tbody>
-        ${p.rows.map((r) => `<tr><td><code>${escapeHtml(r.key)}</code></td><td>${escapeHtml(r.description)}</td><td>${escapeHtml(r.type)}</td><td>${escapeHtml(r.values)}</td></tr>`).join('')}
+        ${p.rows.map((r) => `<tr data-key="${escapeHtml(r.key)}"><td><code>${escapeHtml(r.key)}</code></td><td>${escapeHtml(r.description)}</td><td>${escapeHtml(r.type)}</td><td>${escapeHtml(r.values)}</td></tr>`).join('')}
       </tbody></table></div>
       <details><summary>The specification's note on TokenDirection and TokenCacheAction</summary>
         ${quote({ text: p.note, source: p.source })}</details></div>
@@ -1749,7 +1757,7 @@ async function renderAi() {
           plural(e.results.examples?.rows || 0, 'row')} on the worked examples</span></li>` : ''; }).join('')}</ul></div>
 
     <div class="detail"><h3>Where it stops</h3>
-      <div class="gaps">${ai.gaps.map((g) => `<div class="gap"><h4>${escapeHtml(g.title)}</h4><p>${linkRefs(g.text)}</p>
+      <div class="gaps">${ai.gaps.map((g) => `<div class="gap" data-key="${escapeHtml(g.id)}"><h4>${escapeHtml(g.title)}</h4><p>${linkRefs(g.text)}</p>
         ${g.quotes.map(quote).join('')}${g.threads.length ? `<ul>${g.threads.map(threadLine).join('')}</ul>` : ''}</div>`).join('')}</div></div>
 
     <div class="detail"><h3>How it got here</h3>
@@ -2988,6 +2996,8 @@ function addressOf(t) {
   if ((t === 'model' || t === 'ref') && detailOwner === t) { const p = selPath(selection); if (p) return `#${t}/${p}`; }
   const ex = $('examples').value;
   if (t === 'query' && examples.some((e) => e.id === ex)) return `#query/${ex}`;
+  if (t === 'data' && dataSel && manifest && manifest.tables[dataSel]) return `#data/${dataSel}`;
+  if (t === 'quiz' && quizQ) return `#quiz/${quizQ.id}`;
   return `#${t}`;
 }
 
@@ -3005,9 +3015,9 @@ function waitFor(find, token, ms = 12000) {
   });
 }
 // Scroll to an item, opening any folded section it is in, and outline it for a moment.
-function flash(el) {
+function flash(el, block = 'center') {
   for (let d = el.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')) d.open = true;
-  el.scrollIntoView({ block: 'center' });
+  el.scrollIntoView({ block });
   el.classList.add('flash');
   setTimeout(() => el.classList.remove('flash'), 2200);
 }
@@ -3027,6 +3037,7 @@ async function route(h = location.hash) {
   if (head === 'evidence' && parts[0]) return focusEvidence(parts[0]);
   if (head === 'recent' && parts[0]) return jumpRecent(Number(parts[0]));
   if (head === 'model' || head === 'ref') return openPanel(head, parts, h);
+  if ((head === 'data' || head === 'quiz' || head === 'ai') && parts[0]) return openOnTab(head, parts[0], h);
   if (tab !== head) showTab(head);
   if (head === 'query' && parts[0]) {
     if (!examples.length) { routeLater = h; return; }
@@ -3048,7 +3059,33 @@ async function openPanel(t, parts, address, thread = null) {
   if (line) { const el = await waitFor(() => $('reqs')?.querySelector(`[data-line="${line}"]`), token); if (el) flash(el); }
   if (thread) { const el = await waitFor(() => threadItem(thread), token); if (el) flash(el); }
 }
-// #thread/<number>: the search index records which panel's History lists each pull request and issue.
+// A table on Sample data, a question on Quiz, or a part of the AI tokens tab.
+async function openOnTab(t, id, address) {
+  if (tab !== t) showTab(t, true);
+  if (!model || !manifest || !conn || !examples.length) { routeLater = address; return; }
+  let el = null, block = 'center';
+  if (t === 'data') {
+    if (!manifest.tables[id]) return;
+    dataSel = id;
+    store.set('data-table', id);
+    renderData();
+    el = $('data-detail');
+    block = 'start';
+  } else if (t === 'quiz') {
+    quiz ??= await loadQuiz();
+    if (!quiz || !quiz.some((q) => q.id === id)) return;
+    pickQuestion(id);
+    el = $('quiz-q');
+    block = 'start';
+  } else {
+    await renderAi();
+    el = $('ai-body').querySelector(`[data-key="${CSS.escape(id)}"]`);
+  }
+  setAddress(address);
+  if (el) flash(el, block);
+}
+// #thread/<number>: the search index records which panel's History lists each pull request and issue; one discussed in
+// the last two weeks is listed as its Recent card instead.
 async function routeThread(n) {
   const idx = await loadSearch();
   const e = idx && idx.threads.get(String(n));
@@ -3071,13 +3108,18 @@ async function focusEvidence(id) {
 // Every word typed must match the start of a word in an entry, or the start of a part of a CamelCase word, so
 // "contracted unit price" finds ContractedUnitPrice. Within each kind, an exact ID comes first, then an exact name, then
 // entries whose words all match in the ID, then in the name, then in the title, then anywhere in the text.
-const SS_GROUPS = [['model', 'Columns and datasets'], ['ref', 'Reference'], ['req', 'Spec requirements'], ['query', 'Queries'],
-  ['thread', 'Pull requests and issues'], ['ev', 'Evidence'], ['recent', 'Recent threads']];
-const SS_GROUP = { ds: 'model', col: 'model', join: 'model', attr: 'ref', cond: 'ref', topic: 'ref', req: 'req', query: 'query',
-  pr: 'thread', issue: 'thread', ev: 'ev', recent: 'recent' };
+// Results are grouped by the tab each one opens on, under the tab's label and in the tab bar's order; on the Data model
+// and Reference, by kind within that. Chips above them show one tab's results at a time.
+const SS_KIND = { ds: 'cols', col: 'cols', join: 'joins', attr: 'entries', cond: 'entries', topic: 'entries', req: 'req',
+  pr: 'thread', issue: 'thread' }; // any other kind is the only one on its tab
+const SS_KINDS = { cols: 'Columns and datasets', joins: 'Joins', entries: 'Conditions, attributes and supporting material',
+  req: 'Requirements', thread: 'Pull requests and issues' }; // in this order within a tab
 const SS_ORDER = { ds: 0, col: 1, join: 2, attr: 0, cond: 1, topic: 2 }; // on a tie: datasets before columns, and so on
-const SS_SHOW = 5, SS_MAX = 100; // per kind: shown at first, and at most after "Show all"
-let searchP = null, ssIndex = null, ssMore = {}, ssActive = -1, ssTimer = 0;
+const SS_SHOW = 4, SS_SHOW_TAB = 20, SS_MAX = 100; // per kind: shown under All, shown when one tab is chosen, and at most
+let searchP = null, ssIndex = null, ssMore = {}, ssActive = -1, ssTimer = 0, ssTab = 'all';
+const ssTabs = () => [...document.querySelectorAll('.apptabs button')].map((b) => [b.dataset.tab, b.textContent.trim()]);
+const ssKindRank = (k) => Object.keys(SS_KINDS).indexOf(k);
+const inSearch = () => document.querySelector('.site-search').contains(document.activeElement);
 const IS_MAC = /mac|iphone|ipad/i.test(navigator.userAgentData?.platform || navigator.platform || '');
 const WORD_RE = /[\p{L}\p{N}]+/gu, PART_RE = /\p{Lu}+(?!\p{Ll})|\p{Lu}?\p{Ll}+|\p{N}+/gu;
 const ssNorm = (s) => String(s || '').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
@@ -3100,7 +3142,8 @@ function buildSearch(items) {
   const tiers = items.map((e) => [e.i, e.n, e.t, `${e.b || ''} ${e.s || ''} ${e.x || ''}`].map(wordsOf));
   const vocab = [...new Set(tiers.flatMap((t) => t.flatMap((s) => [...s])))].sort();
   const at = new Map(vocab.map((w, k) => [w, k]));
-  const list = items.map((e, k) => ({ ...e, pos: k, grp: SS_GROUP[e.y], idKey: ssNorm(e.i), nameKey: ssNorm(e.n),
+  const list = items.map((e, k) => ({ ...e, pos: k, tab: unhash(e.g || e.h).split('/')[0], kind: SS_KIND[e.y] || e.y,
+    idKey: ssNorm(e.i), nameKey: ssNorm(e.n),
     tok: tiers[k].map((s) => Int32Array.from([...s].map((w) => at.get(w))).sort()) }));
   return { vocab, at, list, threads: new Map(list.filter((e) => e.g).map((e) => [e.i, e])) };
 }
@@ -3127,7 +3170,7 @@ function runSearch(idx, q) {
   }
   // On a tie: more of the words in the ID or name, more whole words, then datasets before columns, newer threads first
   hits.sort((a, b) => a.rank - b.rank || a.sum - b.sum || b.exact - a.exact || (SS_ORDER[a.e.y] || 0) - (SS_ORDER[b.e.y] || 0)
-    || (a.e.grp === 'thread' || a.e.grp === 'recent' ? b.e.i - a.e.i : 0) || a.e.pos - b.e.pos);
+    || (a.e.kind === 'thread' || a.e.y === 'recent' ? b.e.i - a.e.i : 0) || a.e.pos - b.e.pos);
   return { words, hits };
 }
 
@@ -3167,6 +3210,7 @@ function ssOption(h, words, k) {
   const e = h.e, m = (s) => ssMark(s, words);
   const num = e.y === 'pr' || e.y === 'issue' || e.y === 'recent' ? `#${escapeHtml(e.i)} ` : '';
   const main = e.y === 'col' ? `<span class="ss-id">${m(e.i)}</span><span class="ss-alt">${m(e.n)}</span>`
+    : e.y === 'table' || (e.y === 'ai' && e.i) ? `<span class="ss-id">${m(e.i)}</span>`
     : e.y === 'ds' || e.y === 'attr' || e.y === 'cond' ? `${m(e.n)}<span class="ss-alt ss-id">${m(e.i)}</span>`
     : e.y === 'join' ? `${m(e.n)}<span class="tag lab">lab</span>`
     : e.y === 'topic' ? m(e.n)
@@ -3179,17 +3223,19 @@ function ssOption(h, words, k) {
 
 async function renderSearch() {
   const box = $('ss-results'), input = $('ss-input'), q = input.value.trim();
-  if (document.activeElement !== input) return;
+  if (!inSearch()) return;
   openResults();
   if (!q) {
-    box.innerHTML = `<p class="ss-note">Search the columns, datasets, attributes, conditions, the specification's requirements, the
-      example queries, the pull requests and issues in the History, the evidence and the Recent threads. Every word must
-      match the start of a word. <kbd>↑</kbd> <kbd>↓</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close.</p>`;
+    ssTab = 'all'; // a new search starts on All
+    box.innerHTML = `<p class="ss-note">Search every tab: columns, datasets, joins and requirements, conditions, attributes and
+      supporting material, the sample tables, the example queries, the quiz, the evidence, AI tokens, the pull requests and
+      issues in the History and the Recent threads. Every word must match the start of a word. <kbd>↑</kbd> <kbd>↓</kbd> to
+      move, <kbd>Enter</kbd> to open, <kbd>Tab</kbd> to the filters, <kbd>Esc</kbd> to close.</p>`;
     return setActive(-1);
   }
   if (!ssIndex) box.innerHTML = '<p class="ss-note">Loading the search index…</p>';
   const idx = await loadSearch();
-  if (input.value.trim() !== q || document.activeElement !== input) return; // typed on, or left, while it loaded
+  if (input.value.trim() !== q || !inSearch()) return; // typed on, or left, while it loaded
   if (!idx) { box.innerHTML = '<p class="ss-note">Could not load the search index.</p>'; return; }
   const { words, hits } = runSearch(idx, q);
   if (!hits.length) {
@@ -3197,20 +3243,42 @@ async function renderSearch() {
     $('ss-status').textContent = 'No results';
     return setActive(-1);
   }
+  const byTab = new Map();
+  hits.forEach((h) => { if (!byTab.has(h.e.tab)) byTab.set(h.e.tab, []); byTab.get(h.e.tab).push(h); });
+  const tabs = ssTabs().filter(([t]) => byTab.has(t));
+  if (!byTab.has(ssTab)) ssTab = 'all'; // the chosen tab has nothing for these words
+  const chip = (t, label, n) => `<button type="button" data-tab="${t}" aria-pressed="${t === ssTab}">${escapeHtml(label)} · ${n.toLocaleString()}</button>`;
   let html = '', k = 0;
-  for (const [g, label] of SS_GROUPS) {
-    const mine = hits.filter((h) => h.e.grp === g);
-    if (!mine.length) continue;
-    const shown = mine.slice(0, ssMore[g] ? SS_MAX : SS_SHOW);
-    html += `<div role="group" aria-labelledby="ss-g-${g}"><div class="ss-group-h" id="ss-g-${g}"><span>${label}</span><span>${mine.length.toLocaleString()}</span></div>
-      ${shown.map((h) => ssOption(h, words, k++)).join('')}${mine.length > shown.length
-      ? `<div class="ss-opt ss-more" role="option" id="ss-o-${k++}" aria-selected="false" data-more="${g}">${ssMore[g]
-        ? `Showing ${SS_MAX} of ${mine.length.toLocaleString()}: add a word to narrow them, or show fewer`
-        : mine.length > SS_MAX ? `Show the first ${SS_MAX}` : `Show all ${mine.length}`}</div>` : ''}</div>`;
+  for (const [t, label] of tabs) {
+    if (ssTab !== 'all' && ssTab !== t) continue;
+    const mine = byTab.get(t), kinds = [...new Set(mine.map((h) => h.e.kind))].sort((a, b) => ssKindRank(a) - ssKindRank(b));
+    html += `<div role="group" aria-labelledby="ss-g-${t}"><div class="ss-group-h" id="ss-g-${t}"><span>${escapeHtml(label)}</span><span>${
+      mine.length.toLocaleString()}</span></div>`;
+    for (const kind of kinds) {
+      const these = mine.filter((h) => h.e.kind === kind), key = `${t}:${kind}`;
+      const shown = these.slice(0, ssMore[key] ? SS_MAX : ssTab === 'all' ? SS_SHOW : SS_SHOW_TAB);
+      if (kinds.length > 1) html += `<div class="ss-kind-h">${SS_KINDS[kind]} · ${these.length.toLocaleString()}</div>`;
+      html += shown.map((h) => ssOption(h, words, k++)).join('');
+      if (these.length > shown.length) html += `<div class="ss-opt ss-more" role="option" id="ss-o-${k++}" aria-selected="false" data-more="${key}">${
+        ssMore[key] ? `Showing ${SS_MAX} of ${these.length.toLocaleString()}: add a word to narrow them, or show fewer`
+          : these.length > SS_MAX ? `Show the first ${SS_MAX}` : `Show all ${these.length}`}</div>`;
+    }
+    html += '</div>';
   }
-  box.innerHTML = html;
-  $('ss-status').textContent = `${hits.length} result${hits.length === 1 ? '' : 's'}`;
+  box.innerHTML = `<div class="ev-filters ss-chips" id="ss-chips" role="group" aria-label="Show results from">${chip('all', 'All', hits.length)}${
+    tabs.map(([t, label]) => chip(t, label, byTab.get(t).length)).join('')}</div><div id="ss-list" role="listbox" aria-label="Search results">${html}</div>`;
+  const shownIn = ssTab === 'all' ? '' : `, ${byTab.get(ssTab).length} in ${tabs.find(([t]) => t === ssTab)[1]}`;
+  $('ss-status').textContent = `${hits.length} result${hits.length === 1 ? '' : 's'}${shownIn}`;
   setActive(ssActive >= 0 && ssActive < k ? ssActive : 0, false);
+}
+// A chip: show only that tab's results (or All). From the keyboard, the focus stays on the chip.
+async function chooseTab(c) {
+  const fromKeys = document.activeElement === c;
+  ssTab = c.dataset.tab;
+  ssActive = -1;
+  await renderSearch();
+  $('ss-results').scrollTop = 0;
+  if (fromKeys) $('ss-chips')?.querySelector(`[data-tab="${ssTab}"]`)?.focus();
 }
 function setActive(k, scroll = true) { // k: the option's position, or -1 for none
   const opts = $('ss-results').querySelectorAll('[role="option"]');
@@ -3227,6 +3295,7 @@ function openResults() {
   box.style.right = `${Math.min(0, r.right - w - 16)}px`; // keep it on screen when the box sits at the left
 }
 function closeResults() {
+  ssTab = 'all'; // the filter lasts while the results are open
   $('ss-results').hidden = true;
   $('ss-input').setAttribute('aria-expanded', 'false');
   $('ss-input').removeAttribute('aria-activedescendant');
@@ -3253,8 +3322,10 @@ function focusSearch() {
 }
 
 $('ss-kbd').textContent = IS_MAC ? '⌘K' : 'Ctrl K';
-$('ss-input').addEventListener('focus', () => { loadSearch(); renderSearch(); });
-$('ss-input').addEventListener('blur', closeResults);
+$('ss-input').addEventListener('focus', () => { loadSearch(); if ($('ss-results').hidden) renderSearch(); });
+// Close once the focus has left the box and its results (the chips are in them). Checked a moment later, because
+// choosing a chip from the keyboard redraws it and puts the focus back on it.
+document.querySelector('.site-search').addEventListener('focusout', () => setTimeout(() => { if (!inSearch()) closeResults(); }, 0));
 $('ss-input').addEventListener('input', () => {
   ssMore = {};
   ssActive = -1;
@@ -3281,7 +3352,25 @@ $('ss-input').addEventListener('keydown', (e) => {
   }
 });
 $('ss-results').addEventListener('mousedown', (e) => e.preventDefault()); // keep the focus in the box
-$('ss-results').addEventListener('click', (e) => chooseOption(e.target.closest('[role="option"]')));
+$('ss-results').addEventListener('click', (e) => {
+  const c = e.target.closest('#ss-chips [data-tab]');
+  if (c) return chooseTab(c);
+  chooseOption(e.target.closest('[role="option"]'));
+});
+// The chips from the keyboard: Tab or ← → between them, Enter or Space to choose, ↓ or Esc back to the box.
+$('ss-results').addEventListener('keydown', (e) => {
+  const c = e.target.closest('#ss-chips [data-tab]');
+  if (!c) return;
+  const chips = [...$('ss-chips').querySelectorAll('[data-tab]')], at = chips.indexOf(c);
+  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+    e.preventDefault();
+    chips[(at + (e.key === 'ArrowRight' ? 1 : chips.length - 1)) % chips.length].focus();
+  } else if (e.key === 'ArrowDown' || e.key === 'Escape') {
+    e.preventDefault();
+    $('ss-input').focus();
+    if (e.key === 'ArrowDown') setActive(0);
+  }
+});
 $('ss-results').addEventListener('mousemove', (e) => {
   const o = e.target.closest('[role="option"]');
   if (o) { const k = [...$('ss-results').querySelectorAll('[role="option"]')].indexOf(o); if (k !== ssActive) setActive(k, false); }
@@ -3313,6 +3402,7 @@ $('data-list').addEventListener('click', (e) => {
   if (!b) return onListClick('data', renderData)(e);
   dataSel = b.dataset.table;
   store.set('data-table', dataSel);
+  setAddress(addressOf('data'));
   renderData();
   $('data-detail').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 });

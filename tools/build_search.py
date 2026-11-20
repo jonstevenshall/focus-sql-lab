@@ -7,12 +7,16 @@ API key, and it changes only when they do:
 
 Reads focus/model.json (datasets, columns, joins, attributes, conditions, appendix, metadata and schema topics, and
 every requirement line), object-summaries.json, focus/spec-queries.json, practice-queries.json, focus/history.json
-with thread-summaries.json, evidence.json, recent.json and, if it exists, open-requests.json.
+with thread-summaries.json, focus/data/manifest.json (the Sample data tables), quiz.json (titles and questions, not
+hints or answers), focus/ai-tokens.json, evidence.json, recent.json and, if it exists, open-requests.json.
+
+Each thing is listed once, under the tab it lives on: the page groups results by the tab their address opens. A pull
+request or issue discussed in the last two weeks is listed as its Recent card, not again from the History.
 
 Each entry is {y: what it is, i: its ID, n: its name, t: its title, b: its text, s: a line shown under it, x: more
 words to find it by, not shown (SQL, thread numbers, column IDs), h: its address on the page}, with empty fields left
-out. The page ranks a match in i above one in n, n above t, and t above b, s and x. A pull request or issue also has g: the address of the panel whose History lists it, which #thread/<number>
-opens. Requirement lines are the specification's, with its Markdown links and emphasis reduced to their text.
+out. The page ranks a match in i above one in n, n above t, and t above b, s and x. A pull request or issue also has
+g: the address of the panel whose History lists it, which #thread/<number> opens. Requirement lines are the specification's, with its Markdown links and emphasis reduced to their text.
 """
 import json
 import pathlib
@@ -171,7 +175,12 @@ def state_of(x):
     return x.get("state", "")
 
 
+in_recent = {str(r["number"]) for r in recent}
+
+
 def thread(y, n, x, goal, extra=""):
+    if str(n) in in_recent:
+        return  # listed as its Recent card instead
     when = x.get("merged") or x.get("closed") or x.get("opened") or ""
     sub = " · ".join(filter(None, ["Pull request" if y == "pr" else "Issue", state_of(x), when, x.get("author")]))
     add(y, f"#thread/{n}", i=n, t=x["title"], s=sub, g=f"#{goal}",
@@ -190,6 +199,31 @@ for n, x in open_threads.items():
     y = "pr" if x.get("kind") == "pull request" else "issue"
     thread(y, n, {**x, "state": "open draft" if x.get("state") == "draft" else "open"}, open_target[n][1],
            " ".join(filter(None, [x.get("summary"), said.get(n, "")])))
+
+# ---- the Sample data, Quiz and AI tokens tabs ---------------------------------------------------------------------
+manifest = load("focus/data/manifest.json", {"tables": {}, "sources": {}})
+for name, m in manifest["tables"].items():
+    src = manifest["sources"].get(m.get("source"), {})
+    labs = m.get("lab_columns") or {}
+    add("table", f"#data/{name}", i=name, b=m.get("description", ""),
+        s=" · ".join(filter(None, [ds_name.get(m.get("dataset"), m.get("dataset")), src.get("label"), f"{m.get('rows', 0):,} rows"])),
+        x=" ".join([*labs, *labs.values()]))
+
+QUIZ_LEVELS = {1: "Write it", 2: "Change it"}  # as the Quiz tab heads its two lists
+for q in load("quiz.json", []):
+    add("quiz", f"#quiz/{q['id']}", t=q["title"], b=q.get("ask", ""),
+        s=" · ".join(filter(None, [QUIZ_LEVELS.get(int(q.get("level", 0))), *q.get("concepts", [])])))
+
+ai = load("focus/ai-tokens.json")
+if ai:  # the parts of the AI tokens tab, under the headings the tab gives them
+    add("ai", "#ai/how", t="How a token charge is recorded",
+        b=" ".join([*ai.get("how", []), ai.get("feature", {}).get("description", "")]))
+    for r in ai.get("properties", {}).get("rows", []):
+        add("ai", f"#ai/{r['key']}", i=r["key"], b=r.get("description", ""), x=r.get("values", ""),
+            s=f"The model and token properties · {r.get('type', '')}")
+    for g in ai.get("gaps", []):
+        add("ai", f"#ai/{g['id']}", t=g["title"], b=g.get("text", ""), s="Where it stops",
+            x=" ".join(q.get("text", "") for q in g.get("quotes", [])))
 
 # ---- evidence and the Recent tab ---------------------------------------------------------------------------------
 EV_KINDS = {"pain": "Pain point", "demand": "Who asked", "discovery": "How they found out", "use_case": "Use case",
