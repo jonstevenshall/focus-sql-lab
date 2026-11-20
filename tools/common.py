@@ -250,15 +250,15 @@ def write_text(client, spend, system, content, limit, thread, primary, fallback,
 
 # ---- what a batch of summaries will cost --------------------------------------------------------------------------
 # Calibrated on the logged summary runs in site/update-log.json, against the text each of their items sent (measured
-# again from the thread or page on 20 November 2026). Input: tokens per character sent (instructions, text and the
-# length line), which includes the retries that failed first tries needed: most first tries fail a check (often the word
-# limit), and a retry sends the text again. Output: tokens per item, which for Haiku is mostly its thinking, billed as
-# output. Haiku 5.5 at high effort: 202 items in two runs (12 and 13 November 2026), 781,806 characters sent, 341,190
-# input and 357,049 output tokens. Sonnet 5.5 at medium effort: 15 items in one run (19 November 2026), 232,829
-# characters, 135,054 input and 5,421 output tokens. Settings with no logged run borrow the nearest that has one, and
-# the estimate says so.
-INPUT_PER_CHAR = {"claude-haiku-5-5": 0.436, "claude-sonnet-5-5": 0.580}
-OUTPUT_PER_ITEM = {("claude-haiku-5-5", "high"): 1768, ("claude-sonnet-5-5", "medium"): 361}
+# from the thread or page). Input: tokens per character sent (instructions, text and the length line), which includes
+# the retries that failed first tries needed: most first tries fail a check (often the word limit), and a retry sends
+# the text again. Output: tokens per item, which for Haiku is mostly its thinking, billed as output. Haiku 5.5 at high
+# effort: 372 items in three runs (12 and 13 November 2026, and the first open-requests batch on 19 November),
+# 2,279,396 characters sent, 967,720 input and 771,190 output tokens. Sonnet 5.5 at medium effort: 15 items in one run
+# (19 November 2026), 232,829 characters, 135,054 input and 5,421 output tokens. Settings with no logged run borrow the
+# nearest that has one, and the estimate says so.
+INPUT_PER_CHAR = {"claude-haiku-5-5": 0.425, "claude-sonnet-5-5": 0.580}
+OUTPUT_PER_ITEM = {("claude-haiku-5-5", "high"): 2073, ("claude-sonnet-5-5", "medium"): 361}
 
 
 def escalated_share(site, model, tasks=("summaries", "open-requests", "recent")):
