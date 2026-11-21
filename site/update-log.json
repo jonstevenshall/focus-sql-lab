@@ -1,6 +1,73 @@
 {
  "runs": [
   {
+   "at": "2026-11-21T01:02:26Z",
+   "task": "open-requests",
+   "model": "claude-haiku-5-5",
+   "effort": "high",
+   "fallback": "claude-sonnet-5-5",
+   "threads": 237,
+   "kept": 236,
+   "attempted": 1,
+   "first_pass": 1,
+   "escalated": 0,
+   "escalated_passed": 0,
+   "failed": 0,
+   "escalated_pct": 0.0,
+   "left": 0,
+   "spend": {
+    "claude-haiku-5-5": {
+     "input": 2350,
+     "output": 3471,
+     "cost": 0.002,
+     "price": [
+      0.1,
+      0.5
+     ]
+    }
+   },
+   "cost": 0.002,
+   "estimate": {
+    "input": 1233,
+    "output": 2082,
+    "cost": 0.0013
+   },
+   "escalations": [],
+   "trigger": "schedule",
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/44846918973"
+  },
+  {
+   "at": "2026-11-21T01:01:51Z",
+   "task": "recent",
+   "model": "claude-haiku-5-5",
+   "effort": "high",
+   "fallback": "claude-sonnet-5-5",
+   "threads": 88,
+   "kept": 70,
+   "attempted": 18,
+   "first_pass": 18,
+   "escalated": 0,
+   "escalated_passed": 0,
+   "failed": 0,
+   "escalated_pct": 0.0,
+   "partly": 0,
+   "spend": {
+    "claude-haiku-5-5": {
+     "input": 121244,
+     "output": 91910,
+     "cost": 0.0581,
+     "price": [
+      0.1,
+      0.5
+     ]
+    }
+   },
+   "cost": 0.0581,
+   "escalations": [],
+   "trigger": "schedule",
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/44846918973"
+  },
+  {
    "at": "2026-11-21T00:06:48Z",
    "task": "summaries",
    "model": "claude-haiku-5-5",

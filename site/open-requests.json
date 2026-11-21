@@ -1,14 +1,14 @@
 {
- "checked_at": "2026-11-20T01:25:36Z",
+ "checked_at": "2026-11-21T01:01:52Z",
  "wide": 15,
  "counts": {
-  "open": 330,
-  "prs": 45,
-  "issues": 285,
-  "matched": 233,
-  "strong": 52,
+  "open": 335,
+  "prs": 46,
+  "issues": 289,
+  "matched": 237,
+  "strong": 54,
   "wide": 4,
-  "weak": 177
+  "weak": 179
  },
  "about": "The open FOCUS_Spec issues and pull requests that concern each dataset and column, matched by the files they change and the names in their titles and descriptions, rebuilt daily from GitHub. Each thread's summary is written by an AI model from the thread, or reused from the History or Recent summaries, and rewritten when the thread gains comments or reviews. The summaries paraphrase those discussions and name participants by their GitHub usernames.",
  "open": [
@@ -341,7 +341,12 @@
   2878,
   2879,
   2880,
-  2881
+  2881,
+  2882,
+  2883,
+  2884,
+  2885,
+  2886
  ],
  "threads": {
   "959": {
@@ -502,7 +507,7 @@
    "reviews": 0,
    "summary": "Matt-Cowsert opened this feature request for a normalized recommendations dataset, because practitioners receive optimization recommendations such as rightsizing and commitment purchases from many providers in different formats; eleven organizations backed it. In 2026 the work moved to task force 2 through #2444, and the thread recorded decisions there: evaluation period start and end columns with duration deferred, past-participle date column names, and RecommendationProviderName in place of DataGeneratorName. flanakin and rileyjenk disagreed over resource configuration columns, and the scope was trimmed before initial Member review in September 2026. In October 2026 maintainers moved the dataset and its supported feature, #2583, to the 1.6 cycle for lack of consensus on its shape and names. The request remained open.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "977": {
    "number": 977,
@@ -644,8 +649,8 @@
    "reviews": 0,
    "summary": "Issue #1027, opened by rileyjenk for Domo, proposes replacing the glossary term \"Charge\" for dataset rows with plain \"Row\". The concern is that charge already means a financial charge in FinOps, so it reads oddly for rows that are not charges. The requester sees low impact, since it is only terminology, though it would need revisiting if FOCUS moved to a JSON-oriented dataset. Recently kk09v noted that the SKU Price dataset already uses \"record\" for the same concept, and that charge and record are both verbs as well as nouns. They seem to favour row, as it is unlikely to be used as an action in the specification. No one has pushed back, but there is no decision or further reaction yet, so the issue looks to be waiting on the working group.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "1028": {
    "number": 1028,
@@ -1237,7 +1242,7 @@
    "reviews": 0,
    "summary": "Matt-Cowsert opened this request because practitioners could not tell which charges can be tagged or where a tag value came from. With kk09v and qquigley as sponsors and work starting in 1.4, TF-2 widened it from resource to charge tagging after cnharris10 noted SaaS tags without resources, and ruled out SKUs as the basis. From eleven candidate structures the group chose a key-driven TagDetails column alongside Tags, after kk09v's BigQuery tests, drafted as #1904. An AWS test showed data growing seven to eight times, tying it to column selection (#1091). In March 2026 shawnalpay opposed adding Recommended columns; maintainers found little support for #1904 as written, felt the scope had grown without re-review, and believed time had run out in the release.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "1133": {
    "number": 1133,
@@ -1577,7 +1582,7 @@
    "reviews": 0,
    "summary": "shawnalpay asked that ListUnitPrice and ListCost requirements say which pricing tier they reflect, because AWS fills them from the highest tier, inflating savings. cnharris10 asked about negotiated tiers, which udam-stitcher said affect only contracted prices. udam-stitcher also noted a contradiction in the issue text and argued list price should follow the row's SKU Price ID, so existing rules may already cover tiers. It remained open, last discussed in November 2025.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "1687": {
    "number": 1687,
@@ -1827,8 +1832,8 @@
    "reviews": 0,
    "summary": "Issue #1974, opened by ljadvey in February 2026, asks that worked examples in the FOCUS specification pass the FOCUS Validator, since implementers use them as templates. Checks against 1.2 found missing MUST columns, numeric-looking IDs, null conditional values, non-conforming PricingUnit values and provider mismatches. It has been marked Seeking Champion since 31 October 2026. The 11 November 2026 TF2 update says PR #2558 adds a validator check for commitment discount flexibility examples, skipping rules known to fail by mistake, and stays open for 1.6. Open PRs #2661 and #2662 bring SaaS and commitment discount examples to the 1.3 schema; one participant offered to close them, while another asked that nothing close while authors are still being asked. Little discussion beyond the update suggests progress depends on qquigley finishing #2558 if it stalls.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "1976": {
    "number": 1976,
@@ -2049,19 +2054,19 @@
   "2174": {
    "number": 2174,
    "kind": "feature request",
-   "title": "[FR] Distinguish data originators, processors, and intermediaries",
+   "title": "[FR] Data Lineage Support - Distinguish data originators, processors, and intermediaries",
    "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2174",
    "state": "open",
    "milestone": null,
    "author": "Matt-Cowsert",
    "opened": "2026-04-07",
-   "last": "2026-11-17T03:57:42Z",
-   "comments": 6,
+   "last": "2026-11-20T05:07:34Z",
+   "comments": 7,
    "reviews": 0,
-   "summary": "This request asks the working group to separate the roles hidden behind data generator, which covers both the providers that create billing data and the FinOps tools that process it, so each requirement says who it applies to. It also wants lineage showing who last changed a row and where it came from, plus a marketplace seller case in the participating entity appendix. Several maintainers stress the last party to touch the data, while others note data can start outside FOCUS. One maintainer doubts the problem statement holds as written, so the Maintainers could not rate the request. Participants disagree on whether lineage needs metadata FRs #1060 and #1131 first. On 16 November 2026 the Maintainers agreed to open a new FR defining the entities, with lineage after it, so this request's future looks unsettled.",
+   "summary": "FR #2174 asks FOCUS to separate the roles behind \"data generator\", which currently covers both source providers and FinOps tools that transform their data. The aim is that requirements say who they apply to and practitioners can trace who changed a number. The Maintainers could not rate it yet. One participant doubts the problem statement, while others see value in tracing each change. Matt-Cowsert marked it blocked by metadata FRs #1060 and #1131, though participants disagree that the dependency is firm. On 16 November 2026 the Maintainers agreed to split the work: a new FR defining participating entities comes first, then metadata, then lineage, tracked as #2875. rileyjenk argues direct payment to a marketplace seller is an outlier that major clouds prohibit. The FR looks stalled in its current form, and its future depends on the entities FR.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2294": {
    "number": 2294,
@@ -2072,14 +2077,13 @@
    "milestone": null,
    "author": "Matt-Cowsert",
    "opened": "2026-04-21",
-   "last": "2026-04-21T19:53:14Z",
-   "comments": 0,
+   "last": "2026-11-20T04:57:13Z",
+   "comments": 1,
    "reviews": 0,
-   "summary": "Matt-Cowsert opened this request on 21 April 2026 after a TF-1 discussion. Practitioners could not reliably join Billing Period rows to Cost and Usage, since the spec does not say which billing periods need a row. shawnalpay proposed that each distinct BillingPeriodStart and InvoiceIssuerName pair in Cost and Usage require a matching Billing Period row. The thread records no decision, and the issue remains open.",
-   "summary_from": "written",
-   "summary_to": "2026-11-19",
-   "basis": "0/0",
-   "written_by": "claude-haiku-5-5"
+   "summary": "Issue #2294, opened by Matt-Cowsert in April 2026, asks the specification to say which billing periods need a Billing Period row. The aim is to let practitioners join Billing Period metadata such as status and timestamps onto Cost and Usage without missing rows, and to give data generators a testable rule. The direction raised by shawnalpay is that every distinct billing period start and invoice issuer pair in Cost and Usage should have a matching Billing Period row. The only recent activity is a comment from rileyjenk on 20 November 2026, arguing that much of the use case is already covered by recency and that the feature could adapt that. rileyjenk thinks it is close but needs some work. No other replies appear, so the thread looks quiet and the next step is not defined.",
+   "summary_from": "recent",
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2335": {
    "number": 2335,
@@ -2095,7 +2099,7 @@
    "reviews": 0,
    "summary": "shawnalpay asked to make Mandatory columns such as HostProviderName, ListCost and ContractedCost conditional so flat-fee SaaS and other non-cloud vendors could conform without inventing data. Earlier pull requests closed unmerged, and in 2026 the work narrowed to a contributor rubric for classifying new columns as Mandatory or Conditional (#2604), deferring existing columns to 1.6. In November 2026 the request, still open, went back to Seeking Champion for 1.6.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2371": {
    "number": 2371,
@@ -2237,7 +2241,7 @@
    "reviews": 0,
    "summary": "Matt-Cowsert proposed a FOCUS property distinguishing globally routed from region-pinned prices, mainly driven by AI model serving. The group debated its name and its link to the SKU Price dataset, with flanakin and ijurica raising naming and consistency concerns. On 23 September 2026 PR #2613 was postponed to the 1.6 cycle, and by 7 October 2026 no one had volunteered to take it up. The issue remains open.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2418": {
    "number": 2418,
@@ -2269,10 +2273,9 @@
    "last": "2026-11-15T06:16:49Z",
    "comments": 5,
    "reviews": 0,
-   "summary": "This request asks for a standard way to record which processing tier an AI charge was billed under, such as Standard, Priority or Batch, since providers price the same model differently by tier. Practitioners cannot currently compare tiers or spot non-urgent workloads that could move to batch without provider-specific parsing. thecloudman has championed it and opened #2873, targeting 1.6, which adds a ProcessingTier property with five values: Standard, Priority, Flex, Batch and Other. Flex goes beyond the three proposed values because several providers price it separately. It also keeps PricingCategory at Standard and excludes provisioned capacity from #2371. Open questions for Task Force 2 cover the value set, provisioned capacity and whether the tier sits on the SKU or the SKU Price. No replies yet, so the thread looks early.",
-   "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary": "Matt-Cowsert opened this request on 2 June 2026 to distinguish AI inference processing tiers, such as Standard, Priority and Batch, which are priced differently. At the 3 June 2026 Task Force 2 meeting it was kept separate from #2018, and its inclusion in 1.5 was left open. On 15 November 2026 thecloudman volunteered as champion and opened #2873, proposing a ProcessingTier property. The thread doesn't record the outcome.",
+   "summary_from": "history",
+   "summary_to": "2026-11-21"
   },
   "2444": {
    "number": 2444,
@@ -2289,7 +2292,7 @@
    "files": 36,
    "summary": "qquigley proposed a Recommendation dataset, toward #975, to normalize optimization recommendations such as rightsizing and commitment purchases across providers and join them to Cost and Usage data. Matt-Cowsert asked what anchors a recommendation when ResourceId is null, and tfcross, flanakin, ijurica and kk09v requested further columns and statuses; the group widened the scope beyond cost. flanakin wanted the resource configuration columns folded into a JSON RecommendationDetails column, while rileyjenk wanted them kept. Task force 2 renamed Currency to RecommendationCurrency after shawnalpay asked for a prefix. Merges with working_draft dropped and then duplicated a section of data_model.md, and thecloudman found links that would break; these were fixed. shawnalpay named two threads as blocking in September 2026, and the pull request was still open after its October 2026 activity.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2447": {
    "number": 2447,
@@ -2324,7 +2327,7 @@
    "files": 9,
    "summary": "finops-DaveMoreau proposed extending the Dataset Configuration attribute for #2415 so data generators could offer optional, higher-cardinality detail for documented parts of a dataset, which practitioners could select. ijurica argued the mapping from a chosen detail level to columns must be deterministic and raised aggregating records when high-cardinality columns are left out. The task force dropped the granularity framing for an opt-in documented by FOCUS dimensions, later renamed scoped detail, and ijurica explained split cost allocation as a narrower subset. Matt-Cowsert's reviews flagged undefined terms, which led to glossary entries, and how detail columns interact with column selection. ijurica's renames to detail variant and detail representation were adopted, qquigley kept Version Introduced at 1.4, and jpradocueva proposed restating requirements as checkable states. It remained open, last active in August 2026.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2487": {
    "number": 2487,
@@ -2430,7 +2433,7 @@
    "reviews": 0,
    "summary": "Matt-Cowsert opened #2521 because some AI providers, mainly Google, price one model differently by context-window tier, and FOCUS data cannot segment cost by that tier. jerrysr99 found 24 models across six providers using such bands and documented boundary wording. TF1 and the Maintainers explored SkuPriceDetails properties and SKU Price columns. finops-DaveMoreau questioned whether tiers are separate SKUs. Draft PRs #2871 and #2872 followed. The issue is still open.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2540": {
    "number": 2540,
@@ -2557,7 +2560,7 @@
    "files": 7,
    "summary": "Matt-Cowsert opened #2613 on 10 August 2026 to implement FR #2414 by adding a FOCUS-defined region scope property to SkuPriceDetails, with example values \"Global\", \"Regional\" and \"DataZone\", a footnote separating it from RegionId and Redundancy, and an appendix example. It was drafted as ServingScope.\n\nReviewers questioned the name: flanakin and marc-perreaut found \"serving\" unclear, and udam-stitcher and mike-finopsorg backed GeographicScope. ijurica wanted pricing framing dropped, and qquigley objected to an undefined population rule. Matt-Cowsert amended the footnote and argued PricingRegionId cannot close the gap. After flanakin's research (#2672), RegionScope was settled on 17 September, and #2667 merged into the branch on 23 September. jpradocueva's validation passed. On 18 November, jerrysr99 asked whether SKU versus SKU Price placement should be decided once. The PR remains open.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2635": {
    "number": 2635,
@@ -2628,7 +2631,7 @@
    "files": 57,
    "summary": "rileyjenk proposed example custom columns, with CSV data, for the SKU Price dataset appendix as part of #2807. Matt-Cowsert requested changes because the branch had fallen behind and its rate card edits would undo later fixes, beau-finopsorg flagged conflicts and an unedited description, and flanakin asked whether the columns duplicated existing SkuPriceDetails properties. It remained open as of September 2026, with conflicts and a change request outstanding.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2654": {
    "number": 2654,
@@ -2857,14 +2860,13 @@
    "milestone": null,
    "author": "jngibert",
    "opened": "2026-09-17",
-   "last": "2026-09-17T21:23:07Z",
-   "comments": 0,
+   "last": "2026-11-20T04:51:15Z",
+   "comments": 1,
    "reviews": 0,
-   "summary": "On 17 September 2026, jngibert asked how HostProviderName and ServiceProviderName apply to sovereign clouds, using Microsoft Azure operated by 21Vianet as the example. They noted the specification's examples do not cover a sovereign brand operated by a separate entity. Three options were posed: Azure as service provider with 21Vianet as host, the reverse, or Azure for both. The thread records no replies and is still open.",
-   "summary_from": "written",
-   "summary_to": "2026-11-19",
-   "basis": "0/0",
-   "written_by": "claude-haiku-5-5"
+   "summary": "jngibert asks how HostProviderName and ServiceProviderName should be filled for Azure China, which Microsoft Azure sells but 21Vianet operates. Three options are on the table: Microsoft Azure as service provider with 21Vianet as host, the reverse, or Microsoft Azure for both. The reporter notes the existing example covers third-party operation, not a brand and operator split, and wants a consistent answer for normalising data. The only reply, from rileyjenk on 20 November 2026, moves the question toward the invoice: for operator-run regions the payee may be a local billing entity, as with AWS China, and they ask for a recent example. No one has picked an option or answered yet, so the thread looks stalled. Whatever is chosen would decide which entity normalised data lists as provider.",
+   "summary_from": "recent",
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2705": {
    "number": 2705,
@@ -2952,7 +2954,7 @@
    "reviews": 0,
    "summary": "thecloudman opened issue #2712 on 22 September 2026 because the AllocatedRatio requirements do not state what time period the ratio covers. On 29 September 2026, Matt-Cowsert rewrote the problem statement and success criteria. On 8 October 2026, thecloudman was recorded as planning the change for the 1.6 cycle, and pull request #2713 was assigned to them. The issue remains open with no merge recorded.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2713": {
    "number": 2713,
@@ -2969,7 +2971,7 @@
    "files": 3,
    "summary": "Pull request #2713, opened as a draft by thecloudman on 22 September 2026, resolves #2712 by stating the charge period over which AllocatedRatio applies. It ties both requirements to the allocated charge's ChargePeriodStart and ChargePeriodEnd and adds an informative note on finer-grained calculation. The author expects the wording may change once #2515 and #2578 settle the origin-row model. The thread is still open and records no outcome.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2715": {
    "number": 2715,
@@ -3184,7 +3186,7 @@
    "reviews": 0,
    "summary": "Matt-Cowsert opened this issue on 30 September 2026 to fix six lines in the SKU Price dataset and examples that call a single record the SKU Price, per #2725. It proposed \"SKU Price record\" in informative text and \"SkuPrice record\" in requirements. A 26 October 2026 comment by Matt-Cowsert said maintainers agreed to defer the work to the 1.6 cycle instead of the 1.5 review. The issue was still open.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2737": {
    "number": 2737,
@@ -3254,7 +3256,7 @@
    "reviews": 0,
    "summary": "Matt-Cowsert opened #2742 on 6 October 2026 because FOCUS price data cannot show the rate a commitment discount produces, so it cannot be compared with on-demand rates. They later listed four missing pieces, including a link from purchase to covered usage. Draft #2753 tests one approach, and Irena Jurica leads the work. The issue remains open.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2743": {
    "number": 2743,
@@ -3325,7 +3327,7 @@
    "files": 58,
    "summary": "shawnalpay proposed adding a QuantityTierCategory column to SKU Price, with allowed values Graduated or Retroactive, so tiered pricing can be calculated correctly. mike-finopsorg, jpradocueva and jerrysr99 approved. On 16 November 2026, Matt-Cowsert requested wording, version, example and rebase changes. The pull request was still open.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2749": {
    "number": 2749,
@@ -3342,7 +3344,7 @@
    "files": 3,
    "summary": "shawnalpay opened #2749 to add a mandatory, nullable SkuMeter column to the SKU Price dataset, mirroring the existing Cost and Usage column so practitioners can filter price catalogs by meter without custom x_ columns. jpradocueva, flanakin and jerrysr99 approved. Matt-Cowsert suggested rewording, a consistency-rule fix, a preview version label, and raised example CSVs and rebasing. FR #2807 questions where SkuMeter belongs. The PR remains open.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2753": {
    "number": 2753,
@@ -3359,7 +3361,7 @@
    "files": 25,
    "summary": "Pull request #2753, opened by ijurica on 8 October 2026, proposed a CommitmentApplicability column on commitment purchase records instead of separate usage records. It argued a commitment price is a different amount for the same SKU Price, not a new SKU Price. On 5 November 2026, Matt-Cowsert assigned ijurica a TF2 action item to present the approach and its size impact. The thread doesn't record the outcome; it remains open.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2759": {
    "number": 2759,
@@ -3376,7 +3378,7 @@
    "files": 24,
    "summary": "finops-DaveMoreau opened this draft pull request on 9 October 2026 to close #2758. It adds lint rule MD992, which checks and auto-fixes Display Name casing in column file introductions, plus tooling such as make lint-fix and pre-commit hooks. On 12 October 2026, ijurica asked that the rule first be added to the editorial guidelines and that the team agree how custom lint rules are tested. The thread is still open.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2760": {
    "number": 2760,
@@ -3483,8 +3485,8 @@
    "files": 1,
    "summary": "Matt-Cowsert proposes guidelines for review artifacts: watermarked PDFs that share content held back from a FOCUS release, so data generators and practitioners can give feedback without it being a release or for production use. The first use would be the SKU Price dataset (#2424), kept out of FOCUS 1.5 and shared separately, a third option beside the preview path in #2762 and #2752. The guidelines set conditions for approval, faithfulness, fixed builds, labeling and clearance. Little reaction shows so far; the latest activity is Matt-Cowsert's 11 November 2026 note that foundation #38 merged on 22 October 2026, adding section 5.3 to the Operating Procedures, so the guidelines no longer wait on Steering Committee ratification. Matt-Cowsert has asked for another look, so the thread looks to be waiting on Members' feedback.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2776": {
    "number": 2776,
@@ -3501,7 +3503,7 @@
    "files": 229,
    "summary": "flanakin proposed an editorial change prefixing every Version Introduced value with a GA label, matching the Preview and GA format from #2762. Matt-Cowsert asked how content first published in 0.5 and 1.0-preview should be labelled, which flanakin considered implicitly preview, and in October 2026 said the change did not clearly suit consistency review. It remains an open draft pull request.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2778": {
    "number": 2778,
@@ -3536,7 +3538,7 @@
    "reviews": 0,
    "summary": "finops-DaveMoreau proposed verifiable entity references in the specification source, so that each reference names its column, glossary term or other entity and a check reports mismatches in each pull request. They built a prototype on a branch, with no pull request yet. Matt-Cowsert edited the issue for triage, asking finops-DaveMoreau to confirm seven changes. The thread doesn't record a confirmation. The issue is still open.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2780": {
    "number": 2780,
@@ -3571,8 +3573,8 @@
    "reviews": 0,
    "summary": "The issue asks for the rest of the preview lifecycle for whole datasets, which PR #2762 left open. Practitioners need to know which FOCUS content is preview and what it takes to become stable before building on it. Matt-Cowsert is drafting PR #2843 to set these rules. The 17 November update records agreement that a preview's scope list names only entities that exist for the preview, that features depending on preview content are also preview, and that new datasets start as preview but can go straight to general availability when evidence is strong. Glossary wording, requirement checks and Version Introduced remain open. Alex Hullah raised a concern that a preview label could reduce implementer feedback, which Matt-Cowsert said is not zero. The PR left draft on 16 November, and the 1.6 deadline still applies.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2783": {
    "number": 2783,
@@ -3642,8 +3644,8 @@
    "reviews": 0,
    "summary": "This is a planning issue, opened by beau-finopsorg on 27 October 2026, asking for a plan covering what to share about the FOCUS 1.5 SKU Price Sheet Dataset Preview, when to share it, and what data to gather around it, both outbound and inbound. The description adds nothing beyond that goal, so the thread holds no draft plan yet. The only recent activity is one comment from Matt-Cowsert on 17 November 2026 saying they and beau-finopsorg will talk it through in their one-to-one. No one else has weighed in, and no options or positions are on record, so there is no visible sign yet of support or disagreement. The issue remains open and appears to be waiting on that conversation. Anyone outside it would need a written plan in the thread before they could see what is proposed.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2805": {
    "number": 2805,
@@ -3677,8 +3679,8 @@
    "reviews": 0,
    "summary": "This thread tracks moving the SKU Price dataset out of preview, so its requirements count toward conformance and its shape follows normal deprecation rules. The FinOps Foundation rates it nice to have, and the #1057 requesters are invited to add support. Task Force 2 on 11 November kept PR #2845's wording and moved the row-versus-record question to #1027. @flanakin's draft in #2826 would let users pull only changed records, which matters for dataset size. Open questions remain on SkuMeter, the primary key and the name. The Maintainers on 16 November made no decision on renaming: Irena Jurica argues SKU Price blurs the identifier and the dataset, while others doubt the concern is clear. Task Force 2 revisits the name on 18 November, so general availability looks some way off.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2811": {
    "number": 2811,
@@ -3767,8 +3769,8 @@
    "reviews": 0,
    "summary": "The request asks for a complete, reusable evaluation of the scope rules shared by eligibility and applicability columns, so data engineers need not derive it from the processing workflow. Today SKU Price Eligibility queries evaluate only part of the rules, and no supported feature uses Contract Commitment Applicability. Replying to triage feedback from Matt-Cowsert, ijurica narrowed 'reusable' to reuse across supported features rather than across columns, with one non-normative evaluation per column. In scope are SKU Price Eligibility and Contract Commitment Applicability; the draft column from #2753 is optional. Edge cases such as In and NotIn on a null dimension, which the applicability definition does not cover, remain an open question. No one else has commented yet, so support is untested; the author will revise the problem statement, use case and success criteria to match.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2821": {
    "number": 2821,
@@ -3803,7 +3805,7 @@
    "files": 4,
    "summary": "flanakin opened this pull request on 4 November 2026 to let SKU Price deliveries include only prices changed since a chosen point in time. The reason given was size: re-sending every row monthly would be about 7.5 GB, versus 0.64 GB for changes only. On 18 November 2026, flanakin pushed revisions covering Append delivery, key-changing corrections, scheduled cutoffs and retirements. The PR remained open, with no reviewer comments recorded.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2831": {
    "number": 2831,
@@ -3909,8 +3911,8 @@
    "reviews": 0,
    "summary": "This issue, opened by Matt-Cowsert, collects nine fixes from a review of the full 1.5 specification: casing errors such as 'MUST not' and SchemaID, one link pointing at the wrong InvoiceId, and a renamed condition. None changes what a requirement asks for. The description planned to hold them for the 1.5 release as errata. The only later activity is a comment by Matt-Cowsert saying maintainers agreed to apply them now as an editorial improvement targeting working_draft, so they no longer seem to be waiting for the release. That comment dates the meeting 2027, which looks like a slip for 2026. The renamed condition in row 9 needs care, since it changes a published anchor and eleven links, and the comment does not say whether it was kept. No one else has replied, so support or objections are not yet visible.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2837": {
    "number": 2837,
@@ -3944,8 +3946,8 @@
    "reviews": 0,
    "summary": "The issue asks how repeated [*] paths in JSON Object requirements bind to array elements. finops-DaveMoreau notes the guidelines don't say whether a second [*] path means the same element as the first, and RFC 9535 would allow either reading. The affected requirements fall into four groups: some where the same element is clearly meant but unstated, one where different elements are meant (scope tied to #2701), one where a [*] subject conflicts with \"for one object\", and a minor missing-location case. The proposed fix is an explicit qualifier in each requirement. Matt-Cowsert reports that #2827 now uses plain back-references instead of \"in the same entry\", and asks that four Requester Details lines join the same-element table. No replies yet; the issue remains open.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2839": {
    "number": 2839,
@@ -3978,10 +3980,10 @@
    "comments": 7,
    "reviews": 19,
    "files": 1,
-   "summary": "Matt-Cowsert's PR adds the v1.5 section to CHANGELOG.md, built from the diff between the v1.4 tag and v1.5-cr rather than milestone titles. It is part of #2825 and does not close it, as the Contributors list is still separate. The main judgement calls are six Migration Compatible changes, where queries or ingestion may need updating, such as the price redefinition, consumption currency and ContractedUnitPrice presence. shawnalpay confirmed the counts and raised classification and wording questions, which Matt-Cowsert has addressed in later commits. Six approvals are recorded by 19 November, and no change requests are shown. Entries for the IP Review editorial fixes will follow as they merge; #2836 and #2837 are excluded as post-release errata. It looks close to ready ahead of the 3 December 2026 WG approval date.",
+   "summary": "Matt-Cowsert's pull request adds the v1.5 section to CHANGELOG.md, part of #2825, listing every change from v1.4 to the v1.5 release candidate. Each change is classified as Compatible or Migration Compatible, with none Incompatible. For FOCUS data users, the seven Migration Compatible items, such as SkuPriceId scoping and consumption currency, are the ones to check. shawnalpay checked the counts and asked for clearer wording on several points; the author addressed each in one commit. flanakin found no blockers. The PR has six approvals, the last on 19 November 2026, though ijurica's later nits on Quarter removal and requester documentation have no reply yet. Editorial fixes from the IP Review will be added as they merge, ahead of WG approval on 3 December 2026.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2841": {
    "number": 2841,
@@ -3995,10 +3997,11 @@
    "last": "2026-11-06T17:59:51Z",
    "comments": 0,
    "reviews": 0,
-   "summary": "Matt-Cowsert asks for a FOCUS 1.4 to 1.5 section in the version migration guidance, modelled on the 1.3 to 1.4 section (#1548, #1597) and placed above it. It would be built from the v1.5 changelog (#2840) and a diff between the published 1.4 spec and the 1.5 release candidate. For people producing or consuming FOCUS data, it would cover each Migration Compatible change, the operating model conditions now governing column presence, and renames to the anchor and requirements models that affect tooling. It would also state that the SKU Price preview is excluded from conformance. The target is a pull request approved by Members before the working group approves v1.5 on 3 December 2026. No one has replied yet, so support or objections are unknown, and the thread looks quiet since opening on 6 November 2026.",
-   "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary": "Matt-Cowsert opened #2841 on 6 November 2026 requesting a FOCUS 1.4 to 1.5 section in the version migration guidance, placed above the 1.3 to 1.4 section. It was to draw on the 1.5 changelog (#2840) and a comparison with the v1.5 release candidate, and to state that the SKU Price preview is excluded from conformance. The thread has no comments and remains open, so no outcome is recorded.",
+   "summary_from": "written",
+   "summary_to": "2026-11-21",
+   "basis": "0/0",
+   "written_by": "claude-haiku-5-5"
   },
   "2842": {
    "number": 2842,
@@ -4013,10 +4016,10 @@
    "comments": 3,
    "reviews": 6,
    "files": 1,
-   "summary": "This pull request adds a 1.4 to 1.5 migration section to the version migration guidance, implementing #2841 ahead of the planned v1.5 approval. The main point is that 1.5 removes and renames no columns, so the impact is on values, such as how List, Contracted and Effective Cost relate. ijurica, reviewing the negotiated pricing wording, suggested limiting the gap to Effective Cost to discount-bearing commitment programs and placing non-discount negotiated terms in Contracted Cost; Matt-Cowsert applied both in c72bbe8b. ijurica also sees most unit price and cost changes as clarifications rather than substantive change and questioned a sentence on List Cost; Matt-Cowsert dropped that clause and invited alternative wording. A milestone mismatch was raised and explained as intentional. No approvals are recorded, and the List Cost wording remains open.",
+   "summary": "This PR adds a FOCUS 1.4 to 1.5 section to the version migration guidance, built from the release candidate diff and the v1.5 changelog. Its main point is that 1.5 removes and renames no columns, so the impact sits in values: queries can run cleanly and return different results. ijurica argued the gap to Effective Cost should cover only discount-bearing commitment programs, since capacity reservations give no discount, and sees most unit price and cost changes as clarifications. Matt-Cowsert applied these suggestions in c72bbe8b and offered other wording for the List Cost sentence; ijurica has not yet replied to that revision. The PR sits on the v1.6 milestone against a working_draft target, which Matt-Cowsert calls intentional, though the issue ties Member approval to the 3 December 2026 v1.5 vote.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2843": {
    "number": 2843,
@@ -4033,8 +4036,8 @@
    "files": 1,
    "summary": "Matt-Cowsert opened this draft pull request as a starting point for feature request #2782, which asks how a whole-dataset preview moves to stable or is removed, since the merged rules only cover its start. It adds markers to the Preview Process in the spec change guidelines: Proposed answers where existing evidence supports one, and TODO markers elsewhere. Proposals cover supporting entities, the scope list rule for requirements, and which Version Introduced value shows after promotion, and drafted text covers four questions. Nothing merges until the Task Force settles each answer. No approvals, change requests or comments are recorded yet, so reaction is not visible. The description says Task Force 1 took it up on 10 November 2026, but the record shows the change to TF-Core 1 that day, so its placement looks unsettled.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2844": {
    "number": 2844,
@@ -4050,8 +4053,8 @@
    "reviews": 0,
    "summary": "Matt-Cowsert opened this action item to produce the FOCUS 1.5 Data Model spreadsheet, the filterable file listing every dataset and column, which the website still links only for 1.4. It is built from the 1.5 release candidate and adds the preview SKU Price dataset (23 columns), four Cost and Usage columns, and operating model conditions replacing free-text conditions and the Applicability Criteria tab. Two of those conditions are also preview, and some allowed values change, such as ServiceSubcategory gaining Bare Metal. A draft exists but will be rebuilt from the release tag after ratification. Maintainers must still settle choices the specification leaves open, such as column categories and whether to keep shortened descriptions. It moved to In Progress on 10 November 2026, due 17 November 2026, and no one has commented yet.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2845": {
    "number": 2845,
@@ -4068,7 +4071,7 @@
    "files": 5,
    "summary": "finops-DaveMoreau opened #2845 to close #2735 by changing six SKU Price dataset lines to name the record, since eligibility can differ between records. Because the dataset shares the construct's name, they proposed renaming it. ijurica approved on 11 November 2026, flagging a release mismatch. TF2 agreed the PR lands in 1.6. The thread doesn't record a merge, and the PR was still open at its last comment.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2846": {
    "number": 2846,
@@ -4079,14 +4082,13 @@
    "milestone": "v1.5",
    "author": "Matt-Cowsert",
    "opened": "2026-11-10",
-   "last": "2026-11-19T22:06:24Z",
-   "comments": 3,
-   "reviews": 6,
+   "last": "2026-11-20T21:40:45Z",
+   "comments": 4,
+   "reviews": 7,
    "files": 18,
-   "summary": "This pull request corrects examples in the Contract Commitment and Commitment Program Eligibility Details text that don't match allowed values or requirements, closing #2832. Fixes include allowed ServiceCategory and ServiceSubcategory values, the UsageType and CDN filters, the discount percentage formula, and merging StackLens's monthly and annual programs into one Interval Spend Commitment. No requirement lines change. The main point under discussion was what Interval Spend Commitment means. ijurica read the monthly and annual intervals as resetting minimums, which conflicted with a Full Period row. Matt-Cowsert agreed and changed that row to Monthly. kk09v and jpradocueva approved. kk09v's question on the Datadog reference and Flexible Spend Plan was answered in-thread. Last activity was 19 November 2026, with Matt-Cowsert saying they would make the line 65 change too. No merge is recorded.",
-   "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary": "Matt-Cowsert opened this editorial pull request in November 2026 to correct examples flagged in #2832, such as allowed service values and a CDN filter. Review by kk09v and ijurica led to the Interval Spend Commitment row changing to monthly intervals. kk09v, jpradocueva and flanakin approved it between 16 and 20 November 2026. The thread doesn't record a merge, so the pull request was still open.",
+   "summary_from": "history",
+   "summary_to": "2026-11-21"
   },
   "2849": {
    "number": 2849,
@@ -4102,8 +4104,8 @@
    "reviews": 0,
    "summary": "This Action Item tracks the 1.5 errata candidates, filed as separate Feedback issues, from Maintainer assessment to one errata PR against working_draft, merged after 1.5 is published. Three are listed: #2836 corrects casing, IDs and links in 1.5 requirement text; #2837 corrects the PaymentCurrency, ContractId and TimeSectorEnd requirements; and #2783 points out that two CAU commitment discount requirements have no Condition, so a null value fails them, also in 1.2 to 1.4. Under the Errata Guidelines, changes to BCP-14 keywords, added columns or properties, or validation logic go to Feature Request instead. An open question is whether SkuPrice rules should join the 1.5 model through errata. The thread was opened by Matt-Cowsert on 10 November 2026 with no comments or assessments yet, so support can't be judged; all three candidates still await Maintainer assessment.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2850": {
    "number": 2850,
@@ -4119,8 +4121,8 @@
    "reviews": 0,
    "summary": "This issue asks for a two-way check of SKU Price dataset columns against FOCUS-defined SkuPriceDetails properties. It follows a TF1 discussion: SkuPriceDetails is meant to describe what matters for a SKU, not its price tiers, yet context window size sits apart from AI properties such as model family. jerrysr99 posted the comparison on 16 November, listing 25 SKU Price columns and 21 properties, with only the two context window bounds from #2521 appearing in both. The list is a snapshot; it does not yet say which gaps should close, and no one has responded since. If the group proceeds, Matt-Cowsert expects one feature request per column added, as with the model family and token direction properties. One participant warned that carrying every column would keep SkuPriceDetails growing. Results go to TF1 on 17 November.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2851": {
    "number": 2851,
@@ -4136,8 +4138,8 @@
    "reviews": 0,
    "summary": "Matt-Cowsert opened this issue after a #2773 review found that \"term\" in the Commitment Discount Quantity requirement is ambiguous. It means how long the commitment discount runs, which the introduction calls its period, yet the glossary defines Term as an agreement on a contract or invoice. A reviewer removed the glossary link, but the wording stayed because rewording a normative requirement was out of scope for an editorial PR. The options are keeping \"term\" as plain English, or rewording it to \"period\", the closer fit, which changes requirement text. That means it cannot merge into the working draft during the 1.5 IP Review, so it moves to the 1.6 cycle. The first step searches the specification for other requirements using \"term\" for a duration. No one has commented yet, so the group's leaning is unclear.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2852": {
    "number": 2852,
@@ -4153,8 +4155,8 @@
    "reviews": 0,
    "summary": "This issue asks whether the Columns table and the Requirements column list in dataset files count toward the rule that an entity is linked only on its first occurrence. It arose in PR #2773, where a new Relationships link repeated a term already linked in the table and list, and was removed. The open choices are whether the table counts, which would make the list link the repeat, and whether the list needs its own exception, since linking every column there is existing practice. The Members meeting on 29 October 2026 agreed to follow the guidelines as written and revisit linking in 1.6. Only the opening post exists so far, so support or pushback can't be read yet. Next, the group must decide and record why, then a draft PR updates the guidelines and AGENTS.md.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2853": {
    "number": 2853,
@@ -4165,13 +4167,13 @@
    "milestone": "v1.5",
    "author": "Matt-Cowsert",
    "opened": "2026-11-11",
-   "last": "2026-11-19T17:04:49Z",
-   "comments": 1,
-   "reviews": 3,
+   "last": "2026-11-20T21:37:06Z",
+   "comments": 2,
+   "reviews": 6,
    "files": 21,
-   "summary": "Matt-Cowsert opened #2853 on 11 November 2026 as an editorial pull request closing #2833 and the open items in #2655. It corrects appendix examples, example CSVs and a query whose numbers contradicted their own data or a requirement, with no requirement changes. thecloudman and jpradocueva suggested wording fixes and raised a ConsumedQuantity question, which Matt-Cowsert resolved. The thread doesn't record the outcome; the pull request was open.",
+   "summary": "Matt-Cowsert opened this pull request on 11 November 2026 to fix example values flagged in #2833, including commitment discount factors, the CrestNode fee and split cost allocation rows. thecloudman asked about ConsumedQuantity, which was then split. ijurica disputed the origin-row assumption and asked for #2515 or #2578 to be extended or reopened. flanakin approved on 20 November 2026. The thread doesn't record a merge, so it remains open.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2854": {
    "number": 2854,
@@ -4187,8 +4189,8 @@
    "reviews": 0,
    "summary": "ijurica opened this issue because the introduction and Description section of the SKU Price Description column conflict over whether it describes the SKU Price construct or a single SKU Price record. The CSV examples treat it as record-level, since it changes between records under one SKU Price ID. The working group is asked to choose a reading and align the definition and examples. Choosing the construct reading raises further questions about whether descriptions must match across records of one ID and differ between IDs of the same provider. Rewording alone would not settle it, since the column is described as self-contained and as adding information not otherwise available. For producers and users of FOCUS data, the answer changes what a value describes. Nobody has responded since opening on 11 November 2026, so support is unclear.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2855": {
    "number": 2855,
@@ -4204,8 +4206,8 @@
    "reviews": 0,
    "summary": "ijurica opened this issue on 11 November 2026 to align pricing terms across the SKU Price dataset, its appendix and supported features, after a TF-2 update flagged several meanings of rate. The aim is precise wording: unit price for a value, SKU Price for the stable construct, SKU Price record for a single row where effective period, currency or contract matters, and price list instead of rate card. Some edits may change what a requirement applies to, such as IsGlobalScope in #2735, so the author wants those flagged separately in the pull request, and lines overlapping open PR #2845 left alone. For FOCUS data users the effect would be clearer wording, with a few requirements possibly shifting in scope. The thread has no comments yet, so the group's view is unknown. No pull request exists yet.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2856": {
    "number": 2856,
@@ -4221,8 +4223,8 @@
    "reviews": 0,
    "summary": "ijurica opened this issue on 11 November 2026 to question the shared name SKU Price, used for both the construct identified by SKU Price ID and the dataset whose rows are records, where one ID spans several records. The case is that the dataset name implies one row per SKU Price, unlike Contract Commitment, and that normative requirements need the word record to avoid ambiguity, which has already caused confusion in the specification. Options are keeping the name, renaming only the dataset, or renaming it along with record-level columns such as SkuPriceEffectiveStart, since renaming the dataset alone would not change those. A rename would touch the dataset, columns, examples and preview notes, and is possible because the dataset is still preview. No one has replied yet, so the group's view is unknown.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2860": {
    "number": 2860,
@@ -4238,8 +4240,8 @@
    "reviews": 0,
    "summary": "finops-DaveMoreau opened this action item to bring the semantic tag tooling from the #2779 demo into the specification build, with no change to specification content. Tags such as column and term references are resolved to today's link and italics conventions and checked; the registry and resolver come with tests. The change is meant to be backwards compatible: with no tags the output stays identical, and tagged and hand-written links can coexist. Converting the specification would follow in separate reviewable steps, each recording conversion progress per tag kind. Two open decisions are flagged, on tool location and whether spec.md resolves tags before Pandoc; the description cuts off there. Opened 12 November 2026 and marked critical path. No comments or reactions yet, so the working group's view is not visible.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2861": {
    "number": 2861,
@@ -4255,8 +4257,8 @@
    "reviews": 0,
    "summary": "Opened by finops-DaveMoreau on 12 November 2026 under #2779, this issue writes down the rules for converting the specification to semantic tags, so the Working Group approves each rule once rather than reviewing 300-plus files line by line. Conversion rules decide which text becomes which tag; rendering rules decide how tags appear in the published specification, so they touch every tag. Translations carry over existing markup, wrong links included, and account for 6,841 tags in 332 files. Inferences go further: plain Display Name matching adds 866 tags in 231 files, with Title Case words meaning a concept rather than a column as the main risk. Each rule becomes a separate converter switch, and later conversion PRs would be checked only against approved rules. Nobody has commented yet, so there is no reaction to read; the issue depends on #2860.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2862": {
    "number": 2862,
@@ -4272,8 +4274,8 @@
    "reviews": 0,
    "summary": "finops-DaveMoreau proposes running the translation rules approved in #2861 over the specification, converting entity links, italic glossary terms and plain entity IDs into semantic tags and marking each kind as mechanical so CI keeps it converted. The conversion copies what the markup says now and corrects nothing. A first mention that will link to the glossary rather than the record #2735 describes is left for a separate change. The proposal is one PR for every kind and file, timed with maintainers, with one PR per area as the alternative. It changes 689 rendered lines but no visible words, and leaves 234 items open, mostly ColumnIds defined in several datasets. Checks show no errors and 20 warnings that reflect existing source disagreements. The thread is new, opened 12 November 2026 and assigned to TF-Supporting, with no discussion or reaction yet.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2864": {
    "number": 2864,
@@ -4290,8 +4292,8 @@
    "files": 1,
    "summary": "Matt-Cowsert opened this draft PR to set out the scope of the 1.5 errata tracked in #2849 for Maintainer assessment. It adds a Version 1.5 section to ERRATA.md with one row per correction from #2836, #2837 and #2783, so the Maintainers can assess them in final form. Nothing carries the errata label yet, and the PR merges only after 1.5 is published. Flagged for the Maintainers: whether the lowercase 'must' in row #3 is a typo or needs a Feature Request, whether the anchor rename in row #8 is worth breaking existing links, and that rows #13 and #14 stand or fall with rows #1 and #2. Section numbers, fix PRs and SkuPrice rules are left for later. No one has reacted yet, so the group's view is unknown and the PR awaits Maintainer assessment.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2866": {
    "number": 2866,
@@ -4307,8 +4309,8 @@
    "reviews": 0,
    "summary": "ijurica opened #2866 on 12 November 2026 to align entity references and links in three parts of the specification with the contributor guidelines: the SKU Price dataset, the appendix and supported features. These were skipped in #2772 and PR #2773 to avoid clashing with other open PRs. Focus areas are reference forms in normative requirements, Entity ID and Display Name formatting, first-occurrence linking and link targets. It is explicitly best-effort, so some references may stay unaligned, either pending discussion or following decisions not yet written into the guidelines. In practice this looks like editorial tidying rather than new requirements. The thread has no comments yet, so there is no visible support or pushback. The only stated completion point is a draft PR, which has not been opened yet.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2868": {
    "number": 2868,
@@ -4325,8 +4327,8 @@
    "files": 26,
    "summary": "This draft, opened by finops-DaveMoreau on 13 November 2026, brings the semantic tag tooling from the demo (#2819) into the specification build under #2779, with no content change. Tags name the entity a reference means and the build turns them into today's links and italics, checking each one. Untagged output should match the base branch byte for byte, so existing links keep working. Open questions are where the tools live, resolving tags before Pandoc, keeping REG016 a warning, and running REG017 before releases. Billing Period was converted in a scratch copy with small rendered differences, and tests pass locally. No one has commented or reviewed yet, so reception is unknown; it is still a draft that the conversions #2861 to #2863 depend on.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2869": {
    "number": 2869,
@@ -4337,13 +4339,13 @@
    "milestone": "v1.5",
    "author": "Matt-Cowsert",
    "opened": "2026-11-13",
-   "last": "2026-11-19T18:45:08Z",
-   "comments": 1,
-   "reviews": 8,
+   "last": "2026-11-20T21:37:18Z",
+   "comments": 2,
+   "reviews": 9,
    "files": 18,
-   "summary": "Matt-Cowsert opened #2869 as an editorial pull request closing #2834. It fixes metadata links, key names, examples, timestamps and recency IDs, changing no requirement text. jpradocueva's review flagged four issues: duplicate creation times, recency IDs matching no instance, and a repeated last-updated time. On 19 November 2026 Matt-Cowsert changed the dates, IDs and times accordingly. The pull request remained open.",
+   "summary": "Matt-Cowsert opened this pull request on 13 November 2026 to fix links, key names, examples and timestamps listed in #2834, all in informative text. On 17 November 2026 jpradocueva's review questioned example dates, recency times and recency IDs, which Matt-Cowsert fixed on 19 November. flanakin approved on 20 November 2026. The thread doesn't record a merge, and the pull request remained open.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2870": {
    "number": 2870,
@@ -4354,13 +4356,13 @@
    "milestone": "v1.5",
    "author": "Matt-Cowsert",
    "opened": "2026-11-13",
-   "last": "2026-11-19T08:14:21Z",
-   "comments": 3,
-   "reviews": 2,
+   "last": "2026-11-20T21:36:58Z",
+   "comments": 4,
+   "reviews": 3,
    "files": 13,
-   "summary": "Matt-Cowsert opened PR #2870 on 13 November 2026 to fix editorial items from #2835, found mostly in Shawn Alpay's review of the 1.5 specification. It corrects summary tables, glossary entries, labels, relationship lists, links and ordering, changing no requirements. jpradocueva approved on 17 November 2026. ijurica approved on 19 November 2026, suggesting the missing Billing Period relationship in Invoice Detail be added here or separately. The PR remained open.",
+   "summary": "Matt-Cowsert opened this pull request on 13 November 2026 to fix editorial problems from #2835, without changing any requirements. jpradocueva approved it on 17 November, ijurica on 19 November, and flanakin on 20 November 2026. ijurica suggested adding a missing Billing Period relationship to Invoice Detail, either here or in a separate pull request. The thread doesn't record that change. It remains open, with no merge recorded.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2871": {
    "number": 2871,
@@ -4377,7 +4379,7 @@
    "files": 7,
    "summary": "Pull request #2871, opened by jerrysr99 on 14 November 2026, proposed adding ContextWindowMinimum and ContextWindowMaximum to SkuPriceDetails so practitioners can see which context-window pricing tier a charge used, without parsing provider text. It builds on FR #2521 and a 10 November Task Force 1 direction, with the SKU Price columns in #2872.\n\nthecloudman reviewed it, and jerrysr99 applied most suggestions: SHOULD instead of MUST, the existing nullability rule restored, and the counting basis tied to each provider's own terms. The explicit null and boundary convention were left for Task Force 1. finops-DaveMoreau argued each tier should be its own SKU; jerrysr99 was open to it. Renaming the keys to TokenContextWindowMinimum and TokenContextWindowMaximum was agreed. Matt-Cowsert suggested wording fixes. As of 18 November 2026 the pull request was still open.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2872": {
    "number": 2872,
@@ -4394,8 +4396,8 @@
    "files": 13,
    "summary": "jerrysr99 has opened this draft implementing the SKU Price part of FR #2521, which asks for long-context AI charges to be distinguished from standard-context charges for the same model. Google's Gemini models price at a 200K-token prompt threshold, and FOCUS data currently blends those rates together. The pull request adds two Conditional columns, ContextWindowMinimum (exclusive) and ContextWindowMaximum (inclusive), measured in input tokens per request, along with an IncludesContextWindowPricing condition, dataset requirements and an appendix example. Unlike Quantity Tier Minimum, the minimum is null when price does not vary by window size. It is stacked on #2871 and needs that branch first. Trial merges conflict with #2748, #2749 and #2753, which also edit the SKU Price column table. No reviews or approvals exist yet; the only other activity is jerrysr99's comment listing providers with context-window pricing.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2873": {
    "number": 2873,
@@ -4412,7 +4414,7 @@
    "files": 7,
    "summary": "thecloudman opened #2873 on 15 November 2026 to add ProcessingTier, with allowed values Standard, Priority, Flex, Batch and Other, to SkuPriceDetails for AI inference tiers, implementing #2437's MVP. Matt-Cowsert's review on 18 November asked for normative MUST NOT and SHOULD rules, PricingCategory wording, example fixes and shared SkuPriceId corrections. jerrysr99 asked for one rule on SKU versus SKU Price across tier types. The PR stayed open.",
    "summary_from": "history",
-   "summary_to": "2026-11-19"
+   "summary_to": "2026-11-21"
   },
   "2877": {
    "number": 2877,
@@ -4428,8 +4430,8 @@
    "reviews": 0,
    "summary": "Issue #2877 asks for a 1.6 example dataset showing how providers bill context window pricing, to support feature request #2521 and draft pull requests #2871 and #2872. The open point from the 17 November Task Force 1 meeting is the quantity columns: a billing row adds up many requests, often over an hour, so its token count is not one request's window. Google Cloud gives each tier its own SKU ID and AWS is expected to follow, while the CSVs in #2871 give both tiers one SkuId with separate SkuPriceIds. If it goes ahead, finops-DaveMoreau would show tiers in Cost and Usage rows with ConsumedQuantity, PricingQuantity and units, mirrored in the SKU Price dataset. No replies yet, so reaction is unclear. The issue is open due 24 November 2026 with the spreadsheet not yet shared with TF1.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2879": {
    "number": 2879,
@@ -4446,8 +4448,8 @@
    "files": 2,
    "summary": "This draft from flanakin, for issue #49, proposes spec-only rules for weighting portfolios: a FAANGMAN portfolio weighted by each name's share of SPY, and an equal-weight chips portfolio. Despite its Azure title, the body covers these weightings and a benchmark change. The FAANGMAN weight rule was already set on #49, but three points remain open: the Alphabet share class, whether to keep a 25% cap, and a 5% cash line. The benchmark would become unfiltered SPY for every portfolio, citing a 17 November 2026 sync; the comparison script still uses filtered SPY until approval. Portfolios would start on the first trading day after approval, with the cap effect reported apart from research effect. No reviews, approvals or comments exist yet, so this looks early-stage. It closes #49 only after both approvers sign off.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2880": {
    "number": 2880,
@@ -4464,8 +4466,8 @@
    "files": 23,
    "summary": "Matt-Cowsert has opened draft pull request #2880 to apply nine casing, ID, link and name fixes from #2836 to the 1.5 working draft. Examples include changing MUST not to MUST NOT, correcting SchemaID to SchemaId, and renaming the Pricing-Billing currency condition to Pricing and Billing. None alters what a requirement asks for. #2836 first proposed these as 1.5 errata, but at the 16 November 2026 Maintainers meeting the group agreed to ship them as editorial fixes before release, since 1.5 is unpublished. For data producers and readers, the practical effect is only wording and anchors: the rename updates eleven links, and the 1.5 requirements model follows the text. The thread has no comments, reviews or approvals yet, so there is no visible reaction; it is simply waiting on review.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "2881": {
    "number": 2881,
@@ -4482,8 +4484,77 @@
    "files": 2,
    "summary": "Matt-Cowsert's draft pull request fixes the 1.5 Requirements Model defect reported in #2783. The Status and Category allowed-values rules have no condition, so nulls fail them, even though the spec and C-003-C say null is correct without a commitment discount. The fix adds a not-null condition to both rules and renames them from C-005-M to C-005-C, which the suffix test requires, so tools keyed on 1.5 rule IDs will see new IDs. The 1.2 to 1.4 models have the same defect but are unchanged, since those versions are published and that question sits in #2864. The Maintainers agreed on 16 November to ship such corrections in 1.5 if they match existing normative text. The PR has no reviews or comments yet, so reaction is untested and it remains a draft.",
    "summary_from": "recent",
-   "summary_to": "2026-11-20",
-   "recent_since": "2026-11-06"
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
+  },
+  "2882": {
+   "number": 2882,
+   "kind": "issue",
+   "title": "[Feedback] Contract Commitment by Category query: unqualified ContractCommitmentId in GROUP BY fails on PostgreSQL-style engines",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2882",
+   "state": "open",
+   "milestone": null,
+   "author": "Matt-Cowsert",
+   "opened": "2026-11-20",
+   "last": "2026-11-20T01:42:10Z",
+   "comments": 0,
+   "reviews": 0,
+   "summary": "Matt-Cowsert reports that the contract commitment by category query uses the bare name ContractCommitmentId in GROUP BY, which is ambiguous because the joined Contract Commitment table has a column of that name. BigQuery docs suggest the select alias wins, so the query should run there, but PostgreSQL-style engines bind it to the table column. A DuckDB 1.4.4 run fails with a binder error. The proposed fix qualifies the name as CC.ContractCommitmentId in SELECT, GROUP BY and ORDER BY, which the existing join already makes equivalent. It is flagged as an errata candidate for 1.5, present at v1.5-cr and on the working draft. Opened on 20 November 2026, the issue has no replies yet, so the group's view is unknown, though the change looks small.",
+   "summary_from": "recent",
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
+  },
+  "2883": {
+   "number": 2883,
+   "kind": "issue",
+   "title": "[Feedback] Commitment discount scenario CSVs still use the removed ProviderName and PublisherName columns",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2883",
+   "state": "open",
+   "milestone": null,
+   "author": "Matt-Cowsert",
+   "opened": "2026-11-20",
+   "last": "2026-11-20T01:42:33Z",
+   "comments": 0,
+   "reviews": 0,
+   "summary": "Matt-Cowsert reports that all 14 commitment discount scenario CSVs still carry the ProviderName and PublisherName columns, which 1.4 removed, and none has ServiceProviderName. So the 1.5 supported-feature queries that group or filter on ServiceProviderName cannot run against these files without edits. The proposal is to rename ProviderName to ServiceProviderName, keeping its values, and drop PublisherName, since all three name columns hold the same single value in each file. No prose in the commitment discounts appendix names the removed columns, so only the CSVs change. The issue is linked to #1974 on validator compatibility and to PR #2662, which moves these files to the 1.3 schema for 1.6 but keeps the removed columns. The reporter notes that whichever lands, working_draft still needs both columns removed. The issue is open with no replies yet, so reaction is unknown.",
+   "summary_from": "recent",
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
+  },
+  "2885": {
+   "number": 2885,
+   "kind": "issue",
+   "title": "[Feedback] How should a non-invoicing metering layer (such as an LLM gateway) carry its computed cost when BilledCost and EffectiveCost must be 0?",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2885",
+   "state": "open",
+   "milestone": null,
+   "author": "andrasKelle",
+   "opened": "2026-11-20",
+   "last": "2026-11-20T05:57:45Z",
+   "comments": 0,
+   "reviews": 0,
+   "summary": "andrasKelle asks how a metering layer that does not invoice, such as an LLM gateway, should carry the cost it computes itself. FOCUS 1.4 requires BilledCost and EffectiveCost to be 0 for entities that neither invoice nor originate the cost, to avoid double counting, but it says nothing about a cost the entity prices from its own list. The example is a provider row of 0.48 split into 0.36 and 0.12 for two teams, which would total 0.96 if those figures sat in BilledCost. Open questions are whether ListCost or ContractedCost could hold them without double counting, whether originating usage detail counts as originating the data, and whether such a generator should emit Cost and Usage rows at all. Nobody has replied yet, so the working group's view is unknown and the thread looks unattended for now.",
+   "summary_from": "recent",
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
+  },
+  "2886": {
+   "number": 2886,
+   "kind": "pull request",
+   "title": "AI 2847 reply to Irena proposal",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2886",
+   "state": "draft",
+   "milestone": null,
+   "author": "jpradocueva",
+   "opened": "2026-11-20",
+   "last": "2026-11-20T13:05:56Z",
+   "comments": 1,
+   "reviews": 0,
+   "files": 4,
+   "summary": "jpradocueva has opened a draft review of step 1 of the editorial guidelines restructuring, stacked on #2848. It changes no rule wording. Instead it adds HTML comments the editor can accept, adapt or drop, each tied to a rule ID and its recorded verdict. Many rules are marked as in agreement, while others have gaps, duplicates or conflicts with suggested alternative wording. Some assumptions are only raised as open questions. The author asks the group for decisions, including whether to link to the specification file or keep a full example, and whether rule IDs are published. The A-16 verdict is corrected to approve after the rule was reversed, and a pilot dataset is proposed before follow-up work is sized. The PR has no approvals, change requests or replies yet, so there is no visible reaction so far.",
+   "summary_from": "recent",
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   }
  },
  "objects": {
@@ -4550,12 +4621,12 @@
     "changes billingperiodstart.md"
    ],
    [
-    2737,
+    2294,
     "weak",
     "description names BillingPeriodStart"
    ],
    [
-    2294,
+    2737,
     "weak",
     "description names BillingPeriodStart"
    ],
@@ -4582,6 +4653,11 @@
     "changes billingperiodstatus.md"
    ],
    [
+    2294,
+    "weak",
+    "description names BillingPeriodStatus"
+   ],
+   [
     2861,
     "weak",
     "description names BillingPeriodStatus"
@@ -4593,11 +4669,6 @@
    ],
    [
     2737,
-    "weak",
-    "description names BillingPeriodStatus"
-   ],
-   [
-    2294,
     "weak",
     "description names BillingPeriodStatus"
    ]
@@ -4614,17 +4685,17 @@
     "changes invoiceissuername.md"
    ],
    [
+    2294,
+    "weak",
+    "description names InvoiceIssuerName"
+   ],
+   [
     2779,
     "weak",
     "description names InvoiceIssuerName"
    ],
    [
     2737,
-    "weak",
-    "description names InvoiceIssuerName"
-   ],
-   [
-    2294,
     "weak",
     "description names InvoiceIssuerName"
    ]
@@ -4644,6 +4715,11 @@
     2759,
     "wide",
     "changes billingcurrency.md"
+   ],
+   [
+    2882,
+    "weak",
+    "description names BillingCurrency"
    ],
    [
     2842,
@@ -4712,6 +4788,11 @@
     "changes contractcommitmentcategory.md"
    ],
    [
+    2882,
+    "weak",
+    "description names ContractCommitmentCategory"
+   ],
+   [
     2004,
     "weak",
     "description names ContractCommitmentCategory"
@@ -4732,6 +4813,11 @@
     2819,
     "wide",
     "changes contractcommitmentcost.md"
+   ],
+   [
+    2882,
+    "weak",
+    "description names ContractCommitmentCost"
    ],
    [
     2004,
@@ -4825,6 +4911,11 @@
    ]
   ],
   "column:ContractCommitment.ContractCommitmentId": [
+   [
+    2882,
+    "strong",
+    "title names ContractCommitmentId"
+   ],
    [
     2776,
     "wide",
@@ -4995,6 +5086,11 @@
     2819,
     "wide",
     "changes contractcommitmentperiodend.md"
+   ],
+   [
+    2882,
+    "weak",
+    "description names ContractCommitmentPeriodEnd"
    ]
   ],
   "column:ContractCommitment.ContractCommitmentPeriodStart": [
@@ -5014,6 +5110,11 @@
     "changes contractcommitmentperiodstart.md; description names ContractCommitmentPeriodStart"
    ],
    [
+    2882,
+    "weak",
+    "description names ContractCommitmentPeriodStart"
+   ],
+   [
     2779,
     "weak",
     "description names ContractCommitmentPeriodStart"
@@ -5029,6 +5130,11 @@
     2819,
     "wide",
     "changes contractcommitmentquantity.md"
+   ],
+   [
+    2882,
+    "weak",
+    "description names ContractCommitmentQuantity"
    ],
    [
     2723,
@@ -5048,6 +5154,11 @@
     "changes contractcommitmenttype.md"
    ],
    [
+    2882,
+    "weak",
+    "description names ContractCommitmentType"
+   ],
+   [
     1938,
     "weak",
     "description names ContractCommitmentType"
@@ -5065,6 +5176,11 @@
     "changes contractcommitmentunit.md"
    ],
    [
+    2882,
+    "weak",
+    "description names ContractCommitmentUnit"
+   ],
+   [
     2730,
     "weak",
     "description names ContractCommitmentUnit"
@@ -5080,6 +5196,11 @@
     2819,
     "wide",
     "changes contractid.md"
+   ],
+   [
+    2882,
+    "weak",
+    "description names ContractId"
    ],
    [
     2745,
@@ -5222,6 +5343,11 @@
     2819,
     "wide",
     "changes serviceprovidername.md"
+   ],
+   [
+    2882,
+    "weak",
+    "description names ServiceProviderName"
    ],
    [
     2842,
@@ -5535,6 +5661,11 @@
   ],
   "column:CostAndUsage.BilledCost": [
    [
+    2885,
+    "strong",
+    "title names BilledCost"
+   ],
+   [
     1885,
     "strong",
     "title names BilledCost"
@@ -5555,12 +5686,17 @@
     "description names BilledCost"
    ],
    [
-    2613,
+    2886,
     "weak",
     "description names BilledCost"
    ],
    [
     2174,
+    "weak",
+    "description names BilledCost"
+   ],
+   [
+    2613,
     "weak",
     "description names BilledCost"
    ],
@@ -5883,6 +6019,11 @@
     "changes billingcurrency.md"
    ],
    [
+    2882,
+    "weak",
+    "description names BillingCurrency"
+   ],
+   [
     2842,
     "weak",
     "description names BillingCurrency"
@@ -5950,6 +6091,11 @@
     "changes billingperiodend.md"
    ],
    [
+    2294,
+    "weak",
+    "description names BillingPeriodEnd"
+   ],
+   [
     1974,
     "weak",
     "description names BillingPeriodEnd"
@@ -5961,11 +6107,6 @@
    ],
    [
     2673,
-    "weak",
-    "description names BillingPeriodEnd"
-   ],
-   [
-    2294,
     "weak",
     "description names BillingPeriodEnd"
    ]
@@ -5980,6 +6121,11 @@
     2819,
     "wide",
     "changes billingperiodstart.md"
+   ],
+   [
+    2294,
+    "weak",
+    "description names BillingPeriodStart"
    ],
    [
     1974,
@@ -5998,11 +6144,6 @@
    ],
    [
     2673,
-    "weak",
-    "description names BillingPeriodStart"
-   ],
-   [
-    2294,
     "weak",
     "description names BillingPeriodStart"
    ],
@@ -6171,6 +6312,11 @@
     2819,
     "wide",
     "changes chargecategory.md; description names ChargeCategory"
+   ],
+   [
+    2882,
+    "weak",
+    "description names ChargeCategory"
    ],
    [
     2842,
@@ -6571,6 +6717,11 @@
     "changes chargeperiodend.md"
    ],
    [
+    2882,
+    "weak",
+    "description names ChargePeriodEnd"
+   ],
+   [
     1974,
     "weak",
     "description names ChargePeriodEnd"
@@ -6636,6 +6787,11 @@
     2819,
     "wide",
     "changes chargeperiodstart.md"
+   ],
+   [
+    2882,
+    "weak",
+    "description names ChargePeriodStart"
    ],
    [
     1974,
@@ -7216,6 +7372,11 @@
     "changes consumedquantity.md"
    ],
    [
+    2885,
+    "weak",
+    "description names ConsumedQuantity"
+   ],
+   [
     2842,
     "weak",
     "description names ConsumedQuantity"
@@ -7375,6 +7536,11 @@
     "changes contractapplied.md"
    ],
    [
+    2882,
+    "weak",
+    "description names ContractApplied"
+   ],
+   [
     2613,
     "weak",
     "description names ContractApplied"
@@ -7467,12 +7633,17 @@
     "changes contractedcost.md"
    ],
    [
-    2842,
+    2853,
     "weak",
     "description names ContractedCost"
    ],
    [
-    2853,
+    2885,
+    "weak",
+    "description names ContractedCost"
+   ],
+   [
+    2842,
     "weak",
     "description names ContractedCost"
    ],
@@ -7594,17 +7765,17 @@
     "changes contractedunitprice.md"
    ],
    [
+    2853,
+    "weak",
+    "description names ContractedUnitPrice"
+   ],
+   [
     2842,
     "weak",
     "description names ContractedUnitPrice"
    ],
    [
     2840,
-    "weak",
-    "description names ContractedUnitPrice"
-   ],
-   [
-    2853,
     "weak",
     "description names ContractedUnitPrice"
    ],
@@ -7748,6 +7919,11 @@
   ],
   "column:CostAndUsage.EffectiveCost": [
    [
+    2885,
+    "strong",
+    "title names EffectiveCost"
+   ],
+   [
     2673,
     "strong",
     "title names EffectiveCost"
@@ -7773,12 +7949,12 @@
     "description names EffectiveCost"
    ],
    [
-    2613,
+    2174,
     "weak",
     "description names EffectiveCost"
    ],
    [
-    2174,
+    2613,
     "weak",
     "description names EffectiveCost"
    ],
@@ -8116,6 +8292,16 @@
     "changes invoiceissuername.md; description names InvoiceIssuerName"
    ],
    [
+    2294,
+    "weak",
+    "description names InvoiceIssuerName"
+   ],
+   [
+    2883,
+    "weak",
+    "description names InvoiceIssuerName"
+   ],
+   [
     1974,
     "weak",
     "description names InvoiceIssuerName"
@@ -8137,11 +8323,6 @@
    ],
    [
     2673,
-    "weak",
-    "description names InvoiceIssuerName"
-   ],
-   [
-    2294,
     "weak",
     "description names InvoiceIssuerName"
    ],
@@ -8174,6 +8355,11 @@
    ],
    [
     2853,
+    "weak",
+    "description names ListCost"
+   ],
+   [
+    2885,
     "weak",
     "description names ListCost"
    ],
@@ -8843,6 +9029,11 @@
    ],
    [
     2853,
+    "weak",
+    "description names PricingQuantity"
+   ],
+   [
+    2885,
     "weak",
     "description names PricingQuantity"
    ],
@@ -9709,6 +9900,16 @@
     "changes serviceprovidername.md"
    ],
    [
+    2883,
+    "weak",
+    "description names ServiceProviderName"
+   ],
+   [
+    2882,
+    "weak",
+    "description names ServiceProviderName"
+   ],
+   [
     2842,
     "weak",
     "description names ServiceProviderName"
@@ -9796,17 +9997,17 @@
     "changes servicesubcategory.md"
    ],
    [
-    2842,
-    "weak",
-    "description names ServiceSubcategory"
-   ],
-   [
     2846,
     "weak",
     "description names ServiceSubcategory"
    ],
    [
     2853,
+    "weak",
+    "description names ServiceSubcategory"
+   ],
+   [
+    2842,
     "weak",
     "description names ServiceSubcategory"
    ],
@@ -10005,12 +10206,12 @@
     "changes skumeter.md"
    ],
    [
-    2842,
+    2846,
     "weak",
     "description names SkuMeter"
    ],
    [
-    2846,
+    2842,
     "weak",
     "description names SkuMeter"
    ],
@@ -12051,6 +12252,11 @@
     "changes dataset.md; description names Contract Commitment"
    ],
    [
+    2882,
+    "strong",
+    "title names Contract Commitment"
+   ],
+   [
     2832,
     "strong",
     "title names Contract Commitment"
@@ -12081,14 +12287,14 @@
     "changes dataset.md"
    ],
    [
-    2842,
-    "weak",
-    "description names Contract Commitment"
-   ],
-   [
     2869,
     "weak",
     "description names ContractCommitment"
+   ],
+   [
+    2842,
+    "weak",
+    "description names Contract Commitment"
    ],
    [
     2840,
@@ -12233,6 +12439,11 @@
     "changes dataset.md; description names Cost and Usage"
    ],
    [
+    2294,
+    "strong",
+    "title names Cost and Usage"
+   ],
+   [
     2728,
     "strong",
     "title names Cost and Usage"
@@ -12246,11 +12457,6 @@
     2447,
     "strong",
     "title names CostAndUsage"
-   ],
-   [
-    2294,
-    "strong",
-    "title names Cost and Usage"
    ],
    [
     2880,
@@ -12268,12 +12474,27 @@
     "changes dataset.md; description names Cost and Usage"
    ],
    [
-    2842,
+    2869,
     "weak",
     "description names CostAndUsage"
    ],
    [
-    2869,
+    2885,
+    "weak",
+    "description names Cost and Usage"
+   ],
+   [
+    2883,
+    "weak",
+    "description names Cost and Usage"
+   ],
+   [
+    2882,
+    "weak",
+    "description names Cost and Usage"
+   ],
+   [
+    2842,
     "weak",
     "description names CostAndUsage"
    ],
@@ -12790,6 +13011,11 @@
     "description names Invoice Detail"
    ],
    [
+    2294,
+    "weak",
+    "description names Invoice Detail"
+   ],
+   [
     2880,
     "weak",
     "description names Invoice Detail"
@@ -12846,11 +13072,6 @@
    ],
    [
     2108,
-    "weak",
-    "description names Invoice Detail"
-   ],
-   [
-    2294,
     "weak",
     "description names Invoice Detail"
    ],
@@ -12987,12 +13208,12 @@
     "changes dataset.md"
    ],
    [
-    2842,
+    2870,
     "weak",
     "description names SKU Price"
    ],
    [
-    2870,
+    2842,
     "weak",
     "description names SKU Price"
    ],
