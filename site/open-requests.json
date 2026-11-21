@@ -1,12 +1,12 @@
 {
- "checked_at": "2026-11-21T01:01:52Z",
+ "checked_at": "2026-11-21T23:56:04Z",
  "wide": 15,
  "counts": {
-  "open": 335,
-  "prs": 46,
-  "issues": 289,
-  "matched": 237,
-  "strong": 54,
+  "open": 343,
+  "prs": 47,
+  "issues": 296,
+  "matched": 245,
+  "strong": 62,
   "wide": 4,
   "weak": 179
  },
@@ -346,7 +346,15 @@
   2883,
   2884,
   2885,
-  2886
+  2886,
+  2887,
+  2888,
+  2889,
+  2890,
+  2891,
+  2892,
+  2893,
+  2894
  ],
  "threads": {
   "959": {
@@ -448,14 +456,13 @@
    "milestone": null,
    "author": "Matt-Cowsert",
    "opened": "2025-05-02",
-   "last": "2026-09-23T14:53:24Z",
-   "comments": 3,
+   "last": "2026-11-21T11:32:31Z",
+   "comments": 4,
    "reviews": 0,
-   "summary": "Matt-Cowsert proposed on 2 May 2025 optional FOCUS columns for carbon, power and water use, joinable with cost data, plus a \"Sustainability Tracking\" feature. On 15 May 2025 robmartin33 pointed to a working group's use cases and metric equations. shawnalpay asked for \"sustainability\" in the title. On 23 September 2026 jnioche supported it and suggested the open-source SPRUCE tool could supply values. No outcome is recorded; the issue remains open.",
-   "summary_from": "written",
-   "summary_to": "2026-11-19",
-   "basis": "3/0",
-   "written_by": "claude-haiku-5-5"
+   "summary": "#972, opened by Matt-Cowsert in May 2025, asks for optional carbon, power and water columns in FOCUS datasets, keyed to the same resources and regions as cost. A comment from guillermollopis narrows this to AI token rows, which already carry model and token fields in FOCUS 1.5. It proposes optional estimated energy in kWh and location-based emissions in kg CO2e, plus a provenance field stating the method and grid-intensity basis. Most AI providers won't publish measured energy per request, so estimates will come from third parties, and provenance keeps them labelled. Cost and carbon would then sit on one row. guillermollopis also asks where the fields belong, whether location-based should be the default, and whether kWh or joules is the right unit. No replies appear in the last two weeks, so the thread looks quiet.",
+   "summary_from": "recent",
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
   },
   "973": {
    "number": 973,
@@ -3349,17 +3356,17 @@
   "2753": {
    "number": 2753,
    "kind": "pull request",
-   "title": "FOCUS #2751: Adding CommitmentApplicability to the SKU Price dataset",
+   "title": "AI #2751: Adding CommitmentApplicability to the SKU Price dataset",
    "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2753",
    "state": "draft",
    "milestone": "v1.6",
    "author": "ijurica",
    "opened": "2026-10-08",
-   "last": "2026-11-05T01:11:24Z",
-   "comments": 4,
+   "last": "2026-11-21T03:31:57Z",
+   "comments": 5,
    "reviews": 0,
    "files": 25,
-   "summary": "Pull request #2753, opened by ijurica on 8 October 2026, proposed a CommitmentApplicability column on commitment purchase records instead of separate usage records. It argued a commitment price is a different amount for the same SKU Price, not a new SKU Price. On 5 November 2026, Matt-Cowsert assigned ijurica a TF2 action item to present the approach and its size impact. The thread doesn't record the outcome; it remains open.",
+   "summary": "ijurica opened this pull request on 8 October 2026, adding a CommitmentApplicability column to SKU Price. It gives covered usage on commitment purchase records a factor, discount, or published unit price. On 5 November 2026, Matt-Cowsert set an action item on size impact. On 21 November 2026, flanakin recorded TF2 requests for worked examples, before-and-after SKU Price ID views, and record-count comparisons. No outcome is recorded; still open.",
    "summary_from": "history",
    "summary_to": "2026-11-21"
   },
@@ -3793,7 +3800,7 @@
   "2826": {
    "number": 2826,
    "kind": "pull request",
-   "title": "Add changed-since configuration to SKU Price dataset",
+   "title": "Period and Update Date Filtering for DatasetConfiguration",
    "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2826",
    "state": "open",
    "milestone": "v1.6",
@@ -3802,7 +3809,7 @@
    "last": "2026-11-18T20:25:00Z",
    "comments": 1,
    "reviews": 5,
-   "files": 4,
+   "files": 5,
    "summary": "flanakin opened this pull request on 4 November 2026 to let SKU Price deliveries include only prices changed since a chosen point in time. The reason given was size: re-sending every row monthly would be about 7.5 GB, versus 0.64 GB for changes only. On 18 November 2026, flanakin pushed revisions covering Append delivery, key-changing corrections, scheduled cutoffs and retirements. The PR remained open, with no reviewer comments recorded.",
    "summary_from": "history",
    "summary_to": "2026-11-21"
@@ -4530,10 +4537,10 @@
    "milestone": null,
    "author": "andrasKelle",
    "opened": "2026-11-20",
-   "last": "2026-11-20T05:57:45Z",
-   "comments": 0,
+   "last": "2026-11-21T12:03:08Z",
+   "comments": 1,
    "reviews": 0,
-   "summary": "andrasKelle asks how a metering layer that does not invoice, such as an LLM gateway, should carry the cost it computes itself. FOCUS 1.4 requires BilledCost and EffectiveCost to be 0 for entities that neither invoice nor originate the cost, to avoid double counting, but it says nothing about a cost the entity prices from its own list. The example is a provider row of 0.48 split into 0.36 and 0.12 for two teams, which would total 0.96 if those figures sat in BilledCost. Open questions are whether ListCost or ContractedCost could hold them without double counting, whether originating usage detail counts as originating the data, and whether such a generator should emit Cost and Usage rows at all. Nobody has replied yet, so the working group's view is unknown and the thread looks unattended for now.",
+   "summary": "andrasKelle asks how a non-invoicing metering layer, such as an LLM gateway that prices usage into per-team costs, should carry that computed cost when FOCUS 1.4 requires BilledCost and EffectiveCost to be 0. The open questions are whether ListCost or ContractedCost can hold it without double counting when datasets merge, whether originating usage detail without cost counts as originating, and whether the data belongs in custom columns or a separate allocation dataset. roy-tong replies that the metered and billed distinction should be kept: BilledCost should stay absent rather than copy an estimate, EffectiveCost should hold the best per-request figure, and a provenance field should show whether a number came from an invoice or a local estimate. No maintainer has responded yet, so the thread looks unresolved and no specification change is proposed.",
    "summary_from": "recent",
    "summary_to": "2026-11-21",
    "recent_since": "2026-11-07"
@@ -4552,6 +4559,143 @@
    "reviews": 0,
    "files": 4,
    "summary": "jpradocueva has opened a draft review of step 1 of the editorial guidelines restructuring, stacked on #2848. It changes no rule wording. Instead it adds HTML comments the editor can accept, adapt or drop, each tied to a rule ID and its recorded verdict. Many rules are marked as in agreement, while others have gaps, duplicates or conflicts with suggested alternative wording. Some assumptions are only raised as open questions. The author asks the group for decisions, including whether to link to the specification file or keep a full example, and whether rule IDs are published. The A-16 verdict is corrected to approve after the rule was reversed, and a pilot dataset is proposed before follow-up work is sized. The PR has no approvals, change requests or replies yet, so there is no visible reaction so far.",
+   "summary_from": "recent",
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
+  },
+  "2887": {
+   "number": 2887,
+   "kind": "action item",
+   "title": "[AI] Clarify relationship between BillingAccountId and ContractId",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2887",
+   "state": "open",
+   "milestone": null,
+   "author": "flanakin",
+   "opened": "2026-11-21",
+   "last": "2026-11-21T03:30:50Z",
+   "comments": 1,
+   "reviews": 0,
+   "summary": "Opened on 21 November 2026 under #2807, this item asks Task Force 2 to settle how the SKU Price dataset links billing accounts, contracts and contract commitments. ijurica noted that contract ID and contract commitment ID look like parent and child, but billing account ID and contract ID are not defined against each other, and some cases have many of each per the other. flanakin asked whether the contract ID on commitment prices marks the scope where prices are locked for an account or the specific commitment. The answer determines how producers fill these fields and how users join them. The thread has no replies yet, so no view has support. The plan is to discuss first, then record the outcome and perhaps open a draft PR or Feature Request, with a due date of 25 November 2026.",
+   "summary_from": "recent",
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
+  },
+  "2888": {
+   "number": 2888,
+   "kind": "action item",
+   "title": "[AI] Finalize where SKU properties live for SKU Price general availability",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2888",
+   "state": "open",
+   "milestone": null,
+   "author": "flanakin",
+   "opened": "2026-11-21",
+   "last": "2026-11-21T03:31:01Z",
+   "comments": 1,
+   "reviews": 0,
+   "summary": "The issue asks where SKU properties should live before SKU Price reaches general availability. They sit outside Core scope, and feature request #2807 offers three placements: the SKU Price dataset, a SKU Details dataset, or only the Cost and Usage dataset. The choice changes dataset size, so the work is to compare the options, decide in TF-Core 2, and open a PR or feature request if the specification must change. Related work includes #2749 and #2613, and TF2 discussed on 18 November 2026 how SKU properties differ from SKU price properties. flanakin opened it on 21 November 2026 and assigned ijurica and finops-DaveMoreau. There are no replies yet, so no positions on the options are visible. It looks to be at the very start, waiting for the comparison.",
+   "summary_from": "recent",
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
+  },
+  "2889": {
+   "number": 2889,
+   "kind": "action item",
+   "title": "[AI] Finalize tiered pricing coverage in the SKU Price dataset",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2889",
+   "state": "open",
+   "milestone": null,
+   "author": "flanakin",
+   "opened": "2026-11-21",
+   "last": "2026-11-21T03:31:08Z",
+   "comments": 2,
+   "reviews": 0,
+   "summary": "This is a task issue opened by flanakin on 21 November 2026 under the parent feature request #2807. That request asks whether the SKU Price dataset supports enough analysis of tiered pricing, and in particular whether tiers are based on quantity, spend, or something else. The work is to summarize what the dataset supports today, list gaps including spend-based tiers, and decide in TF2 whether any gap blocks general availability. #2748, which adds QuantityTierCategory, is the related change. The issue is assigned to ijurica, with a due date of 9 December 2026 for the TF2 discussion. There are no comments yet, so no view has been recorded on whether spend-based tiers would block general availability. The issue remains open, and nothing has happened beyond its setup.",
+   "summary_from": "recent",
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
+  },
+  "2890": {
+   "number": 2890,
+   "kind": "action item",
+   "title": "[AI] Finalize columns needed for a SKU Price primary key",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2890",
+   "state": "open",
+   "milestone": null,
+   "author": "flanakin",
+   "opened": "2026-11-21",
+   "last": "2026-11-21T03:31:19Z",
+   "comments": 2,
+   "reviews": 0,
+   "summary": "flanakin opened this issue on 21 November 2026 as the working piece under #2807, which asks which columns guarantee a SKU Price record is unique and what the SKU Price ID should cover. The open questions are whether billing account ID or SkuPriceEligibility belongs in the key, whether dev/test pricing must be separated from production, and which provider-specific columns are needed. The 18 November TF2 discussion showed that contract ID is required for uniqueness. Settling the final key columns and the meaning of SKU Price ID would also decide the dataset name. There are no replies beyond the opening description, so no options have been debated yet. The issue is assigned to ijurica, sits with TF-Core 2 with a due date of 2 December 2026, and remains open, with the candidate-column discussion in TF2 as the next step.",
+   "summary_from": "recent",
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
+  },
+  "2891": {
+   "number": 2891,
+   "kind": "action item",
+   "title": "[AI] Close SKU Price supported feature gaps",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2891",
+   "state": "open",
+   "milestone": null,
+   "author": "flanakin",
+   "opened": "2026-11-21",
+   "last": "2026-11-21T03:31:30Z",
+   "comments": 1,
+   "reviews": 0,
+   "summary": "flanakin opened this issue on 21 November 2026 after the scenario review of PR #2879 found minor gaps in the SKU Price dataset. The scenario queries have not yet been run against a database. Three gaps are named: commitment eligibility, which the toolkit exposes in Prices() but has no query for; tiered commitment rates, which are not repriced; and SKU attribute comparisons such as VM size or generation, which have no query. Until then, people relying on SKU price data for commitment or VM-level questions have no ready query. The work is to run the queries, then add or defer each gap with a reason, and confirm in TF2 which gaps block general availability. There are no comments yet, so no view on which gaps matter most. It is open and at an early stage.",
+   "summary_from": "recent",
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
+  },
+  "2892": {
+   "number": 2892,
+   "kind": "action item",
+   "title": "[AI] Assess Storage Characteristics of Alternative SKU Price Models",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2892",
+   "state": "open",
+   "milestone": null,
+   "author": "flanakin",
+   "opened": "2026-11-21",
+   "last": "2026-11-21T03:31:37Z",
+   "comments": 1,
+   "reviews": 0,
+   "summary": "Issue #2892 is an assessment task under #2807, which asks whether storing one price per row keeps the FOCUS dataset a workable size across a provider's full price list. flanakin ran a preliminary comparison on 18 November 2026 using Microsoft price sheet data in a FOCUS-style layout, compressed, but AWS and GCP results are still missing. The goal is a finished size report, shared in Google Doc and Slack, with guidelines so other providers can reproduce the figures. No one has commented yet, so there is no visible view on whether the approach holds. Opened 21 November 2026 with a due date of 25 November, the work looks to be at data gathering, and the next step is collecting AWS and GCP figures to compare with the Microsoft results.",
+   "summary_from": "recent",
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
+  },
+  "2893": {
+   "number": 2893,
+   "kind": "action item",
+   "title": "[AI] Provide SKU Price dataset complexity, size, and performance analysis",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2893",
+   "state": "open",
+   "milestone": null,
+   "author": "flanakin",
+   "opened": "2026-11-21",
+   "last": "2026-11-21T03:31:48Z",
+   "comments": 1,
+   "reviews": 0,
+   "summary": "flanakin has opened an analysis task on the SKU Price dataset, tracked under #2807, which asks how easily practitioners can join SKU Price to Cost and Usage data and whether its shape holds up for query performance. The report would cover complexity, size and performance of the supported features, providing evidence for a general availability decision. So far there is only a status change assigning the work to TF-Core 2, due 2 December 2026. Two steps remain: a draft shared with TF2, then a final report after practitioner feedback and confirmation of supported features. Nobody has commented yet, so support or objection is unknown. If the report is sound, it would give the working group a basis for deciding whether SKU Price is ready for general availability.",
+   "summary_from": "recent",
+   "summary_to": "2026-11-21",
+   "recent_since": "2026-11-07"
+  },
+  "2894": {
+   "number": 2894,
+   "kind": "pull request",
+   "title": "Split Append delivery into Additive and Versioned Append",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2894",
+   "state": "draft",
+   "milestone": null,
+   "author": "flanakin",
+   "opened": "2026-11-21",
+   "last": "2026-11-21T06:45:22Z",
+   "comments": 1,
+   "reviews": 0,
+   "files": 8,
+   "summary": "This draft PR from flanakin, opened on 21 November 2026, splits the Append delivery mechanism into two. Additive Append adds new rows that practitioners sum. Versioned Append adds new versions of earlier rows, and practitioners keep the latest per row key, which needs a row key and a last-updated column. The no-deduplication rule would exclude Versioned Append, while the preserve-all-artifacts rule would cover both. SKU Price would use Versioned Append when UpdatedSince is configured, and Delta and Ledger corrections would move to Additive Append. It updates the 1.5 requirements model text for three DeliveryHandling rules. The description covers the mechanics but gives little motivation, so the reason is implied. No comments, reviews or approvals exist yet, and the PR is stacked on #2826, which must merge first, so it looks like it is waiting on that work.",
    "summary_from": "recent",
    "summary_to": "2026-11-21",
    "recent_since": "2026-11-07"
@@ -5609,6 +5753,11 @@
     "changes availabilityzone.md"
    ],
    [
+    972,
+    "weak",
+    "description names AvailabilityZone"
+   ],
+   [
     2414,
     "weak",
     "description names AvailabilityZone"
@@ -5620,11 +5769,6 @@
    ],
    [
     1069,
-    "weak",
-    "description names AvailabilityZone"
-   ],
-   [
-    972,
     "weak",
     "description names AvailabilityZone"
    ],
@@ -5679,6 +5823,11 @@
     2819,
     "wide",
     "changes billedcost.md; description names BilledCost"
+   ],
+   [
+    972,
+    "weak",
+    "description names BilledCost"
    ],
    [
     2853,
@@ -5762,11 +5911,6 @@
    ],
    [
     1013,
-    "weak",
-    "description names BilledCost"
-   ],
-   [
-    972,
     "weak",
     "description names BilledCost"
    ],
@@ -5867,6 +6011,11 @@
    ]
   ],
   "column:CostAndUsage.BillingAccountId": [
+   [
+    2887,
+    "strong",
+    "title names BillingAccountId"
+   ],
    [
     2776,
     "wide",
@@ -6717,6 +6866,11 @@
     "changes chargeperiodend.md"
    ],
    [
+    972,
+    "weak",
+    "description names ChargePeriodEnd"
+   ],
+   [
     2882,
     "weak",
     "description names ChargePeriodEnd"
@@ -6738,11 +6892,6 @@
    ],
    [
     2654,
-    "weak",
-    "description names ChargePeriodEnd"
-   ],
-   [
-    972,
     "weak",
     "description names ChargePeriodEnd"
    ],
@@ -6789,6 +6938,11 @@
     "changes chargeperiodstart.md"
    ],
    [
+    972,
+    "weak",
+    "description names ChargePeriodStart"
+   ],
+   [
     2882,
     "weak",
     "description names ChargePeriodStart"
@@ -6815,11 +6969,6 @@
    ],
    [
     2654,
-    "weak",
-    "description names ChargePeriodStart"
-   ],
-   [
-    972,
     "weak",
     "description names ChargePeriodStart"
    ],
@@ -7377,6 +7526,11 @@
     "description names ConsumedQuantity"
    ],
    [
+    972,
+    "weak",
+    "description names ConsumedQuantity"
+   ],
+   [
     2842,
     "weak",
     "description names ConsumedQuantity"
@@ -7403,11 +7557,6 @@
    ],
    [
     2654,
-    "weak",
-    "description names ConsumedQuantity"
-   ],
-   [
-    972,
     "weak",
     "description names ConsumedQuantity"
    ],
@@ -7459,6 +7608,11 @@
     "changes consumedunit.md"
    ],
    [
+    972,
+    "weak",
+    "description names ConsumedUnit"
+   ],
+   [
     2613,
     "weak",
     "description names ConsumedUnit"
@@ -7470,11 +7624,6 @@
    ],
    [
     2730,
-    "weak",
-    "description names ConsumedUnit"
-   ],
-   [
-    972,
     "weak",
     "description names ConsumedUnit"
    ],
@@ -7633,12 +7782,12 @@
     "changes contractedcost.md"
    ],
    [
-    2853,
+    2885,
     "weak",
     "description names ContractedCost"
    ],
    [
-    2885,
+    2853,
     "weak",
     "description names ContractedCost"
    ],
@@ -8354,12 +8503,12 @@
     "changes listcost.md"
    ],
    [
-    2853,
+    2885,
     "weak",
     "description names ListCost"
    ],
    [
-    2885,
+    2853,
     "weak",
     "description names ListCost"
    ],
@@ -9028,12 +9177,12 @@
     "changes pricingquantity.md"
    ],
    [
-    2853,
+    2885,
     "weak",
     "description names PricingQuantity"
    ],
    [
-    2885,
+    2853,
     "weak",
     "description names PricingQuantity"
    ],
@@ -9304,6 +9453,11 @@
     "changes regionid.md"
    ],
    [
+    972,
+    "weak",
+    "description names RegionId"
+   ],
+   [
     2613,
     "weak",
     "description names RegionId"
@@ -9315,11 +9469,6 @@
    ],
    [
     2604,
-    "weak",
-    "description names RegionId"
-   ],
-   [
-    972,
     "weak",
     "description names RegionId"
    ],
@@ -9376,17 +9525,17 @@
     "changes regionname.md"
    ],
    [
+    972,
+    "weak",
+    "description names RegionName"
+   ],
+   [
     2613,
     "weak",
     "description names RegionName"
    ],
    [
     2414,
-    "weak",
-    "description names RegionName"
-   ],
-   [
-    972,
     "weak",
     "description names RegionName"
    ],
@@ -9450,6 +9599,11 @@
     "changes resourceid.md"
    ],
    [
+    972,
+    "weak",
+    "description names ResourceId"
+   ],
+   [
     1974,
     "weak",
     "description names ResourceId"
@@ -9471,11 +9625,6 @@
    ],
    [
     2654,
-    "weak",
-    "description names ResourceId"
-   ],
-   [
-    972,
     "weak",
     "description names ResourceId"
    ],
@@ -9619,17 +9768,17 @@
     "changes resourcetype.md"
    ],
    [
+    972,
+    "weak",
+    "description names ResourceType"
+   ],
+   [
     2779,
     "weak",
     "description names ResourceType"
    ],
    [
     2473,
-    "weak",
-    "description names ResourceType"
-   ],
-   [
-    972,
     "weak",
     "description names ResourceType"
    ],
@@ -9686,6 +9835,11 @@
     "changes servicecategory.md"
    ],
    [
+    972,
+    "weak",
+    "description names ServiceCategory"
+   ],
+   [
     2846,
     "weak",
     "description names ServiceCategory"
@@ -9712,11 +9866,6 @@
    ],
    [
     2743,
-    "weak",
-    "description names ServiceCategory"
-   ],
-   [
-    972,
     "weak",
     "description names ServiceCategory"
    ],
@@ -9793,6 +9942,11 @@
     "changes servicename.md"
    ],
    [
+    972,
+    "weak",
+    "description names ServiceName"
+   ],
+   [
     2846,
     "weak",
     "description names ServiceName"
@@ -9804,11 +9958,6 @@
    ],
    [
     2473,
-    "weak",
-    "description names ServiceName"
-   ],
-   [
-    972,
     "weak",
     "description names ServiceName"
    ],
@@ -11301,12 +11450,12 @@
   ],
   "column:SkuPrice.CommitmentDiscountCategory": [
    [
-    2748,
+    2753,
     "wide",
     "changes commitmentdiscountcategory.md"
    ],
    [
-    2753,
+    2748,
     "wide",
     "changes commitmentdiscountcategory.md"
    ],
@@ -11322,6 +11471,11 @@
    ]
   ],
   "column:SkuPrice.ContractId": [
+   [
+    2887,
+    "strong",
+    "title names ContractId"
+   ],
    [
     2748,
     "wide",
@@ -11853,6 +12007,11 @@
     "changes skupriceeffectivestart.md"
    ],
    [
+    2826,
+    "weak",
+    "description names SkuPriceEffectiveStart"
+   ],
+   [
     2856,
     "weak",
     "description names SkuPriceEffectiveStart"
@@ -11883,6 +12042,11 @@
     2645,
     "wide",
     "changes skupriceeligibility.md"
+   ],
+   [
+    2890,
+    "weak",
+    "description names SkuPriceEligibility"
    ],
    [
     2749,
@@ -12049,6 +12213,11 @@
   ],
   "column:SkuPrice.SkuPriceLastUpdated": [
    [
+    2826,
+    "strong",
+    "changes skupricelastupdated.md; description names SkuPriceLastUpdated"
+   ],
+   [
     2845,
     "strong",
     "changes skupricelastupdated.md"
@@ -12067,11 +12236,6 @@
     2645,
     "wide",
     "changes skupricelastupdated.md"
-   ],
-   [
-    2826,
-    "weak",
-    "description names SkuPriceLastUpdated"
    ]
   ],
   "column:SkuPrice.UnitPrice": [
@@ -12108,12 +12272,12 @@
   ],
   "column:SkuPrice.UnitPriceType": [
    [
-    2748,
+    2753,
     "wide",
     "changes unitpricetype.md"
    ],
    [
-    2753,
+    2748,
     "wide",
     "changes unitpricetype.md"
    ],
@@ -12474,14 +12638,29 @@
     "changes dataset.md; description names Cost and Usage"
    ],
    [
-    2869,
-    "weak",
-    "description names CostAndUsage"
-   ],
-   [
     2885,
     "weak",
     "description names Cost and Usage"
+   ],
+   [
+    972,
+    "weak",
+    "description names Cost and Usage"
+   ],
+   [
+    2893,
+    "weak",
+    "description names Cost and Usage"
+   ],
+   [
+    2888,
+    "weak",
+    "description names Cost and Usage"
+   ],
+   [
+    2869,
+    "weak",
+    "description names CostAndUsage"
    ],
    [
     2883,
@@ -12515,6 +12694,11 @@
    ],
    [
     2613,
+    "weak",
+    "description names Cost and Usage"
+   ],
+   [
+    2879,
     "weak",
     "description names Cost and Usage"
    ],
@@ -12760,11 +12944,6 @@
    ],
    [
     2721,
-    "weak",
-    "description names Cost and Usage"
-   ],
-   [
-    972,
     "weak",
     "description names Cost and Usage"
    ],
@@ -13108,6 +13287,46 @@
   ],
   "dataset:SkuPrice": [
    [
+    2894,
+    "strong",
+    "changes dataset.md; description names SKU Price"
+   ],
+   [
+    2753,
+    "strong",
+    "adds commitmentapplicability.md, a new column; changes dataset.md; title names SKU Price; title proposes CommitmentApplicability, a new column"
+   ],
+   [
+    2893,
+    "strong",
+    "title names SKU Price"
+   ],
+   [
+    2892,
+    "strong",
+    "title names SKU Price"
+   ],
+   [
+    2891,
+    "strong",
+    "title names SKU Price"
+   ],
+   [
+    2890,
+    "strong",
+    "title names SKU Price"
+   ],
+   [
+    2889,
+    "strong",
+    "title names SKU Price"
+   ],
+   [
+    2888,
+    "strong",
+    "title names SKU Price"
+   ],
+   [
     2749,
     "strong",
     "adds skumeter.md, a new column; changes dataset.md; title names SkuPrice"
@@ -13120,7 +13339,7 @@
    [
     2826,
     "strong",
-    "changes dataset.md; title names SKU Price"
+    "changes dataset.md; description names SKU Price"
    ],
    [
     2879,
@@ -13168,11 +13387,6 @@
     "title names SKU Price"
    ],
    [
-    2753,
-    "strong",
-    "adds commitmentapplicability.md, a new column; changes dataset.md; title names SKU Price; title proposes CommitmentApplicability, a new column"
-   ],
-   [
     2831,
     "strong",
     "title names SKU Price"
@@ -13206,6 +13420,11 @@
     2819,
     "wide",
     "changes dataset.md"
+   ],
+   [
+    2887,
+    "weak",
+    "description names SKU Price"
    ],
    [
     2870,
