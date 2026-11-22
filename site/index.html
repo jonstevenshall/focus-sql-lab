@@ -363,23 +363,30 @@
   #daily-list { display: flex; flex-direction: column; gap: 10px; max-width: 860px; }
   .dy { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; scroll-margin-top: 12px; }
   .dy.flash { outline: 2px solid var(--accent); outline-offset: 1px; }
-  .dy > summary { cursor: pointer; list-style: none; }
+  .dy:not([open]):hover { border-color: var(--accent); }
+  .dy > summary { cursor: pointer; list-style: none; border-radius: 6px; }
   .dy > summary::-webkit-details-marker { display: none; }
-  .dy > summary::before { content: '▸'; display: inline-block; width: 1em; color: var(--muted); transition: transform 0.15s; }
-  .dy[open] > summary::before { transform: rotate(90deg); }
+  .dy > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  /* The day's heading, with a button-like control at the right that says what a click does */
+  .dy-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .dy-h { font-size: 16px; font-weight: 600; }
-  .dy-latest { margin-left: 8px; vertical-align: 2px; }
-  .dy-meta { font-size: 12px; color: var(--muted); margin: 3px 0 0 1em; overflow-wrap: anywhere; }
-  .dy-cost { font-size: 12px; color: var(--muted); margin: 1px 0 0 1em; font-variant-numeric: tabular-nums; }
-  .dy-peek { font-size: 13px; color: var(--fg); margin: 6px 0 0 1em; line-height: 1.5; max-width: 80ch; }
+  .dy-toggle { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 500;
+    color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 3px 9px 3px 12px; white-space: nowrap;
+    transition: background 0.15s, color 0.15s; }
+  .dy > summary:hover .dy-toggle { background: var(--accent); color: var(--accent-fg); }
+  .dy-chev { width: 12px; height: 12px; transition: transform 0.15s; }
+  .dy[open] .dy-chev { transform: rotate(180deg); }
+  .dy[open] .dy-more, .dy:not([open]) .dy-less { display: none; }
+  .dy-meta { font-size: 12px; color: var(--muted); margin: 3px 0 0; overflow-wrap: anywhere; }
+  .dy-cost { font-size: 12px; color: var(--muted); margin: 1px 0 0; font-variant-numeric: tabular-nums; }
+  .dy-peek { font-size: 13px; color: var(--fg); margin: 6px 0 0; line-height: 1.5; max-width: 80ch; }
   .dy[open] .dy-peek { display: none; }
-  .dy-text { margin-left: 1em; }
   .dy-text p { font-size: 14.5px; line-height: 1.65; margin: 12px 0 0; max-width: 72ch; }
   .dy-text .linkish, .dy-threads .linkish { border: 0; background: none; padding: 0; color: var(--accent); text-decoration: underline;
     cursor: pointer; font: inherit; }
   .dy-text a, .dy-threads a { color: var(--accent); }
-  .dy-note { font-size: 12px; color: var(--muted); margin: 10px 0 0 1em; }
-  .dy-threads { margin: 12px 0 0 1em; font-size: 13px; }
+  .dy-note { font-size: 12px; color: var(--muted); margin: 10px 0 0; }
+  .dy-threads { margin: 12px 0 0; font-size: 13px; }
   .dy-threads > summary { cursor: pointer; color: var(--muted); font-size: 12.5px; }
   .dy-threads ul { list-style: none; margin: 6px 0 0; padding: 0; }
   .dy-threads li { padding: 5px 0; border-top: 1px solid var(--line); line-height: 1.45; overflow-wrap: anywhere; }
@@ -2638,7 +2645,10 @@ function dayCard(d, latest, inWindow, titles) {
     d.threads.length === 1 ? 'The thread' : `The ${d.threads.length} threads`}, busiest first</summary><ul>${rows}</ul></details>` : '';
   const note = d.background ? '<p class="dy-note">Written afterwards, with each thread\'s earlier comments as background.</p>' : '';
   return `<details class="dy" id="daily-${escapeHtml(d.id)}" data-day="${escapeHtml(d.id)}"${latest ? ' open' : ''}>
-    <summary><span class="dy-h">${escapeHtml(dayLabel(d))}</span>${latest ? '<span class="tag dy-latest">Latest</span>' : ''}
+    <summary><div class="dy-top"><span class="dy-h">${escapeHtml(dayLabel(d))}</span>${latest ? '<span class="tag dy-latest">Latest</span>' : ''}
+      <span class="dy-toggle" aria-hidden="true"><span class="dy-more">${d.text ? 'Read the day' : 'Show'}</span><span class="dy-less">Hide</span><svg
+        class="dy-chev" viewBox="0 0 12 12"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.6"
+        stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
       <div class="dy-meta">${escapeHtml(dayRange(d))} · ${escapeHtml(dayCounts(d.counts))}</div>
       ${dayCost(d)}
       ${first ?`<div class="dy-peek">${escapeHtml(first)}</div>` : ''}</summary>
