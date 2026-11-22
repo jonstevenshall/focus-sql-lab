@@ -2788,14 +2788,23 @@ const dayTitle = (d, titles, n) => shortTitle((d.titles || {})[n] || titles.get(
 // Whether a position falls inside brackets, such as a number in another thread's title.
 const insideBrackets = (s, at) => { let d = 0; for (const c of s.slice(0, at)) d += c === '(' ? 1 : c === ')' ? -1 : 0; return d > 0; };
 
+// A thread number, linked to its card on Most recent updates if it has one; else to the lab's panel whose History or
+// open requests list it (#thread/<number>, once the search index has loaded: panels is its map of threads); else to
+// the thread on GitHub, marked ↗.
+function threadLink(n, title, inWindow, panels) {
+  const tt = escapeHtml(title || '');
+  if (inWindow.has(Number(n))) return `<button class="linkish" data-recent="${n}"${tt ? ` title="${tt}"` : ''}>#${n}</button>`;
+  if (panels && panels.has(String(n))) return `<a href="#thread/${n}" title="${tt ? `${tt} (in the lab)` : 'Open in the lab'}">#${n}</a>`;
+  return `<a href="${GH_ISSUE}${n}" target="_blank" rel="noopener" title="${tt ? `${tt} (on GitHub)` : 'Open on GitHub'}">#${n} ↗</a>`;
+}
+
 // A day's text with each thread number linked. The text gives each thread's title in brackets at its first mention; for
 // a number it left bare, the page adds the title there instead.
-function dayText(d, inWindow, titles) {
+function dayText(d, inWindow, titles, panels) {
   const seen = new Set();
   return d.text.split(/\n\s*\n/).map((para) => `<p>${escapeHtml(para.trim()).replace(/(?<![&\w])#(\d{2,5})\b/g, (m, n, at, all) => {
     const t = dayTitle(d, titles, n), tt = escapeHtml(t);
-    const link = inWindow.has(Number(n)) ? `<button class="linkish" data-recent="${n}" title="${tt}">#${n}</button>`
-      : `<a href="${GH_ISSUE}${n}" target="_blank" rel="noopener" title="${tt ? `${tt} (on GitHub)` : 'Open on GitHub'}">#${n}</a>`;
+    const link = threadLink(n, t, inWindow, panels);
     const titled = all.startsWith(' (', at + m.length);
     if (titled) seen.add(n);
     if (!t || titled || seen.has(n) || insideBrackets(all, at)) return link; // a number inside another's title stays bare
@@ -2817,14 +2826,13 @@ function dayCost(d) {
   return `<div class="dy-cost">Cost to write: US$${d.cost.toFixed(4)}${runs}</div>`;
 }
 
-function dayCard(d, latest, inWindow, titles) {
+function dayCard(d, latest, inWindow, titles, panels) {
   const first = d.text ? dayPeek(d, titles, d.text.split(/(?<=[.?!])\s/)[0]) : '';
-  const body = d.text ? `<div class="dy-text">${dayText(d, inWindow, titles)}</div>`
+  const body = d.text ? `<div class="dy-text">${dayText(d, inWindow, titles, panels)}</div>`
     : d.failed ? '<p class="dy-note">No summary for this day: what was written didn\'t pass the lab\'s checks, so it isn\'t shown. The threads are listed below, and the next run tries again.</p>'
     : '<p class="dy-note">Nothing new: nobody opened, commented on or reviewed a thread, and nothing was merged or closed.</p>';
   const rows = d.threads.map((t) => {
-    const num = inWindow.has(t.n) ? `<button class="linkish" data-recent="${t.n}">#${t.n}</button>`
-      : `<a href="${GH_ISSUE}${t.n}" target="_blank" rel="noopener" title="Open on GitHub">#${t.n} ↗</a>`;
+    const num = threadLink(t.n, '', inWindow, panels);
     const tags = [t.opened ? '<span class="tag">opened</span>' : '',
       t.change ? `<span class="tag ch-${escapeHtml(DY_CHANGE[t.change] || 'closed').replace(/ /g, '-')}">${escapeHtml(DY_CHANGE[t.change] || t.change)}</span>` : ''].join('');
     const what = !t.comments ? '' : t.comments === 1 ? '1 comment or review' : `${t.comments} comments and reviews`;
@@ -2855,10 +2863,15 @@ async function renderDaily() {
   const updated = new Date(d.days[0].to).toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric',
     hour: '2-digit', minute: '2-digit', timeZoneName: 'short' });
   $('daily-about').innerHTML = `${escapeHtml(d.about)} <button class="log-open" type="button" title="Open the update log">Updated <time datetime="${
-    escapeHtml(d.days[0].to)}">${escapeHtml(updated)}</time></button>. Each thread number opens its card on Most recent updates.`;
+    escapeHtml(d.days[0].to)}">${escapeHtml(updated)}</time></button>. Each thread number opens its card on Most recent
+    updates, or else the panel in the lab that lists it; one the lab has nothing on opens on GitHub (↗).`;
+  const panels = ssIndex ? ssIndex.threads : null;
   const open = new Set([...document.querySelectorAll('#daily-list .dy[open]')].map((x) => x.dataset.day));
-  $('daily-list').innerHTML = d.days.map((x, k) => dayCard(x, k === 0, inWindow, titles)).join('');
+  $('daily-list').innerHTML = d.days.map((x, k) => dayCard(x, k === 0, inWindow, titles, panels)).join('');
   if (open.size) document.querySelectorAll('#daily-list .dy').forEach((x) => { x.open = open.has(x.dataset.day); }); // as the reader left them
+  // Which threads have a panel comes from the search index (1.6 MB), so the days show first and their links are
+  // redrawn once it has loaded; the site search uses the same copy.
+  if (!panels) loadSearch().then((idx) => { if (idx && tab === 'daily') renderDaily(); });
 }
 
 // Open one day's summary: from its address, a search result or the way back from a thread.

@@ -42,8 +42,9 @@ server tab's question box, which has a small service of its own (see below).
 - **Daily summary** (also at `#daily`): what the working group did on GitHub each day, in two to four paragraphs
   written every morning, starting with the day's main news, with what it cost to write under its heading: what moved
   forward or was decided, what is being discussed, who said what, and what is waiting on someone. Every thread it
-  mentions is a link to its card on Most recent updates (or to GitHub, if it has no card), with its title in brackets
-  after its first mention, and a "Back to the daily summary" button there returns to the day. Under the text, each day
+  mentions is a link to its card on Most recent updates, with its title in brackets after its first mention, and a
+  "Back to the daily summary" button there returns to the day. A thread with no card links to the panel in the lab whose
+  history or open requests list it (`#thread/<number>`), and one the lab has nothing on links to GitHub, marked ↗. Under the text, each day
   lists its threads, busiest first, with what changed (opened, merged, closed) and who took part. Earlier days are kept
   below, folded to their first sentence. Each day has an address, `#daily/2026-11-22`, named by its date in Brisbane.
 - **Most recent updates** (also at `#recent`): the FOCUS_Spec issues and pull requests people opened, commented on or reviewed in
