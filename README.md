@@ -1,7 +1,8 @@
 # FOCUS SQL Lab
 
 A web page for exploring SQL queries on FOCUS sample data and exploring the FOCUS data model. DuckDB-WASM runs the
-queries in the browser, so the server only serves static files: no database, no login, no API.
+queries in the browser, so the server serves static files, with no database and no login. The one exception is the MCP
+server tab's question box, which has a small service of its own (see below).
 
 ## What it does
 
@@ -57,8 +58,13 @@ queries in the browser, so the server only serves static files: no database, no 
   status and time. Replies show as tables, one for each list of records in them, captioned with where the list sits;
   when there are several, chips above them show one at a time. The other values are listed as fields. A switch
   beside "Tables" shows the reply as JSON instead, the server's text unchanged. `#mcp/<tool name>` opens a tool. The
-  requests go from the browser straight to focus.finops.org, which allows calls from other sites; the lab's own server
-  still serves only static files.
+  requests go from the browser straight to focus.finops.org, which allows calls from other sites.
+  Above the tester, a question box takes a plain-English question. Claude Haiku 5.5 answers it, calling the server's
+  tools through the lab's service (`ask/server.py`), and the page shows the answer, what it cost and every lookup it
+  made; each lookup opens in the tester with its arguments filled in. The service keeps the API key, caps spend at
+  US$1.00 a question and a daily total, limits each visitor to 20 questions an hour, and keeps tool replies for a day,
+  since the FOCUS server limits how often one address can call it. Questions are not stored. The box only shows where the
+  service is running with a key.
 - **Search:** a box in the page header, on every tab (Ctrl-K, or Cmd-K on a Mac, goes to it). It searches what every
   tab shows: the columns, datasets, joins and requirement lines, the conditions, attributes and supporting material,
   the pull requests and issues in the history and open requests, the sample tables, the example queries, the quiz
@@ -409,3 +415,10 @@ python3 -m http.server 8644 --directory site
 
 On Coolify, add this repository as a Public Repository resource using the Dockerfile build pack and port 80.
 A GitHub webhook redeploys it on every push to `main`.
+
+The question box needs `ANTHROPIC_API_KEY` set as an environment variable on the resource. Without it the box stays
+hidden and the rest of the lab works as before. Use a key from its own workspace in the Anthropic Console, with a spend
+limit on that workspace: the service's own spend counts start again from zero at every deploy. `ASK_DAILY_CAP_USD`
+(default 1.00), `ASK_QUESTION_CAP_USD` (1.00), `ASK_PER_HOUR` (20) and `ASK_MAX_AT_ONCE` (3) change its limits. To run
+it locally, with the page, on port 8648: `ANTHROPIC_API_KEY=... python ask/server.py --dev` (it needs `pip install
+anthropic`).
