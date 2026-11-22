@@ -1,6 +1,605 @@
 {
  "runs": [
   {
+   "at": "2026-11-22T04:36:19Z",
+   "task": "daily",
+   "model": "claude-haiku-5-5",
+   "effort": "high",
+   "fallback": "claude-sonnet-5-5",
+   "reviewer": "claude-haiku-5-5",
+   "days": 5,
+   "threads": 39,
+   "items": 99,
+   "attempted": 5,
+   "first_pass": 3,
+   "escalated": 2,
+   "escalated_passed": 2,
+   "failed": 0,
+   "escalated_pct": 40.0,
+   "spend": {
+    "claude-haiku-5-5": {
+     "input": 134799,
+     "output": 43362,
+     "cost": 0.0352,
+     "price": [
+      0.1,
+      0.5
+     ]
+    },
+    "claude-sonnet-5-5": {
+     "input": 25165,
+     "output": 2678,
+     "cost": 0.0771,
+     "price": [
+      2.0,
+      10.0
+     ]
+    }
+   },
+   "cost": 0.1123,
+   "estimate": {
+    "input": 109429,
+    "output": 21147,
+    "cost": 0.0537
+   },
+   "escalations": [
+    {
+     "key": "2026-11-16",
+     "title": "Daily summary for 16 November 2026",
+     "result": "passed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "input": 6985,
+       "output": 3682,
+       "cost": 0.00254,
+       "problems": [
+        "a paragraph has 174 words; keep each paragraph under 170 words"
+       ]
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "input": 7711,
+       "output": 1832,
+       "cost": 0.00169,
+       "review": {
+        "model": "claude-haiku-5-5",
+        "input": 6945,
+        "output": 2167,
+        "cost": 0.00178
+       },
+       "problems": [
+        "fact check: \"#2873 and #2437 are at an early stage and are waiting on Task Force 2's answers.\": The material does not say #2873 is waiting on Task Force 2. Only #2437 carries the questions to Task Force 2 (c6890252064), and #2873 is simply an open PR with no reviews or replies (o2873). Describing it as waiting on those answers is unsupported."
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "input": 6984,
+       "output": 643,
+       "cost": 0.0204,
+       "problems": [
+        "a paragraph has 194 words; keep each paragraph under 170 words"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 2,
+       "input": 7691,
+       "output": 633,
+       "cost": 0.02171,
+       "review": {
+        "model": "claude-haiku-5-5",
+        "input": 6917,
+        "output": 1633,
+        "cost": 0.00151
+       },
+       "problems": []
+      }
+     ],
+     "cost": 0.04963
+    },
+    {
+     "key": "2026-11-15",
+     "title": "Daily summary for 15 November 2026",
+     "result": "passed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "input": 4870,
+       "output": 2587,
+       "cost": 0.00178,
+       "problems": [
+        "it uses a relative date (\"today\")"
+       ]
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "input": 5665,
+       "output": 1490,
+       "cost": 0.00131,
+       "problems": [
+        "it uses a relative date (\"today\")"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "input": 4869,
+       "output": 700,
+       "cost": 0.01674,
+       "problems": [
+        "it uses a relative date (\"today\")"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 2,
+       "input": 5621,
+       "output": 702,
+       "cost": 0.01826,
+       "review": {
+        "model": "claude-haiku-5-5",
+        "input": 4871,
+        "output": 1376,
+        "cost": 0.00118
+       },
+       "problems": []
+      }
+     ],
+     "cost": 0.03927
+    }
+   ],
+   "run": null
+  },
+  {
+   "at": "2026-11-22T04:29:15Z",
+   "task": "daily",
+   "model": "claude-haiku-5-5",
+   "effort": "high",
+   "fallback": "claude-sonnet-5-5",
+   "reviewer": "claude-haiku-5-5",
+   "days": 14,
+   "threads": 151,
+   "items": 303,
+   "attempted": 13,
+   "first_pass": 12,
+   "escalated": 1,
+   "escalated_passed": 1,
+   "failed": 0,
+   "escalated_pct": 7.7,
+   "spend": {
+    "claude-haiku-5-5": {
+     "input": 313899,
+     "output": 93662,
+     "cost": 0.0782,
+     "price": [
+      0.1,
+      0.5
+     ]
+    },
+    "claude-sonnet-5-5": {
+     "input": 18143,
+     "output": 1599,
+     "cost": 0.0523,
+     "price": [
+      2.0,
+      10.0
+     ]
+    }
+   },
+   "cost": 0.1305,
+   "estimate": {
+    "input": 338847,
+    "output": 55703,
+    "cost": 0.2127
+   },
+   "escalations": [
+    {
+     "key": "2026-11-21",
+     "title": "Daily summary for 21 November 2026",
+     "result": "passed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "input": 8557,
+       "output": 3504,
+       "cost": 0.00261,
+       "review": {
+        "model": "claude-haiku-5-5",
+        "input": 8715,
+        "output": 3725,
+        "cost": 0.00273
+       },
+       "problems": [
+        "fact check: \"are otherwise in a mergeable state on approvals alone\": The summary says #2846 is mergeable on approvals alone, but the background shows Matt-Cowsert committed on 2026-11-19 to make the same wording change to line 65 of the eligibility examples. No item in this period shows that change made, so the thread is not clearly in a mergeable state."
+       ]
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "input": 9487,
+       "output": 849,
+       "cost": 0.00137,
+       "review": {
+        "model": "claude-haiku-5-5",
+        "input": 8791,
+        "output": 2849,
+        "cost": 0.0023
+       },
+       "problems": [
+        "fact check: \"#2869 on metadata links and recency examples and #2870 on summary tables and glossary entries are otherwise in a mergeable state on approvals alone.\": #2869 has only one approval (0 to 1), and #2870's background shows ijurica's unresolved flag that Invoice Detail omits the Billing Period relationship, so calling both mergeable on approvals alone misstates where they stand. Cited: [s7051224321], [r5999737660], [s7051219322], [r5999734479], and the #2870 background item from ijurica on 2026-11-19.",
+        "fact check: \"the threads on older issues were largely tidied up by rileyjenk.\": Most of rileyjenk's in-period comments on older threads challenge or question the threads (#2294 argues recency covers the use case, #2174 disputes the marketplace premise, #2704 asks for an example). Only the #1226 and #1131 comments are triage-like, so 'tidied up' mischaracterizes them. Cited: [c7030764090], [c7030856033], [c7031015332], [c7041766911], [c7031085947]."
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "input": 8556,
+       "output": 890,
+       "cost": 0.02601,
+       "problems": [
+        "it writes the username flanakin as Flanakin; write it exactly as shown",
+        "it has 416 words; the limit is 400",
+        "a paragraph has 199 words; keep each paragraph under 170 words"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 2,
+       "input": 9587,
+       "output": 709,
+       "cost": 0.02626,
+       "review": {
+        "model": "claude-haiku-5-5",
+        "input": 8651,
+        "output": 1529,
+        "cost": 0.00163
+       },
+       "problems": []
+      }
+     ],
+     "cost": 0.06291
+    }
+   ],
+   "run": null
+  },
+  {
+   "at": "2026-11-22T03:52:04Z",
+   "task": "daily",
+   "model": "claude-haiku-5-5",
+   "effort": "high",
+   "fallback": "claude-sonnet-5-5",
+   "reviewer": "claude-haiku-5-5",
+   "days": 14,
+   "threads": 151,
+   "items": 303,
+   "attempted": 13,
+   "first_pass": 8,
+   "escalated": 5,
+   "escalated_passed": 3,
+   "failed": 2,
+   "escalated_pct": 38.5,
+   "spend": {
+    "claude-haiku-5-5": {
+     "input": 375470,
+     "output": 118445,
+     "cost": 0.0968,
+     "price": [
+      0.1,
+      0.5
+     ]
+    },
+    "claude-sonnet-5-5": {
+     "input": 99706,
+     "output": 8599,
+     "cost": 0.2854,
+     "price": [
+      2.0,
+      10.0
+     ]
+    }
+   },
+   "cost": 0.3822,
+   "estimate": {
+    "input": 262656,
+    "output": 54016,
+    "cost": 0.0628
+   },
+   "escalations": [
+    {
+     "key": "2026-11-22",
+     "title": "Daily summary for 22 November 2026",
+     "result": "failed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "input": 8564,
+       "output": 3553,
+       "cost": 0.00263,
+       "problems": [
+        "it has 459 words; the limit is 400"
+       ]
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "input": 9521,
+       "output": 824,
+       "cost": 0.00136,
+       "problems": [
+        "it has 413 words; the limit is 400"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "input": 8563,
+       "output": 862,
+       "cost": 0.02575,
+       "problems": [
+        "it has 404 words; the limit is 400",
+        "a paragraph has 193 words; keep each paragraph under 170 words"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 2,
+       "input": 9503,
+       "output": 817,
+       "cost": 0.02718,
+       "review": {
+        "model": "claude-haiku-5-5",
+        "input": 9030,
+        "output": 1779,
+        "cost": 0.00179
+       },
+       "problems": [
+        "fact check: \"The SKU Price issues each break out one open question from the 18 November TF2 discussion.\": Not supported for all the issues described. #2891 tracks gaps found in the scenario review of PR #2879, not the 18 November TF2 discussion (o2891 and its background). The material also does not tie #2893 or #2892 to that discussion as their origin."
+       ]
+      }
+     ],
+     "cost": 0.05871
+    },
+    {
+     "key": "2026-11-20",
+     "title": "Daily summary for 20 November 2026",
+     "result": "passed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "input": 15446,
+       "output": 4514,
+       "cost": 0.0038,
+       "problems": [
+        "it has 444 words; the limit is 400"
+       ]
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "input": 16514,
+       "output": 1394,
+       "cost": 0.00235,
+       "problems": [
+        "it has 445 words; the limit is 400"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "input": 15445,
+       "output": 972,
+       "cost": 0.04061,
+       "problems": [
+        "it has 406 words; the limit is 400"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 2,
+       "input": 16471,
+       "output": 932,
+       "cost": 0.04226,
+       "review": {
+        "model": "claude-haiku-5-5",
+        "input": 16027,
+        "output": 2550,
+        "cost": 0.00288
+       },
+       "problems": []
+      }
+     ],
+     "cost": 0.0919
+    },
+    {
+     "key": "2026-11-15",
+     "title": "Daily summary for 15 November 2026",
+     "result": "passed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "input": 4560,
+       "output": 3359,
+       "cost": 0.00214,
+       "problems": [
+        "a paragraph has 172 words; keep each paragraph under 170 words",
+        "it uses a relative date (\"today\")"
+       ]
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "input": 5416,
+       "output": 3799,
+       "cost": 0.00244,
+       "review": {
+        "model": "claude-haiku-5-5",
+        "input": 4942,
+        "output": 2647,
+        "cost": 0.00182
+       },
+       "problems": [
+        "fact check: \"Most of the activity since the last update went to context-window pricing for #2521\": Counting the period's 9 comments, reviews and new threads, only 4 concern context-window pricing (#2521, #2871, #2872). The 5 qquigley replies on #2859 are the largest share, so context-window pricing did not get most of the activity.",
+        "fact check: \"qquigley replied on 14 November to each of Matt-Cowsert's review points\": The material does not show a reply to Matt-Cowsert's note on the triage test, which was one of the points in the first review. The replies cover the seven-day window, scope change, must wording, objection bullet and approval line only.",
+        "fact check: \"Every point now has a reply\": The same gap applies: no item in this period replies to the triage-test note from Matt-Cowsert's 12 November review, so not every point has a reply."
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "input": 4559,
+       "output": 749,
+       "cost": 0.01661,
+       "problems": [
+        "a paragraph has 177 words; keep each paragraph under 170 words",
+        "it uses a relative date (\"today\")"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 2,
+       "input": 5384,
+       "output": 728,
+       "cost": 0.01805,
+       "review": {
+        "model": "claude-haiku-5-5",
+        "input": 4937,
+        "output": 1416,
+        "cost": 0.0012
+       },
+       "problems": []
+      }
+     ],
+     "cost": 0.04226
+    },
+    {
+     "key": "2026-11-12",
+     "title": "Daily summary for 12 November 2026",
+     "result": "passed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "input": 8420,
+       "output": 4731,
+       "cost": 0.00321,
+       "problems": [
+        "it has 433 words; the limit is 400"
+       ]
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "input": 9398,
+       "output": 3919,
+       "cost": 0.0029,
+       "review": {
+        "model": "claude-haiku-5-5",
+        "input": 8817,
+        "output": 1676,
+        "cost": 0.00172
+       },
+       "problems": [
+        "fact check: \"#2827 merged after jerrysr99 approved the Entry to RequesterDetailsObject[] rewording.\": jerrysr99's review on #2827 is a comment, not an approval. The material says \"Review by jerrysr99 (commented)\" and describes finding the rewording sound and backing option 1, without approving the pull request."
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "input": 8419,
+       "output": 922,
+       "cost": 0.02606,
+       "problems": [
+        "it writes the username flanakin as Flanakin; write it exactly as shown",
+        "it has 442 words; the limit is 400",
+        "a paragraph has 217 words; keep each paragraph under 170 words"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 2,
+       "input": 9444,
+       "output": 682,
+       "cost": 0.02571,
+       "review": {
+        "model": "claude-haiku-5-5",
+        "input": 8751,
+        "output": 3178,
+        "cost": 0.00246
+       },
+       "problems": []
+      }
+     ],
+     "cost": 0.06206
+    },
+    {
+     "key": "2026-11-11",
+     "title": "Daily summary for 11 November 2026",
+     "result": "failed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "input": 10385,
+       "output": 3693,
+       "cost": 0.00288,
+       "problems": [
+        "it has 447 words; the limit is 400",
+        "it doesn't mention #1545; mention every thread in the material by its number"
+       ]
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "input": 11473,
+       "output": 2811,
+       "cost": 0.00255,
+       "problems": [
+        "it has 422 words; the limit is 400"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "input": 10384,
+       "output": 1096,
+       "cost": 0.03173,
+       "problems": [
+        "it has 487 words; the limit is 400"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 2,
+       "input": 11534,
+       "output": 839,
+       "cost": 0.03146,
+       "review": {
+        "model": "claude-haiku-5-5",
+        "input": 10873,
+        "output": 2655,
+        "cost": 0.00241
+       },
+       "problems": [
+        "fact check: \"Automation moved #2770 to TF-Supporting.\": Misattributes the change. The record says Matt-Cowsert updated Task Force from TF-Core 2 to TF-Supporting; the repository's automation only posted that change. Cited: s6755575244."
+       ]
+      }
+     ],
+     "cost": 0.07103
+    }
+   ],
+   "run": null
+  },
+  {
    "at": "2026-11-21T23:56:04Z",
    "task": "recent",
    "model": "claude-haiku-5-5",

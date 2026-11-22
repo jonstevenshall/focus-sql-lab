@@ -8,16 +8,18 @@ API key, and it changes only when they do:
 Reads focus/model.json (datasets, columns, joins, attributes, conditions, appendix, metadata and schema topics, and
 every requirement line), object-summaries.json, focus/spec-queries.json, practice-queries.json, focus/history.json
 with thread-summaries.json, focus/data/manifest.json (the Sample data tables), quiz.json (titles and questions, not
-hints or answers), focus/ai-tokens.json, evidence.json, recent.json and, if it exists, open-requests.json.
+hints or answers), focus/ai-tokens.json, evidence.json, daily.json, recent.json and, if it exists, open-requests.json.
 
 Each thing is listed once, under the tab it lives on: the page groups results by the tab their address opens. A pull
-request or issue discussed in the last two weeks is listed as its Recent card, not again from the History.
+request or issue discussed in the last two weeks is listed as its card on Most recent updates, not again from the History.
+Each day's summary is listed under the Daily summary tab.
 
 Each entry is {y: what it is, i: its ID, n: its name, t: its title, b: its text, s: a line shown under it, x: more
 words to find it by, not shown (SQL, thread numbers, column IDs), h: its address on the page}, with empty fields left
 out. The page ranks a match in i above one in n, n above t, and t above b, s and x. A pull request or issue also has
 g: the address of the panel whose History lists it, which #thread/<number> opens. Requirement lines are the specification's, with its Markdown links and emphasis reduced to their text.
 """
+import datetime
 import json
 import pathlib
 import re
@@ -38,6 +40,7 @@ history = load("focus/history.json")
 said = load("thread-summaries.json", {"summaries": {}})["summaries"]
 evidence = load("evidence.json", {"items": []})["items"]
 recent = load("recent.json", {"threads": []})["threads"]
+daily = load("daily.json", {"days": []})["days"]
 queries = load("practice-queries.json", []) + load("focus/spec-queries.json", [])
 open_req = load("open-requests.json")  # written by tools/open_requests.py, once that is in place
 
@@ -225,7 +228,7 @@ if ai:  # the parts of the AI tokens tab, under the headings the tab gives them
         add("ai", f"#ai/{g['id']}", t=g["title"], b=g.get("text", ""), s="Where it stops",
             x=" ".join(q.get("text", "") for q in g.get("quotes", [])))
 
-# ---- evidence and the Recent tab ---------------------------------------------------------------------------------
+# ---- evidence, the daily summaries and the most recent updates ---------------------------------------------------------------------------------
 EV_KINDS = {"pain": "Pain point", "demand": "Who asked", "discovery": "How they found out", "use_case": "Use case",
             "tradeoff": "Trade-off"}
 obj_label = lambda k: k.split(":", 1)[1]  # noqa: E731
@@ -234,6 +237,16 @@ for e in evidence:
     add("ev", f"#evidence/{e['id']}", t=e["statement"], b=e.get("quote") or "",
         s=" · ".join(filter(None, [EV_KINDS.get(e["category"], e["category"]), e.get("date"), threads and f"threads {threads}"])),
         x=" ".join([*(e.get("who") or []), *[obj_label(o) for o in e.get("objects") or []]]))
+
+BRISBANE = datetime.timezone(datetime.timedelta(hours=10))  # a day is named by its date there (tools/daily.py)
+for d in daily:
+    if not d.get("text"):
+        continue
+    day = datetime.date.fromisoformat(d["id"])
+    c = d["counts"]
+    add("daily", f"#daily/{d['id']}", i=d["id"], t=f"{day:%A} {day.day} {day:%B %Y}", b=d["text"],
+        s=f"Daily summary · {c['threads']} threads · {c['items']} comments, reviews and new threads",
+        x=" ".join([*(f"#{t['n']} {t['n']}" for t in d["threads"]), *{p for t in d["threads"] for p in t["people"]}]))
 
 for r in recent:
     add("recent", f"#recent/{r['number']}", i=r["number"], t=r["title"],

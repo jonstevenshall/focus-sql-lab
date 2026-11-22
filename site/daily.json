@@ -1,0 +1,3167 @@
+{
+ "about": "What the FOCUS working group did on GitHub since the previous update. Written each morning by an AI model from that period's comments, reviews, merges and closures, then fact-checked against them by a second call. It interprets, so check the threads before relying on it.",
+ "generated_at": "2026-11-21T23:52:15Z",
+ "days": [
+  {
+   "id": "2026-11-22",
+   "from": "2026-11-20T23:52:15Z",
+   "to": "2026-11-21T23:52:15Z",
+   "counts": {
+    "items": 11,
+    "threads": 11,
+    "people": 3,
+    "opened": 8,
+    "merged": 0,
+    "closed": 0
+   },
+   "threads": [
+    {
+     "n": 2894,
+     "kind": "pr",
+     "title": "Split Append delivery into Additive and Versioned Append",
+     "state": "draft",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "topic:correction-handling-examples",
+      "attribute:CorrectionHandling",
+      "attribute:DeliveryHandling",
+      "dataset:SkuPrice"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2893,
+     "kind": "issue",
+     "title": "[AI] Provide SKU Price dataset complexity, size, and performance analysis",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2892,
+     "kind": "issue",
+     "title": "[AI] Assess Storage Characteristics of Alternative SKU Price Models",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "dataset:SkuPrice"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2891,
+     "kind": "issue",
+     "title": "[AI] Close SKU Price supported feature gaps",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "dataset:SkuPrice"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2890,
+     "kind": "issue",
+     "title": "[AI] Finalize columns needed for a SKU Price primary key",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 2,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:SkuPrice.SkuPriceEligibility"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2889,
+     "kind": "issue",
+     "title": "[AI] Finalize tiered pricing coverage in the SKU Price dataset",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 2,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "dataset:SkuPrice"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2888,
+     "kind": "issue",
+     "title": "[AI] Finalize where SKU properties live for SKU Price general availability",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2887,
+     "kind": "issue",
+     "title": "[AI] Clarify relationship between BillingAccountId and ContractId",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.BillingAccountId",
+      "column:SkuPrice.ContractId"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2885,
+     "kind": "issue",
+     "title": "[Feedback] How should a non-invoicing metering layer (such as an LLM gateway) carry its computed cost when BilledCost and EffectiveCost must be 0?",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "roy-tong"
+     ],
+     "objects": [
+      "column:CostAndUsage.BilledCost",
+      "column:CostAndUsage.EffectiveCost",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ListCost",
+      "column:CostAndUsage.ContractedCost",
+      "column:CostAndUsage.ConsumedQuantity"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2753,
+     "kind": "pr",
+     "title": "AI #2751: Adding CommitmentApplicability to the SKU Price dataset",
+     "state": "draft",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "topic:json-object-examples",
+      "topic:sku-price-examples",
+      "column:SkuPrice.CommitmentDiscountCategory",
+      "column:SkuPrice.UnitPriceType",
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 972,
+     "kind": "issue",
+     "title": "[FR] Add granular sustainability dimensions and metrics",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "guillermollopis"
+     ],
+     "objects": [
+      "column:CostAndUsage.ResourceId",
+      "column:CostAndUsage.RegionId",
+      "column:CostAndUsage.ChargePeriodStart",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ResourceName",
+      "column:CostAndUsage.ResourceType"
+     ],
+     "change": null,
+     "opened": false
+    }
+   ],
+   "text": "Most of the activity since the last update came from flanakin, who opened eight items on 21 November: seven issues under #2807, the feature request to promote SKU Price to general availability, and one draft pull request. None of them has comments yet, so this period sets out the work rather than resolving anything.\n\nThe issues list what must be settled before SKU Price can go to general availability. #2890 covers the columns that make a SKU Price record unique (TF-Core 2, due 2 December), #2887 the relationships between billing account, contract and commitment IDs, and #2888 where SKU properties should live, since placement affects dataset size (both due 25 November). #2889 asks whether spend-based tiers would block general availability (due 9 December). #2891 tracks three feature gaps from #2879, to be queried and then added or deferred with a reason. #2892 and #2893 are size and query-performance analyses, due 25 November and 2 December. In #2753, a draft adding CommitmentApplicability to SKU Price, flanakin recorded that TF2 wanted to see the approach in practice on 18 November and asked ijurica for worked examples and a size comparison. The draft remains open.\n\n#2894 proposes splitting Append delivery into Additive Append, for new rows that practitioners sum, and Versioned Append, for newer versions of earlier rows that practitioners reduce to the latest per row key. It is stacked on #2826, which must merge first, so it appears to be waiting on that work.\n\nThe other two threads are still open. In #2885, andrasKelle asks how an LLM gateway that prices usage should carry its computed cost when BilledCost and EffectiveCost must be 0. roy-tong replied that BilledCost should stay absent rather than copy an estimate, that EffectiveCost should hold the best per-request figure, and that a provenance field should show whether a number came from an invoice or a local estimate. No maintainer has responded yet. In #972, guillermollopis proposes optional estimated energy and location-based emissions for AI token rows, with a provenance field, and asks where these belong, which basis should be the default and which energy unit to use. That thread has no reply yet.",
+   "written_by": "claude-haiku-5-5"
+  },
+  {
+   "id": "2026-11-21",
+   "from": "2026-11-19T23:52:15Z",
+   "to": "2026-11-20T23:52:15Z",
+   "counts": {
+    "items": 17,
+    "threads": 14,
+    "people": 6,
+    "opened": 5,
+    "merged": 0,
+    "closed": 0
+   },
+   "threads": [
+    {
+     "n": 2853,
+     "kind": "pr",
+     "title": "Editorial #2833: Correct the split cost allocation and commitment discount examples",
+     "state": "open",
+     "items": 4,
+     "comments": 4,
+     "statuses": 1,
+     "people": [
+      "flanakin",
+      "ijurica"
+     ],
+     "objects": [
+      "topic:commitment-discounts",
+      "topic:examples-commitment-discount-flexibility-examples",
+      "topic:split-cost-allocation-examples",
+      "topic:split-cost-allocation-field-mapping",
+      "column:CostAndUsage.AllocatedServiceName",
+      "column:CostAndUsage.AllocatedMethodId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2886,
+     "kind": "pr",
+     "title": "AI 2847 reply to Irena proposal",
+     "state": "draft",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "jpradocueva"
+     ],
+     "objects": [
+      "column:CostAndUsage.BilledCost"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2885,
+     "kind": "issue",
+     "title": "[Feedback] How should a non-invoicing metering layer (such as an LLM gateway) carry its computed cost when BilledCost and EffectiveCost must be 0?",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 0,
+     "people": [
+      "andrasKelle"
+     ],
+     "objects": [
+      "column:CostAndUsage.BilledCost",
+      "column:CostAndUsage.EffectiveCost",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ListCost",
+      "column:CostAndUsage.ContractedCost",
+      "column:CostAndUsage.ConsumedQuantity"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2884,
+     "kind": "issue",
+     "title": "[FR] One Participating Entity FR Definition To Rule Them All",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 0,
+     "people": [
+      "rileyjenk"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2883,
+     "kind": "issue",
+     "title": "[Feedback] Commitment discount scenario CSVs still use the removed ProviderName and PublisherName columns",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:CostAndUsage.ServiceProviderName",
+      "column:CostAndUsage.InvoiceIssuerName",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2882,
+     "kind": "issue",
+     "title": "[Feedback] Contract Commitment by Category query: unqualified ContractCommitmentId in GROUP BY fails on PostgreSQL-style engines",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:ContractCommitment.ContractCommitmentId",
+      "dataset:ContractCommitment",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ChargePeriodStart",
+      "column:CostAndUsage.ChargePeriodEnd",
+      "column:CostAndUsage.ServiceProviderName"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2870,
+     "kind": "pr",
+     "title": "Editorial #2835: Correct summary tables, glossary entries, labels, and links",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "dataset:ContractCommitment",
+      "column:CostAndUsage.SkuPriceDetails",
+      "dataset:CostAndUsage",
+      "column:InvoiceDetail.PaymentCurrency",
+      "dataset:InvoiceDetail",
+      "column:SkuPrice.PurchaseDurationType"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2869,
+     "kind": "pr",
+     "title": "Editorial #2834: Correct metadata links, key names, and examples",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "topic:metadata-examples",
+      "topic:dataset-instance",
+      "topic:recency",
+      "topic:schema",
+      "dataset:ContractCommitment",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2846,
+     "kind": "pr",
+     "title": "Editorial #2832: Correct the Contract Commitment and commitment program examples",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "topic:contract-commitments",
+      "topic:json-object-examples",
+      "column:ContractCommitment.ContractCommitmentApplicability",
+      "column:ContractCommitment.ContractCommitmentDiscountPercentage",
+      "column:ContractCommitment.ContractCommitmentPeriodEnd",
+      "column:ContractCommitment.ContractCommitmentPeriodStart"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2704,
+     "kind": "issue",
+     "title": "[Feedback] Clarification Request: Intended HostProviderName and ServiceProviderName Values for Sovereign Clouds (e.g., Azure operated by 21Vianet)",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "rileyjenk"
+     ],
+     "objects": [
+      "column:CostAndUsage.HostProviderName",
+      "column:CostAndUsage.ServiceProviderName"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2294,
+     "kind": "issue",
+     "title": "[FR] Define Billing Period population relative to Cost and Usage",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "rileyjenk"
+     ],
+     "objects": [
+      "dataset:BillingPeriod",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.BillingPeriodStart",
+      "dataset:InvoiceDetail",
+      "column:CostAndUsage.InvoiceIssuerName",
+      "column:BillingPeriod.BillingPeriodStatus"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2174,
+     "kind": "issue",
+     "title": "[FR] Data Lineage Support - Distinguish data originators, processors, and intermediaries",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "rileyjenk"
+     ],
+     "objects": [
+      "column:CostAndUsage.BilledCost",
+      "column:CostAndUsage.EffectiveCost"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 1226,
+     "kind": "issue",
+     "title": "[FR] Review the use of \"provider\" vs \"data generator\"",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "rileyjenk"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 1131,
+     "kind": "issue",
+     "title": "[FR] Add machine-readable FOCUS column metadata",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "rileyjenk"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": false
+    }
+   ],
+   "background": "earlier items",
+   "text": "Most of the activity since the last update went to the editorial pull requests for the 1.5 release, where flanakin approved four of them, and to rileyjenk, who opened a new feature request on participating entities and commented on several related threads.\n\nOn the editorial pull requests, #2853 (split cost allocation and commitment discount examples) gained its first approval from flanakin, but ijurica raised three inline comments. They argue that the examples assume a retained origin row is related to the split, which the glossary and nullability rules don't establish, and suggest the field mapping example also drop the origin row. They also note that #2515 covers the origin-row model while #2578 was closed with two Definition of Done items not reflected, and ask for #2515 to be extended or #2578 reopened. A reply from Matt-Cowsert is awaited. Approvals took #2870 and #2846 to three each, and #2869 to one. Matt-Cowsert also opened #2883, reporting that all 14 commitment discount scenario CSVs still use the removed ProviderName and PublisherName columns, and #2882, reporting that an unqualified ContractCommitmentId in a GROUP BY fails on DuckDB. jpradocueva opened draft #2886, adding review comments to the step-1 editorial guidelines restructuring.\n\nThe participating entity discussion is the other main theme. rileyjenk opened #2884 to refine the definitions of data generator, later manipulators, and last-touch and intermediate processors, to reduce confusion and support metadata moving to GA. In #1226 they called the provider versus data generator question a duplicate to be handled within #2884. On #2174 they argued that direct payment to a marketplace seller is an outlier, and on #1131 they said column metadata is essentially the same as existing metadata.\n\nSmaller items: andrasKelle opened #2885, asking how a non-invoicing metering layer such as an LLM gateway can carry computed cost when BilledCost and EffectiveCost must be 0. rileyjenk asked on #2704 for an example of who the invoice is paid to for sovereign cloud regions, and suggested on #2294 that recency already covers much of the Billing Period use case.",
+   "written_by": "claude-sonnet-5-5"
+  },
+  {
+   "id": "2026-11-20",
+   "from": "2026-11-18T23:52:15Z",
+   "to": "2026-11-19T23:52:15Z",
+   "counts": {
+    "items": 53,
+    "threads": 12,
+    "people": 7,
+    "opened": 2,
+    "merged": 2,
+    "closed": 0
+   },
+   "threads": [
+    {
+     "n": 2842,
+     "kind": "pr",
+     "title": "AI #2841: Add 1.4 to 1.5 migration guide",
+     "state": "open",
+     "items": 12,
+     "comments": 12,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert",
+      "ijurica"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceId",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ServiceSubcategory",
+      "column:ContractCommitment.ContractCommitmentDurationType",
+      "column:CostAndUsage.PricingCurrencyContractedUnitPrice"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2827,
+     "kind": "pr",
+     "title": "Feedback #2821: Replace undefined Entry references with RequesterDetailsObject paths",
+     "state": "merged",
+     "items": 11,
+     "comments": 11,
+     "statuses": 3,
+     "people": [
+      "davidearney",
+      "finops-DaveMoreau",
+      "flanakin",
+      "ijurica",
+      "jpradocueva"
+     ],
+     "objects": [
+      "column:CostAndUsage.RequesterDetails",
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceDetails"
+     ],
+     "change": "merged",
+     "opened": false
+    },
+    {
+     "n": 2840,
+     "kind": "pr",
+     "title": "AI #2825: Add 1.5 Changelog",
+     "state": "open",
+     "items": 6,
+     "comments": 6,
+     "statuses": 3,
+     "people": [
+      "ijurica",
+      "jpradocueva",
+      "shawnalpay"
+     ],
+     "objects": [
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.ContractedUnitPrice",
+      "dataset:CostAndUsage",
+      "attribute:UnitFormat",
+      "dataset:ContractCommitment",
+      "column:CostAndUsage.ConsumedQuantity"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2830,
+     "kind": "pr",
+     "title": "AI #2825: Add 1.5 Contributors",
+     "state": "open",
+     "items": 6,
+     "comments": 6,
+     "statuses": 2,
+     "people": [
+      "flanakin",
+      "ijurica",
+      "shawnalpay"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2823,
+     "kind": "pr",
+     "title": "AI #2822: Add spec.md in builds",
+     "state": "merged",
+     "items": 5,
+     "comments": 5,
+     "statuses": 3,
+     "people": [
+      "Matt-Cowsert",
+      "finops-DaveMoreau",
+      "flanakin",
+      "ijurica",
+      "jpradocueva"
+     ],
+     "objects": [],
+     "change": "merged",
+     "opened": false
+    },
+    {
+     "n": 2869,
+     "kind": "pr",
+     "title": "Editorial #2834: Correct metadata links, key names, and examples",
+     "state": "open",
+     "items": 4,
+     "comments": 4,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "topic:metadata-examples",
+      "topic:dataset-instance",
+      "topic:recency",
+      "topic:schema",
+      "dataset:ContractCommitment",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2846,
+     "kind": "pr",
+     "title": "Editorial #2832: Correct the Contract Commitment and commitment program examples",
+     "state": "open",
+     "items": 4,
+     "comments": 4,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert",
+      "ijurica"
+     ],
+     "objects": [
+      "topic:contract-commitments",
+      "topic:json-object-examples",
+      "column:ContractCommitment.ContractCommitmentApplicability",
+      "column:ContractCommitment.ContractCommitmentDiscountPercentage",
+      "column:ContractCommitment.ContractCommitmentPeriodEnd",
+      "column:ContractCommitment.ContractCommitmentPeriodStart"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2881,
+     "kind": "pr",
+     "title": "AI #2783: Skip null values in the 1.5 CommitmentDiscount allowed-values rules",
+     "state": "draft",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:CostAndUsage.CapacityReservationStatus",
+      "attribute:CurrencyFormat",
+      "column:CostAndUsage.CommitmentDiscountStatus",
+      "column:CostAndUsage.CommitmentDiscountCategory",
+      "column:CostAndUsage.CommitmentDiscountId"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2880,
+     "kind": "pr",
+     "title": "Editorial #2836: Correct casing, IDs, and links in 1.5 requirement text",
+     "state": "draft",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:ContractCommitment.PricingCurrency",
+      "column:ContractCommitment.PricingCurrencyContractCommitmentCost",
+      "dataset:ContractCommitment",
+      "column:CostAndUsage.AllocatedMethodDetails",
+      "column:CostAndUsage.HostProviderName",
+      "column:CostAndUsage.InvoiceDetailId"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2870,
+     "kind": "pr",
+     "title": "Editorial #2835: Correct summary tables, glossary entries, labels, and links",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [
+      "dataset:ContractCommitment",
+      "column:CostAndUsage.SkuPriceDetails",
+      "dataset:CostAndUsage",
+      "column:InvoiceDetail.PaymentCurrency",
+      "dataset:InvoiceDetail",
+      "column:SkuPrice.PurchaseDurationType"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2853,
+     "kind": "pr",
+     "title": "Editorial #2833: Correct the split cost allocation and commitment discount examples",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "topic:commitment-discounts",
+      "topic:examples-commitment-discount-flexibility-examples",
+      "topic:split-cost-allocation-examples",
+      "topic:split-cost-allocation-field-mapping",
+      "column:CostAndUsage.AllocatedServiceName",
+      "column:CostAndUsage.AllocatedMethodId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2749,
+     "kind": "pr",
+     "title": "AI #2364: Add `SkuMeter` to `SkuPrice` dataset",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuMeter",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ServiceProviderName",
+      "column:SkuPrice.SkuPriceEligibility",
+      "column:CostAndUsage.SkuId"
+     ],
+     "change": null,
+     "opened": false
+    }
+   ],
+   "background": "earlier items",
+   "text": "Most activity since the last update went into fixes for the 1.5 release, and two pull requests were merged on 19 November. #2827 replaces undefined Entry references in the Requester Details requirements with RequesterDetailsObject paths and collected five approvals. jpradocueva's point about line 43 having no path subject, and ijurica's question about whether it should be a MUST, are not shown as resolved, and the binding of repeated [*] paths is left to #2838. #2823 adds spec.md to the release build artifacts and was approved on the members' call without objections.\n\nThe migration guide in #2842 drew the most discussion. ijurica argued that capacity reservations secure availability rather than provide discounts, and Matt-Cowsert narrowed the Effective Cost gap to discount-bearing programmes in c72bbe8b, along with other suggested wording. The List Cost clause remains open, with Matt-Cowsert inviting preferred wording. ijurica also flagged that the v1.6 milestone does not match the working_draft target; Matt-Cowsert called the milestone intentional and moved #2841 to match.\n\nSeveral editorial pull requests for 1.5 have had their reviewers' points answered but not yet re-reviewed. In #2846 the eligibility examples now say intervals, and the Interval Spend Commitment row was changed to Monthly. In #2869 the CreationDate values and recency IDs were corrected in response to jpradocueva. In #2853 ConsumedQuantity is split 0.333 and 0.667, as thecloudman proposed. #2870 has two approvals, with ijurica noting that Invoice Detail omits the Billing Period relationship.\n\nThe changelog in #2840 has six approvals, though ijurica's two nits on the removed Quarter units show no reply. #2830 has seven approvals, but shawnalpay asked whether four non-Maintainers were covered by a CLA and asked for MAINTAINERS.md affiliations to match; that seems to await Matt-Cowsert. Matt-Cowsert also opened drafts #2880 and #2881, applying the #2836 and #2783 fixes. On #2749, flanakin noted that SkuMeter is planned for TF Core 2 and tracked under FR #2807.",
+   "written_by": "claude-haiku-5-5"
+  },
+  {
+   "id": "2026-11-19",
+   "from": "2026-11-17T23:52:15Z",
+   "to": "2026-11-18T23:52:15Z",
+   "counts": {
+    "items": 21,
+    "threads": 6,
+    "people": 4,
+    "opened": 1,
+    "merged": 0,
+    "closed": 0
+   },
+   "threads": [
+    {
+     "n": 2873,
+     "kind": "pr",
+     "title": "FR #2437: Add ProcessingTier as a SkuPriceDetails property",
+     "state": "open",
+     "items": 10,
+     "comments": 10,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert",
+      "jerrysr99"
+     ],
+     "objects": [
+      "column:CostAndUsage.SkuPriceDetails",
+      "dataset:SkuPrice",
+      "column:CostAndUsage.PricingCategory",
+      "column:CostAndUsage.SkuId",
+      "column:CostAndUsage.SkuPriceId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2826,
+     "kind": "pr",
+     "title": "Period and Update Date Filtering for DatasetConfiguration",
+     "state": "open",
+     "items": 4,
+     "comments": 4,
+     "statuses": 0,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "attribute:DatasetConfiguration",
+      "column:SkuPrice.SkuPriceLastUpdated",
+      "dataset:SkuPrice",
+      "column:SkuPrice.SkuPriceEffectiveStart",
+      "column:SkuPrice.SkuPriceEffectiveEnd"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2871,
+     "kind": "pr",
+     "title": "FR #2521: Add context-window pricing properties to SKU Price Details",
+     "state": "draft",
+     "items": 3,
+     "comments": 3,
+     "statuses": 0,
+     "people": [
+      "jerrysr99"
+     ],
+     "objects": [
+      "column:CostAndUsage.SkuPriceDetails",
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.SkuId",
+      "column:CostAndUsage.SkuMeter"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2848,
+     "kind": "pr",
+     "title": "AI #2847: Restructure the Editorial Guidelines and align the AGENTS.md grouping",
+     "state": "draft",
+     "items": 2,
+     "comments": 2,
+     "statuses": 0,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2879,
+     "kind": "pr",
+     "title": "Add Azure practitioner scenarios to SKU Price supported features",
+     "state": "draft",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2613,
+     "kind": "pr",
+     "title": "FR #2414: Region scope as a SkuPriceDetails property",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "jerrysr99"
+     ],
+     "objects": [
+      "column:CostAndUsage.SkuPriceDetails",
+      "column:SkuPrice.PricingRegionId",
+      "dataset:SkuPrice",
+      "column:CostAndUsage.RegionId",
+      "column:SkuPrice.SkuPriceEligibility",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": false
+    }
+   ],
+   "background": "earlier items",
+   "text": "Most of the activity since the last update went to the ProcessingTier pull request #2873, where Matt-Cowsert's review asked for targeted changes in eight line comments. The question of whether a pricing condition belongs on the SKU or the SKU Price also came up in #2871 and #2613, so several threads now depend on the same answer.\n\nOn #2873, Matt-Cowsert argues that footnote 5 is the only statement of when ProcessingTier applies and that notes are non-normative, so single-tier SKUs could be tagged Standard. The proposed fix is MUST NOT and SHOULD bullets, with the footnote reworded around the SKU Price. Other requested changes cover PricingCategory for committed tiered charges, Standard rows that reuse SkuPriceIds from examples without ProcessingTier, an unexplained TokenCacheAction difference in Scenario B, and the provider count for Priority. jerrysr99 asks whether processing tiers, quantity tiers and context-window ranges should follow one SKU versus SKU Price rule, and welcomes Other and omission for varied provider data. No reply from thecloudman appears in this period, so the changes are waiting on the author.\n\nIn #2871, jerrysr99 agreed to rename the keys to TokenContextWindowMinimum and TokenContextWindowMaximum, carrying the change into the stacked SKU Price columns in #2872. jerrysr99 also proposed that a null value means an open end at either side of a range, and that each range gets its own SkuId if the group agrees. The PR remains in draft. In #2613, jerrysr99 prefers example values for RegionScope over a closed list.\n\nThe other threads are smaller. In #2826, flanakin's four inline comments on dataset.md set out how changed-since delivery, key-changing corrections, scheduled cutoffs and retirements should work. In #2848, ijurica proposed two table-of-contents entries, one for Supported Features Editorial Rules and one for Retired Rule IDs (Optional), and a matching heading for Supported Features in the step-one supporting file. flanakin opened #2879 as a draft adding common price scenarios to the SKU Price supported features.",
+   "written_by": "claude-haiku-5-5"
+  },
+  {
+   "id": "2026-11-18",
+   "from": "2026-11-16T23:52:15Z",
+   "to": "2026-11-17T23:52:15Z",
+   "counts": {
+    "items": 27,
+    "threads": 21,
+    "people": 6,
+    "opened": 4,
+    "merged": 0,
+    "closed": 4
+   },
+   "threads": [
+    {
+     "n": 2871,
+     "kind": "pr",
+     "title": "FR #2521: Add context-window pricing properties to SKU Price Details",
+     "state": "draft",
+     "items": 7,
+     "comments": 7,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert",
+      "finops-DaveMoreau",
+      "jerrysr99"
+     ],
+     "objects": [
+      "column:CostAndUsage.SkuPriceDetails",
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.SkuId",
+      "column:CostAndUsage.SkuMeter"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2869,
+     "kind": "pr",
+     "title": "Editorial #2834: Correct metadata links, key names, and examples",
+     "state": "open",
+     "items": 4,
+     "comments": 4,
+     "statuses": 0,
+     "people": [
+      "jpradocueva"
+     ],
+     "objects": [
+      "topic:metadata-examples",
+      "topic:dataset-instance",
+      "topic:recency",
+      "topic:schema",
+      "dataset:ContractCommitment",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 1857,
+     "kind": "issue",
+     "title": "[AI] Create a FOCUS for AI paper",
+     "state": "completed",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "mike-finopsorg"
+     ],
+     "objects": [],
+     "change": "closed as completed",
+     "opened": false
+    },
+    {
+     "n": 2878,
+     "kind": "issue",
+     "title": "[AI]  Work on a FOCUS Mapper and Mapping Template Library",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "mike-finopsorg"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2877,
+     "kind": "issue",
+     "title": "[AI] Build a 1.6 example dataset for context window pricing",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuId",
+      "column:CostAndUsage.SkuPriceId",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ConsumedQuantity",
+      "column:CostAndUsage.PricingQuantity"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2876,
+     "kind": "issue",
+     "title": "[AI] Use \"prose\" consistently in the contributor guidelines",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2875,
+     "kind": "issue",
+     "title": "[AI] Open a feature request to define the participating entities",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2870,
+     "kind": "pr",
+     "title": "Editorial #2835: Correct summary tables, glossary entries, labels, and links",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "jpradocueva"
+     ],
+     "objects": [
+      "dataset:ContractCommitment",
+      "column:CostAndUsage.SkuPriceDetails",
+      "dataset:CostAndUsage",
+      "column:InvoiceDetail.PaymentCurrency",
+      "dataset:InvoiceDetail",
+      "column:SkuPrice.PurchaseDurationType"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2859,
+     "kind": "pr",
+     "title": "AI #2771: Separate Champion scope entry from PR approval",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2853,
+     "kind": "pr",
+     "title": "Editorial #2833: Correct the split cost allocation and commitment discount examples",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "jpradocueva"
+     ],
+     "objects": [
+      "topic:commitment-discounts",
+      "topic:examples-commitment-discount-flexibility-examples",
+      "topic:split-cost-allocation-examples",
+      "topic:split-cost-allocation-field-mapping",
+      "column:CostAndUsage.AllocatedServiceName",
+      "column:CostAndUsage.AllocatedMethodId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2846,
+     "kind": "pr",
+     "title": "Editorial #2832: Correct the Contract Commitment and commitment program examples",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "jpradocueva"
+     ],
+     "objects": [
+      "topic:contract-commitments",
+      "topic:json-object-examples",
+      "column:ContractCommitment.ContractCommitmentApplicability",
+      "column:ContractCommitment.ContractCommitmentDiscountPercentage",
+      "column:ContractCommitment.ContractCommitmentPeriodEnd",
+      "column:ContractCommitment.ContractCommitmentPeriodStart"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2807,
+     "kind": "issue",
+     "title": "[FR] Promote the SKU Price dataset to general availability",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.SkuMeter",
+      "column:CostAndUsage.BillingAccountId",
+      "column:SkuPrice.SkuPriceEligibility",
+      "column:CostAndUsage.ContractedUnitPrice"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2806,
+     "kind": "issue",
+     "title": "[AI] Consolidate findings on gaps and conflicts in the contributor guidelines",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [
+      "column:CostAndUsage.ChargeCategory",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.BilledCost",
+      "column:CostAndUsage.AllocatedMethodId",
+      "column:CostAndUsage.ListUnitPrice"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2800,
+     "kind": "issue",
+     "title": "[AI]  Plan around 1.5 Preview Material - outbound and inbound",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2782,
+     "kind": "issue",
+     "title": "[FR] Define the preview lifecycle for whole datasets",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ChargeCategory",
+      "dataset:BillingPeriod",
+      "dataset:ContractCommitment",
+      "dataset:InvoiceDetail"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2694,
+     "kind": "issue",
+     "title": "[AI]  Audit the FOCUS-related contents on finops.org to see what actions are needed to prevent accidental dissociation with TF and IF",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2521,
+     "kind": "issue",
+     "title": "[FR] Distinguish AI model costs by context window size",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceDetails",
+      "column:CostAndUsage.SkuPriceId",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.PricingUnit",
+      "column:CostAndUsage.SkuId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2174,
+     "kind": "issue",
+     "title": "[FR] Data Lineage Support - Distinguish data originators, processors, and intermediaries",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:CostAndUsage.BilledCost",
+      "column:CostAndUsage.EffectiveCost"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2799,
+     "kind": "issue",
+     "title": "[AI]  Prepare first version of Voice of the Community for FOCUS & Beau's Minute",
+     "state": "closed",
+     "items": 0,
+     "comments": 0,
+     "statuses": 0,
+     "people": [],
+     "objects": [],
+     "change": "closed as completed",
+     "opened": false
+    },
+    {
+     "n": 2774,
+     "kind": "issue",
+     "title": "[AI] Follow up on 1.5 retro feedback",
+     "state": "closed",
+     "items": 0,
+     "comments": 0,
+     "statuses": 0,
+     "people": [],
+     "objects": [],
+     "change": "closed as completed",
+     "opened": false
+    },
+    {
+     "n": 2460,
+     "kind": "issue",
+     "title": "[AI] Add all 1.5 spec changes to the Requirements Model",
+     "state": "closed",
+     "items": 0,
+     "comments": 0,
+     "statuses": 0,
+     "people": [],
+     "objects": [],
+     "change": "closed as completed",
+     "opened": false
+    }
+   ],
+   "background": "earlier items",
+   "text": "Most of the activity since the last update went to context-window pricing for AI models (#2521) and to editorial fixes for the 1.5 release. In the context-window work, finops-DaveMoreau argues in #2871 that each tier should be its own SKU, citing Google Cloud and AWS Bedrock billing. jerrysr99 wants the top tier's maximum kept null so prices are not tied to a model limit, and is open to renaming the keys. Matt-Cowsert's review of #2871 proposes three wording fixes on cache rows, the maximum's condition and footnote 4, with inline replies that reword the Scenario A note and restructure the maximum's requirements. Task Force 1 discussed #2871 without reaching agreement on SKU ID placement or on what quantity columns show on billing rows, and Matt-Cowsert asked for examples in the PR (#2872 is the stacked column PR). A new 1.6 example-dataset issue, #2877, is assigned to finops-DaveMoreau and due 24 November.\n\nOn the 1.5 editorial fixes, jpradocueva approved #2870, and #2846 now has two approvals. In #2869, jpradocueva raised four findings, three marked as needing discussion on dates and recency examples, and the author still has to decide them. In #2853, jpradocueva suggested naming the $75.80 hourly rate in one line.\n\nElsewhere, the Maintainers' 16 November meeting left the proposed rename of the SKU Price dataset in #2807 undecided. In #2174 they agreed to open a new feature request defining participating entities, now #2875, assigned to rileyjenk and due 23 November. In #2859 they supported the intent of the Champion-scope proposal but asked for a worked example. TF1's preview-lifecycle decisions are recorded in #2782. New issues include #2878, a FOCUS Mapper and Mapping Template Library opened by mike-finopsorg with a blank description, and #2876, on consistent use of \"prose\" in the contributor guidelines. In #2806, ijurica has proposed a spreadsheet of findings in place of per-group Action Items, which the thread does not yet show as agreed. #2800 and #2694 are waiting on replies: beau-finopsorg and Matt-Cowsert will discuss #2800 one-to-one, and Matt-Cowsert's question in #2694 has no answer yet. #1857 closed as won't do, since a larger AI and value-tracking piece supersedes it. #2799, #2774 and #2460 closed as completed.",
+   "written_by": "claude-haiku-5-5"
+  },
+  {
+   "id": "2026-11-17",
+   "from": "2026-11-15T23:52:15Z",
+   "to": "2026-11-16T23:52:15Z",
+   "counts": {
+    "items": 32,
+    "threads": 15,
+    "people": 5,
+    "opened": 1,
+    "merged": 0,
+    "closed": 2
+   },
+   "threads": [
+    {
+     "n": 2748,
+     "kind": "pr",
+     "title": "AI #2364: Add `QuantityTierCategory` to `SkuPrice` dataset",
+     "state": "open",
+     "items": 7,
+     "comments": 7,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "topic:json-object-examples",
+      "topic:sku-price-examples",
+      "column:CostAndUsage.ChargeCategory",
+      "column:SkuPrice.ChargeCategory",
+      "column:SkuPrice.CommitmentDiscountCategory",
+      "column:SkuPrice.ContractId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2859,
+     "kind": "pr",
+     "title": "AI #2771: Separate Champion scope entry from PR approval",
+     "state": "open",
+     "items": 5,
+     "comments": 5,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2749,
+     "kind": "pr",
+     "title": "AI #2364: Add `SkuMeter` to `SkuPrice` dataset",
+     "state": "open",
+     "items": 5,
+     "comments": 5,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuMeter",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ServiceProviderName",
+      "column:SkuPrice.SkuPriceEligibility",
+      "column:CostAndUsage.SkuId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2853,
+     "kind": "pr",
+     "title": "Editorial #2833: Correct the split cost allocation and commitment discount examples",
+     "state": "open",
+     "items": 4,
+     "comments": 4,
+     "statuses": 0,
+     "people": [
+      "thecloudman"
+     ],
+     "objects": [
+      "topic:commitment-discounts",
+      "topic:examples-commitment-discount-flexibility-examples",
+      "topic:split-cost-allocation-examples",
+      "topic:split-cost-allocation-field-mapping",
+      "column:CostAndUsage.AllocatedServiceName",
+      "column:CostAndUsage.AllocatedMethodId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2827,
+     "kind": "pr",
+     "title": "Feedback #2821: Replace undefined Entry references with RequesterDetailsObject paths",
+     "state": "open",
+     "items": 4,
+     "comments": 4,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:CostAndUsage.RequesterDetails",
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceDetails"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2846,
+     "kind": "pr",
+     "title": "Editorial #2832: Correct the Contract Commitment and commitment program examples",
+     "state": "open",
+     "items": 2,
+     "comments": 2,
+     "statuses": 1,
+     "people": [
+      "kk09v"
+     ],
+     "objects": [
+      "topic:contract-commitments",
+      "topic:json-object-examples",
+      "column:ContractCommitment.ContractCommitmentApplicability",
+      "column:ContractCommitment.ContractCommitmentDiscountPercentage",
+      "column:ContractCommitment.ContractCommitmentPeriodEnd",
+      "column:ContractCommitment.ContractCommitmentPeriodStart"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2874,
+     "kind": "issue",
+     "title": "[AI] Explain the Maintainer assessment workbook changes and why they were made",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2850,
+     "kind": "issue",
+     "title": "[AI] Compare SKU Price dataset columns with SkuPriceDetails properties",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "jerrysr99"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceDetails",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2838,
+     "kind": "issue",
+     "title": "[Maintenance] State how repeated [*] paths bind to array elements in JSON object requirements",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:SkuPrice.ContractId",
+      "column:CostAndUsage.CommitmentDiscountType",
+      "column:ContractCommitment.ContractCommitmentId",
+      "column:CostAndUsage.ContractApplied",
+      "column:CostAndUsage.CommitmentProgramEligibilityDetails",
+      "column:SkuPrice.SkuPriceEligibility"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2836,
+     "kind": "issue",
+     "title": "[Feedback] Correct casing, IDs, and links in 1.5 requirement text",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:CostAndUsage.InvoiceId",
+      "column:CostAndUsage.HostProviderName",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.InvoiceDetailId",
+      "dataset:InvoiceDetail"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2521,
+     "kind": "issue",
+     "title": "[FR] Distinguish AI model costs by context window size",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "finops-DaveMoreau"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceDetails",
+      "column:CostAndUsage.SkuPriceId",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.PricingUnit",
+      "column:CostAndUsage.SkuId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2627,
+     "kind": "pr",
+     "title": "AI #2240: Use backticks instead of double-quotes for string column values",
+     "state": "closed",
+     "items": 0,
+     "comments": 0,
+     "statuses": 0,
+     "people": [],
+     "objects": [],
+     "change": "closed without merging",
+     "opened": false
+    },
+    {
+     "n": 2518,
+     "kind": "pr",
+     "title": "AI #2504: Expand Service Category allowed values for on-premises, SaaS, and physical infrastructure",
+     "state": "closed",
+     "items": 0,
+     "comments": 0,
+     "statuses": 0,
+     "people": [],
+     "objects": [],
+     "change": "closed without merging",
+     "opened": false
+    },
+    {
+     "n": 2873,
+     "kind": "pr",
+     "title": "FR #2437: Add ProcessingTier as a SkuPriceDetails property",
+     "state": "open",
+     "items": 0,
+     "comments": 0,
+     "statuses": 1,
+     "people": [],
+     "objects": [
+      "column:CostAndUsage.SkuPriceDetails",
+      "dataset:SkuPrice",
+      "column:CostAndUsage.PricingCategory",
+      "column:CostAndUsage.SkuId",
+      "column:CostAndUsage.SkuPriceId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2437,
+     "kind": "issue",
+     "title": "[FR] Distinguish AI inference processing tiers",
+     "state": "open",
+     "items": 0,
+     "comments": 0,
+     "statuses": 1,
+     "people": [],
+     "objects": [
+      "column:CostAndUsage.SkuPriceDetails",
+      "column:CostAndUsage.PricingCategory",
+      "column:CostAndUsage.SkuId",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.ListUnitPrice",
+      "column:CostAndUsage.ContractedUnitPrice"
+     ],
+     "change": null,
+     "opened": false
+    }
+   ],
+   "background": "earlier items",
+   "text": "Most of the activity went to the SKU Price dataset and to the 1.5 editorial fixes. Matt-Cowsert's review of #2748, which adds QuantityTierCategory, asks the new owner for six changes: the Retroactive description reads as having no upper bound, the intro should name the Graduated and Retroactive values, Version Introduced should read Preview 1.6, and the tiered examples lack the column. Matt-Cowsert also asked whether every tier of one offering must share a category, since mixing them changes totals. For #2749, which adds SkuMeter, Matt-Cowsert proposed wording that describes the column as metered functionality, responding to jerrysr99's approval. Whether it belongs in SKU Price depends on the open feature request #2807. Both pull requests are waiting on their new owners.\n\nScope and feature-request work also moved. On #2859, Matt-Cowsert's second review calls the Champion scope section close, with open points on limiting the entry rule to Feature Requests outside Core scope, using \"Core scope\" in place of \"official scope\", and whether a held sponsored request can still come up under other business. Matt-Cowsert accepted qquigley's answer on approvals and will resolve that thread. On #2521, finops-DaveMoreau questioned listing the model as the SkuId, since 1.5 treats tokens as the SKU sold. In #2850, jerrysr99 posted a comparison of 25 SKU Price columns against 21 SkuPriceDetails properties, without a view on gaps yet. Matt-Cowsert moved #2437 from Seeking Champion to Core under TF-Core 2, and #2873, which adds a ProcessingTier property with five values, was also assigned to TF-Core 2. The workbook explanation in #2874 was opened.\n\nEditorial fixes for 1.5 continued. thecloudman's review of #2853 found the corrected figures consistent, with two suggestions and a question on ConsumedQuantity. kk09v approved #2846, raising the approval count from 0 to 1, while noting one unrelated definition. On #2827, Matt-Cowsert took a reviewer's option 1 so the lines end on RequesterDetailsObject[*].key, leaving how repeated paths bind to #2838, where Matt-Cowsert asked for four lines to join the same-element table. On 16 November maintainers agreed to apply the casing, ID and link fixes in #2836 as an editorial improvement targeting working draft, rather than waiting for 1.5. #2627 and #2518 were closed without merging.",
+   "written_by": "claude-haiku-5-5"
+  },
+  {
+   "id": "2026-11-16",
+   "from": "2026-11-14T23:52:15Z",
+   "to": "2026-11-15T23:52:15Z",
+   "counts": {
+    "items": 26,
+    "threads": 3,
+    "people": 2,
+    "opened": 1,
+    "merged": 0,
+    "closed": 0
+   },
+   "threads": [
+    {
+     "n": 2871,
+     "kind": "pr",
+     "title": "FR #2521: Add context-window pricing properties to SKU Price Details",
+     "state": "draft",
+     "items": 24,
+     "comments": 24,
+     "statuses": 0,
+     "people": [
+      "jerrysr99",
+      "thecloudman"
+     ],
+     "objects": [
+      "column:CostAndUsage.SkuPriceDetails",
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.SkuId",
+      "column:CostAndUsage.SkuMeter"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2873,
+     "kind": "pr",
+     "title": "FR #2437: Add ProcessingTier as a SkuPriceDetails property",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "thecloudman"
+     ],
+     "objects": [
+      "column:CostAndUsage.SkuPriceDetails",
+      "dataset:SkuPrice",
+      "column:CostAndUsage.PricingCategory",
+      "column:CostAndUsage.SkuId",
+      "column:CostAndUsage.SkuPriceId"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2437,
+     "kind": "issue",
+     "title": "[FR] Distinguish AI inference processing tiers",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "thecloudman"
+     ],
+     "objects": [
+      "column:CostAndUsage.SkuPriceDetails",
+      "column:CostAndUsage.PricingCategory",
+      "column:CostAndUsage.SkuId",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.ListUnitPrice",
+      "column:CostAndUsage.ContractedUnitPrice"
+     ],
+     "change": null,
+     "opened": false
+    }
+   ],
+   "background": "earlier items",
+   "text": "Most of the activity since the last update was a detailed review of the draft pull request #2871, which adds context-window pricing properties to SkuPriceDetails. A second AI pricing proposal, #2873, was also opened, and its feature request #2437 gained a champion.\n\nOn #2871, thecloudman left a review and a series of inline comments. The main points were that the nullability wording would make the new properties mandatory, which conflicts with the SHOULD level recorded at TF1, and that fixing cached input tokens in the minimum's counting basis may not suit providers whose thresholds exclude them. jerrysr99 replied to every comment and agreed with most. The MAY-be-null rule was restored, inclusion of both keys is now SHOULD, and the maximum SHOULD NOT appear without the minimum. The redundant one-value and type lines were removed.\n\nBoth bounds are now defined against the service provider's own count, using the wording \"toward the threshold in its pricing terms\" so that negotiated thresholds are covered. The Meridian AI example gained a sentence on cache-write tokens, and the SkuPriceId naming is marked illustrative here and in #2872. Two points go to TF1 as open questions: whether an unbounded maximum should be an explicit null, which jerrysr99 kept and documented, and how to convert inclusive thresholds to a value like 127999. The PR remains a draft, and those two questions look to be waiting on TF1.\n\nOn #2437, thecloudman said they will champion the request and opened #2873, which adds ProcessingTier as a SkuPriceDetails property targeting workingdraftinterim for 1.6. It has five allowed values, adding Flex and Other to the three in the request. In the #2437 thread, thecloudman put three questions to Task Force 2: the value set, where the boundary with provisioned capacity falls, and whether the property belongs on the SKU or on the SKU Price. No replies have been posted yet.",
+   "written_by": "claude-sonnet-5-5"
+  },
+  {
+   "id": "2026-11-15",
+   "from": "2026-11-13T23:52:15Z",
+   "to": "2026-11-14T23:52:15Z",
+   "counts": {
+    "items": 9,
+    "threads": 4,
+    "people": 2,
+    "opened": 2,
+    "merged": 0,
+    "closed": 0
+   },
+   "threads": [
+    {
+     "n": 2859,
+     "kind": "pr",
+     "title": "AI #2771: Separate Champion scope entry from PR approval",
+     "state": "open",
+     "items": 5,
+     "comments": 5,
+     "statuses": 0,
+     "people": [
+      "qquigley"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2872,
+     "kind": "pr",
+     "title": "FR #2521: Add context-window pricing columns to SKU Price (stacked on the properties PR)",
+     "state": "draft",
+     "items": 2,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "jerrysr99"
+     ],
+     "objects": [
+      "topic:sku-price-examples",
+      "column:SkuPrice.SkuPriceId",
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.ServiceProviderName",
+      "column:CostAndUsage.SkuPriceDetails"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2871,
+     "kind": "pr",
+     "title": "FR #2521: Add context-window pricing properties to SKU Price Details",
+     "state": "draft",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "jerrysr99"
+     ],
+     "objects": [
+      "column:CostAndUsage.SkuPriceDetails",
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.SkuId",
+      "column:CostAndUsage.SkuMeter"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2521,
+     "kind": "issue",
+     "title": "[FR] Distinguish AI model costs by context window size",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "jerrysr99"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceDetails",
+      "column:CostAndUsage.SkuPriceId",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.PricingUnit",
+      "column:CostAndUsage.SkuId"
+     ],
+     "change": null,
+     "opened": false
+    }
+   ],
+   "background": "earlier items",
+   "text": "Since the last update, the main development is the opening of two draft pull requests for the context-window pricing feature request, #2521, while the other active thread was a round of replies on the Champion scope process change in #2859.\n\nOn #2521, jerrysr99 posted a comment listing six ways context window size can affect pricing, based on provider pages reviewed as of 9 November 2026; of these, only whole-request application is in use now. jerrysr99 then opened #2871, a draft adding ContextWindowMinimum and ContextWindowMaximum to SkuPriceDetails with an appendix example, described as the Cost and Usage half of the joint solution. A second draft, #2872, is stacked on it and adds the same two bounds as Conditional columns in SKU Price, along with an IncludesContextWindowPricing condition, SkuPriceId requirements and a worked example. jerrysr99 also posted a snapshot on #2872 of providers and models with context-window pricing, quoting threshold wording only, as context for naming the bounds as columns. This follows Task Force 1's earlier agreement to recommend carrying the bounds in both places. Both PRs are drafts and no one else has commented yet.\n\nOn #2859, qquigley replied to the review points raised by Matt-Cowsert on 12 November. The seven-day no-objection window has been dropped, qquigley saying they had missed the context of the 9 November meeting. Instead, Maintainers confirm readiness at their next meeting after a sponsorship, and if they decide an item isn't ready, it stays in Champion scope with the sponsorship standing. Held Feature Requests stay off Task Force agendas until Maintainers decide, and the objection bullet was removed. qquigley also agreed that Scope should change when a contributor commits to lead, with the WG Chair setting it to Champion, and adopted the suggestion to split the champion's comments. Both must lines are confirmed as requirements. On the approval line, qquigley held that approval already means merge-ready for every PR, so early approvals need no special rule. Matt-Cowsert has not yet responded to these replies, and it is unclear whether the changes settle the review.",
+   "written_by": "claude-sonnet-5-5"
+  },
+  {
+   "id": "2026-11-14",
+   "from": "2026-11-12T23:52:15Z",
+   "to": "2026-11-13T23:52:15Z",
+   "counts": {
+    "items": 3,
+    "threads": 3,
+    "people": 2,
+    "opened": 3,
+    "merged": 0,
+    "closed": 0
+   },
+   "threads": [
+    {
+     "n": 2870,
+     "kind": "pr",
+     "title": "Editorial #2835: Correct summary tables, glossary entries, labels, and links",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:ContractCommitment",
+      "column:CostAndUsage.SkuPriceDetails",
+      "dataset:CostAndUsage",
+      "column:InvoiceDetail.PaymentCurrency",
+      "dataset:InvoiceDetail",
+      "column:SkuPrice.PurchaseDurationType"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2869,
+     "kind": "pr",
+     "title": "Editorial #2834: Correct metadata links, key names, and examples",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "topic:metadata-examples",
+      "topic:dataset-instance",
+      "topic:recency",
+      "topic:schema",
+      "dataset:ContractCommitment",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2868,
+     "kind": "pr",
+     "title": "AI #2860: Add semantic tag tooling to the specification build",
+     "state": "draft",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "finops-DaveMoreau"
+     ],
+     "objects": [
+      "dataset:BillingPeriod"
+     ],
+     "change": null,
+     "opened": true
+    }
+   ],
+   "background": "earlier items",
+   "text": "Since the last update, three new pull requests were opened on 13 November, all about the 1.5 release or the tooling behind it, and none has been merged. Matt-Cowsert opened two editorial fixes for the 1.5 specification, both open at the end of the period. #2869 corrects the Metadata section and the metadata examples: links, dataset and key names, example IDs, dates, recency times and timestamp formats. #2870 corrects the summary tables, glossary entries, labels, relationship lists, section order and one link, against #2835. Both say they change only informative text and leave requirement lines alone. The fixes trace to a review of the 1.5 specification, and they sit alongside #2846 and #2853, which correct the examples in the Contract Commitment and cost allocation sections.\n\nfinops-DaveMoreau opened #2868 as a draft under AI #2860 and FR #2779. It brings the semantic tag tooling from the demo in #2819 into the specification build without changing any content. Converting the existing content is left to later items (#2861, #2862 and #2863), and the draft lists the decisions still open for review, along with local verification and test results. The draft also mentions #2867, which proposes unit tests for the repository's Python tooling in CI.\n\nWhere things stand: none of the three pull requests has received review or comments yet. The two editorial pull requests are narrow and say what they change, so they are ready for review. The tooling draft is at an earlier stage, with its open decisions waiting for the working group's input.",
+   "written_by": "claude-haiku-5-5"
+  },
+  {
+   "id": "2026-11-13",
+   "from": "2026-11-11T23:52:15Z",
+   "to": "2026-11-12T23:52:15Z",
+   "counts": {
+    "items": 54,
+    "threads": 17,
+    "people": 9,
+    "opened": 11,
+    "merged": 0,
+    "closed": 0
+   },
+   "threads": [
+    {
+     "n": 2840,
+     "kind": "pr",
+     "title": "AI #2825: Add 1.5 Changelog",
+     "state": "open",
+     "items": 25,
+     "comments": 25,
+     "statuses": 3,
+     "people": [
+      "Matt-Cowsert",
+      "davidearney",
+      "finops-DaveMoreau",
+      "flanakin",
+      "shawnalpay"
+     ],
+     "objects": [
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.ContractedUnitPrice",
+      "dataset:CostAndUsage",
+      "attribute:UnitFormat",
+      "dataset:ContractCommitment",
+      "column:CostAndUsage.ConsumedQuantity"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2859,
+     "kind": "pr",
+     "title": "AI #2771: Separate Champion scope entry from PR approval",
+     "state": "open",
+     "items": 8,
+     "comments": 7,
+     "statuses": 2,
+     "people": [
+      "Matt-Cowsert",
+      "qquigley"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2830,
+     "kind": "pr",
+     "title": "AI #2825: Add 1.5 Contributors",
+     "state": "open",
+     "items": 6,
+     "comments": 6,
+     "statuses": 2,
+     "people": [
+      "davidearney",
+      "finops-DaveMoreau",
+      "jpradocueva",
+      "kk09v"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2845,
+     "kind": "pr",
+     "title": "AI #2735: Align SKU Price record wording across the SKU Price dataset",
+     "state": "open",
+     "items": 2,
+     "comments": 2,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert",
+      "ijurica"
+     ],
+     "objects": [
+      "topic:sku-price-examples",
+      "column:SkuPrice.SkuPriceCreated",
+      "column:SkuPrice.SkuPriceEligibility",
+      "column:SkuPrice.SkuPriceLastUpdated",
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2867,
+     "kind": "issue",
+     "title": "[FR] Run unit tests for the repository's Python tooling in CI",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 0,
+     "people": [
+      "finops-DaveMoreau"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2866,
+     "kind": "issue",
+     "title": "[AI] Align FOCUS entity references and links in the spec with Contributor Guidelines",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [
+      "dataset:SkuPrice"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2865,
+     "kind": "issue",
+     "title": "[Process] 1.6 Interim Consistency Review",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 0,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2864,
+     "kind": "pr",
+     "title": "AI #2849: Add 1.5 errata",
+     "state": "draft",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:InvoiceDetail.PaymentCurrency",
+      "column:SkuPrice.ContractId",
+      "dataset:SkuPrice"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2863,
+     "kind": "issue",
+     "title": "[AI] Tag plain Display Names, quoted values, and file datasets with the inference rules",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "finops-DaveMoreau"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2862,
+     "kind": "issue",
+     "title": "[AI] Convert existing references to semantic tags with the translation rules",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "finops-DaveMoreau"
+     ],
+     "objects": [
+      "dataset:SkuPrice"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2861,
+     "kind": "issue",
+     "title": "[AI] Decide the conversion and rendering rules for semantic tags",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "finops-DaveMoreau"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.ChargeClass",
+      "column:CostAndUsage.ServiceCategory",
+      "dataset:CostAndUsage",
+      "dataset:ContractCommitment",
+      "column:ContractCommitment.ContractPeriodStart"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2860,
+     "kind": "issue",
+     "title": "[AI] Add semantic tag tooling to the specification build",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 2,
+     "people": [
+      "finops-DaveMoreau"
+     ],
+     "objects": [
+      "column:CostAndUsage.BilledCost"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2858,
+     "kind": "issue",
+     "title": "[AI] Add 1.5 to 1.6 version migration guidance",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2857,
+     "kind": "issue",
+     "title": "[AI] Add the 1.6 changelog",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2807,
+     "kind": "issue",
+     "title": "[FR] Promote the SKU Price dataset to general availability",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.SkuMeter",
+      "column:CostAndUsage.BillingAccountId",
+      "column:SkuPrice.SkuPriceEligibility",
+      "column:CostAndUsage.ContractedUnitPrice"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2358,
+     "kind": "issue",
+     "title": "[FR] Add Actor dimensions to Cost and Usage",
+     "state": "completed",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:CostAndUsage.PrincipalId",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 1974,
+     "kind": "issue",
+     "title": "[FR] Ensure specification examples pass FOCUS Validator",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:CostAndUsage.InvoiceIssuerName",
+      "column:CostAndUsage.PricingUnit",
+      "column:CostAndUsage.ChargeClass",
+      "column:CostAndUsage.ServiceSubcategory",
+      "column:CostAndUsage.BillingAccountId",
+      "column:CostAndUsage.ContractedCost"
+     ],
+     "change": null,
+     "opened": false
+    }
+   ],
+   "background": "earlier items",
+   "text": "Most activity since the last update went into the 1.5 release, while 1.6 work began. The 1.5 changelog in #2840 gained three approvals, from davidearney, flanakin and finops-DaveMoreau, after shawnalpay's review, which Matt-Cowsert largely applied in one commit. The contributors list in #2830 reached five approvals, though jpradocueva's suggested affiliation change is not shown as resolved.\n\nMuch of the new work concerns semantic tags under parent #2779. finops-DaveMoreau opened #2860 for the build tooling, #2861 for conversion rules to be approved once with examples rather than reviewed across more than 300 files, #2862 and #2863 for converting references, and #2867 for unit tests of the build scripts in CI. ijurica opened #2866 to align SKU Price references with the contributor guidelines and #2865 as a placeholder for the 1.6 consistency review. Matt-Cowsert opened #2857 for the 1.6 changelog, due 15 April 2027, #2858 for migration guidance, due 20 May 2027, and the draft #2864 for the 1.5 errata, which flags four rows for Maintainer assessment after the 16 November review. Most of these are newly opened, with no decisions yet.\n\nTwo discussions remain open. In #2859, qquigley proposes separating Champion sponsorship from merge approval, and Matt-Cowsert asks whether the seven-day no-objection window is meant to stand alongside the 9 November interim practice and what happens when an objection is upheld. On SKU Price, TF2 agreed on 11 November that #2845 lands in 1.6, and ijurica prefers finops-DaveMoreau's original Pricing Currency wording. The TF2 update in #2807 lists open questions on SkuMeter, primary key and name, so general availability is not settled.\n\nSmaller items: TF2's update in #2358 says PR #2473 stays open into 1.6 because draft #2828 builds on it, and that thread is now marked completed. In #1974, Matt-Cowsert reports that #2558 adds a commitment discount check and stays open for 1.6, and asks whether #2661 and #2662 should stay open.",
+   "written_by": "claude-haiku-5-5"
+  },
+  {
+   "id": "2026-11-12",
+   "from": "2026-11-10T23:52:15Z",
+   "to": "2026-11-11T23:52:15Z",
+   "counts": {
+    "items": 21,
+    "threads": 15,
+    "people": 6,
+    "opened": 6,
+    "merged": 0,
+    "closed": 1
+   },
+   "threads": [
+    {
+     "n": 2845,
+     "kind": "pr",
+     "title": "AI #2735: Align SKU Price record wording across the SKU Price dataset",
+     "state": "open",
+     "items": 5,
+     "comments": 5,
+     "statuses": 3,
+     "people": [
+      "flanakin",
+      "ijurica",
+      "kk09v"
+     ],
+     "objects": [
+      "topic:sku-price-examples",
+      "column:SkuPrice.SkuPriceCreated",
+      "column:SkuPrice.SkuPriceEligibility",
+      "column:SkuPrice.SkuPriceLastUpdated",
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2828,
+     "kind": "pr",
+     "title": "AI #2415: Simplify scoped detail to user-defined column rules",
+     "state": "draft",
+     "items": 2,
+     "comments": 2,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "attribute:DatasetConfiguration"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 1027,
+     "kind": "issue",
+     "title": "[FR] Rename \"Charge\" row term to just \"Row\"",
+     "state": "open",
+     "items": 2,
+     "comments": 2,
+     "statuses": 0,
+     "people": [
+      "kk09v"
+     ],
+     "objects": [
+      "column:CostAndUsage.ChargeCategory",
+      "column:CostAndUsage.ChargeClass",
+      "column:CostAndUsage.ChargeDescription",
+      "column:CostAndUsage.ChargeFrequency",
+      "column:CostAndUsage.ChargePeriodStart",
+      "column:CostAndUsage.ChargePeriodEnd"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2777,
+     "kind": "pr",
+     "title": "AI #2688: Slim AGENTS.md to defer to contributor guidelines (less is more)",
+     "state": "closed",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "ljadvey"
+     ],
+     "objects": [],
+     "change": "closed without merging",
+     "opened": false
+    },
+    {
+     "n": 2856,
+     "kind": "issue",
+     "title": "[AI] Clarify distinction between `SKU Price` construct and `SKU Price` records",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:SkuPrice.SkuPriceEffectiveStart",
+      "dataset:ContractCommitment",
+      "column:ContractCommitment.ContractCommitmentId",
+      "dataset:CostAndUsage",
+      "column:SkuPrice.SkuPriceEligibility"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2855,
+     "kind": "issue",
+     "title": "[AI] Align pricing terminology across the SKU Price dataset, its appendix, and its supported features",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:SkuPrice.UnitPrice"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2854,
+     "kind": "issue",
+     "title": "[AI] Revisit the SKU Price Description column",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.ServiceProviderName",
+      "column:SkuPrice.SkuPriceDescription",
+      "column:CostAndUsage.PricingUnit",
+      "column:CostAndUsage.CommitmentDiscountUnit"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2853,
+     "kind": "pr",
+     "title": "Editorial #2833: Correct the split cost allocation and commitment discount examples",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "topic:commitment-discounts",
+      "topic:examples-commitment-discount-flexibility-examples",
+      "topic:split-cost-allocation-examples",
+      "topic:split-cost-allocation-field-mapping",
+      "column:CostAndUsage.AllocatedServiceName",
+      "column:CostAndUsage.AllocatedMethodId"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2852,
+     "kind": "issue",
+     "title": "[AI] Decide how the Columns table and the Requirements column list count for first-occurrence linking",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:ContractCommitment",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2851,
+     "kind": "issue",
+     "title": "[AI] Reword \"term\" in the Commitment Discount Quantity requirement",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:CostAndUsage.CommitmentDiscountQuantity",
+      "column:CostAndUsage.CommitmentDiscountUnit",
+      "column:CostAndUsage.ChargeFrequency"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2827,
+     "kind": "pr",
+     "title": "Feedback #2821: Replace undefined Entry references with RequesterDetailsObject paths",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "jerrysr99"
+     ],
+     "objects": [
+      "column:CostAndUsage.RequesterDetails",
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceDetails"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2770,
+     "kind": "pr",
+     "title": "AI #2769: Define review artifact process",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2749,
+     "kind": "pr",
+     "title": "AI #2364: Add `SkuMeter` to `SkuPrice` dataset",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "jerrysr99"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuMeter",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ServiceProviderName",
+      "column:SkuPrice.SkuPriceEligibility",
+      "column:CostAndUsage.SkuId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2748,
+     "kind": "pr",
+     "title": "AI #2364: Add `QuantityTierCategory` to `SkuPrice` dataset",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "jerrysr99"
+     ],
+     "objects": [
+      "topic:json-object-examples",
+      "topic:sku-price-examples",
+      "column:CostAndUsage.ChargeCategory",
+      "column:SkuPrice.ChargeCategory",
+      "column:SkuPrice.CommitmentDiscountCategory",
+      "column:SkuPrice.ContractId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2698,
+     "kind": "issue",
+     "title": "[AI] Decide Version Updated policy and apply consistently",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": false
+    }
+   ],
+   "background": "earlier items",
+   "text": "Most activity since the last update went to the SKU Price dataset. The main development is #2845, opened by finops-DaveMoreau, which changes six lines to name the record rather than the construct, since eligibility, timestamps and currency can differ between records under one SKU Price ID. It now has two approvals, from ijurica and flanakin. ijurica asks that broader terminology work be split out and flags a 1.5 versus 1.6 release mismatch. kk09v's change request on the glossary was dismissed after kk09v replied that the point had been discussed and was out of scope.\n\nijurica's same-day issues test the terminology further. #2856 asks whether SKU Price names the construct or the record-based dataset, #2855 proposes aligning pricing terms and overlaps with #2845, and #2854 asks whether SKU Price Description describes the SKU Price or a record. In #1027, kk09v notes that SKU Price already uses \"record\", so the dataset has three terms for one concept. None of these is settled, so the naming question is the one to watch. Separately, jerrysr99 approved #2749 (SkuMeter) and #2748 (QuantityTierCategory), each now with three approvals and only non-blocking suggestions.\n\nFor the 1.5 release, Matt-Cowsert opened #2853 to correct example figures and values without changing requirements. In #2827, which replaces undefined Entry references with RequesterDetailsObject paths, jerrysr99 finds the rewording sound and backs deferring the binding question to #2838. flanakin's #2828 is still a draft, after Matt-Cowsert suggested that summable numeric custom columns be summed in its record minimisation paragraph. Matt-Cowsert also asks the group to decide two editorial questions: #2852 on whether the Columns table counts for first-occurrence linking, and #2851 on whether \"term\" becomes \"period\", which would move to 1.6. On #2770, the guidelines now cite section 5.3 of the Operating Procedures, and Matt-Cowsert asks for another look. #2698 gained two 1.6 inputs on Version Updated, tied to #2780.\n\nClosed without merging: #2777, which ljadvey closed in favour of #2848 without giving a further reason.",
+   "written_by": "claude-haiku-5-5"
+  },
+  {
+   "id": "2026-11-11",
+   "from": "2026-11-09T23:52:15Z",
+   "to": "2026-11-10T23:52:15Z",
+   "counts": {
+    "items": 23,
+    "threads": 23,
+    "people": 4,
+    "opened": 6,
+    "merged": 0,
+    "closed": 8
+   },
+   "threads": [
+    {
+     "n": 2847,
+     "kind": "issue",
+     "title": "[AI] Restructure the Editorial Guidelines and align the AGENTS.md grouping",
+     "state": "completed",
+     "items": 2,
+     "comments": 1,
+     "statuses": 3,
+     "people": [
+      "Matt-Cowsert",
+      "ijurica"
+     ],
+     "objects": [],
+     "change": "closed as completed",
+     "opened": true
+    },
+    {
+     "n": 2845,
+     "kind": "pr",
+     "title": "AI #2735: Align SKU Price record wording across the SKU Price dataset",
+     "state": "open",
+     "items": 2,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "finops-DaveMoreau"
+     ],
+     "objects": [
+      "topic:sku-price-examples",
+      "column:SkuPrice.SkuPriceCreated",
+      "column:SkuPrice.SkuPriceEligibility",
+      "column:SkuPrice.SkuPriceLastUpdated",
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceId"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2521,
+     "kind": "issue",
+     "title": "[FR] Distinguish AI model costs by context window size",
+     "state": "open",
+     "items": 2,
+     "comments": 2,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceDetails",
+      "column:CostAndUsage.SkuPriceId",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.PricingUnit",
+      "column:CostAndUsage.SkuId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2818,
+     "kind": "issue",
+     "title": "[AI] Open a Champion scope feature request for review artifacts",
+     "state": "completed",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": "closed as completed",
+     "opened": false
+    },
+    {
+     "n": 2795,
+     "kind": "issue",
+     "title": "[AI] Open a feature request for Version Introduced and Version Updated semantics",
+     "state": "completed",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": "closed as completed",
+     "opened": false
+    },
+    {
+     "n": 2767,
+     "kind": "issue",
+     "title": "[AI] Conduct 1.5 retrospective",
+     "state": "completed",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": "closed as completed",
+     "opened": false
+    },
+    {
+     "n": 2765,
+     "kind": "pr",
+     "title": "AI #2486-Ext: Review changes to entity reference and linking rules proposed in #2514",
+     "state": "closed",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [
+      "column:ContractCommitment.BillingCurrency",
+      "column:CostAndUsage.AllocatedServiceName",
+      "column:CostAndUsage.AvailabilityZone",
+      "column:CostAndUsage.BillingCurrency",
+      "column:CostAndUsage.SubAccountName"
+     ],
+     "change": "closed without merging",
+     "opened": false
+    },
+    {
+     "n": 2751,
+     "kind": "issue",
+     "title": "[AI] Explore how SKU Price can express usage covered by commitment discounts",
+     "state": "completed",
+     "items": 1,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice"
+     ],
+     "change": "closed as completed",
+     "opened": false
+    },
+    {
+     "n": 2240,
+     "kind": "issue",
+     "title": "[AI] Use backticks instead of double-quotes for all string column values",
+     "state": "completed",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": "closed as completed",
+     "opened": false
+    },
+    {
+     "n": 1545,
+     "kind": "issue",
+     "title": "[AI] Generate list of considerations of what might unlock adoption",
+     "state": "completed",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": "closed as completed",
+     "opened": false
+    },
+    {
+     "n": 2850,
+     "kind": "issue",
+     "title": "[AI] Compare SKU Price dataset columns with SkuPriceDetails properties",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceDetails",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2849,
+     "kind": "issue",
+     "title": "[AI] Track the 1.5 errata from Maintainer assessment to one errata PR",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:InvoiceDetail.PaymentCurrency",
+      "column:SkuPrice.ContractId",
+      "column:CostAndUsage.CommitmentDiscountStatus",
+      "column:CostAndUsage.CommitmentDiscountCategory",
+      "dataset:SkuPrice"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2848,
+     "kind": "pr",
+     "title": "AI #2847: Restructure the Editorial Guidelines and align the AGENTS.md grouping",
+     "state": "draft",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2846,
+     "kind": "pr",
+     "title": "Editorial #2832: Correct the Contract Commitment and commitment program examples",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "topic:contract-commitments",
+      "topic:json-object-examples",
+      "column:ContractCommitment.ContractCommitmentApplicability",
+      "column:ContractCommitment.ContractCommitmentDiscountPercentage",
+      "column:ContractCommitment.ContractCommitmentPeriodEnd",
+      "column:ContractCommitment.ContractCommitmentPeriodStart"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2806,
+     "kind": "issue",
+     "title": "[AI] Consolidate findings on gaps and conflicts in the contributor guidelines",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 2,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [
+      "column:CostAndUsage.ChargeCategory",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.BilledCost",
+      "column:CostAndUsage.AllocatedMethodId",
+      "column:CostAndUsage.ListUnitPrice"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2782,
+     "kind": "issue",
+     "title": "[FR] Define the preview lifecycle for whole datasets",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ChargeCategory",
+      "dataset:BillingPeriod",
+      "dataset:ContractCommitment",
+      "dataset:InvoiceDetail"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2776,
+     "kind": "pr",
+     "title": "Label Version Introduced with GA",
+     "state": "draft",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "jpradocueva"
+     ],
+     "objects": [
+      "attribute:CorrectionHandling",
+      "attribute:CurrencyFormat",
+      "attribute:CustomColumnHandling",
+      "attribute:DataGeneratorCalculatedSplitCostAllocationHandling",
+      "attribute:DatasetCompleteness",
+      "attribute:DatasetConfiguration"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2603,
+     "kind": "issue",
+     "title": "[FR] Add specification-level privacy and data protection statement",
+     "state": "completed",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:CostAndUsage",
+      "dataset:InvoiceDetail",
+      "column:CostAndUsage.PrincipalId",
+      "dataset:ContractCommitment",
+      "column:CostAndUsage.CredentialId",
+      "column:CostAndUsage.RequesterDetails"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2335,
+     "kind": "issue",
+     "title": "[FR] Revise Feature Levels to make FOCUS more globally applicable",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:CostAndUsage.ListCost",
+      "column:CostAndUsage.ContractedCost",
+      "column:CostAndUsage.HostProviderName",
+      "column:CostAndUsage.ChargeFrequency",
+      "column:CostAndUsage.PricingQuantity",
+      "column:CostAndUsage.PricingUnit"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2174,
+     "kind": "issue",
+     "title": "[FR] Data Lineage Support - Distinguish data originators, processors, and intermediaries",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:CostAndUsage.BilledCost",
+      "column:CostAndUsage.EffectiveCost"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2844,
+     "kind": "issue",
+     "title": "[AI] Create the FOCUS 1.5 Data Model spreadsheet",
+     "state": "open",
+     "items": 0,
+     "comments": 0,
+     "statuses": 1,
+     "people": [],
+     "objects": [
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.AllocatedServiceName",
+      "column:CostAndUsage.CredentialId",
+      "column:CostAndUsage.PrincipalId",
+      "column:CostAndUsage.RequesterDetails"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2843,
+     "kind": "pr",
+     "title": "FR #2782: Define the preview lifecycle for whole datasets",
+     "state": "open",
+     "items": 0,
+     "comments": 0,
+     "statuses": 1,
+     "people": [],
+     "objects": [
+      "dataset:SkuPrice"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2770,
+     "kind": "pr",
+     "title": "AI #2769: Define review artifact process",
+     "state": "open",
+     "items": 0,
+     "comments": 0,
+     "statuses": 1,
+     "people": [],
+     "objects": [
+      "dataset:SkuPrice"
+     ],
+     "change": null,
+     "opened": false
+    }
+   ],
+   "background": "earlier items",
+   "text": "Since the last update, most of the activity went into closing out the 1.5 release and planning 1.6. Seven issues were closed as completed and one pull request was closed without merging. The main technical movement was in #2521, where Task Force 1 reviewed a draft by jerrysr99 on pricing by context window size and agreed to recommend carrying the bounds in both SKU Price and SkuPriceDetails. The Maintainers closed #2603 on a privacy statement, reasoning that providers and customers already protect sensitive data; it can be reopened.\n\nSKU Price and preview work moved on several fronts. Matt-Cowsert took Task Force 1 through open questions in draft #2843 for #2782, and #2770 moved to TF-Supporting. #2751 is done, but group review waits until 18 November. finops-DaveMoreau opened #2845 to name the SKU Price record in six lines and suggested renaming the dataset later. #2850 compares SKU Price columns with SkuPriceDetails and sits with jerrysr99 under TF-Core 1, while #2844, the 1.5 spreadsheet, is now due 17 November. For errata, #2846 corrects Contract Commitment examples, and #2849 tracks #2836, #2837 and #2783 towards one errata PR.\n\nOn the guidelines, ijurica opened #2847 to restructure the Editorial Guidelines, with the draft #2848 following. #2847 closed as completed after Matt-Cowsert reported an initial draft, though a rebase is expected. #2765 closed without merging in favour of #2848. ijurica's #2806 drafts an action item on how column values are written, and #2240 closed for now as overlapping with 1.6 guideline work. flanakin's #2776 drew a resolved inline comment from jpradocueva on dataset.md, with no change requested.\n\nSeveral items closed with little or no explanation: Matt-Cowsert marked #2818, #2795, #2767 and #1545 as complete. #2335 returned to Seeking Champion for 1.6, while #2604 continues. In #2174, participants agreed that who changed each row matters most but disagreed on whether lineage depends on #1060 and #1131.",
+   "written_by": "claude-haiku-5-5"
+  },
+  {
+   "id": "2026-11-10",
+   "from": "2026-11-08T23:52:15Z",
+   "to": "2026-11-09T23:52:15Z",
+   "counts": {
+    "items": 6,
+    "threads": 7,
+    "people": 2,
+    "opened": 2,
+    "merged": 0,
+    "closed": 3
+   },
+   "threads": [
+    {
+     "n": 2603,
+     "kind": "issue",
+     "title": "[FR] Add specification-level privacy and data protection statement",
+     "state": "completed",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:CostAndUsage",
+      "dataset:InvoiceDetail",
+      "column:CostAndUsage.PrincipalId",
+      "dataset:ContractCommitment",
+      "column:CostAndUsage.CredentialId",
+      "column:CostAndUsage.RequesterDetails"
+     ],
+     "change": "closed as completed",
+     "opened": false
+    },
+    {
+     "n": 2564,
+     "kind": "pr",
+     "title": "AI #2563: Add tiered-pricing-related glossary terms",
+     "state": "closed",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "topic:contract-commitments",
+      "column:ContractCommitment.ContractCommitmentBenefitCategory",
+      "column:ContractCommitment.ContractCommitmentCategory",
+      "column:ContractCommitment.ContractCommitmentDiscountPercentage",
+      "column:ContractCommitment.ContractCommitmentFulfillmentInterval",
+      "column:CostAndUsage.PricingCategory"
+     ],
+     "change": "closed without merging",
+     "opened": false
+    },
+    {
+     "n": 2357,
+     "kind": "pr",
+     "title": "FOCUS #2183: Adding Development Process Supporting Content - FOCUS 1.5 Operating Model Augmentation Discussion",
+     "state": "closed",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": "closed without merging",
+     "opened": false
+    },
+    {
+     "n": 2844,
+     "kind": "issue",
+     "title": "[AI] Create the FOCUS 1.5 Data Model spreadsheet",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.AllocatedServiceName",
+      "column:CostAndUsage.CredentialId",
+      "column:CostAndUsage.PrincipalId",
+      "column:CostAndUsage.RequesterDetails"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2843,
+     "kind": "pr",
+     "title": "FR #2782: Define the preview lifecycle for whole datasets",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2820,
+     "kind": "issue",
+     "title": "[FR] Demonstrate reusable scope rule evaluation in supported features",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "dataset:ContractCommitment"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2806,
+     "kind": "issue",
+     "title": "[AI] Consolidate findings on gaps and conflicts in the contributor guidelines",
+     "state": "open",
+     "items": 0,
+     "comments": 0,
+     "statuses": 1,
+     "people": [],
+     "objects": [
+      "column:CostAndUsage.ChargeCategory",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.BilledCost",
+      "column:CostAndUsage.AllocatedMethodId",
+      "column:CostAndUsage.ListUnitPrice"
+     ],
+     "change": null,
+     "opened": false
+    }
+   ],
+   "background": "earlier items",
+   "text": "Most of the activity since the last update was housekeeping around the 1.6 release, plus the start of the 1.5 Data Model spreadsheet. Matt-Cowsert opened #2844 to build that spreadsheet from v1.5-cr, covering the SKU Price dataset, four columns and operating model conditions, with Maintainers to settle open choices. The repository's automation set it to Open under task force F2.\n\nThe 1.6 open-PR outreach closed two pull requests without merging. Matt-Cowsert closed #2564, the tiered-pricing glossary draft, after ijurica agreed it could wait, and said it may be reopened if #2839 makes 1.6. Matt-Cowsert also closed #2357, the development process draft, at ijurica's request because the Candidate Release was already cleared. Both branches were kept. Separately, #2603, the request for a specification-level privacy and data protection statement, was closed as completed on 9 November. Matt-Cowsert reported that the Maintainers call discussed it, acknowledged its importance, and concluded that defining it is outside FOCUS's boundaries.\n\nPreview lifecycle work has started. Matt-Cowsert opened draft pull request #2843 as a starting point for #2782, adding proposed answers and TODO markers to the guidelines' Preview Process without changing specification text yet.\n\nThe scope-rule discussion in #2820 is moving. Responding to Matt-Cowsert's triage comment, ijurica narrowed \"reusable\" to reuse across supported features rather than across columns, named the two columns in scope, and flagged the null-dimension In and NotIn cases as still open. That open question appears to be waiting on a reply. On #2806, the consolidation of gaps in the contributor guidelines, ijurica moved the AI Status to In Progress.",
+   "written_by": "claude-haiku-5-5"
+  },
+  {
+   "id": "2026-11-09",
+   "from": "2026-11-07T23:52:15Z",
+   "to": "2026-11-08T23:52:15Z",
+   "counts": {
+    "items": 0,
+    "threads": 0,
+    "people": 0,
+    "opened": 0,
+    "merged": 0,
+    "closed": 0
+   },
+   "threads": [],
+   "background": "earlier items",
+   "text": ""
+  }
+ ]
+}

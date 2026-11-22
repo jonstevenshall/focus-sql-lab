@@ -38,7 +38,13 @@ queries in the browser, so the server only serves static files: no database, no 
   the browser and compares their results. Hints and model answers are there when you want them. A data model panel
   beside the questions (under the question on a phone) lists the five datasets, their columns and the lab's join keys
   for the data the question runs on. Clicking a dataset, column or join shows the same detail as the Data model tab.
-- **Recent** (also at `#recent`): the FOCUS_Spec issues and pull requests people opened, commented on or reviewed in
+- **Daily summary** (also at `#daily`): what the working group did on GitHub since the previous update, in two to four
+  paragraphs, written every morning: what moved forward or was decided, what is being discussed, who said what, and
+  what is waiting on someone. Every thread it mentions is a link to its card on Most recent updates (or to GitHub, if
+  it has no card), and a "Back to the daily summary" button there returns to the day. Under the text, each day lists
+  its threads, busiest first, with what changed (opened, merged, closed) and who took part. Earlier days are kept
+  below, folded to their first sentence. Each day has an address, `#daily/2026-11-22`, named by its date in Brisbane.
+- **Most recent updates** (also at `#recent`): the FOCUS_Spec issues and pull requests people opened, commented on or reviewed in
   the last two weeks, newest activity first, rebuilt every morning. Each card has a summary of the fortnight, the
   comments and reviews as a reply tree with a one-line gist of each and a link to it on GitHub, the status changes the
   repository's automation posted, and links to the parts of the data model the thread touches (from a pull request's
@@ -55,12 +61,13 @@ queries in the browser, so the server only serves static files: no database, no 
 - **Search:** a box in the page header, on every tab (Ctrl-K, or Cmd-K on a Mac, goes to it). It searches what every
   tab shows: the columns, datasets, joins and requirement lines, the conditions, attributes and supporting material,
   the pull requests and issues in the history and open requests, the sample tables, the example queries, the quiz
-  questions (not their hints or answers), the evidence, the AI tokens tab and the Recent threads. Results are grouped
+  questions (not their hints or answers), the evidence, the AI tokens tab, the daily summaries and the threads on
+  Most recent updates. Results are grouped
   by the tab each one opens on, in the tab bar's order and under its label, with a count; the Data model and Reference
   groups are split by kind. A row of chips above them (All, then one per tab with results, with its count) shows one
   tab at a time; it stays chosen while you refine the words and goes back to All when the search is closed or emptied.
   Each thing is listed once, under its main tab: a column under the Data model, not again under the Quiz's panel, and
-  a pull request or issue discussed in the last two weeks under Recent, not again under the history. Every word typed
+  a pull request or issue discussed in the last two weeks under Most recent updates, not again under the history. Every word typed
   must match the start of a word, and CamelCase IDs count as their parts, so "contracted unit price" finds
   ContractedUnitPrice. An exact ID comes first, then an exact name, then matches in IDs, names, titles and the rest of
   the text, in that order. It runs in the browser on `site/search.json`; nothing typed is sent anywhere.
@@ -68,7 +75,8 @@ queries in the browser, so the server only serves static files: no database, no 
   `#model/CostAndUsage/BilledCost` (or `#model/BilledCost`), `#model/CostAndUsage`, `#model/join/cau-sku`,
   `#ref/CorrectionHandling` (attributes, conditions and supporting material), `#data/<table>`, `#query/<example id>`,
   `#quiz/<question id>`, `#evidence/<evidence id>`, `#ai/<part>` (`how`, a SkuPriceDetails key such as
-  `#ai/ModelDeveloper`, or one of the gaps), `#recent/<number>` and `#thread/<number>` (the Recent card for a thread
+  `#ai/ModelDeveloper`, or one of the gaps), `#daily/<date>`, `#recent/<number>` and `#thread/<number>` (the card on
+  Most recent updates for a thread
   discussed in the last two weeks, or else the panel whose history or open requests list it). A panel address can end
   in `/line-<n>` to point at one requirement line. Each tab has its own address too (`#ref`, `#quiz`, ...).
 
@@ -119,7 +127,7 @@ Everything the lab made is labelled on the page:
   from each thread. Threads with less discussion show only their own description.
 - **Open requests:** [site/open-requests.json](site/open-requests.json) matches the open FOCUS_Spec issues and pull
   requests to the datasets and columns they concern; the matching rules are the lab's. Each thread's summary is written
-  by an AI model from the thread, or reused from the conversation summaries or the Recent tab.
+  by an AI model from the thread, or reused from the conversation summaries or the Most recent updates tab.
 
 ## Findings
 
@@ -234,8 +242,8 @@ The workflow [.github/workflows/refresh.yml](.github/workflows/refresh.yml) does
 `working_draft`. It runs every day at 18:30 UTC, and can be started by hand: Actions, then "Refresh from FOCUS_Spec",
 then "Run workflow". It downloads the sample data at the pinned commits, rebuilds, writes the summaries that are due
 (below), and pushes to `main` only if something changed, which redeploys the site. So the definitions, each one's
-history, and the status of every pull request and issue in it are at most a day old. The page header shows when the site was last updated by any run (a refresh or the daily Recent
-rebuild), in the reader's own time zone, with that update's cost in API calls and the total to date; both come from
+history, and the status of every pull request and issue in it are at most a day old. The page header shows when the site was last updated by any run (a refresh or the daily
+rebuild of Daily summary and Most recent updates), in the reader's own time zone, with that update's cost in API calls and the total to date; both come from
 `site/update-log.json`. The footer adds the specification commit and when the AI summaries were last written, from
 `site/focus/refresh.json`, which records the refresh time in UTC.
 
@@ -285,21 +293,57 @@ thread is summarised again only when it gains comments or reviews from people, o
 [.github/workflows/daily.yml](.github/workflows/daily.yml) runs it every day at 19:30 UTC (05:30 in Brisbane) and
 pushes the result; it can also be started by hand. It shares a queue with the refresh, so the two never push at once.
 
+### Daily summary
+
+[tools/daily.py](tools/daily.py) runs next in the same workflow and adds a day to `site/daily.json` (newest first, up
+to 120 days). A day runs from the end of the previous day's summary to the moment `recent.json` was built, so every
+comment, review and status change falls in exactly one day even when GitHub starts the workflow late; a second run on
+the same Brisbane date rewrites that day to cover both. The material for a day is every thread with activity in it: its
+title, the parts of the data model it touches and the threads it mentions; each comment, review and status change in
+the period, as its gist from `recent.json` and the start of its own text (a new pull request's zero approvals and
+change requests are left out); pull requests merged and threads closed in the period, from GitHub; and, as background
+only, the thread's two-week summary. Claude Haiku 5.5 (high effort) writes two to four paragraphs, 250 to 350 words on
+a busy day and never more than 400, crediting a field update to the person it names rather than to the automation. A
+text over 400 words is retried with a target of about 320, since a model asked only to come under a limit lands just
+over it. The text must pass the checks every AI-written text here passes (exact usernames, no he or she, dates written
+out, no URLs or Markdown, quotes word for word), and those of a daily summary: every thread in the material named by
+its number, no thread number that isn't in the material, at least 180 words on a day with five or more threads, no
+paragraph over 170 words, no dramatic framing, no "today" or "yesterday", no first person, no talk of "the material" or
+"the background". The brief also asks it to call a review an approval or a change request only when that is its GitHub
+state, and to say what a thread is waiting on rather than forecast a decision. A text that passes is then fact-checked
+by a second call (Claude Haiku 5.5, high effort), which reports only errors of substance (the wrong person or outcome,
+background reported as new, a reading of the mood the items don't bear out, the main development missing), each quoting
+the summary; a finding whose quote isn't in the summary is dropped. A text that fails either gets one retry naming what
+failed, and one that fails twice goes to Claude Sonnet 5.5 for two more tries. A day that fails on both lists its
+threads with no summary and is tried again on the next run. The days before 22 November 2026 were written afterwards,
+from the comments in `recent.json`; those have the thread's earlier gists as background instead of its two-week
+summary, which was written later and would give away what came next. For the same reason each thread there has its
+state at the end of that day (a pull request merged later is still open), and a thread opened after the day may not be
+named, even where a body edited later mentions it. The dry run prints the estimated cost from tokens and, beside it,
+what logged daily runs cost a day with their retries, escalations and fact checks (US$0.01 to US$0.03 a day in the
+first runs). If the step fails, the rest of the run is still published.
+
+```bash
+GH_TOKEN=... python -I tools/daily.py site                                     # dry run: the period, its threads, the cost
+GH_TOKEN=... python -I tools/daily.py site --show                              # print the material the model is given
+GH_TOKEN=... ANTHROPIC_API_KEY=... python -I tools/daily.py site --write --effort high [--backfill 13] [--redo] [--rewrite 2026-11-19,2026-11-17]
+```
+
 ### Open requests, daily
 
 [tools/open_requests.py](tools/open_requests.py) builds `site/open-requests.json` from GitHub, in the same daily
-workflow, after the Recent tab: every open FOCUS_Spec issue and pull request, matched to the datasets and columns it
+workflow, after the daily summary: every open FOCUS_Spec issue and pull request, matched to the datasets and columns it
 concerns. A strong match is a pull request that changes the definition's file (under its current name or an earlier
 one, from `history.json`), or a title that names the column's ID or the dataset's name or ID. A pull request that adds
 a page under a dataset's `columns/` folder, or a title that proposes a column the model doesn't have, counts for the
 dataset it names. A name that appears only in the description is a weak match. Pull requests that change more than 15
 files and match only by their files are kept apart, as in the history. Each matched thread gets a summary of the whole
 thread: the one written here before, until the thread gains comments or reviews; otherwise the conversation summary
-from `thread-summaries.json` if it is up to date, or the thread's Recent brief; otherwise a new one, written and
+from `thread-summaries.json` if it is up to date, or the thread's brief on Most recent updates; otherwise a new one, written and
 checked like the conversation summaries (Claude Haiku 5.5 at high effort, Claude Sonnet 5.5 as the fallback), at most
 30 a run, strong matches first. Before writing, it compares its counts with the last run's and stops if the open
-threads or the matches fell by more than half (`--force` writes anyway). If the step fails, the Recent tab is still
-published.
+threads or the matches fell by more than half (`--force` writes anyway). If the step fails, Most recent updates and
+the daily summary are still published.
 
 ```bash
 GH_TOKEN=... python -I tools/open_requests.py site                          # dry run: the matches, what's due, its cost
@@ -310,7 +354,7 @@ GH_TOKEN=... python -I tools/open_requests.py site --write --no-ai          # wr
 ### Update log
 
 Every rebuild (`summarise.py --stamp --data`) and every batch of AI-written text (`summarise.py --write`,
-`recent.py --write`, `open_requests.py --write`) adds an entry to `site/update-log.json`: when it ran, the GitHub run, what it did, how many items
+`recent.py --write`, `daily.py --write`, `open_requests.py --write`) adds an entry to `site/update-log.json`: when it ran, the GitHub run, what it did, how many items
 passed first time, how many (and what share) were escalated to the fallback model and how many of those passed, and the
 tokens and cost per model at list price, with the list prices used and how the run started (scheduled or by hand). Each
 entry's "Show the working" gives each model's tokens times its list price, the run total, the estimate made before the
@@ -318,7 +362,7 @@ run, and for every item the first model failed twice: what the checks found on e
 try the fallback passed on or that it failed, and the item's tokens and cost per model. Entries from before
 20 November 2026 recorded counts only and show them as they are; their four escalations are filled in from the runs'
 GitHub logs, which printed only the findings that sent each item to the fallback. The page shows it when you click the update time in the header (or the
-"Updated" time on the Recent tab), with the total spend and the overall share escalated. Clicking the cost in the header
+"Updated" time on the Daily summary or Most recent updates tab), with the total spend and the overall share escalated. Clicking the cost in the header
 opens a breakdown by model for the latest update and to date: what the main model wrote and how much passed first time,
 what went to the fallback, and the tokens and cost of each.
 
@@ -333,10 +377,10 @@ GH_TOKEN=... python -I tools/recent.py site --write --no-ai                   # 
 [tools/build_search.py](tools/build_search.py) writes `site/search.json` from files already in `site/`: the
 definitions, joins and requirement lines in `focus/model.json` with the plain-language summaries, the example queries,
 the pull requests and issues in `focus/history.json` with their conversation summaries, the Sample data tables
-(`focus/data/manifest.json`), the quiz questions, the AI tokens tab (`focus/ai-tokens.json`), the evidence, the Recent
-threads and, where it exists, `open-requests.json`. Each entry records the address it opens, which is how the page
+(`focus/data/manifest.json`), the quiz questions, the AI tokens tab (`focus/ai-tokens.json`), the evidence, the daily
+summaries (`daily.json`), the threads on Most recent updates and, where it exists, `open-requests.json`. Each entry records the address it opens, which is how the page
 groups the results by tab. It needs no network and no API key. `tools/refresh.sh` runs it, the
-refresh workflow runs it again after writing summaries, and the daily workflow runs it after the Recent tab, so the
+refresh workflow runs it again after writing summaries, and the daily workflow runs it after the daily summary and open requests, so the
 index always matches what the panels show. The page loads it the first time someone uses the search box.
 
 ```bash

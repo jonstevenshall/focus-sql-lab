@@ -140,7 +140,7 @@
     box-shadow: 0 0 0 1px var(--line); }
 
   /* Data model view */
-  #model, #evidence, #ai, #recent, #mcp { padding: 14px 16px 32px; }
+  #model, #evidence, #ai, #daily, #recent, #mcp { padding: 14px 16px 32px; }
   #ai-body { max-width: 1000px; }
   #ai .ai-intro { margin: 0 0 12px; color: var(--muted); font-size: 13px; max-width: 80ch; line-height: 1.5; }
   #ai .detail { min-height: 0; margin-bottom: 12px; line-height: 1.5; }
@@ -358,6 +358,37 @@
   .ev-card .linkish, .detail .ev-mini .linkish { border: 0; background: none; padding: 0; color: var(--accent); text-decoration: underline; cursor: pointer; font-size: 12px; }
   .detail .ev-mini { border-top: 1px solid var(--line); padding: 6px 0; font-size: 12.5px; }
   .detail .ev-mini .tag { margin-right: 6px; }
+  /* Daily summary: a few paragraphs a day, newest first; each day opens to the threads it covers */
+  #daily-about { margin: 0 0 12px; color: var(--muted); font-size: 13px; max-width: 90ch; line-height: 1.5; }
+  #daily-list { display: flex; flex-direction: column; gap: 10px; max-width: 860px; }
+  .dy { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; scroll-margin-top: 12px; }
+  .dy.flash { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .dy > summary { cursor: pointer; list-style: none; }
+  .dy > summary::-webkit-details-marker { display: none; }
+  .dy > summary::before { content: '▸'; display: inline-block; width: 1em; color: var(--muted); transition: transform 0.15s; }
+  .dy[open] > summary::before { transform: rotate(90deg); }
+  .dy-h { font-size: 16px; font-weight: 600; }
+  .dy-latest { margin-left: 8px; vertical-align: 2px; }
+  .dy-meta { font-size: 12px; color: var(--muted); margin: 3px 0 0 1em; overflow-wrap: anywhere; }
+  .dy-peek { font-size: 13px; color: var(--fg); margin: 6px 0 0 1em; line-height: 1.5; max-width: 80ch; }
+  .dy[open] .dy-peek { display: none; }
+  .dy-text { margin-left: 1em; }
+  .dy-text p { font-size: 14.5px; line-height: 1.65; margin: 12px 0 0; max-width: 72ch; }
+  .dy-text .linkish, .dy-threads .linkish { border: 0; background: none; padding: 0; color: var(--accent); text-decoration: underline;
+    cursor: pointer; font: inherit; }
+  .dy-text a, .dy-threads a { color: var(--accent); }
+  .dy-note { font-size: 12px; color: var(--muted); margin: 10px 0 0 1em; }
+  .dy-threads { margin: 12px 0 0 1em; font-size: 13px; }
+  .dy-threads > summary { cursor: pointer; color: var(--muted); font-size: 12.5px; }
+  .dy-threads ul { list-style: none; margin: 6px 0 0; padding: 0; }
+  .dy-threads li { padding: 5px 0; border-top: 1px solid var(--line); line-height: 1.45; overflow-wrap: anywhere; }
+  .dy-threads .tag { margin: 0 0 0 6px; }
+  .dy-threads .tag.ch-merged, .dy-threads .tag.ch-completed { color: var(--ok); border-color: var(--ok); }
+  .dy-threads .who { color: var(--muted); font-size: 12px; }
+  #recent-back { margin: 0 0 10px; position: sticky; top: 8px; z-index: 5; width: fit-content; }
+  #recent:has(#recent-back:not([hidden])) .rc { scroll-margin-top: 52px; } /* the card opened clears the button */
+  #recent-back button { border: 1px solid var(--accent); background: var(--panel); color: var(--fg); border-radius: 14px; padding: 4px 12px;
+    font-size: 12.5px; cursor: pointer; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25); }
   /* Recent: one card per thread, its last two weeks as a reply tree */
   #recent .rc-bar { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-bottom: 10px; }
   #recent .rc-bar p { margin: 0 0 4px; color: var(--muted); font-size: 13px; max-width: 90ch; flex-basis: 100%; }
@@ -601,7 +632,8 @@
     <button data-tab="quiz" aria-pressed="false">Quiz</button>
     <button data-tab="evidence" aria-pressed="false">Evidence</button>
     <button data-tab="ai" aria-pressed="false">AI tokens</button>
-    <button data-tab="recent" aria-pressed="false">Recent</button>
+    <button data-tab="daily" aria-pressed="false">Daily summary</button>
+    <button data-tab="recent" aria-pressed="false">Most recent updates</button>
     <button data-tab="mcp" aria-pressed="false">MCP server</button>
   </nav>
   <div class="site-search" role="search">
@@ -774,7 +806,12 @@
   <div id="ip-body" tabindex="-1"></div>
 </section>
 <section id="ai" hidden><div id="ai-body"><p class="hint">Loading…</p></div></section>
+<section id="daily" hidden>
+  <p id="daily-about">What the FOCUS working group did on GitHub, a day at a time.</p>
+  <div id="daily-list"><p class="hint">Loading…</p></div>
+</section>
 <section id="recent" hidden>
+  <div id="recent-back" hidden></div>
   <div class="rc-bar">
     <p id="recent-about">What the FOCUS working group discussed on GitHub in the last two weeks.</p>
     <div class="rc-filters" id="recent-filters" role="group" aria-label="Kind of thread"></div>
@@ -1052,6 +1089,7 @@ async function init() {
   if (tab === 'ai') renderAi();
   if (tab === 'quiz') renderQuiz();
   if (tab === 'evidence') renderEvidence(); // again, now topic names are known
+  if (tab === 'daily') renderDaily();
   if (tab === 'recent') renderRecent();
   if (routeLater) { const h = routeLater; routeLater = null; route(h); } // an address that was waiting for the model or the queries
 }
@@ -1430,14 +1468,14 @@ const SHORT = { 'cau-sku': 'SKU Price ID', 'cau-cc': 'Commitment ID', 'cau-inv':
 //   #model/CostAndUsage, #model/CostAndUsage/BilledCost (or #model/BilledCost), #model/join/cau-sku   the Data model's panel
 //   #ref/CorrectionHandling, #ref/<condition ID>, #ref/<topic id>     the same panel, beside the Reference list
 //     (either can end in /line-<n>: that requirement line of the page, outlined)
-//   #query/<example id>, #evidence/<evidence id>, #recent/<number>
+//   #query/<example id>, #evidence/<evidence id>, #daily/<day: 2026-11-22>, #recent/<number>
 //   #data/<table>, #quiz/<question id>, #ai/<part of the AI tokens tab: how, a SkuPriceDetails key, or a gap's id>
 //   #thread/<number>       its Recent card if it was discussed in the last two weeks, or else the panel whose History
 //                          or open requests list it (from the search index)
 //   #i-<evidence id>       a private interpretation, over the Evidence tab
 //   #mcp/<tool name>       that tool of the FOCUS MCP server, ready to send
 // The page opens on the tab its address names, or on the Data model.
-const TABS = ['model', 'ref', 'data', 'query', 'quiz', 'evidence', 'ai', 'recent', 'mcp'];
+const TABS = ['model', 'ref', 'data', 'query', 'quiz', 'evidence', 'ai', 'daily', 'recent', 'mcp'];
 const unhash = (h) => { try { return decodeURIComponent(h.slice(1)); } catch { return h.slice(1); } }; // a stray % is not an error
 function hashTab(h) {
   if (!h || h === '#') return 'model';
@@ -1485,6 +1523,9 @@ function showTab(t, keepAddress = false) { // keepAddress: the caller is opening
   moveDetail(t);
   store.set('tab', t);
   document.querySelectorAll('.apptabs button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tab === t)));
+  const on = document.querySelector(`.apptabs button[data-tab="${t}"]`), bar = on.parentElement; // on a phone the bar scrolls sideways
+  const br = bar.getBoundingClientRect(), r = on.getBoundingClientRect();
+  if (r.left < br.left || r.right > br.right) bar.scrollLeft += r.left - br.left - 8;
   document.querySelector('.layout').hidden = t !== 'query';
   $('model').hidden = t !== 'model';
   $('evidence').hidden = t !== 'evidence';
@@ -1492,8 +1533,10 @@ function showTab(t, keepAddress = false) { // keepAddress: the caller is opening
   $('data').hidden = t !== 'data';
   $('ai').hidden = t !== 'ai';
   $('quiz').hidden = t !== 'quiz';
+  $('daily').hidden = t !== 'daily';
   $('recent').hidden = t !== 'recent';
   $('mcp').hidden = t !== 'mcp';
+  if (t !== 'recent') recentFrom = null; // the way back to a daily summary lasts only until another tab is chosen
   // Each tab has an address, so it can be bookmarked. One that already names this tab is left alone: it may name
   // something on it that is still to open.
   if (!keepAddress && hashTab(location.hash) !== t) setAddress(addressOf(t));
@@ -1503,6 +1546,7 @@ function showTab(t, keepAddress = false) { // keepAddress: the caller is opening
   if (t === 'data') renderData();
   if (t === 'ai') renderAi();
   if (t === 'quiz') renderQuiz();
+  if (t === 'daily') renderDaily();
   if (t === 'recent') renderRecent();
   if (t === 'mcp') renderMcp();
 }
@@ -2451,13 +2495,17 @@ async function renderDataDetail() {
 }
 
 // ---- Recent: what the working group discussed on GitHub in the last two weeks (site/recent.json, rebuilt daily) ------
-let recentP = null, recentKind = 'all';
+let recentP = null, recentKind = 'all', recentFrom = null; // recentFrom: the daily summary a thread was opened from
 const loadRecent = () => (recentP ??= fetch('recent.json').then((r) => (r.ok ? r.json() : null)).catch(() => null));
 const shortDate = (iso) => (iso ? new Date(iso.length === 10 ? iso + 'T12:00:00Z' : iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : '');
 const RC_KINDS = [['all', 'All'], ['pr', 'Pull requests'], ['issue', 'Issues'], ['model', 'Linked to the model']];
 const RC_VERB = { approved: 'approved', 'changes requested': 'requested changes', commented: 'reviewed', dismissed: 'review dismissed' };
 
 async function renderRecent() {
+  const back = $('recent-back');
+  back.hidden = !recentFrom;
+  back.innerHTML = recentFrom ? `<button type="button" data-daily="${escapeHtml(recentFrom.id)}">← Back to the daily summary for ${
+    escapeHtml(recentFrom.label)}</button>` : '';
   const d = await loadRecent();
   if (!d) { $('recent-list').innerHTML = '<p class="hint">Could not load the recent discussion.</p>'; return; }
   const updated = new Date(d.generated_at).toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric',
@@ -2513,11 +2561,93 @@ function recentCard(t, inWindow, since) {
   </article>`;
 }
 
+// ---- Daily summary: what the working group did since the previous update, in prose (site/daily.json, rebuilt daily) ---
+// A thread a summary names opens as its card on Most recent updates, if it is there, or else on GitHub.
+let dailyP = null;
+const loadDaily = () => (dailyP ??= fetch('daily.json').then((r) => (r.ok ? r.json() : null)).catch(() => null));
+const DY_CHANGE = { merged: 'merged', 'closed as completed': 'completed', 'closed as not planned': 'not planned',
+  'closed without merging': 'closed', closed: 'closed' };
+const dayWhen = (iso, o) => new Date(iso).toLocaleString('en-GB', o);
+const dayLabel = (d) => dayWhen(d.to, { weekday: 'long', day: 'numeric', month: 'long' });
+const dayRange = (d) => `${dayWhen(d.from, { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })} to ${
+  dayWhen(d.to, { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' })}`;
+
+function dayCounts(c) {
+  const parts = [plural(c.threads, 'thread'), `${c.items} ${c.items === 1 ? 'comment, review or new thread' : 'comments, reviews and new threads'}${
+    c.people ? ` from ${c.people === 1 ? '1 person' : `${c.people} people`}` : ''}`];
+  if (c.opened) parts.push(`${c.opened} opened`);
+  if (c.merged) parts.push(`${c.merged} merged`);
+  if (c.closed) parts.push(`${c.closed} closed`);
+  return parts.join(' · ');
+}
+
+// The summary's text, with each #number a link: to the thread's card, or to GitHub if it has none.
+function dayText(text, inWindow, titles) {
+  return text.split(/\n\s*\n/).map((para) => `<p>${escapeHtml(para.trim()).replace(/(?<![&\w])#(\d{2,5})\b/g, (m, n) => {
+    const t = escapeHtml(titles.get(Number(n)) || '');
+    return inWindow.has(Number(n)) ? `<button class="linkish" data-recent="${n}" title="${t}">#${n}</button>`
+      : `<a href="${GH_ISSUE}${n}" target="_blank" rel="noopener" title="${t ? `${t} (on GitHub)` : 'Open on GitHub'}">#${n}</a>`;
+  })}</p>`).join('');
+}
+
+function dayCard(d, latest, inWindow, titles) {
+  const first = d.text ? d.text.split(/(?<=[.?!])\s/)[0] : '';
+  const body = d.text ? `<div class="dy-text">${dayText(d.text, inWindow, titles)}</div>`
+    : d.failed ? '<p class="dy-note">No summary for this day: what was written didn\'t pass the lab\'s checks, so it isn\'t shown. The threads are listed below, and the next run tries again.</p>'
+    : '<p class="dy-note">Nothing new: nobody opened, commented on or reviewed a thread, and nothing was merged or closed.</p>';
+  const rows = d.threads.map((t) => {
+    const num = inWindow.has(t.n) ? `<button class="linkish" data-recent="${t.n}">#${t.n}</button>`
+      : `<a href="${GH_ISSUE}${t.n}" target="_blank" rel="noopener" title="Open on GitHub">#${t.n} ↗</a>`;
+    const tags = [t.opened ? '<span class="tag">opened</span>' : '',
+      t.change ? `<span class="tag ch-${escapeHtml(DY_CHANGE[t.change] || 'closed').replace(/ /g, '-')}">${escapeHtml(DY_CHANGE[t.change] || t.change)}</span>` : ''].join('');
+    const what = !t.comments ? '' : t.comments === 1 ? '1 comment or review' : `${t.comments} comments and reviews`;
+    const who = t.people.length ? `${what} · ${t.people.map(escapeHtml).join(', ')}` : what;
+    return `<li>${num} ${escapeHtml(t.title)}${tags}${who ? `<div class="who">${who}</div>` : ''}</li>`;
+  }).join('');
+  const list = d.threads.length ? `<details class="dy-threads"${latest ? ' open' : ''}><summary>${
+    d.threads.length === 1 ? 'The thread' : `The ${d.threads.length} threads`}, busiest first</summary><ul>${rows}</ul></details>` : '';
+  const note = d.background ? '<p class="dy-note">Written afterwards, with each thread\'s earlier comments as background.</p>' : '';
+  return `<details class="dy" id="daily-${escapeHtml(d.id)}" data-day="${escapeHtml(d.id)}"${latest ? ' open' : ''}>
+    <summary><span class="dy-h">${escapeHtml(dayLabel(d))}</span>${latest ? '<span class="tag dy-latest">Latest</span>' : ''}
+      <div class="dy-meta">${escapeHtml(dayRange(d))} · ${escapeHtml(dayCounts(d.counts))}</div>
+      ${first ? `<div class="dy-peek">${escapeHtml(first)}</div>` : ''}</summary>
+    ${body}${note}${list}</details>`;
+}
+
+async function renderDaily() {
+  const [d, r] = await Promise.all([loadDaily(), loadRecent()]);
+  if (!d) { $('daily-list').innerHTML = '<p class="hint">Could not load the daily summaries.</p>'; return; }
+  if (!d.days.length) { $('daily-list').innerHTML = '<p class="hint">No daily summary yet: the first comes with the next morning\'s update.</p>'; return; }
+  const inWindow = new Set(r ? r.threads.map((t) => t.number) : []);
+  const titles = new Map(d.days.flatMap((x) => x.threads.map((t) => [t.n, t.title])));
+  if (r) r.threads.forEach((t) => { titles.set(t.number, t.title); t.refs.forEach((x) => x.title && !titles.has(x.n) && titles.set(x.n, x.title)); });
+  const updated = new Date(d.days[0].to).toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric',
+    hour: '2-digit', minute: '2-digit', timeZoneName: 'short' });
+  $('daily-about').innerHTML = `${escapeHtml(d.about)} <button class="log-open" type="button" title="Open the update log">Updated <time datetime="${
+    escapeHtml(d.days[0].to)}">${escapeHtml(updated)}</time></button>. Each thread number opens its card on Most recent updates.`;
+  const open = new Set([...document.querySelectorAll('#daily-list .dy[open]')].map((x) => x.dataset.day));
+  $('daily-list').innerHTML = d.days.map((x, k) => dayCard(x, k === 0, inWindow, titles)).join('');
+  if (open.size) document.querySelectorAll('#daily-list .dy').forEach((x) => { x.open = open.has(x.dataset.day); }); // as the reader left them
+}
+
+// Open one day's summary: from its address, a search result or the way back from a thread.
+async function openDay(id) {
+  if (tab !== 'daily') showTab('daily', true);
+  await renderDaily();
+  const el = $(`daily-${id}`);
+  if (!el) return;
+  el.open = true;
+  setAddress(`#daily/${id}`);
+  el.scrollIntoView({ block: 'start' });
+  el.classList.add('flash');
+  setTimeout(() => el.classList.remove('flash'), 1600);
+}
+
 // ---- Update log (site/update-log.json): every rebuild and batch of AI-written text, with escalations and cost --------
 const MODEL_NAME = { 'claude-haiku-5-5': 'Claude Haiku 5.5', 'claude-sonnet-5-5': 'Claude Sonnet 5.5' };
 const modelName = (m) => MODEL_NAME[m] || m;
 const usd = (n) => `US$${(n || 0).toFixed(n && n < 0.1 ? 4 : 2)}`;
-const LOG_TASK = { rebuild: 'Rebuilt from the specification', summaries: 'Spec page and thread summaries', recent: 'Recent discussion',
+const LOG_TASK = { rebuild: 'Rebuilt from the specification', summaries: 'Spec page and thread summaries', recent: 'Most recent updates', daily: 'Daily summary',
   'open-requests': 'Open request summaries' };
 
 function logEntry(r) {
@@ -2529,7 +2659,11 @@ function logEntry(r) {
     what = `From the FOCUS_Spec working draft at <a href="https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/commit/${
       escapeHtml(r.spec || '')}" target="_blank" rel="noopener">${escapeHtml(r.spec || '')}</a>${r.spec_date ? ` (${shortDate(r.spec_date)})` : ''}.`;
   } else {
-    const items = r.task === 'recent'
+    const items = r.task === 'daily'
+      ? `${plural(r.days, 'day')}, covering ${plural(r.threads, 'thread')} and ${r.items} comments, reviews and new threads; ${
+        r.attempted === 1 ? '1 summary' : `${r.attempted} summaries`} to write. Each that passed the checks was fact-checked by ${
+        modelName(r.reviewer)}.`
+      : r.task === 'recent'
       ? `${plural(r.threads, 'thread')} in the window, ${r.kept} unchanged; ${r.attempted} summarised.`
       : r.task === 'open-requests'
       ? `${plural(r.threads, 'open thread')} linked to a dataset or column, ${r.kept} with a current summary; ${r.attempted} summarised${
@@ -2537,11 +2671,11 @@ function logEntry(r) {
       : `${r.attempted === 1 ? '1 summary' : `${r.attempted} summaries`} due (${plural(r.pages, 'page')}, ${plural(r.threads, 'thread')}).`;
     const first = `${modelName(r.model)}${r.effort ? ` (${r.effort} effort)` : ''} wrote ${r.first_pass} that passed the checks first time.`;
     const esc = r.fallback ? ` ${r.escalated} (${r.escalated_pct}%) went to ${modelName(r.fallback)}, which passed ${r.escalated_passed}.` : '';
-    const left = r.failed ? ` ${r.failed} ${r.task === 'recent' ? 'kept a plain excerpt for some parts' : 'skipped'}.` : '';
+    const left = r.failed ? ` ${r.failed} ${r.task === 'recent' ? 'kept a plain excerpt for some parts' : r.task === 'daily' ? 'not written' : 'skipped'}.` : '';
     what = `${items} ${first}${esc}${left} Cost ${usd(r.cost)}${byModel && Object.keys(r.spend).length > 1 ? ` (${byModel})` : ''} at list price.`;
   }
   // How the run started (common.log_run records it). Older entries don't say: until the refresh was scheduled, its
-  // rebuilds and spec summaries only ran when started by hand, and the Recent tab's runs were daily.
+  // rebuilds and spec summaries only ran when started by hand, and the Most recent updates tab's runs were daily.
   const manual = r.trigger ? r.trigger === 'workflow_dispatch' : r.task === 'rebuild' || r.task === 'summaries';
   const tag = (manual ? '<span class="tag">Manually triggered</span>' : '')
     + (!r.attempted ? '' : r.fallback ? `<span class="tag${r.escalated ? ' esc' : ''}">Escalated ${r.escalated_pct}%</span>`
@@ -2593,9 +2727,13 @@ function logWorking(r) {
       const outcome = { passed: '', partly: '<div>Written, with some parts still failing the checks.</div>',
         failed: '<div>Not written: it failed the checks on both models.</div>' }[x.result] || '';
       const costed = x.tries.some((t) => t.cost !== undefined);
+      const reviews = x.tries.filter((t) => t.review).map((t) => t.review); // a daily summary's fact checks
+      const checked = reviews.length ? `. Fact checks (${escapeHtml(short(reviews[0].model))}): ${plural(reviews.length, 'call')}, ${
+        num0(reviews.reduce((n, t) => n + t.input, 0))} input and ${num0(reviews.reduce((n, t) => n + t.output, 0))} output tokens, ${
+        usd4(reviews.reduce((n, t) => n + t.cost, 0))}` : '';
       const calls = costed ? Object.entries(byModel).map(([m, ts]) => `${escapeHtml(short(m))}: ${plural(ts.length, 'call')}, ${
         num0(ts.reduce((n, t) => n + t.input, 0))} input and ${num0(ts.reduce((n, t) => n + t.output, 0))} output tokens, ${
-        usd4(ts.reduce((n, t) => n + t.cost, 0))}`).join('. ') + `. This item: ${usd4(x.cost)}.`
+        usd4(ts.reduce((n, t) => n + t.cost, 0))}`).join('. ') + `${checked}. This item: ${usd4(x.cost)}.`
         : 'From the run\'s GitHub log, which printed only the findings that sent it to the fallback; tokens per item were not recorded then.';
       return `<div class="lw-item"><div>${head} ${escapeHtml(x.title || '')}</div>${steps}${outcome}<div class="hint">${calls}</div></div>`;
     };
@@ -2624,10 +2762,11 @@ async function openLog() {
 }
 
 // Show one thread's card, from a mention or from a part of the model.
-async function jumpRecent(n) {
+async function jumpRecent(n, from = null) {
   recentKind = 'all';
   $('recent-search').value = '';
   showTab('recent');
+  recentFrom = from; // after showTab, which clears it on other tabs
   await renderRecent();
   const card = $(`recent-${n}`);
   if (!card) return;
@@ -3353,6 +3492,7 @@ async function route(h = location.hash) {
   if (!TABS.includes(head)) return;
   if (head === 'evidence' && parts[0]) return focusEvidence(parts[0]);
   if (head === 'recent' && parts[0]) return jumpRecent(Number(parts[0]));
+  if (head === 'daily' && parts[0]) return openDay(parts[0]);
   if (head === 'mcp') return openMcp(parts[0]);
   if (head === 'model' || head === 'ref') return openPanel(head, parts, h);
   if ((head === 'data' || head === 'quiz' || head === 'ai') && parts[0]) return openOnTab(head, parts[0], h);
@@ -3547,7 +3687,7 @@ async function renderSearch() {
     ssTab = 'all'; // a new search starts on All
     box.innerHTML = `<p class="ss-note">Search every tab: columns, datasets, joins and requirements, conditions, attributes and
       supporting material, the sample tables, the example queries, the quiz, the evidence, AI tokens, the pull requests and
-      issues in the History and the Recent threads. Every word must match the start of a word. <kbd>↑</kbd> <kbd>↓</kbd> to
+      issues in the History, the daily summaries and the most recent updates. Every word must match the start of a word. <kbd>↑</kbd> <kbd>↓</kbd> to
       move, <kbd>Enter</kbd> to open, <kbd>Tab</kbd> to the filters, <kbd>Esc</kbd> to close.</p>`;
     return setActive(-1);
   }
@@ -3729,6 +3869,18 @@ $('data-detail').addEventListener('click', (e) => {
   if (e.target.closest('[data-action="open"]') && dataSel) openInQuery(`SELECT *\nFROM ${dataSel}\nLIMIT ${PREVIEW_ROWS};`, 'the Sample data tab');
 });
 $('ai-body').addEventListener('click', onAiClick);
+$('daily-list').addEventListener('click', (e) => {
+  const r = e.target.closest('[data-recent]');
+  if (!r) return;
+  const day = r.closest('.dy');
+  jumpRecent(Number(r.dataset.recent), day && { id: day.dataset.day, label: day.querySelector('.dy-h').textContent });
+});
+// The address follows the day the reader opens or closes (a toggle event also fires for a day drawn open, so listen for clicks)
+$('daily-list').addEventListener('click', (e) => {
+  const s = e.target.closest('.dy > summary');
+  if (s) setTimeout(() => setAddress(s.parentElement.open ? `#daily/${s.parentElement.dataset.day}` : '#daily'));
+});
+$('recent-back').addEventListener('click', (e) => { const b = e.target.closest('[data-daily]'); if (b) openDay(b.dataset.daily); });
 $('recent-filters').addEventListener('click', (e) => { const b = e.target.closest('[data-rkind]'); if (b) { recentKind = b.dataset.rkind; renderRecent(); } });
 $('recent-search').addEventListener('input', () => renderRecent());
 $('recent-list').addEventListener('click', (e) => {

@@ -1,5 +1,6 @@
 # Every morning, rebuild site/recent.json: the FOCUS_Spec issues and pull requests people discussed in the last two
-# weeks, with AI summaries of what is new; then site/open-requests.json: the open issues and pull requests that concern
+# weeks, with AI summaries of what is new; then site/daily.json: a few paragraphs on what happened since the last
+# update, fact-checked by a second call; then site/open-requests.json: the open issues and pull requests that concern
 # each dataset and column, with a summary of each thread (Claude Haiku 5.5 at high effort; it calls the Claude API,
 # which costs money). It can also be started by hand: Actions > Daily discussions > Run workflow.
 name: Daily discussions
@@ -54,6 +55,16 @@ jobs:
           if [ -n "$ONLY" ]; then args+=(--only "$ONLY"); fi
           python -I tools/recent.py site "${args[@]}"
 
+      # A few paragraphs on what happened since the previous summary, from the recent.json just written: Haiku writes,
+      # a second Haiku call fact-checks, Sonnet 5.5 is the fallback. If this step fails, the rest is still published, and
+      # the next run covers the days it missed.
+      - name: Write the daily summary
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python -I tools/daily.py site --write --model claude-haiku-5-5 --effort high
+
       # If this step fails, the Recent tab above is still published, and the open requests keep yesterday's file.
       - name: Match open requests to the data model and summarise them
         continue-on-error: true
@@ -73,6 +84,7 @@ jobs:
           name: trial-run
           path: |
             site/recent.json
+            site/daily.json
             site/open-requests.json
             site/update-log.json
           retention-days: 7
@@ -90,7 +102,7 @@ jobs:
       - name: Commit and push, if anything changed
         if: ${{ github.event_name == 'schedule' || inputs.publish }}
         run: |
-          git add site/recent.json site/open-requests.json site/update-log.json
+          git add site/recent.json site/open-requests.json site/update-log.json $(ls site/daily.json 2>/dev/null)
           if git diff --cached --quiet; then echo "Nothing changed."; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
