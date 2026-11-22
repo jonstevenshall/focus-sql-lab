@@ -44,6 +44,11 @@ queries in the browser, so the server only serves static files: no database, no 
   repository's automation posted, and links to the parts of the data model the thread touches (from a pull request's
   changed files, and the column and dataset names in the text). Each of those parts lists its recent threads in turn.
   Anything older links out to the thread on GitHub.
+- **MCP server** (also at `#mcp`): try the FinOps Foundation's FOCUS MCP server
+  (`https://focus.finops.org/wp-json/focus/v1/mcp`) from the browser. The tab connects when it opens, lists the server's
+  tools, builds a form from each tool's inputs, shows the exact JSON-RPC request, and shows the reply as the server
+  returned it, with its HTTP status and time. `#mcp/<tool name>` opens a tool. The requests go from the browser straight
+  to focus.finops.org, which allows calls from other sites; the lab's own server still serves only static files.
 - **Search:** a box in the page header, on every tab (Ctrl-K, or Cmd-K on a Mac, goes to it). It searches what every
   tab shows: the columns, datasets, joins and requirement lines, the conditions, attributes and supporting material,
   the pull requests and issues in the history and open requests, the sample tables, the example queries, the quiz

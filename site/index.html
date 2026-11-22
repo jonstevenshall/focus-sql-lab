@@ -140,7 +140,7 @@
     box-shadow: 0 0 0 1px var(--line); }
 
   /* Data model view */
-  #model, #evidence, #ai, #recent { padding: 14px 16px 32px; }
+  #model, #evidence, #ai, #recent, #mcp { padding: 14px 16px 32px; }
   #ai-body { max-width: 1000px; }
   #ai .ai-intro { margin: 0 0 12px; color: var(--muted); font-size: 13px; max-width: 80ch; line-height: 1.5; }
   #ai .detail { min-height: 0; margin-bottom: 12px; line-height: 1.5; }
@@ -156,6 +156,34 @@
   #ai .gap p { margin: 4px 0; }
   #ai .gap ul { list-style: none; padding: 0; margin: 6px 0 0; font-size: 12.5px; }
   #ai .gap li { margin: 3px 0; }
+  #mcp-body { max-width: 1100px; }
+  #mcp .mcp-intro { margin: 0 0 6px; color: var(--muted); font-size: 13px; max-width: 80ch; line-height: 1.5; }
+  #mcp code { font-family: var(--mono); font-size: 12px; overflow-wrap: anywhere; }
+  #mcp-status { font-size: 13px; margin: 10px 0 12px; }
+  #mcp-status details > summary { cursor: pointer; color: var(--accent); margin: 6px 0; }
+  #mcp pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; margin: 6px 0;
+    font-family: var(--mono); font-size: 12px; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 480px; overflow: auto; }
+  #mcp .mcp-grid { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 12px; align-items: start; }
+  #mcp-tools { display: flex; flex-direction: column; gap: 2px; }
+  #mcp-tools button { text-align: left; border: 0; background: transparent; padding: 5px 8px; border-radius: 6px;
+    font-family: var(--mono); font-size: 12.5px; color: var(--fg); overflow-wrap: anywhere; }
+  #mcp-tools button:hover { background: var(--panel); }
+  #mcp-tools button[aria-pressed="true"] { background: var(--panel); box-shadow: inset 0 0 0 1px var(--line); font-weight: 600; }
+  #mcp .detail { min-height: 0; line-height: 1.5; }
+  #mcp .detail h3 code { font-size: 14px; }
+  #mcp .mcp-desc { white-space: pre-wrap; }
+  #mcp .mcp-field { margin: 10px 0; }
+  #mcp .mcp-field label { display: block; font-size: 12.5px; margin-bottom: 2px; }
+  #mcp .mcp-field input, #mcp .mcp-field select { width: 100%; max-width: 440px; padding: 6px 8px; border: 1px solid var(--line);
+    border-radius: 6px; background: var(--panel); color: var(--fg); font: inherit; }
+  #mcp .mcp-field .hint { margin-top: 2px; max-width: 80ch; }
+  #mcp .mcp-meta { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; margin: 10px 0 4px; }
+  #mcp .mcp-err { color: var(--err-fg); background: var(--err-bg); border-radius: 6px; padding: 6px 10px; }
+  @media (max-width: 720px) {
+    #mcp .mcp-grid { grid-template-columns: minmax(0, 1fr); }
+    #mcp-tools { flex-direction: row; flex-wrap: wrap; }
+    #mcp .mcp-field input, #mcp .mcp-field select { font-size: 16px; } /* 16px stops iOS zooming in on focus */
+  }
   #quiz { padding: 14px 16px 32px; }
   .quiz-wrap { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 18px; max-width: 1200px; }
   .quiz-list h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 4px 0 6px; }
@@ -558,6 +586,7 @@
     <button data-tab="evidence" aria-pressed="false">Evidence</button>
     <button data-tab="ai" aria-pressed="false">AI tokens</button>
     <button data-tab="recent" aria-pressed="false">Recent</button>
+    <button data-tab="mcp" aria-pressed="false">MCP server</button>
   </nav>
   <div class="site-search" role="search">
     <svg class="ss-glass" viewBox="0 0 16 16" aria-hidden="true"><circle cx="6.8" cy="6.8" r="4.8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.4 10.4 14.5 14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -603,7 +632,8 @@
     debate about what a cost really is.</p>
   <h3>Good to know</h3>
   <ul>
-    <li>Everything runs in your browser. There's no sign-in and nothing is stored.</li>
+    <li>Everything runs in your browser. There's no sign-in and nothing is stored. The MCP server tab sends its
+      requests from your browser to the FinOps Foundation's server at focus.finops.org.</li>
     <li>It's built from public material: the FOCUS specification and its GitHub history, and the FinOps Foundation's
       sample data. It isn't affiliated with the FinOps Foundation.</li>
     <li>The plain-English summaries were written with AI from those sources. The specification's own text and links
@@ -736,6 +766,21 @@
   </div>
   <div id="recent-list"><p class="hint">Loading…</p></div>
 </section>
+<section id="mcp" hidden><div id="mcp-body">
+  <p class="mcp-intro">The FinOps Foundation runs an MCP server that lets AI assistants look up FOCUS content: the
+    specification, its columns, example queries, use cases, providers and the documentation on focus.finops.org. It doesn't
+    hold billing data. This tab sends requests from your browser straight to that server and shows the replies as it returned
+    them. The lab doesn't run the server or change what it sends.</p>
+  <p class="mcp-intro">Address: <code>https://focus.finops.org/wp-json/focus/v1/mcp</code> (HTTP, no sign-in), described on
+    <a href="https://focus.finops.org/mcp/" target="_blank" rel="noopener">the server's page</a>. To add it to Claude Code:
+    <code>claude mcp add --transport http focus https://focus.finops.org/wp-json/focus/v1/mcp</code>. Other MCP clients take
+    the same address.</p>
+  <div id="mcp-status"><p class="hint">Not connected yet.</p></div>
+  <div class="mcp-grid">
+    <nav id="mcp-tools" aria-label="The server's tools"></nav>
+    <div id="mcp-tool" class="detail" hidden></div>
+  </div>
+</div></section>
 <section id="quiz" hidden>
   <div class="quiz-wrap">
     <nav class="quiz-list" id="quiz-list" aria-label="Quiz questions"><p class="hint">Loading…</p></nav>
@@ -1374,8 +1419,9 @@ const SHORT = { 'cau-sku': 'SKU Price ID', 'cau-cc': 'Commitment ID', 'cau-inv':
 //   #thread/<number>       its Recent card if it was discussed in the last two weeks, or else the panel whose History
 //                          or open requests list it (from the search index)
 //   #i-<evidence id>       a private interpretation, over the Evidence tab
+//   #mcp/<tool name>       that tool of the FOCUS MCP server, ready to send
 // The page opens on the tab its address names, or on the Data model.
-const TABS = ['model', 'ref', 'data', 'query', 'quiz', 'evidence', 'ai', 'recent'];
+const TABS = ['model', 'ref', 'data', 'query', 'quiz', 'evidence', 'ai', 'recent', 'mcp'];
 const unhash = (h) => { try { return decodeURIComponent(h.slice(1)); } catch { return h.slice(1); } }; // a stray % is not an error
 function hashTab(h) {
   if (!h || h === '#') return 'model';
@@ -1431,6 +1477,7 @@ function showTab(t, keepAddress = false) { // keepAddress: the caller is opening
   $('ai').hidden = t !== 'ai';
   $('quiz').hidden = t !== 'quiz';
   $('recent').hidden = t !== 'recent';
+  $('mcp').hidden = t !== 'mcp';
   // Each tab has an address, so it can be bookmarked. One that already names this tab is left alone: it may name
   // something on it that is still to open.
   if (!keepAddress && hashTab(location.hash) !== t) setAddress(addressOf(t));
@@ -1441,7 +1488,172 @@ function showTab(t, keepAddress = false) { // keepAddress: the caller is opening
   if (t === 'ai') renderAi();
   if (t === 'quiz') renderQuiz();
   if (t === 'recent') renderRecent();
+  if (t === 'mcp') renderMcp();
 }
+
+// ---- MCP server: send requests to the FOCUS MCP server and show its replies as returned --------------------------------
+// The server is the FinOps Foundation's, not the lab's. It speaks JSON-RPC over plain HTTP POST, needs no sign-in, and
+// answers browsers from other sites (CORS), so this page calls it directly. Nothing goes through the lab's server.
+const MCP_URL = 'https://focus.finops.org/wp-json/focus/v1/mcp';
+let mcpReady = null; // the connection: a promise of { init, tools }, or null before connecting or after a failure
+let mcpTools = [];
+let mcpTool = null; // the chosen tool's name
+let mcpSeq = 0;
+
+async function mcpSend(method, params, notification = false) {
+  const body = { jsonrpc: '2.0', ...(notification ? {} : { id: ++mcpSeq }), method, ...(params ? { params } : {}) };
+  const t0 = performance.now();
+  const res = await fetch(MCP_URL, { method: 'POST', credentials: 'omit', body: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json, text/event-stream' } });
+  const text = await res.text();
+  const out = { body, status: res.status, ms: Math.round(performance.now() - t0), text, json: null };
+  // A server may answer as an event stream instead: then the reply is the last data: line.
+  const sse = (res.headers.get('content-type') || '').includes('text/event-stream');
+  const raw = sse ? text.split(/\r?\n/).filter((l) => l.startsWith('data:')).map((l) => l.slice(5).trim()).pop() || '' : text;
+  try { out.json = JSON.parse(raw); } catch { /* not JSON: shown as text */ }
+  return out;
+}
+
+function renderMcp() {
+  mcpReady ??= mcpConnect();
+  return mcpReady;
+}
+
+async function mcpConnect() {
+  const box = $('mcp-status');
+  box.innerHTML = '<p class="hint">Connecting to focus.finops.org…</p>';
+  try {
+    const init = await mcpSend('initialize', { protocolVersion: '2024-11-05', capabilities: {},
+      clientInfo: { name: 'focus-sql-lab', version: '1' } });
+    const info = init.json && init.json.result;
+    if (!info) throw new Error(init.json?.error?.message || `HTTP ${init.status} from initialize`);
+    mcpSend('notifications/initialized', null, true).catch(() => {});
+    const list = await mcpSend('tools/list');
+    const tools = list.json?.result?.tools;
+    if (!tools) throw new Error(list.json?.error?.message || `HTTP ${list.status} from tools/list`);
+    mcpTools = tools;
+    const s = info.serverInfo || {};
+    box.innerHTML = `<p style="margin:0">Connected to <b>${escapeHtml(s.name || 'the server')}</b> ${escapeHtml(s.version || '')},
+      MCP protocol ${escapeHtml(info.protocolVersion || '?')}. ${plural(tools.length, 'tool')}.</p>
+      ${info.instructions ? `<details><summary>The server's instructions to AI assistants, as returned</summary>
+        <pre>${escapeHtml(info.instructions)}</pre></details>` : ''}`;
+    $('mcp-tools').innerHTML = tools.map((t) =>
+      `<button type="button" data-tool="${escapeHtml(t.name)}" aria-pressed="false">${escapeHtml(t.name)}</button>`).join('');
+    const want = mcpTool || store.get('mcp-tool');
+    pickMcpTool(tools.some((t) => t.name === want) ? want : tools[0].name, true);
+    return { init: info, tools };
+  } catch (e) {
+    mcpReady = null;
+    box.innerHTML = `<p class="mcp-err">Couldn't reach the server: ${escapeHtml(e.message || String(e))}</p>
+      <button type="button" id="mcp-retry">Try again</button>`;
+    $('mcp-retry').addEventListener('click', renderMcp);
+    return null;
+  }
+}
+
+async function openMcp(name) {
+  if (tab !== 'mcp') showTab('mcp', true);
+  const ready = await renderMcp();
+  if (ready && name && mcpTools.some((t) => t.name === name)) pickMcpTool(name);
+  else if (ready && !name) setAddress(addressOf('mcp'));
+}
+
+function mcpField(name, p, required) {
+  const id = `mcp-f-${name}`;
+  let input;
+  if (Array.isArray(p.enum)) {
+    input = `<select id="${id}" data-arg="${escapeHtml(name)}" data-type="string"><option value="">(not set)</option>${
+      p.enum.map((v) => `<option>${escapeHtml(v)}</option>`).join('')}</select>`;
+  } else if (p.type === 'boolean') {
+    input = `<select id="${id}" data-arg="${escapeHtml(name)}" data-type="boolean"><option value="">(not set)</option>
+      <option>true</option><option>false</option></select>`;
+  } else if (p.type === 'integer' || p.type === 'number') {
+    input = `<input id="${id}" type="number" step="${p.type === 'integer' ? 1 : 'any'}" data-arg="${escapeHtml(name)}" data-type="${p.type}">`;
+  } else {
+    // A string, or an array or object typed as JSON
+    const json = p.type === 'array' || p.type === 'object';
+    input = `<input id="${id}" type="text" autocomplete="off" spellcheck="false" data-arg="${escapeHtml(name)}" data-type="${json ? 'json' : 'string'}"${
+      json ? ` placeholder="JSON ${p.type}"` : ''}>`;
+  }
+  return `<div class="mcp-field"><label for="${id}"><code>${escapeHtml(name)}</code> <span class="hint">${escapeHtml(
+    [p.type, required ? 'required' : 'optional'].filter(Boolean).join(', '))}</span></label>${input}${
+    p.description ? `<p class="hint">${escapeHtml(p.description)}</p>` : ''}</div>`;
+}
+
+function pickMcpTool(name, keepAddress = false) {
+  const t = mcpTools.find((x) => x.name === name);
+  if (!t) return;
+  mcpTool = name;
+  store.set('mcp-tool', name);
+  $('mcp-tools').querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tool === name)));
+  const schema = t.inputSchema || {};
+  const props = Object.entries(schema.properties || {});
+  const req = new Set(schema.required || []);
+  const box = $('mcp-tool');
+  box.hidden = false;
+  box.innerHTML = `<h3><code>${escapeHtml(t.name)}</code></h3>
+    ${t.description ? `<p class="mcp-desc">${escapeHtml(t.description)}</p>` : ''}
+    <form id="mcp-form" novalidate>
+      ${props.length ? props.map(([k, p]) => mcpField(k, p, req.has(k))).join('') : '<p class="hint">This tool takes no arguments.</p>'}
+      <h4>Request</h4>
+      <pre id="mcp-req"></pre>
+      <div class="actions"><button type="submit" class="primary" id="mcp-send">Send</button></div>
+    </form>
+    <div id="mcp-reply"></div>`;
+  $('mcp-form').addEventListener('input', showMcpRequest);
+  $('mcp-form').addEventListener('submit', (e) => { e.preventDefault(); sendMcpTool(); });
+  showMcpRequest();
+  if (!keepAddress || hashTab(location.hash) === 'mcp') setAddress(addressOf('mcp'));
+}
+
+function mcpArgs() {
+  const args = {};
+  for (const el of $('mcp-form').querySelectorAll('[data-arg]')) {
+    const v = el.value.trim();
+    if (v === '') continue;
+    const type = el.dataset.type;
+    if (type === 'integer' || type === 'number') args[el.dataset.arg] = Number(v);
+    else if (type === 'boolean') args[el.dataset.arg] = v === 'true';
+    else if (type === 'json') { try { args[el.dataset.arg] = JSON.parse(v); } catch { args[el.dataset.arg] = v; } }
+    else args[el.dataset.arg] = v;
+  }
+  return args;
+}
+
+function showMcpRequest() {
+  const body = { jsonrpc: '2.0', id: mcpSeq + 1, method: 'tools/call', params: { name: mcpTool, arguments: mcpArgs() } };
+  $('mcp-req').textContent = JSON.stringify(body, null, 2);
+}
+
+async function sendMcpTool() {
+  const name = mcpTool, out = $('mcp-reply'), btn = $('mcp-send');
+  btn.disabled = true;
+  out.innerHTML = '<p class="mcp-meta">Waiting for the server…</p>';
+  let r;
+  try { r = await mcpSend('tools/call', { name, arguments: mcpArgs() }); }
+  catch (e) { r = { failed: e.message || String(e) }; }
+  if (mcpTool !== name || !document.body.contains(out)) return; // another tool was chosen meanwhile
+  btn.disabled = false;
+  showMcpRequest(); // the next request's id
+  if (r.failed) { out.innerHTML = `<p class="mcp-err">Couldn't reach the server: ${escapeHtml(r.failed)}</p>`; return; }
+  const meta = `<p class="mcp-meta">Reply to request ${r.body.id} · HTTP ${r.status} · ${r.ms.toLocaleString()} ms · ${
+    r.text.length.toLocaleString()} characters</p>`;
+  if (!r.json) { out.innerHTML = `${meta}<p class="mcp-err">The reply wasn't JSON. As returned:</p><pre>${escapeHtml(r.text)}</pre>`; return; }
+  const full = `<details><summary>The whole JSON-RPC reply (indented by the lab)</summary><pre>${
+    escapeHtml(JSON.stringify(r.json, null, 2))}</pre></details>`;
+  if (r.json.error) {
+    out.innerHTML = `${meta}<p class="mcp-err">JSON-RPC error ${escapeHtml(r.json.error.code ?? '')}: ${escapeHtml(r.json.error.message || '')}</p>${full}`;
+    return;
+  }
+  const res = r.json.result || {}, content = res.content || [];
+  out.innerHTML = `${meta}${res.isError ? '<p class="mcp-err">The tool reported an error (isError is true).</p>' : ''}
+    <h4>Content: ${plural(content.length, 'item')}</h4>
+    ${content.map((c) => `<pre>${escapeHtml(c.type === 'text' ? c.text : JSON.stringify(c, null, 2))}</pre>`).join('')}
+    ${res.structuredContent ? `<h4>Structured content</h4><pre>${escapeHtml(JSON.stringify(res.structuredContent, null, 2))}</pre>` : ''}
+    ${full}`;
+}
+
+$('mcp-tools').addEventListener('click', (e) => { const b = e.target.closest('[data-tool]'); if (b) pickMcpTool(b.dataset.tool); });
 
 // ---- Quiz: write or change a query, checked by comparing its result with the model answer's (site/quiz.json) ----------
 // AI feedback is off. To add it, set QUIZ_FEEDBACK_URL to an endpoint that takes one attempt record (quizRecord, below)
@@ -2998,6 +3210,7 @@ function addressOf(t) {
   if (t === 'query' && examples.some((e) => e.id === ex)) return `#query/${ex}`;
   if (t === 'data' && dataSel && manifest && manifest.tables[dataSel]) return `#data/${dataSel}`;
   if (t === 'quiz' && quizQ) return `#quiz/${quizQ.id}`;
+  if (t === 'mcp' && mcpTool) return `#mcp/${mcpTool}`;
   return `#${t}`;
 }
 
@@ -3036,6 +3249,7 @@ async function route(h = location.hash) {
   if (!TABS.includes(head)) return;
   if (head === 'evidence' && parts[0]) return focusEvidence(parts[0]);
   if (head === 'recent' && parts[0]) return jumpRecent(Number(parts[0]));
+  if (head === 'mcp') return openMcp(parts[0]);
   if (head === 'model' || head === 'ref') return openPanel(head, parts, h);
   if ((head === 'data' || head === 'quiz' || head === 'ai') && parts[0]) return openOnTab(head, parts[0], h);
   if (tab !== head) showTab(head);
