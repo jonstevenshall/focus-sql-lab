@@ -1,4 +1,4 @@
-"""Daily summary: a short account, in prose, of what the FOCUS working group did on GitHub since the last update.
+"""Daily summary: a short account, in prose, of what the FOCUS working group did on GitHub each day.
 
     python -I tools/daily.py <site dir>                    dry run: the period, what happened in it, the estimated cost
     GH_TOKEN=... ANTHROPIC_API_KEY=... python -I tools/daily.py <site dir> --write [--model M] [--effort E] [--fallback F]
@@ -40,7 +40,7 @@ from collections import Counter
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))  # python -I leaves the script's folder off the path
 from common import (MODELS, Spend, call_cost, escalated_item, escalated_share, escalation, estimate,  # noqa: E402
-                    estimate_line, fallback_from, gh_all, log_run, model_from, norm, problems)
+                    estimate_line, fallback_from, gh, gh_all, log_run, model_from, norm, problems)
 
 SITE, FLAGS = pathlib.Path(sys.argv[1]), sys.argv[2:]
 OUT = SITE / "daily.json"
@@ -68,6 +68,7 @@ recent = json.loads((SITE / "recent.json").read_text())
 model = json.loads((SITE / "focus" / "model.json").read_text())
 before = json.loads(OUT.read_text()) if OUT.exists() else {"days": []}
 days = list(before["days"])
+earlier_cost = {d["id"]: (d.get("cost", 0), d.get("runs", 0)) for d in days}  # a day written again adds to its cost
 UNTIL, WINDOW = ts(recent["generated_at"]), ts(recent["since"])
 by_n = {t["number"]: t for t in recent["threads"]}
 ds_name = {d["id"]: d["name"] for d in model["datasets"]}
@@ -117,9 +118,11 @@ for d in [d for d in days if d["id"] in REWRITE and ts(d["from"]) >= WINDOW]:
 # ---- what changed state in each period, from GitHub ------------------------------------------------------------
 changes = {}  # number -> (when, what, issue) for pull requests merged and threads closed since the earliest day
 created = {}  # number -> when it was opened, for every thread updated since the earliest day
+gh_titles = {}  # number -> title, for the same threads
 if os.environ.get("GH_TOKEN"):
     for i in gh_all("issues", state="all", since=iso(min(p[0] for p in plan))):
         created[i["number"]] = i["created_at"]
+        gh_titles[i["number"]] = i["title"]
         pr = i.get("pull_request") or {}
         if pr.get("merged_at"):
             changes[i["number"]] = (pr["merged_at"], "merged", i)
@@ -135,6 +138,63 @@ def newest_by(to):
     """The highest thread number opened by this time (GitHub numbers threads in order, so a higher one came later), or
     None without GitHub. An earlier day mustn't mention a thread opened after it, even where a body edited later does."""
     return max((n for n, c in created.items() if c <= iso(to)), default=None)
+
+
+def short_title(t):
+    """A thread's title without the repository's prefixes ("[AI] ", "[FR] ", "FR #2437: ", "Editorial #2833: ") or
+    backticks: the form a summary gives in brackets after the number. The page's shortTitle does the same."""
+    t = re.sub(r"^\s*\[[A-Za-z ]+\]\s*", "", t or "")
+    return re.sub(r"^[A-Za-z]+ #\d+(?:-\w+)?:\s*", "", t).replace("`", "").strip()
+
+
+def src_titles(threads):
+    """Each thread number whose title the material gives (the day's threads and the threads they mention): its short title."""
+    out = {}
+    for r in threads:
+        out[r["n"]] = short_title(r["title"])
+        out.update({x["n"]: short_title(x["title"]) for x in r["refs"] if x.get("title") and x["n"] not in out})
+    return out
+
+
+def without_titles(text, titles):
+    """The text with each "(title)" after a thread number taken out: what the length and wording checks count."""
+    for n, t in titles.items():
+        text = text.replace(f"#{n} ({t})", f"#{n}")
+    return text
+
+
+def real_names(threads):
+    """Words that read as a participant's real name in the start of an item's text: a "First Last" pair or a word before
+    a verb such as "requested" that matches part of a username in recent.json ("Shawn Alpay" and shawnalpay, "Jerry" and
+    jerrysr99), and any name after a greeting ("Thanks, Irena"). The caller drops any that also appear outside those
+    excerpts, where the material uses them as ordinary words."""
+    excerpts = " ".join(e.get("excerpt") or "" for r in threads for e in r["events"])
+    users = {u.lower() for t in recent["threads"] for u in [t["author"]] + [e.get("author") or "" for e in t["events"]] if u}
+    user_part = lambda w: len(w) >= 4 and any(w.lower() in u for u in users)  # noqa: E731
+    found = {p for p in re.findall(r"\b([A-Z][a-z]+ [A-Z][a-z]+)\b", excerpts) if any(map(user_part, p.split()))}
+    found |= {w for w in re.findall(r"(?<![\w-])([A-Z][a-z]{2,}) (?:requested|backed|suggested|asked|said|found|took|"
+                                    r"raised|noted|proposed|agreed|flagged|wrote)\b", excerpts) if user_part(w)}
+    found |= set(re.findall(r"\b(?:Thanks|thanks|Hi|hi|Hey|Dear),? ([A-Z][a-z]{2,})\b", excerpts))
+    return found
+
+
+def titles_for(text, threads):
+    """The title of every thread the text names, which the page shows in brackets after its number: from the day's
+    threads and the threads they mention, then GitHub, asking for any still missing one at a time."""
+    known = {r["n"]: r["title"] for r in threads}
+    for r in threads:
+        known.update({x["n"]: x["title"] for x in r["refs"] if x.get("title") and x["n"] not in known})
+    known.update({n: t for n, t in gh_titles.items() if n not in known})
+    out = {}
+    for n in sorted({int(x) for x in NUMBER.findall(text)}):
+        if n not in known and os.environ.get("GH_TOKEN"):
+            try:
+                known[n] = gh(f"issues/{n}")["title"]
+            except Exception:  # a title is a nicety: the number still links to GitHub
+                continue
+        if n in known:
+            out[str(n)] = known[n]
+    return out
 
 
 def state_at(n, now, to):
@@ -184,31 +244,31 @@ ZERO_COUNT = re.compile(r"Initialized PR (Approvals|Change Requests): 0$")
 def source_text(frm, to, mode, threads):
     kinds = Counter(r["change"]["what"] for r in threads if r["change"])
     people = {p for r in threads for p in r["people"]}
-    lines = [f"Period: {long_date(frm)}, {frm:%H:%M} UTC, to {long_date(to)}, {to:%H:%M} UTC.",
-             f"In this period: {sum(r['items'] for r in threads)} comments, reviews and new threads from {len(people)} people "
+    lines = [f"The day: {long_date(frm)}, {frm:%H:%M} UTC, to {long_date(to)}, {to:%H:%M} UTC.",
+             f"Altogether: {sum(r['items'] for r in threads)} comments, reviews and new threads from {len(people)} people "
              f"on {len(threads)} threads"
              + "".join(f"; {v} {k}" for k, v in kinds.items()) + "."]
     newest = newest_by(to) if mode == "earlier" else None
     if newest:  # a body edited later can name a thread that didn't exist yet
-        lines.append(f"Threads numbered above {newest} were opened after this period: don't mention them.")
+        lines.append(f"Threads numbered above {newest} were opened after this day: don't mention them.")
     gists = {}
     for r in threads:
         gists.update(by_n[r["n"]].get("gists", {}) if r["n"] in by_n else {})
     for r in threads:
         what = "pull request" if r["kind"] == "pr" else "issue"
-        state = f"now {r['state']}" if mode == "latest" else f"{r['state']} at the end of this period"
-        out = [f"\n=== Thread #{r['n']} ({what}, {state}; opened by {r['author']} on {r['opened']}): {r['title']}"]
+        out = [f"\n=== #{r['n']} ({short_title(r['title'])}): {what}, {r['state']}; opened by {r['author']} on {r['opened']}"]
         if r["objects"]:
             out.append("It concerns " + ", ".join(obj_label(k) for k in r["objects"][:6]) + ".")
         if r["refs"]:
-            out.append("It mentions " + "; ".join(f"#{x['n']}" + (f" ({x['title']})" if x.get("title") else "") for x in r["refs"][:8]) + ".")
+            out.append("It mentions " + "; ".join(f"#{x['n']}" + (f" ({short_title(x['title'])})" if x.get("title") else "")
+                                                  for x in r["refs"][:8]) + ".")
         if mode == "latest" and r["summary"]:
             out.append("Background, for context only: an AI model's summary of this thread's last two weeks, written before "
-                       f"this summary (it covers more than this period):\n{r['summary']}")
+                       f"this summary (it covers more than this day):\n{r['summary']}")
         elif mode == "earlier" and r["earlier_gists"]:
-            out.append("Background, for context only: earlier items in this thread, before this period:")
+            out.append("Background, for context only: earlier items in this thread, before this day:")
             out += [f"- {e['author']} on {e['at'][:10]}: {g or e.get('excerpt', '')}" for e, g in r["earlier_gists"]]
-        out.append("In this period:" if r["events"] or r["change"] else "")
+        out.append("New:" if r["events"] or r["change"] else "")
         for e in r["events"]:
             reply = f" (reply to {e['parent']})" if e.get("parent") else ""
             text = gists.get(e["id"])
@@ -234,38 +294,42 @@ def source_text(frm, to, mode, threads):
     return "\n".join(lines)
 
 
-RULES = """You write the daily summary for a website that follows the GitHub repository of the FOCUS specification (FinOps Open Cost and Usage Specification). The reader follows the FOCUS working group and opens the page each morning to learn, in two minutes, what happened since the last update: what moved forward, what was decided, what is being discussed or disputed, and what is waiting on someone. Below your summary the page lists every thread with each of its comments, so you don't need to account for every comment.
+RULES = """You write the account of one day's activity in the GitHub repository of the FOCUS specification (FinOps Open Cost and Usage Specification), for a website that follows it. The reader follows the FOCUS working group and reads it in two minutes to learn what happened: what moved forward, what was decided, what is being discussed or disputed, and what is waiting on someone. The page heads your text with the date and the day's counts, and lists every thread below it with each of its comments, so you don't need to account for every comment.
 
-Write two to four short paragraphs, separated by a blank line. On a quiet day (one to three threads) a few sentences are enough; on a busy day aim for 250 to 350 words. 400 words is a hard limit, so on the busiest days give a minor thread a clause rather than a sentence, and leave the detail to the page.
-- Open with a sentence or two on the period as a whole: the most important development, and where most of the activity went (for example, most of it was fixes for the 1.5 release). The page shows the counts of comments, threads and people above your summary, so don't open with them.
-- Then cover the threads that matter most, grouping those that belong together (the same release, column, dataset or theme) rather than going thread by thread. For each, say what happened in this period and why it matters: what was proposed, asked, decided, merged or closed; who said what, by GitHub username; where people agree or disagree; and what happens next, if the thread says.
-- Give your reading of where things stand, in plain words ("support looks solid", "this seems to be waiting on a reply from Matt-Cowsert"), grounded in the items. Say what a thread is waiting on; don't forecast what the group will decide or when.
-- Close with the smaller items in a sentence or two, grouped by what happened (for example: approvals on #101 and #102; closed as completed: #103, #104 and #105). If there are none, end with the last of the main threads instead of a sentence about what didn't happen.
+Write it the way someone who follows the repository closely would tell a colleague what happened: plain written English that starts with the news and states it matter-of-factly.
+- The first sentence is the most important thing that happened, said directly: who did what, on which thread (for example "#1234 merged after five approvals." or "someone-else opened seven issues listing what the dataset needs before general availability."). Don't open with a description of the day, of where the activity went or of your text: no "Most of the activity went to", "The day was dominated by", "Since the last update".
+- Then the rest, grouping threads that belong together (the same release, column, dataset or theme) rather than going thread by thread: what was proposed, asked, decided, merged or closed; who said what, by GitHub username; where people agree or disagree; and what a thread is now waiting on, in plain words ("this is waiting on a reply from the author"). Don't forecast what the group will decide or when.
+- End with the smaller items in a sentence, without a label (for example "kk09v also approved #101 and #102, and #103 to #105 were closed as completed."). If there are none, stop after the last main thread rather than saying what didn't happen.
 - Mention every thread in the material by its number (#123) at least once, so the reader can open it. Don't mention a thread number that isn't in the material.
+- The first time you mention a thread, write its number followed by its title in brackets, exactly as the material gives it (for example "#1234 (Add the 1.6 changelog) has six approvals"); after that, the number alone. The title already says what the thread is, so build the sentence around it rather than restating it ("#1234 (Add the 1.6 changelog), the 1.6 changelog, has" says it twice). Titles don't count toward the length. Mention a thread that is only referred to by the day's threads when it matters to what happened, not to list it. Don't put a thread number itself in brackets, and use # only for thread numbers (write "rows 3 and 8", "line 43").
+- Write two to four short paragraphs, separated by a blank line. On a quiet day (one to three threads) a few sentences are enough; on a busy day aim for 250 to 350 words. 400 words is a hard limit, so on the busiest days give a minor thread a clause rather than a sentence, and leave the detail to the page.
 
 Rules:
-- Say only what the material shows. What happened in this period is in the items under "In this period", each with its ID in brackets; a gist is a one-line summary of that item written earlier by an AI model, followed by the start of the item's own text. The background is context only: use it to explain why something matters, never report it as something that happened in this period.
-- Each thread's heading gives its state at the end of this period. Nothing after the period is in the material, so don't say what happened next.
-- A review's GitHub state is in brackets. Say a review approved or requested changes only when that is its state; a review in the "commented" state asked for, suggested or proposed changes, however firmly.
+- Say only what the material shows. The day's items are under "New", each with its ID in brackets; a gist is a one-line summary of that item written earlier by an AI model, followed by the start of the item's own text. The background is context only: use it to explain why something matters, never report it as something that happened on this day.
+- Each thread's heading gives its state at the end of the day. Nothing after the day is in the material, so don't say what happened next.
+- A review's GitHub state is in brackets. Say a review approved or requested changes only when that is its state; for any other review, say in plain words what it asked for, suggested or proposed, however firmly. Don't name review states as such ("commented review", "in the commented state").
+- The "It concerns" and "It mentions" lines under a thread's heading are context: use them to explain a thread, not as lists to repeat.
+- Only FOCUS_Spec threads have numbers here. A number written after another repository's name (such as "foundation #38") belongs to that repository: leave it out.
 - Field updates are recorded by the repository's automation (task force, due date, status, approval counts). Where an update names the person who made it, credit that person, not the automation ("Matt-Cowsert moved #2770 to TF-Supporting"). Use them only where they show where a thread stands, such as approvals rising, a new task force or a due date; a new thread's first settings are worth a mention only when they say who is to do what by when.
 - Write about the threads and the people in them, not about your sources: never mention "the material", "the background", gists or the IDs in brackets.
-- Name people only by their GitHub username exactly as shown, with the same capital and small letters even at the start of a sentence. Never guess real names. Refer to people by username or with they/them, never he or she.
-- Refer to the period as "since the last update", or by date. Don't write "today", "yesterday" or "tomorrow".
-- Write dates as 22 November 2026, or as 22 November.
-- Refer to issues and pull requests as #123. No URLs, no Markdown, no headings, no lists, no emoji.
-- Keep the tone measured and matter-of-fact, as the working group would describe itself: no dramatic framing such as "the real debate", "the crux", "a flurry", "battle" or "clash".
+- Name people only by their GitHub username exactly as shown, with the same capital and small letters even at the start of a sentence. The start of an item's text sometimes calls people by their real names: never repeat those, and never guess real names. Refer to people by username or with they/them, never he or she.
+- Don't describe the day itself ("since the last update", "in this period", "today", "yesterday"): the page gives the date. Give a date only where it matters, written as 22 November.
+- Refer to issues and pull requests as #123. No URLs, no Markdown, no headings, no labels such as "Smaller items:" or "Where things stand:", no lists, no emoji.
+- Keep the tone plain and matter-of-fact, as the working group would describe itself: no dramatic framing ("the real debate", "the crux", "a flurry", "battle", "clash") and no filler ("notably", "it is worth noting", "overall", "in summary", "remains open", "at the end of the day"). Say what a thread is waiting on, or nothing; don't close by saying it is still open. Leave out the automation's own entries (Review Bot, fields being initialised) except as an approval count or a due date.
 - Paraphrase. Quote at most 10 words, word for word from an item's text, and only when the exact wording matters.
 - Don't write in the first person or address the reader.
 - Reply with the summary text only."""
 
-REVIEW = """You check a daily summary of activity in the GitHub repository of the FOCUS specification against the material it was written from. The material lists, for each thread, background (context only) and the items from this period, each with an ID in brackets.
+REVIEW = """You check a daily summary of activity in the GitHub repository of the FOCUS specification against the material it was written from. The material lists, for each thread, background (context only) and the day's items, under "New", each with an ID in brackets.
 
 Report only clear errors of substance that a careful reader would want fixed:
 - a statement the material doesn't support or contradicts: the wrong person, the wrong thread number, the wrong outcome (approved but not merged, proposed but not decided, open but called closed, a "commented" review called an approval or a change request), or a position someone didn't take;
 - a forecast of what the group will decide or when;
-- something reported as happening in this period that the material shows only in the background;
+- a number from another repository (such as "foundation #38") presented as one of this repository's threads;
+- a person called by a real name instead of their GitHub username;
+- something reported as happening on this day that the material shows only in the background;
 - a reading of the mood or of where things stand that the items clearly don't bear out;
-- the period's most important development missing.
+- the day's most important development missing.
 
 Don't report style, word choice, length, order or emphasis, a reasonable reading of the items, or a thread that is merely mentioned briefly. For each finding, quote the summary's words exactly (a short stretch), say what is wrong, and cite the item IDs that show it. If there is nothing of this kind, return an empty list: a summary with no errors of substance is the expected case."""
 
@@ -277,32 +341,58 @@ DRAMA = re.compile(r"\b(crux|battles?|clash(?:es|ed)?|showdown|heated|firestorm|
 RELATIVE = re.compile(r"\b(today|yesterday|tomorrow|tonight)\b", re.I)
 FIRST_PERSON = re.compile(r"\b(?:I|[Ww]e|[Oo]ur|us)\b")
 SOURCES = re.compile(r"\b(the material|the background|gists?)\b", re.I)
+# Openings and labels that describe the day or the text instead of saying what happened.
+STOCK = re.compile(r"\b(most (?:of )?(?:the )?activity|the (?:day|period) was (?:dominated|taken up)|since the last update|"
+                   r"in (?:this|the) period|this (?:update|summary)|smaller items:|other items:|where things stand:|"
+                   r"overall,|in summary|notably|it is worth noting)", re.I)
+FILLER = re.compile(r"\b(?:remains?|is still) (?:open|a draft)\.|\bat the end of the day\b|\bReview Bot\b|"
+                    r"\binitiali[sz]ed\b", re.I)
+REVIEW_STATE = re.compile(r"\b(commented (?:review|state)|state: ?commented|\(commented\))", re.I)
 NUMBER = re.compile(r"(?<![\w&/])#(\d{2,5})\b")
 
 
 def day_problems(text, src, threads, newest=None):
     """The checks a daily summary must pass, beyond those for every AI-written text. newest is the highest thread
-    number opened by the end of an earlier day."""
+    number opened by the end of an earlier day. Lengths and wording are checked with the titles in brackets taken out."""
     found = []
-    bare = re.sub(r"[\"“][^\"”]*[\"”]", " ", text)  # outside quotes
-    named = {int(n) for n in NUMBER.findall(text)}
+    titles = src_titles(threads)
+    plain = without_titles(text, titles)
+    bare = re.sub(r"[\"“][^\"”]*[\"”]", " ", plain)  # outside quotes
+    named = {int(n) for n in NUMBER.findall(plain)}
+    # The day's own threads must carry their titles; a thread they only refer to may (the page adds a missing one).
+    untitled = [r["n"] for r in threads if f"#{r['n']} ({titles[r['n']]})" not in text]
+    if untitled:
+        found.append("give the title in brackets the first time you mention " + "; ".join(
+            f"#{n}, as \"#{n} ({titles[n]})\"" for n in untitled))
+    if re.search(r"\b(?:rows?|lines?|items?|findings?|steps?|options?) #\d", bare, re.I):
+        found.append("it writes a row, line or item number with #; only thread numbers take #, so write \"rows 3 and 8\"")
+    outside = re.sub(r'Its text begins: "[^\n]*', "", src)
+    names = sorted(n for n in real_names(threads) if not re.search(rf"(?<![\w-]){re.escape(n)}(?![\w-])", outside)
+                   and re.search(rf"(?<![\w-]){re.escape(n)}(?![\w-])", bare))
+    if names:
+        found.append("it names " + ", ".join(f'"{n}"' for n in names) + ", a real name from someone's comment; refer to "
+                     "people only by GitHub username")
     known = {int(n) for n in NUMBER.findall(src)}
     missing = [r["n"] for r in threads if r["n"] not in named]
     if missing:
         found.append("it doesn't mention " + ", ".join(f"#{n}" for n in missing) + "; mention every thread in the material by its number")
     if named - known:
         found.append("it mentions " + ", ".join(f"#{n}" for n in sorted(named - known)) + ", which isn't in the material")
+    if re.search(r"\(#\d", bare):
+        found.append("it puts a thread number in brackets; write it as #123 (title), with the number outside")
     later = sorted(n for n in named & known if newest and n > newest)
     if later:
-        found.append("it mentions " + ", ".join(f"#{n}" for n in later) + ", opened after this period; leave it out")
-    words = len(text.split())
+        found.append("it mentions " + ", ".join(f"#{n}" for n in later) + ", opened after this day; leave it out")
+    words = len(plain.split())
     if len(threads) >= 5 and words < 180:
         found.append(f"it has {words} words; on a day with {len(threads)} threads, write at least 200")
-    long_para = [len(p.split()) for p in re.split(r"\n\s*\n", text) if len(p.split()) > 170]
+    long_para = [len(p.split()) for p in re.split(r"\n\s*\n", plain) if len(p.split()) > 170]
     if long_para:
         found.append(f"a paragraph has {long_para[0]} words; keep each paragraph under 170 words")
     for pattern, what in ((DRAMA, "dramatic framing"), (RELATIVE, "a relative date"), (FIRST_PERSON, "the first person"),
-                          (SOURCES, "a word about its sources")):
+                          (SOURCES, "a word about its sources"), (STOCK, "a stock phrase; say what happened directly"),
+                          (REVIEW_STATE, "a review's state by name; say what the review did instead"),
+                          (FILLER, "a filler phrase; say what a thread is waiting on, or nothing")):
         m = pattern.search(bare)
         if m:
             found.append(f"it uses {what} (\"{m.group(0)}\")")
@@ -372,7 +462,7 @@ def attempt(model_, settings, src, threads, tries, newest):
     """One model's try at a day, with one retry naming what failed. Returns (text, problems)."""
     busy = len(threads) > 3 or sum(r["items"] for r in threads) > 8
     length = (f"aim for 250 to 350 words, and never more than {LIMIT}" if busy
-              else f"a few sentences, as many as the period needs, and never more than {LIMIT} words")
+              else f"a few sentences, as many as the day needs, and never more than {LIMIT} words")
     messages = [{"role": "user", "content": f"{src}\n\nLength: {length}."}]
     for n in (1, 2):
         r = client.messages.create(model=model_, max_tokens=settings["max_tokens"], system=RULES, messages=messages,
@@ -384,7 +474,8 @@ def attempt(model_, settings, src, threads, tries, newest):
         if r.stop_reason != "end_turn":
             found = [f"the reply stopped early ({r.stop_reason})"]
         else:
-            found = problems(text, LIMIT, src, thread=True) + day_problems(text, src, threads, newest)
+            found = (problems(without_titles(text, src_titles(threads)), LIMIT, src, thread=True)
+                     + day_problems(text, src, threads, newest))
             if not found:  # the fact check's call is kept beside the writer's, under its own model
                 found, entry["review"] = fact_check(text, src)
         entry["problems"] = found
@@ -394,7 +485,7 @@ def attempt(model_, settings, src, threads, tries, newest):
         if not found or n == 2:
             return text, found
         # A model asked to come under a limit tends to land just over it, so a long text is given a target below it.
-        words = len(text.split())
+        words = len(without_titles(text, src_titles(threads)).split())
         cut = (f" It has {words} words: bring it to about 320 by shortening the minor threads to a clause each, keeping "
                "every thread number." if words > LIMIT else "")
         messages += [{"role": "assistant", "content": text},
@@ -439,6 +530,10 @@ for frm, to, mode, threads, src in work:
         text, found, writer = "", [f"error: {type(e).__name__}: {str(e)[:200]}"], None
         print(f"  {found[0]}")
         up = any(t["model"] != MODEL for t in tries)
+    # What writing this day cost, its fact checks included, added to any earlier run's cost for the same day.
+    spent, runs = earlier_cost.get(day["id"], (0, 0))
+    spent += sum(t["cost"] + (t["review"]["cost"] if t.get("review") else 0) for t in tries)
+    day.update({"cost": round(spent, 5), "runs": runs + 1})
     if up:
         item = escalated_item(day["id"], f"Daily summary for {long_date(to.astimezone(BRISBANE))}", tries, "passed" if not found else "failed")
         item["cost"] = round(item["cost"] + sum(t["review"]["cost"] for t in tries if t.get("review")), 5)  # with the fact checks
@@ -451,13 +546,13 @@ for frm, to, mode, threads, src in work:
         day.update({"text": None, "failed": True})
     else:
         written += 1
-        day.update({"text": text, "written_by": writer})
+        day.update({"text": text, "written_by": writer, "titles": titles_for(text, threads)})
     new_days.append(day)
 
 days = sorted(new_days + days, key=lambda d: d["to"], reverse=True)[:KEEP_DAYS]
 OUT.write_text(json.dumps({
-    "about": ("What the FOCUS working group did on GitHub since the previous update. Written each morning by an AI model "
-              "from that period's comments, reviews, merges and closures, then fact-checked against them by a second call. "
+    "about": ("What the FOCUS working group did on GitHub each day. Written each morning by an AI model from the day's "
+              "comments, reviews, merges and closures, then fact-checked against them by a second call. "
               "It interprets, so check the threads before relying on it."),
     "generated_at": recent["generated_at"],
     "days": days,

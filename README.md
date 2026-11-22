@@ -38,11 +38,12 @@ queries in the browser, so the server only serves static files: no database, no 
   the browser and compares their results. Hints and model answers are there when you want them. A data model panel
   beside the questions (under the question on a phone) lists the five datasets, their columns and the lab's join keys
   for the data the question runs on. Clicking a dataset, column or join shows the same detail as the Data model tab.
-- **Daily summary** (also at `#daily`): what the working group did on GitHub since the previous update, in two to four
-  paragraphs, written every morning: what moved forward or was decided, what is being discussed, who said what, and
-  what is waiting on someone. Every thread it mentions is a link to its card on Most recent updates (or to GitHub, if
-  it has no card), and a "Back to the daily summary" button there returns to the day. Under the text, each day lists
-  its threads, busiest first, with what changed (opened, merged, closed) and who took part. Earlier days are kept
+- **Daily summary** (also at `#daily`): what the working group did on GitHub each day, in two to four paragraphs
+  written every morning, starting with the day's main news, with what it cost to write under its heading: what moved
+  forward or was decided, what is being discussed, who said what, and what is waiting on someone. Every thread it
+  mentions is a link to its card on Most recent updates (or to GitHub, if it has no card), with its title in brackets
+  after its first mention, and a "Back to the daily summary" button there returns to the day. Under the text, each day
+  lists its threads, busiest first, with what changed (opened, merged, closed) and who took part. Earlier days are kept
   below, folded to their first sentence. Each day has an address, `#daily/2026-11-22`, named by its date in Brisbane.
 - **Most recent updates** (also at `#recent`): the FOCUS_Spec issues and pull requests people opened, commented on or reviewed in
   the last two weeks, newest activity first, rebuilt every morning. Each card has a summary of the fortnight, the
@@ -302,26 +303,37 @@ the same Brisbane date rewrites that day to cover both. The material for a day i
 title, the parts of the data model it touches and the threads it mentions; each comment, review and status change in
 the period, as its gist from `recent.json` and the start of its own text (a new pull request's zero approvals and
 change requests are left out); pull requests merged and threads closed in the period, from GitHub; and, as background
-only, the thread's two-week summary. Claude Haiku 5.5 (high effort) writes two to four paragraphs, 250 to 350 words on
-a busy day and never more than 400, crediting a field update to the person it names rather than to the automation. A
-text over 400 words is retried with a target of about 320, since a model asked only to come under a limit lands just
-over it. The text must pass the checks every AI-written text here passes (exact usernames, no he or she, dates written
-out, no URLs or Markdown, quotes word for word), and those of a daily summary: every thread in the material named by
-its number, no thread number that isn't in the material, at least 180 words on a day with five or more threads, no
-paragraph over 170 words, no dramatic framing, no "today" or "yesterday", no first person, no talk of "the material" or
-"the background". The brief also asks it to call a review an approval or a change request only when that is its GitHub
-state, and to say what a thread is waiting on rather than forecast a decision. A text that passes is then fact-checked
-by a second call (Claude Haiku 5.5, high effort), which reports only errors of substance (the wrong person or outcome,
-background reported as new, a reading of the mood the items don't bear out, the main development missing), each quoting
-the summary; a finding whose quote isn't in the summary is dropped. A text that fails either gets one retry naming what
-failed, and one that fails twice goes to Claude Sonnet 5.5 for two more tries. A day that fails on both lists its
-threads with no summary and is tried again on the next run. The days before 22 November 2026 were written afterwards,
-from the comments in `recent.json`; those have the thread's earlier gists as background instead of its two-week
-summary, which was written later and would give away what came next. For the same reason each thread there has its
-state at the end of that day (a pull request merged later is still open), and a thread opened after the day may not be
-named, even where a body edited later mentions it. The dry run prints the estimated cost from tokens and, beside it,
-what logged daily runs cost a day with their retries, escalations and fact checks (US$0.01 to US$0.03 a day in the
-first runs). If the step fails, the rest of the run is still published.
+only, the thread's two-week summary. Claude Haiku 5.5 (high effort) writes two to four plain paragraphs that start with
+the day's main news, the way someone who follows the repository would tell a colleague, rather than describing the day
+or where its activity went; 250 to 350 words on a busy day and never more than 400, crediting a field update to the
+person it names rather than to the automation. A text over 400 words is retried with a target of about 320, since a
+model asked only to come under a limit lands just over it. The text must pass the checks every AI-written text here
+passes (exact usernames, no he or she, dates written out, no URLs or Markdown, quotes word for word), and those of a
+daily summary: every thread in the material named by its number, no thread number that isn't in the material, at least
+180 words on a day with five or more threads, no paragraph over 170 words, no dramatic framing, no "today" or
+"yesterday", no first person, no talk of "the material" or "the background", and no stock openings or labels ("most of
+the activity", "since the last update", "Smaller items:"). The brief also asks it to call a review an approval or a
+change request only when that is its GitHub state, without naming review states, to leave out numbers that belong to
+other repositories, and to say what a thread is waiting on rather than forecast a decision. A text that passes is then
+fact-checked by a second call (Claude Haiku 5.5, high effort), which reports only errors of substance (the wrong person
+or outcome, background reported as new, a reading of the mood the items don't bear out, the main development missing),
+each quoting the summary; a finding whose quote isn't in the summary is dropped. A text that fails either gets one
+retry naming what failed, and one that fails twice goes to Claude Sonnet 5.5 for two more tries. A day that fails on
+both lists its threads with no summary and is tried again on the next run. The days before 22 November 2026 were
+written afterwards, from the comments in `recent.json`; those have the thread's earlier gists as background instead of
+its two-week summary, which was written later and would give away what came next. For the same reason each thread there
+has its state at the end of that day (a pull request merged later is still open), and a thread opened after the day may
+not be named, even where a body edited later mentions it. The dry run prints the estimated cost from tokens and, beside
+it, what logged daily runs cost a day with their retries, escalations and fact checks (US$0.01 to US$0.03 a day in the
+first runs). Each day records what writing it cost at list price, fact checks and retries included, added up over every
+run that wrote it, and the page shows it under the day's heading. The model writes each thread's first mention as its
+number and its title in brackets, exactly as the material gives them without the repository's prefixes such as "[AI]"
+or "FR #2437:" (#2827 (Replace undefined Entry references with RequesterDetailsObject paths)), and builds the sentence
+around the title rather than restating it; a check requires that form, and titles don't count toward the 400 words.
+Each day also keeps the title of every number its text names (from GitHub for an older one), which the page adds after
+a number the text left bare. Real names that appear only in someone's comment and match part of a participant's
+username ("Shawn Alpay", "Thanks, Irena") fail the checks, as do filler phrases such as "remains open." and the
+automation's own entries ("Review Bot", "initialized"). If the step fails, the rest of the run is still published.
 
 ```bash
 GH_TOKEN=... python -I tools/daily.py site                                     # dry run: the period, its threads, the cost

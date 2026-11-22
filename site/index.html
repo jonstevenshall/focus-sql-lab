@@ -370,6 +370,7 @@
   .dy-h { font-size: 16px; font-weight: 600; }
   .dy-latest { margin-left: 8px; vertical-align: 2px; }
   .dy-meta { font-size: 12px; color: var(--muted); margin: 3px 0 0 1em; overflow-wrap: anywhere; }
+  .dy-cost { font-size: 12px; color: var(--muted); margin: 1px 0 0 1em; font-variant-numeric: tabular-nums; }
   .dy-peek { font-size: 13px; color: var(--fg); margin: 6px 0 0 1em; line-height: 1.5; max-width: 80ch; }
   .dy[open] .dy-peek { display: none; }
   .dy-text { margin-left: 1em; }
@@ -2561,7 +2562,7 @@ function recentCard(t, inWindow, since) {
   </article>`;
 }
 
-// ---- Daily summary: what the working group did since the previous update, in prose (site/daily.json, rebuilt daily) ---
+// ---- Daily summary: what the working group did each day, in prose (site/daily.json, rebuilt daily) ---
 // A thread a summary names opens as its card on Most recent updates, if it is there, or else on GitHub.
 let dailyP = null;
 const loadDaily = () => (dailyP ??= fetch('daily.json').then((r) => (r.ok ? r.json() : null)).catch(() => null));
@@ -2582,17 +2583,46 @@ function dayCounts(c) {
 }
 
 // The summary's text, with each #number a link: to the thread's card, or to GitHub if it has none.
-function dayText(text, inWindow, titles) {
-  return text.split(/\n\s*\n/).map((para) => `<p>${escapeHtml(para.trim()).replace(/(?<![&\w])#(\d{2,5})\b/g, (m, n) => {
-    const t = escapeHtml(titles.get(Number(n)) || '');
-    return inWindow.has(Number(n)) ? `<button class="linkish" data-recent="${n}" title="${t}">#${n}</button>`
-      : `<a href="${GH_ISSUE}${n}" target="_blank" rel="noopener" title="${t ? `${t} (on GitHub)` : 'Open on GitHub'}">#${n}</a>`;
+// A thread's title without the repository's prefixes ("[AI] ", "[FR] ", "FR #2437: ", "Editorial #2833: ") or backticks.
+const shortTitle = (t) => (t || '').replace(/^\s*\[[A-Za-z ]+\]\s*/, '').replace(/^[A-Za-z]+ #\d+(?:-\w+)?:\s*/, '')
+  .replace(/`/g, '').trim();
+const dayTitle = (d, titles, n) => shortTitle((d.titles || {})[n] || titles.get(Number(n)));
+
+// Whether a position falls inside brackets, such as a number in another thread's title.
+const insideBrackets = (s, at) => { let d = 0; for (const c of s.slice(0, at)) d += c === '(' ? 1 : c === ')' ? -1 : 0; return d > 0; };
+
+// A day's text with each thread number linked. The text gives each thread's title in brackets at its first mention; for
+// a number it left bare, the page adds the title there instead.
+function dayText(d, inWindow, titles) {
+  const seen = new Set();
+  return d.text.split(/\n\s*\n/).map((para) => `<p>${escapeHtml(para.trim()).replace(/(?<![&\w])#(\d{2,5})\b/g, (m, n, at, all) => {
+    const t = dayTitle(d, titles, n), tt = escapeHtml(t);
+    const link = inWindow.has(Number(n)) ? `<button class="linkish" data-recent="${n}" title="${tt}">#${n}</button>`
+      : `<a href="${GH_ISSUE}${n}" target="_blank" rel="noopener" title="${tt ? `${tt} (on GitHub)` : 'Open on GitHub'}">#${n}</a>`;
+    const titled = all.startsWith(' (', at + m.length);
+    if (titled) seen.add(n);
+    if (!t || titled || seen.has(n) || insideBrackets(all, at)) return link; // a number inside another's title stays bare
+    seen.add(n);
+    return `${link} (${tt})`;
   })}</p>`).join('');
 }
 
+// The same for the one-line preview of a folded day, as plain text.
+const dayPeek = (d, titles, s) => { const seen = new Set();
+  return s.replace(/(?<![&\w])#(\d{2,5})\b/g, (m, n, at, all) => { const t = dayTitle(d, titles, n);
+    if (all.startsWith(' (', at + m.length)) { seen.add(n); return m; }
+    if (!t || seen.has(n) || insideBrackets(all, at)) return m; seen.add(n); return `${m} (${t})`; }); };
+
+// What the AI calls for this day's text cost at list price, fact checks and retries included, over every run that wrote it.
+function dayCost(d) {
+  if (!d.cost) return '';
+  const runs = d.runs > 1 ? ` over ${d.runs} runs` : '';
+  return `<div class="dy-cost">Cost to write: US$${d.cost.toFixed(4)}${runs}</div>`;
+}
+
 function dayCard(d, latest, inWindow, titles) {
-  const first = d.text ? d.text.split(/(?<=[.?!])\s/)[0] : '';
-  const body = d.text ? `<div class="dy-text">${dayText(d.text, inWindow, titles)}</div>`
+  const first = d.text ? dayPeek(d, titles, d.text.split(/(?<=[.?!])\s/)[0]) : '';
+  const body = d.text ? `<div class="dy-text">${dayText(d, inWindow, titles)}</div>`
     : d.failed ? '<p class="dy-note">No summary for this day: what was written didn\'t pass the lab\'s checks, so it isn\'t shown. The threads are listed below, and the next run tries again.</p>'
     : '<p class="dy-note">Nothing new: nobody opened, commented on or reviewed a thread, and nothing was merged or closed.</p>';
   const rows = d.threads.map((t) => {
@@ -2610,7 +2640,8 @@ function dayCard(d, latest, inWindow, titles) {
   return `<details class="dy" id="daily-${escapeHtml(d.id)}" data-day="${escapeHtml(d.id)}"${latest ? ' open' : ''}>
     <summary><span class="dy-h">${escapeHtml(dayLabel(d))}</span>${latest ? '<span class="tag dy-latest">Latest</span>' : ''}
       <div class="dy-meta">${escapeHtml(dayRange(d))} · ${escapeHtml(dayCounts(d.counts))}</div>
-      ${first ? `<div class="dy-peek">${escapeHtml(first)}</div>` : ''}</summary>
+      ${dayCost(d)}
+      ${first ?`<div class="dy-peek">${escapeHtml(first)}</div>` : ''}</summary>
     ${body}${note}${list}</details>`;
 }
 
