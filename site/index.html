@@ -786,7 +786,7 @@
   <p class="mcp-intro">The FinOps Foundation runs an MCP server that lets AI assistants look up FOCUS content: the
     specification, its columns, example queries, use cases, providers and the documentation on focus.finops.org. It doesn't
     hold billing data. This tab sends requests from your browser straight to that server. It shows each reply as tables, one for
-    each list in it, or exactly as returned. The lab doesn't run the server or change what it sends.</p>
+    each list in it, or as the JSON the server sent. The lab doesn't run the server or change what it sends.</p>
   <p class="mcp-intro">Address: <code>https://focus.finops.org/wp-json/focus/v1/mcp</code> (HTTP, no sign-in), described on
     <a href="https://focus.finops.org/mcp/" target="_blank" rel="noopener">the server's page</a>. To add it to Claude Code:
     <code>claude mcp add --transport http focus https://focus.finops.org/wp-json/focus/v1/mcp</code>. Other MCP clients take
@@ -1665,7 +1665,7 @@ async function sendMcpTool() {
   mcpLast = content;
   out.innerHTML = `${meta}${res.isError ? '<p class="mcp-err">The tool reported an error (isError is true).</p>' : ''}
     <div class="mcp-reply-bar"><h4>Content: ${plural(content.length, 'item')}</h4>
-      <div class="view-switch" id="mcp-view" role="group" aria-label="Show the content as">${[['tables', 'Tables'], ['raw', 'As returned']].map(([v, label]) =>
+      <div class="view-switch" id="mcp-view" role="group" aria-label="Show the content as">${[['tables', 'Tables'], ['raw', 'JSON']].map(([v, label]) =>
         `<button type="button" data-view="${v}" aria-pressed="${v === mcpViewMode}">${label}</button>`).join('')}</div></div>
     <div id="mcp-content"></div>
     ${res.structuredContent ? `<h4>Structured content</h4><pre>${escapeHtml(JSON.stringify(res.structuredContent, null, 2))}</pre>` : ''}
@@ -1676,7 +1676,7 @@ async function sendMcpTool() {
 // ---- The Tables view of a reply. Generic, so it works for any tool: every list of records (an array of objects), wherever
 // it sits in the reply, becomes a table captioned with its path; every other value is listed as a field, in the server's
 // order, with nested names joined by dots. When there are two or more tables, chips above them show one at a time.
-// Nothing is reworded: long text is folded in table cells, not cut, and "As returned" shows the server's text.
+// Nothing is reworded: long text is folded in table cells, not cut, and "JSON" shows the server's text unchanged.
 let mcpViewMode = store.get('mcp-view') === 'raw' ? 'raw' : 'tables';
 let mcpLast = null; // the last reply's content items
 
