@@ -193,16 +193,34 @@
   #mcp .results td { white-space: normal; vertical-align: top; overflow-wrap: anywhere; min-width: 60px; }
   #mcp .results td details > summary { color: var(--fg); margin: 0; }
   #mcp .results td details[open] > summary { color: var(--muted); }
-  #ask { margin: 10px 0 14px; }
-  #ask form { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 6px; }
-  #ask-q { flex: 1 1 320px; min-width: 0; padding: 7px 10px; border: 1px solid var(--line); border-radius: 6px;
-    background: var(--panel); color: var(--fg); font: inherit; }
-  #ask .ask-note { max-width: 90ch; }
-  #ask .ask-answer { line-height: 1.55; max-width: 90ch; }
-  #ask .ask-answer ul, #ask .ask-answer ol { padding-left: 20px; }
+  #ask { margin: 10px 0 14px; max-width: 960px; }
+  #ask .ask-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  #ask .ask-head h3 { margin: 0; }
+  #ask .ask-head .ask-total { margin: 0 0 0 auto; font-variant-numeric: tabular-nums; }
+  #ask-new { padding: 4px 12px; font-size: 12.5px; }
+  #ask-thread { display: flex; flex-direction: column; gap: 10px; margin: 12px 0; }
+  #ask-thread:empty { display: none; }
+  #ask .msg { max-width: min(88%, 90ch); border-radius: 14px; padding: 8px 12px; overflow-wrap: anywhere; }
+  #ask .msg.me { align-self: flex-end; background: var(--accent); color: var(--accent-fg); border-bottom-right-radius: 4px;
+    white-space: pre-wrap; }
+  #ask .msg.bot { align-self: flex-start; background: var(--bg); border: 1px solid var(--line); border-bottom-left-radius: 4px;
+    line-height: 1.55; }
+  #ask .msg.bot > :first-child { margin-top: 0; }
+  #ask .msg.bot > :last-child { margin-bottom: 0; }
+  #ask .msg.bot ul, #ask .msg.bot ol { padding-left: 20px; }
+  #ask .msg.waiting { color: var(--muted); font-style: italic; }
+  #ask .msg .mcp-meta { margin: 8px 0 0; }
+  #ask details.ask-lookups > summary { cursor: pointer; color: var(--accent); font-size: 12.5px; margin: 4px 0 0; }
   #ask ul.ask-tools { list-style: none; padding: 0; margin: 4px 0; font-size: 12.5px; }
   #ask ul.ask-tools li { margin: 3px 0; overflow-wrap: anywhere; }
   #ask ul.ask-tools .linkish { font-family: var(--mono); font-size: 12.5px; }
+  #ask-form { display: flex; gap: 8px; align-items: flex-end; margin-top: 8px; }
+  #ask-q { flex: 1 1 auto; min-width: 0; min-height: 40px; max-height: 180px; resize: none; padding: 9px 12px;
+    border: 1px solid var(--line); border-radius: 12px; background: var(--panel); color: var(--fg); font: inherit; line-height: 1.4; }
+  #ask-q:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  #ask .ask-note { max-width: 90ch; }
+  #mcp-tester { margin-top: 18px; }
+  #mcp-tester > summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
   @media (max-width: 720px) {
     #ask-q { font-size: 16px; } /* 16px stops iOS zooming in on focus */
     #mcp .mcp-grid { grid-template-columns: minmax(0, 1fr); }
@@ -701,7 +719,8 @@
   <ul>
     <li>Everything runs in your browser. There's no sign-in and nothing is stored. The MCP server tab sends its
       requests from your browser to the FinOps Foundation's server at focus.finops.org. Its question box sends your
-      question to the lab's server, which asks Claude Haiku 5.5 (Anthropic) to answer it; questions aren't stored.</li>
+      question, with the conversation so far, to the lab's server, which asks Claude Haiku 5.5 (Anthropic) to answer it;
+      questions aren't stored.</li>
     <li>It's built from public material: the FOCUS specification and its GitHub history, and the FinOps Foundation's
       sample data. It isn't affiliated with the FinOps Foundation.</li>
     <li>The plain-English summaries were written with AI from those sources. The specification's own text and links
@@ -840,31 +859,38 @@
   <div id="recent-list"><p class="hint">Loading…</p></div>
 </section>
 <section id="mcp" hidden><div id="mcp-body">
-  <p class="mcp-intro">The FinOps Foundation runs an MCP server that lets AI assistants look up FOCUS content: the
-    specification, its columns, example queries, use cases, providers and the documentation on focus.finops.org. It doesn't
-    hold billing data. This tab sends requests from your browser straight to that server. It shows each reply as tables, one for
-    each list in it, or as the JSON the server sent. The lab doesn't run the server or change what it sends.</p>
+  <p class="mcp-intro">The FinOps Foundation runs an MCP server that lets AI assistants look up FOCUS content on
+    focus.finops.org: the specification, its columns, example queries, use cases, providers and the documentation. It
+    doesn't hold billing data.</p>
+  <div id="ask" class="detail" hidden>
+    <div class="ask-head"><h3>Ask in plain English</h3><span class="hint ask-total" id="ask-total"></span>
+      <button type="button" id="ask-new" hidden>New conversation</button></div>
+    <div id="ask-thread" aria-live="polite"></div>
+    <form id="ask-form">
+      <textarea id="ask-q" rows="1" maxlength="500" autocomplete="off" aria-label="Your question about FOCUS"
+        placeholder="Ask a question about FOCUS"></textarea>
+      <button type="submit" class="primary" id="ask-send">Send</button>
+    </form>
+    <p class="hint ask-note">Claude Haiku 5.5, an AI model, answers using the server's tools, so answers cover the FOCUS
+      releases published on focus.finops.org; the lab's other tabs follow the 1.5 working draft. A follow-up question sees
+      the conversation so far. Your questions go to the lab's server and to Anthropic, and aren't stored. Check an answer
+      against the lookups under it. Enter sends; Shift-Enter starts a new line.</p>
+  </div>
+  <details id="mcp-tester">
+    <summary>Try the server's tools directly</summary>
+    <p class="mcp-intro">This part sends requests from your browser straight to the server, with no AI model involved, and
+      shows each reply as tables, one for each list in it, or as the JSON the server sent. The lab doesn't run the server
+      or change what it sends.</p>
   <p class="mcp-intro">Address: <code>https://focus.finops.org/wp-json/focus/v1/mcp</code> (HTTP, no sign-in), described on
     <a href="https://focus.finops.org/mcp/" target="_blank" rel="noopener">the server's page</a>. To add it to Claude Code:
     <code>claude mcp add --transport http focus https://focus.finops.org/wp-json/focus/v1/mcp</code>. Other MCP clients take
     the same address.</p>
-  <div id="ask" class="detail" hidden>
-    <h3>Ask in plain English</h3>
-    <form id="ask-form">
-      <input id="ask-q" type="text" maxlength="500" autocomplete="off" aria-label="Your question about FOCUS"
-        placeholder="For example: what's the difference between BilledCost and EffectiveCost?">
-      <button type="submit" class="primary" id="ask-send">Ask</button>
-    </form>
-    <p class="hint ask-note">Claude Haiku 5.5, an AI model, answers using the tools below, so answers cover the FOCUS releases
-      published on focus.finops.org; the lab's other tabs follow the 1.5 working draft. Your question goes to the lab's server
-      and to Anthropic, and isn't stored. Check an answer against the lookups listed under it.</p>
-    <div id="ask-out"></div>
-  </div>
-  <div id="mcp-status"><p class="hint">Not connected yet.</p></div>
-  <div class="mcp-grid">
-    <nav id="mcp-tools" aria-label="The server's tools"></nav>
-    <div id="mcp-tool" class="detail" hidden></div>
-  </div>
+    <div id="mcp-status"><p class="hint">Not connected yet.</p></div>
+    <div class="mcp-grid">
+      <nav id="mcp-tools" aria-label="The server's tools"></nav>
+      <div id="mcp-tool" class="detail" hidden></div>
+    </div>
+  </details>
 </div></section>
 <section id="quiz" hidden>
   <div class="quiz-wrap">
@@ -1646,6 +1672,7 @@ async function mcpConnect() {
 
 async function openMcp(name) {
   if (tab !== 'mcp') showTab('mcp', true);
+  if (name) $('mcp-tester').open = true; // an address naming a tool opens the tester
   const ready = await renderMcp();
   if (ready && name && mcpTools.some((t) => t.name === name)) pickMcpTool(name);
   else if (ready && !name) setAddress(addressOf('mcp'));
@@ -1834,11 +1861,13 @@ $('mcp-tool').addEventListener('click', (e) => {
   wrap.querySelectorAll('[data-part]').forEach((p) => { p.hidden = c.dataset.show !== 'all' && p.dataset.part !== c.dataset.show; });
 });
 
-// ---- The question box. Claude Haiku 5.5 answers with the server's tools, through the lab's own service (ask/server.py),
-// which holds the API key, caps the spend and keeps tool replies for a day. Where there is no service (a plain file
-// server) or it has no key, the box stays hidden.
+// ---- The question box: a chat. Claude Haiku 5.5 answers with the server's tools, through the lab's own service
+// (ask/server.py), which holds the API key, caps the spend and keeps tool replies for a day. Each question is sent with
+// the conversation so far (the last six questions and answers), so follow-ups make sense; the service keeps nothing.
+// Where there is no service (a plain file server) or it has no key, the box stays hidden and the tester is open.
 let askStatus = null; // a promise of the service's status, or of null
-let askLast = null; // the last answer
+let askThread = []; // the conversation: {q, body} per question, body being the service's reply once it comes
+let askBusy = false;
 const ASK_STOPS = {
   question_cap: 'stopped at the US$1 limit for one question', call_limit: 'stopped after 15 model calls',
   time_limit: 'stopped after two minutes', max_tokens: 'the answer was cut off', refusal: 'the model declined to answer',
@@ -1847,7 +1876,11 @@ const ASK_STOPS = {
 
 function checkAsk() {
   askStatus ??= fetch('/api/ask/status').then((r) => (r.ok ? r.json() : null)).catch(() => null);
-  askStatus.then((s) => { $('ask').hidden = !(s && s.enabled); });
+  askStatus.then((s) => {
+    const on = !!(s && s.enabled);
+    $('ask').hidden = !on;
+    if (!on) $('mcp-tester').open = true;
+  });
 }
 
 // A little Markdown, enough for the answers: paragraphs, lists, code blocks, `code`, **bold**, *italics* and links.
@@ -1886,38 +1919,76 @@ function mdLite(md) {
   return out.join('');
 }
 
-async function sendAsk() {
-  const q = $('ask-q').value.trim();
-  if (!q) return;
-  const out = $('ask-out'), btn = $('ask-send');
-  btn.disabled = true;
-  out.innerHTML = '<p class="mcp-meta">Looking it up. This usually takes 5 to 20 seconds.</p>';
-  let r = null, body;
-  try {
-    r = await fetch('/api/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: q }) });
-    body = await r.json();
-  } catch { body = { error: r ? `The lab's server answered HTTP ${r.status}.` : "Couldn't reach the lab's server." }; }
-  btn.disabled = false;
-  if (!r || !r.ok || body.error) { out.innerHTML = `<p class="mcp-err">${escapeHtml(body.error || `HTTP ${r.status}`)}</p>`; return; }
-  askLast = body;
-  const n = body.tools.length, cached = body.tools.filter((t) => t.cached).length;
-  const stop = ASK_STOPS[body.stop] || (String(body.stop).startsWith('api_error') ? 'Anthropic returned an error' : '');
-  out.innerHTML = `<p class="mcp-meta">Written by an AI model (Claude Haiku 5.5) · ${plural(body.model_calls, 'model call')} ·
-      ${plural(n, 'lookup')}${cached ? ` (${cached} from the lab's cache)` : ''} · US$${body.cost.toFixed(4)} · ${body.seconds} s${
+function askBubbles(m, i) {
+  const me = `<div class="msg me">${escapeHtml(m.q)}</div>`;
+  const b = m.body;
+  if (!b) return `${me}<div class="msg bot waiting">Looking it up. This usually takes 5 to 20 seconds.</div>`;
+  if (b.error) return `${me}<div class="msg bot"><p class="mcp-err">${escapeHtml(b.error)}</p></div>`;
+  const n = b.tools.length, cached = b.tools.filter((t) => t.cached).length;
+  const stop = ASK_STOPS[b.stop] || (String(b.stop).startsWith('api_error') ? 'Anthropic returned an error' : '');
+  return `${me}<div class="msg bot">${b.answer ? mdLite(b.answer) : '<p class="hint">No answer came back.</p>'}
+    <p class="mcp-meta">Written by Claude Haiku 5.5 · ${plural(b.model_calls, 'model call')} · US$${b.cost.toFixed(4)} · ${b.seconds} s${
       stop ? ` · ${escapeHtml(stop)}` : ''}</p>
-    <div class="ask-answer">${body.answer ? mdLite(body.answer) : '<p class="hint">No answer came back.</p>'}</div>
-    ${n ? `<h4>What it looked up</h4><ul class="ask-tools">${body.tools.map((t, i) => `<li><button type="button" class="linkish"
-      data-ask-tool="${i}">${escapeHtml(t.name)}</button> <code>${escapeHtml(JSON.stringify(t.input))}</code> <span class="hint">· ${
-      t.is_error ? 'error' : plural(t.chars, 'character')}${t.cached ? ' · from the cache' : ''}</span></li>`).join('')}</ul>
-      <p class="hint">Each lookup opens in the tester below with its arguments filled in: send it to see the reply the answer used.</p>` : ''}`;
+    ${n ? `<details class="ask-lookups"><summary>What it looked up: ${plural(n, 'lookup')}${cached ? `, ${cached} from the lab's cache` : ''}</summary>
+      <ul class="ask-tools">${b.tools.map((t, j) => `<li><button type="button" class="linkish" data-ask-msg="${i}" data-ask-tool="${j}">${
+        escapeHtml(t.name)}</button> <code>${escapeHtml(JSON.stringify(t.input))}</code> <span class="hint">· ${
+        t.is_error ? 'error' : plural(t.chars, 'character')}${t.cached ? ' · from the cache' : ''}</span></li>`).join('')}</ul>
+      <p class="hint">Each opens in the tester below with its arguments filled in: send it to see the reply the answer used.</p></details>` : ''}</div>`;
+}
+
+function renderAskThread() {
+  $('ask-thread').innerHTML = askThread.map(askBubbles).join('');
+  $('ask-new').hidden = !askThread.length;
+  const total = askThread.reduce((s, m) => s + ((m.body && m.body.cost) || 0), 0);
+  $('ask-total').textContent = askThread.length ? `This conversation: US$${total.toFixed(4)}` : '';
+}
+
+function fitAsk() { // the box grows with what is typed, up to its maximum height
+  const t = $('ask-q');
+  t.style.height = 'auto';
+  t.style.height = t.value ? `${t.scrollHeight + 2}px` : ''; // empty: its one-line height, whatever the placeholder
+}
+
+async function sendAsk() {
+  const box = $('ask-q'), q = box.value.trim();
+  if (!q || askBusy) return;
+  const history = askThread.filter((m) => m.body && m.body.answer).slice(-6).map((m) => ({ q: m.q, a: m.body.answer }));
+  const m = { q, body: null };
+  askThread.push(m);
+  box.value = '';
+  fitAsk();
+  askBusy = true;
+  $('ask-send').disabled = true;
+  renderAskThread();
+  $('ask-thread').lastElementChild.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  let r = null;
+  try {
+    r = await fetch('/api/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: q, history }) });
+    m.body = await r.json();
+    if (!r.ok && !m.body.error) m.body = { error: `The lab's server answered HTTP ${r.status}.` };
+  } catch { m.body = { error: r ? `The lab's server answered HTTP ${r.status}.` : "Couldn't reach the lab's server." }; }
+  askBusy = false;
+  $('ask-send').disabled = false;
+  if (!askThread.includes(m)) return; // a new conversation was started meanwhile
+  renderAskThread();
+  const mine = $('ask-thread').querySelectorAll('.msg.me');
+  mine[mine.length - 1].scrollIntoView({ block: 'start', behavior: 'smooth' });
+  box.focus({ preventScroll: true });
 }
 
 $('ask-form').addEventListener('submit', (e) => { e.preventDefault(); sendAsk(); });
-$('ask-out').addEventListener('click', (e) => {
+$('ask-q').addEventListener('input', fitAsk);
+$('ask-q').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); sendAsk(); }
+});
+$('ask-new').addEventListener('click', () => { askThread = []; renderAskThread(); $('ask-q').focus(); });
+$('ask-thread').addEventListener('click', (e) => {
   const b = e.target.closest('[data-ask-tool]');
-  if (!b || !askLast) return;
-  const t = askLast.tools[Number(b.dataset.askTool)];
-  if (!mcpTools.some((x) => x.name === t.name)) return;
+  if (!b) return;
+  const m = askThread[Number(b.dataset.askMsg)];
+  const t = m && m.body && m.body.tools[Number(b.dataset.askTool)];
+  if (!t || !mcpTools.some((x) => x.name === t.name)) return;
+  $('mcp-tester').open = true;
   pickMcpTool(t.name);
   for (const [k, v] of Object.entries(t.input || {})) {
     const el = $('mcp-form').querySelector(`[data-arg="${CSS.escape(k)}"]`);
@@ -1926,6 +1997,7 @@ $('ask-out').addEventListener('click', (e) => {
   showMcpRequest();
   $('mcp-tool').scrollIntoView({ block: 'start', behavior: 'smooth' });
 });
+$('mcp-tester').addEventListener('toggle', () => { if (tab === 'mcp') setAddress(addressOf('mcp')); });
 
 $('mcp-tools').addEventListener('click', (e) => { const b = e.target.closest('[data-tool]'); if (b) pickMcpTool(b.dataset.tool); });
 
@@ -3612,7 +3684,7 @@ function addressOf(t) {
   if (t === 'query' && examples.some((e) => e.id === ex)) return `#query/${ex}`;
   if (t === 'data' && dataSel && manifest && manifest.tables[dataSel]) return `#data/${dataSel}`;
   if (t === 'quiz' && quizQ) return `#quiz/${quizQ.id}`;
-  if (t === 'mcp' && mcpTool) return `#mcp/${mcpTool}`;
+  if (t === 'mcp' && mcpTool && $('mcp-tester').open) return `#mcp/${mcpTool}`;
   return `#${t}`;
 }
 

@@ -2,7 +2,11 @@
 things up with the FinOps Foundation's FOCUS MCP server.
 
   GET  /api/ask/status   {"enabled": true or false, "model": ...}
-  POST /api/ask          {"question": "..."} -> {"answer", "tools", "cost", "model_calls", "seconds", "stop"}
+  POST /api/ask          {"question": "...", "history": [{"q": "...", "a": "..."}, ...]}
+                         -> {"answer", "tools", "cost", "model_calls", "seconds", "stop"}
+
+"history" is the conversation so far, oldest first, sent by the page so that follow-up questions make sense. The last six
+questions and answers are used, and older ones are dropped while they come to more than 12,000 characters.
 
 In the lab's container this listens on 127.0.0.1:8081 and nginx passes /api/ to it (see ../Dockerfile and ../nginx.conf).
 The API key comes from the ANTHROPIC_API_KEY environment variable, set in Coolify. With none set, /api/ask/status says
@@ -47,6 +51,8 @@ MAX_AT_ONCE = int(os.environ.get("ASK_MAX_AT_ONCE", "3"))
 MAX_CALLS = 15  # model calls per question
 MAX_SECONDS = 120  # per question
 MAX_QUESTION = 500  # characters
+MAX_HISTORY_TURNS = 6
+MAX_HISTORY_CHARS = 12_000
 CACHE_SECONDS = 24 * 3600
 CACHE_MAX = 2000
 
@@ -134,10 +140,26 @@ def today_spent():
     return spend["usd"]
 
 
-def ask(question):
+def history_messages(history):
+    """The conversation so far as alternating user and assistant messages, or None if it isn't well formed."""
+    if not isinstance(history, list):
+        return None
+    pairs = []
+    for h in history[-MAX_HISTORY_TURNS:]:
+        if not isinstance(h, dict) or not isinstance(h.get("q"), str) or not isinstance(h.get("a"), str):
+            return None
+        q, a = h["q"].strip()[:MAX_QUESTION], h["a"].strip()
+        if q and a:
+            pairs.append((q, a))
+    while pairs and sum(len(q) + len(a) for q, a in pairs) > MAX_HISTORY_CHARS:
+        pairs.pop(0)
+    return [m for q, a in pairs for m in ({"role": "user", "content": q}, {"role": "assistant", "content": a})]
+
+
+def ask(question, earlier=()):
     import anthropic
     defs, instructions = tools()
-    messages = [{"role": "user", "content": question}]
+    messages = [*earlier, {"role": "user", "content": question}]
     spent, calls, log, answer, stop, t0 = 0.0, 0, [], "", None, time.time()
     while True:
         if spent >= QUESTION_CAP:
@@ -217,8 +239,12 @@ class Handler(SimpleHTTPRequestHandler):
             return self.send_json(503, {"error": "The question box isn't switched on here."})
         try:
             size = int(self.headers.get("Content-Length", "0"))
-            question = str(json.loads(self.rfile.read(min(size, 8192)) or b"{}").get("question", "")).strip()
+            body = json.loads(self.rfile.read(min(size, 65536)) or b"{}")
+            question = str(body.get("question", "")).strip()
+            earlier = history_messages(body.get("history") or [])
         except (ValueError, AttributeError):
+            return self.send_json(400, {"error": "The request wasn't understood."})
+        if earlier is None:
             return self.send_json(400, {"error": "The request wasn't understood."})
         if not question:
             return self.send_json(400, {"error": "Type a question first."})
@@ -237,13 +263,14 @@ class Handler(SimpleHTTPRequestHandler):
         if not at_once.acquire(blocking=False):
             return self.send_json(503, {"error": "The lab is answering other questions just now. Try again in a minute."})
         try:
-            result = ask(question)
+            result = ask(question, earlier)
         except Exception as e:
             print(json.dumps({"at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "error": type(e).__name__}), flush=True)
             return self.send_json(502, {"error": "Something went wrong answering that. Try again in a minute."})
         finally:
             at_once.release()
-        print(json.dumps({"at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "cost": result["cost"],
+        print(json.dumps({"at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "earlier": len(earlier) // 2,
+                          "cost": result["cost"],
                           "model_calls": result["model_calls"], "tool_calls": len(result["tools"]),
                           "cached": sum(t["cached"] for t in result["tools"]), "stop": result["stop"],
                           "seconds": result["seconds"]}), flush=True)

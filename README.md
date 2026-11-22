@@ -59,9 +59,10 @@ server tab's question box, which has a small service of its own (see below).
   when there are several, chips above them show one at a time. The other values are listed as fields. A switch
   beside "Tables" shows the reply as JSON instead, the server's text unchanged. `#mcp/<tool name>` opens a tool. The
   requests go from the browser straight to focus.finops.org, which allows calls from other sites.
-  Above the tester, a question box takes a plain-English question. Claude Haiku 5.5 answers it, calling the server's
-  tools through the lab's service (`ask/server.py`), and the page shows the answer, what it cost and every lookup it
-  made; each lookup opens in the tester with its arguments filled in. The service keeps the API key, caps spend at
+  Above the tester, which is folded away when the question box is on, the question box is a chat: Claude Haiku 5.5
+  answers plain-English questions, calling the server's tools through the lab's service (`ask/server.py`). Each answer
+  shows what it cost and every lookup it made; each lookup opens in the tester with its arguments filled in. The page
+  sends the conversation so far with each question (the last six questions and answers), so follow-ups make sense. The service keeps the API key, caps spend at
   US$1.00 a question and a daily total, limits each visitor to 20 questions an hour, and keeps tool replies for a day,
   since the FOCUS server limits how often one address can call it. Questions are not stored. The box only shows where the
   service is running with a key.
