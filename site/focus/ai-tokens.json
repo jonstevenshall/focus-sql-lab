@@ -4,7 +4,7 @@
   "ref": "87fcbc8",
   "date": "2026-11-19"
  },
- "checked": "2026-11-22",
+ "checked": "2026-11-23",
  "how": [
   "A token charge is an ordinary Cost and Usage row. ServiceCategory is \"AI and Machine Learning\", ConsumedUnit is \"Tokens\" and ConsumedQuantity counts them. PricingQuantity and PricingUnit say how they were priced, which can be in blocks, such as per million tokens.",
   "Which model, and which kind of token, are recorded inside one JSON column, SkuPriceDetails, as FOCUS-defined properties. ModelDeveloper, ModelFamily, ModelId and ModelVersion describe the model. TokenDirection (input or output) and TokenCacheAction (uncached, cache read, cache write) describe the tokens. All six are new in the 1.5 candidate.",
@@ -125,7 +125,7 @@
   {
    "id": "json",
    "title": "They sit inside a JSON column",
-   "text": "The working group chose properties inside SkuPriceDetails over new columns (#2018, #2442), and newer proposals follow the same pattern, such as region scope (#2613). That keeps the column list stable, but every token query has to unpack JSON. The specification's queries use BigQuery's JSON_VALUE, which other databases write differently: the lab runs them in DuckDB through a small json_value macro.",
+   "text": "The working group chose properties inside SkuPriceDetails over new columns (#2018, #2442), and the newer proposals follow the same pattern: region scope (#2613), processing tier (#2873) and context window bounds (#2871). That keeps the column list stable, but every token query has to unpack JSON. The specification's queries use BigQuery's JSON_VALUE, which other databases write differently: the lab runs them in DuckDB through a small json_value macro. The context window proposal would also put its bounds in named columns of the SKU Price dataset, a preview in 1.5 (#2872). Whether SKU properties belong in SKU Price, in a separate SKU details dataset or only in Cost and Usage is an open action item for making SKU Price generally available (#2807, #2888).",
    "quotes": [
     {
      "text": "Similar JSON functions are widely available across major SQL engines with variances in syntax, so the examples may need to be adapted for other database engines.",
@@ -134,7 +134,9 @@
    ],
    "threads": [
     2613,
-    2850
+    2850,
+    2807,
+    2888
    ]
   },
   {
@@ -156,7 +158,7 @@
   {
    "id": "dimensions",
    "title": "Pricing dimensions not covered yet",
-   "text": "The specification names dimensions that the token properties deliberately leave out, and each has an open request. Others have been raised since: processing tiers such as batch or priority, provisioned throughput, regional prices and finer AI service subcategories. A query for what caching saves was taken out until the SKU Price dataset can supply the uncached price (#2702).",
+   "text": "The specification names dimensions that the token properties deliberately leave out, and each has an open request. Others have been raised since: processing tiers such as batch or priority, provisioned throughput, regional prices and finer AI service subcategories. Work on AI pricing for 1.6 started with context window size (#2521), with processing tiers and provisioned throughput to follow. Two now have pull requests: context window bounds as SkuPriceDetails properties and as SKU Price columns (#2871, #2872, both drafts), and a ProcessingTier property with the values Standard, Priority, Flex, Batch and Other (#2873). They take opposite sides of a question still open: #2873 gives each processing tier its own SkuId, while #2871's examples keep one SkuId and give each context window tier its own SkuPriceId, as the quantity tier pricing example does. Google Cloud's billing data gives each context window tier its own SKU ID, as noted at Task Force 1 on 17 November, and an example dataset drawn from providers' billing data is being built to ground the next discussion (#2877). A query for what caching saves was taken out until the SKU Price dataset can supply the uncached price (#2702).",
    "quotes": [
     {
      "text": "Dimensions that qualify a charge without describing the direction of its tokens or their interaction with a cache, such as token modality, reasoning effort, cache retention duration, and context window size, are not values of these properties.",
@@ -170,7 +172,11 @@
     2488,
     2521,
     2817,
+    2871,
+    2872,
+    2877,
     2437,
+    2873,
     2371,
     2414,
     1943,
@@ -185,9 +191,27 @@
    "threads": []
   },
   {
+   "id": "gateway",
+   "title": "No place for cost a gateway works out",
+   "text": "An LLM gateway between a company's teams and a model provider knows which team made each call and how many input, output and cache tokens it used, and can price them before the invoice arrives. FOCUS says an entity that doesn't invoice, or doesn't originate the cost and usage data, must report BilledCost and EffectiveCost as 0, so merged datasets don't count the cost twice. It doesn't say where such a layer should put the cost it worked out. Feedback raised on 20 November asks whether ListCost or ContractedCost may carry it, or whether it belongs in x_ columns or a separate allocation dataset (#2885).",
+   "quotes": [
+    {
+     "text": "BilledCost MUST be 0 for *charges* generated by entities that are not responsible or authorized for invoicing, to avoid double-counting when merging multiple [*dataset instances*](#glossary:dataset-instance).",
+     "source": "datasets/cost_and_usage/columns/billedcost.md"
+    },
+    {
+     "text": "EffectiveCost MUST be 0 for *charges* generated by entities that do not originate the cost and usage data, to avoid double-counting when merging multiple *dataset instances*.",
+     "source": "datasets/cost_and_usage/columns/effectivecost.md"
+    }
+   ],
+   "threads": [
+    2885
+   ]
+  },
+  {
    "id": "beyond",
    "title": "Nothing yet on energy, utilisation or results",
-   "text": "FOCUS records what was charged. The specification has no column or property for energy use or emissions, for how busy the resources behind a charge were, or for what the tokens produced. The request that added model identity (#2018) left operational telemetry out of scope. Open requests would cover parts of this: sustainability measures, a companion utilisation dataset (which absorbed a request for AI and GPU utilisation), a mapping from OpenTelemetry, and costs for work that never reached a billed SKU.",
+   "text": "FOCUS records what was charged. The specification has no column or property for energy use or emissions, for how busy the resources behind a charge were, or for what the tokens produced. The request that added model identity (#2018) left operational telemetry out of scope. Open requests would cover parts of this: sustainability measures, a companion utilisation dataset (which absorbed a request for AI and GPU utilisation), a mapping from OpenTelemetry, and costs for work that never reached a billed SKU. A request from 22 November would separate reserved GPU or accelerator capacity a provider didn't deliver, such as hardware taken out of service, from capacity the customer left unused (#2895). An action item to write a FOCUS for AI paper was closed on 17 November, its owner saying a larger piece of work on AI and value tracking supersedes it (#1857).",
    "quotes": [
     {
      "text": "Those belong in observability tooling, not cost and usage data.",
@@ -201,7 +225,9 @@
     2654,
     1022,
     2728,
-    2699
+    2699,
+    2895,
+    1857
    ]
   }
  ],
@@ -227,6 +253,17 @@
    "opened": "2025-05-12",
    "closed": "2026-09-27",
    "comments": 7
+  },
+  "1857": {
+   "n": 1857,
+   "title": "[AI] Create a FOCUS for AI paper",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/1857",
+   "kind": "issue",
+   "state": "closed",
+   "reason": "completed",
+   "opened": "2026-01-20",
+   "closed": "2026-11-17",
+   "comments": 12
   },
   "1941": {
    "n": 1941,
@@ -470,6 +507,17 @@
    "closed": null,
    "comments": 4
   },
+  "2807": {
+   "n": 2807,
+   "title": "[FR] Promote the SKU Price dataset to general availability",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2807",
+   "kind": "issue",
+   "state": "open",
+   "reason": null,
+   "opened": "2026-10-31",
+   "closed": null,
+   "comments": 6
+  },
   "2817": {
    "n": 2817,
    "title": "[AI] Draft a first model of context window pricing for FR 2521",
@@ -491,6 +539,83 @@
    "opened": "2026-11-10",
    "closed": null,
    "comments": 2
+  },
+  "2871": {
+   "n": 2871,
+   "title": "FR #2521: Add context-window pricing properties to SKU Price Details",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2871",
+   "kind": "pr",
+   "state": "open",
+   "reason": null,
+   "opened": "2026-11-14",
+   "closed": null,
+   "comments": 8
+  },
+  "2872": {
+   "n": 2872,
+   "title": "FR #2521: Add context-window pricing columns to SKU Price (stacked on the properties PR)",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2872",
+   "kind": "pr",
+   "state": "open",
+   "reason": null,
+   "opened": "2026-11-14",
+   "closed": null,
+   "comments": 2
+  },
+  "2873": {
+   "n": 2873,
+   "title": "FR #2437: Add ProcessingTier as a SkuPriceDetails property",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2873",
+   "kind": "pr",
+   "state": "open",
+   "reason": null,
+   "opened": "2026-11-15",
+   "closed": null,
+   "comments": 3
+  },
+  "2877": {
+   "n": 2877,
+   "title": "[AI] Build a 1.6 example dataset for context window pricing",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2877",
+   "kind": "issue",
+   "state": "open",
+   "reason": null,
+   "opened": "2026-11-17",
+   "closed": null,
+   "comments": 1
+  },
+  "2885": {
+   "n": 2885,
+   "title": "[Feedback] How should a non-invoicing metering layer (such as an LLM gateway) carry its computed cost when BilledCost and EffectiveCost must be 0?",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2885",
+   "kind": "issue",
+   "state": "open",
+   "reason": null,
+   "opened": "2026-11-20",
+   "closed": null,
+   "comments": 2
+  },
+  "2888": {
+   "n": 2888,
+   "title": "[AI] Finalize where SKU properties live for SKU Price general availability",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2888",
+   "kind": "issue",
+   "state": "open",
+   "reason": null,
+   "opened": "2026-11-21",
+   "closed": null,
+   "comments": 1
+  },
+  "2895": {
+   "n": 2895,
+   "title": "[FR] Enable comparing delivered capacity with reserved capacity",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2895",
+   "kind": "issue",
+   "state": "open",
+   "reason": null,
+   "opened": "2026-11-22",
+   "closed": null,
+   "comments": 0
   }
  }
 }

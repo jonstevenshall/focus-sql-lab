@@ -19,6 +19,8 @@ SPEC, SITE = pathlib.Path(sys.argv[1]) / "specification", pathlib.Path(sys.argv[
 REPO = "FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec"
 FEATURE = "supported_features/ai_model_billing.md"
 SKUPD = "datasets/cost_and_usage/columns/skupricedetails.md"
+BILLED = "datasets/cost_and_usage/columns/billedcost.md"
+EFFECTIVE = "datasets/cost_and_usage/columns/effectivecost.md"
 
 
 def read(rel):
@@ -49,6 +51,8 @@ def quote(md, start, source):
 feature_md = read(FEATURE)
 skupd_md = read(SKUPD)
 glossary_md = read("glossary.md")
+billed_md = read(BILLED)
+effective_md = read(EFFECTIVE)
 
 # The FOCUS-defined SkuPriceDetails properties that describe AI models and tokens.
 props = []
@@ -87,12 +91,16 @@ GAPS = [
                 quote(skupd_md, "SkuPriceDetails SHOULD include TokenDirection when", SKUPD)],
      "threads": []},
     {"id": "json", "title": "They sit inside a JSON column",
-     "text": "The working group chose properties inside SkuPriceDetails over new columns (#2018, #2442), and newer "
-             "proposals follow the same pattern, such as region scope (#2613). That keeps the column list stable, but "
-             "every token query has to unpack JSON. The specification's queries use BigQuery's JSON_VALUE, which "
-             "other databases write differently: the lab runs them in DuckDB through a small json_value macro.",
+     "text": "The working group chose properties inside SkuPriceDetails over new columns (#2018, #2442), and the "
+             "newer proposals follow the same pattern: region scope (#2613), processing tier (#2873) and context "
+             "window bounds (#2871). That keeps the column list stable, but every token query has to unpack JSON. The "
+             "specification's queries use BigQuery's JSON_VALUE, which other databases write differently: the lab "
+             "runs them in DuckDB through a small json_value macro. The context window proposal would also put its "
+             "bounds in named columns of the SKU Price dataset, a preview in 1.5 (#2872). Whether SKU properties "
+             "belong in SKU Price, in a separate SKU details dataset or only in Cost and Usage is an open action item for "
+             "making SKU Price generally available (#2807, #2888).",
      "quotes": [quote(feature_md, "Similar JSON functions are widely available", FEATURE)],
-     "threads": [2613, 2850]},
+     "threads": [2613, 2850, 2807, 2888]},
     {"id": "compare", "title": "Models and tokens don't line up across providers",
      "text": "The same model can carry a different ModelId from each seller, and a token is not a fixed amount of "
              "content. So a cost per million tokens compares prices, not work done, and comparing one model across "
@@ -103,25 +111,46 @@ GAPS = [
     {"id": "dimensions", "title": "Pricing dimensions not covered yet",
      "text": "The specification names dimensions that the token properties deliberately leave out, and each has an "
              "open request. Others have been raised since: processing tiers such as batch or priority, provisioned "
-             "throughput, regional prices and finer AI service subcategories. A query for what caching saves was "
+             "throughput, regional prices and finer AI service subcategories. Work on AI pricing for 1.6 started with "
+             "context window size (#2521), with processing tiers and provisioned throughput to follow. Two now have "
+             "pull requests: context window bounds as SkuPriceDetails properties and as SKU Price columns (#2871, "
+             "#2872, both drafts), and a ProcessingTier property with the values Standard, Priority, Flex, Batch and "
+             "Other (#2873). They take opposite sides of a question still open: #2873 gives each processing tier its "
+             "own SkuId, while #2871's examples keep one SkuId and give each context window tier its own SkuPriceId, "
+             "as the quantity tier pricing example does. Google Cloud's billing data gives each context window tier "
+             "its own SKU ID, as noted at Task Force 1 on 17 November, and an example dataset drawn from providers' "
+             "billing data is being built to ground the next discussion (#2877). A query for what caching saves was "
              "taken out until the SKU Price dataset can supply the uncached price (#2702).",
      "quotes": [quote(note.group(1), "Dimensions that qualify a charge", SKUPD)],
-     "threads": [2489, 2805, 2487, 2488, 2521, 2817, 2437, 2371, 2414, 1943, 2702]},
+     "threads": [2489, 2805, 2487, 2488, 2521, 2817, 2871, 2872, 2877, 2437, 2873, 2371, 2414, 1943, 2702]},
     {"id": "data", "title": "No public data with token charges yet",
      "text": "Only the specification's worked examples contain token rows. The token queries return nothing on the "
              "accepted 1.0 sample or on the samples proposed for 1.3 and 1.4, so no public FOCUS sample data yet "
              "shows token billing.",
      "quotes": [], "threads": []},
+    {"id": "gateway", "title": "No place for cost a gateway works out",
+     "text": "An LLM gateway between a company's teams and a model provider knows which team made each call and how "
+             "many input, output and cache tokens it used, and can price them before the invoice arrives. FOCUS says "
+             "an entity that doesn't invoice, or doesn't originate the cost and usage data, must report BilledCost and "
+             "EffectiveCost as 0, so merged datasets don't count the cost twice. It doesn't say where such a layer should put the "
+             "cost it worked out. Feedback raised on 20 November asks whether ListCost or ContractedCost may carry "
+             "it, or whether it belongs in x_ columns or a separate allocation dataset (#2885).",
+     "quotes": [quote(billed_md, "BilledCost MUST be 0 for *charges* generated by entities", BILLED),
+                quote(effective_md, "EffectiveCost MUST be 0 for *charges* generated by entities", EFFECTIVE)],
+     "threads": [2885]},
     {"id": "beyond", "title": "Nothing yet on energy, utilisation or results",
      "text": "FOCUS records what was charged. The specification has no column or property for energy use or "
              "emissions, for how busy the resources behind a charge were, or for what the tokens produced. The request "
              "that added model identity (#2018) left operational telemetry out of scope. Open requests would "
              "cover parts of this: sustainability measures, a companion utilisation dataset (which absorbed a request "
              "for AI and GPU utilisation), a mapping from OpenTelemetry, and costs for work that never reached a "
-             "billed SKU.",
+             "billed SKU. A request from 22 November would separate reserved GPU or accelerator capacity a provider "
+             "didn't deliver, such as hardware taken out of service, from capacity the customer left unused (#2895). "
+             "An action item to write a FOCUS for AI paper was closed on 17 November, its owner saying a larger "
+             "piece of work on AI and value tracking supersedes it (#1857).",
      "quotes": [{"text": "Those belong in observability tooling, not cost and usage data.", "source": "#2018", "thread": True,
                  "context": "The model identity request's own scope, on latency, CPU use and sampling settings"}],
-     "threads": [972, 2654, 1022, 2728, 2699]},
+     "threads": [972, 2654, 1022, 2728, 2699, 2895, 1857]},
 ]
 
 # The "no public data" gap holds only while no non-example source returns token rows.
