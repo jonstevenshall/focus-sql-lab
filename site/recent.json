@@ -1,10 +1,205 @@
 {
- "generated_at": "2026-11-21T23:52:15Z",
- "since": "2026-11-07T23:52:15Z",
+ "generated_at": "2026-11-23T00:24:39Z",
+ "since": "2026-11-09T00:24:39Z",
  "days": 14,
  "model": "claude-haiku-5-5",
  "about": "FOCUS_Spec issues and pull requests that people opened, commented on or reviewed in the last 14 days. Each summary (what is proposed and why, where the debate lies, how people feel and where it stands) and each one-line gist is written by an AI model from the thread and the issue it implements, and rewritten when the thread gains comments or reviews: they interpret, so check the thread before relying on one. Status changes are posted by the repository's own automation.",
  "threads": [
+  {
+   "number": 2897,
+   "kind": "issue",
+   "title": "[FR] Define path to mandatory, testable FOCUS metadata",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2897",
+   "state": "open",
+   "labels": [
+    "needs triage",
+    "feature"
+   ],
+   "author": "Matt-Cowsert",
+   "opened": "2026-11-22",
+   "last": "2026-11-22T22:19:20Z",
+   "earlier": 0,
+   "objects": [],
+   "files_matched": false,
+   "refs": [
+    {
+     "n": 1937,
+     "title": null
+    },
+    {
+     "n": 2884,
+     "title": "[FR] One Participating Entity FR Definition To Rule Them All"
+    },
+    {
+     "n": 1060,
+     "title": null
+    },
+    {
+     "n": 1131,
+     "title": "[FR] Add machine-readable FOCUS column metadata"
+    },
+    {
+     "n": 2174,
+     "title": "[FR] Data Lineage Support - Distinguish data originators, processors, and intermediaries"
+    }
+   ],
+   "basis": [
+    "o2897"
+   ],
+   "events": [
+    {
+     "id": "o2897",
+     "kind": "opened",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-22T22:19:20Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2897",
+     "excerpt": "Problem Statement Practitioners and tools cannot count on FOCUS metadata being there. The specification defines what metadata contains, but it recommends rather than requires that metadata accompany a FOCUS dataset.…"
+    },
+    {
+     "id": "s7086733410",
+     "kind": "status",
+     "at": "2026-11-22T22:19:51Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2897#issuecomment-7086733410",
+     "lines": [
+      "Initialized Request Type: Feature"
+     ]
+    }
+   ],
+   "summary": "Matt-Cowsert proposes a path to mandatory, testable FOCUS metadata. Today the specification recommends metadata alongside a dataset but does not require it, and nothing standard says where metadata lives, when it arrives, or how a delivered file links to it. Data engineers, practitioners and vendors therefore write custom logic for each data generator to learn dataset versions, structure and completeness. The request asks for required metadata rules, scoped by which datasets are time series, that reviewers can mark pass or fail from a delivery. If adopted, data generators would know what a conforming delivery must provide, including preview datasets and version changes. The issue is open with no comments yet. Provider support is unknown and an inventory is still to be collected, so nothing has been decided.",
+   "gists": {
+    "o2897": "Matt-Cowsert opened the request because FOCUS metadata is only recommended, forcing provider-specific logic to find versions, structure and completeness, and asks for mandatory, testable metadata rules."
+   },
+   "written_by": [
+    "claude-haiku-5-5"
+   ],
+   "style": 2
+  },
+  {
+   "number": 2896,
+   "kind": "pr",
+   "title": "AI #2460: Remove dependency loop from 1.5 Requirements Model",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2896",
+   "state": "open",
+   "labels": [],
+   "author": "Matt-Cowsert",
+   "opened": "2026-11-22",
+   "last": "2026-11-22T18:03:54Z",
+   "earlier": 0,
+   "objects": [
+    "column:CostAndUsage.SkuPriceId",
+    "column:CostAndUsage.ChargeCategory",
+    "condition:IncludesUnitPricing",
+    "dataset:CostAndUsage"
+   ],
+   "files_matched": false,
+   "refs": [
+    {
+     "n": 2460,
+     "title": "[AI] Add all 1.5 spec changes to the Requirements Model"
+    }
+   ],
+   "basis": [
+    "o2896"
+   ],
+   "events": [
+    {
+     "id": "o2896",
+     "kind": "opened",
+     "author": "Matt-Cowsert",
+     "at": "2026-11-22T18:03:54Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2896",
+     "excerpt": "Summary This PR removes a dependency loop from the 1.5 Requirements Model. It changes one entry in one rule's Dependencies list and no normative text. focus-validator 2.2.1 still cannot load the built model directly,…"
+    },
+    {
+     "id": "s7083319288",
+     "kind": "status",
+     "at": "2026-11-22T18:04:15Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2896#issuecomment-7083319288",
+     "lines": [
+      "Initialized PR Approvals: 0",
+      "Initialized PR Change Requests: 0"
+     ]
+    },
+    {
+     "id": "s7086758750",
+     "kind": "status",
+     "at": "2026-11-22T22:21:50Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2896#issuecomment-7086758750",
+     "lines": [
+      "Matt-Cowsert updated Task Force: TF-Supporting",
+      "Matt-Cowsert updated PR Type: Req Model"
+     ]
+    }
+   ],
+   "summary": "Matt-Cowsert proposes a small change to the 1.5 Requirements Model, part of #2460's work to add all 1.5 changes. Thirty-six rules form a dependency loop, and every circular path runs through one edge: CAU-ChargeCategory-C-009-C depends on the whole SkuPriceId group, which depends back on ChargeCategory. The PR repoints that rule to CAU-SkuPriceId-C-001-M, the SkuPriceId type rule, which has no dependencies. This is a deliberate exception to the contributor guidelines, which would otherwise mean narrowing at least six other rules. The rule also stops inheriting an IncludesUnitPricing condition, so the target choice affects validation results. Only working_draft changes; the same dependency remains in other 1.5 tags. The PR is open with no approvals, reviews or comments yet, so reception is untested, and the thread says nothing about next steps.",
+   "gists": {
+    "o2896": "Matt-Cowsert removes a circular dependency from the 1.5 model by pointing CAU-ChargeCategory-C-009-C at CAU-SkuPriceId-C-001-M, since the full group loops back and focus-validator 2.2.1 still cannot load the model."
+   },
+   "written_by": [
+    "claude-haiku-5-5"
+   ],
+   "style": 2
+  },
+  {
+   "number": 2895,
+   "kind": "issue",
+   "title": "[FR] Enable comparing delivered capacity with reserved capacity",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2895",
+   "state": "open",
+   "labels": [
+    "needs triage",
+    "feature"
+   ],
+   "author": "undiscopurrr",
+   "opened": "2026-11-22",
+   "last": "2026-11-22T16:16:46Z",
+   "earlier": 0,
+   "objects": [
+    "column:CostAndUsage.CapacityReservationId",
+    "column:CostAndUsage.PricingQuantity",
+    "column:CostAndUsage.CapacityReservationStatus",
+    "column:CostAndUsage.PricingUnit",
+    "dataset:CostAndUsage",
+    "column:CostAndUsage.ChargeCategory",
+    "column:CostAndUsage.ChargeClass"
+   ],
+   "files_matched": false,
+   "refs": [
+    {
+     "n": 1104,
+     "title": null
+    },
+    {
+     "n": 2654,
+     "title": null
+    },
+    {
+     "n": 2371,
+     "title": null
+    }
+   ],
+   "basis": [
+    "o2895"
+   ],
+   "events": [
+    {
+     "id": "o2895",
+     "kind": "opened",
+     "author": "undiscopurrr",
+     "at": "2026-11-22T16:16:46Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2895",
+     "excerpt": "Problem Statement The glossary defines a capacity reservation as an agreement that \"secures a dedicated amount of resources or services for a specified period\", which \"ensures the reserved capacity is always available…"
+    }
+   ],
+   "summary": "undiscopurrr proposes a conditional column, provisionally Capacity Reservation Delivered Quantity, stating how much of a reserved charge the data generator counts as delivered. Today, capacity made unavailable by host failures or unscheduled maintenance shows as Unused, just like capacity the customer chose not to use, and reserved GPU clusters often settle shortfalls later through service credits. Practitioners therefore rebuild delivered capacity outside FOCUS. The proposal counts hours the agreement excludes, such as scheduled maintenance, as delivered, and wants consistent treatment across generators. PSYCHE wants it to compare with its SQCD-1 format. Generator support is unknown. The issue was opened on 22 November 2026 and has had no replies, so its direction is untested.",
+   "gists": {
+    "o2895": "Opened the request for a column giving delivered reserved capacity per reservation and charge period, so practitioners can separate customer-unused capacity from undelivered capacity and reconcile against billing data."
+   },
+   "written_by": [
+    "claude-haiku-5-5"
+   ],
+   "style": 2
+  },
   {
    "number": 2885,
    "kind": "issue",
@@ -500,6 +695,15 @@
      "excerpt": "Assignee(s): @ijurica Parent Issue: 2807 Detailed Description FR 2807 asks whether the SKU Price dataset enables sufficient analysis of tiered pricing, whether tiers are based on quantity, spend, or something else. PR…"
     },
     {
+     "id": "s7056661957",
+     "kind": "status",
+     "at": "2026-11-21T03:31:23Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2889#issuecomment-7056661957",
+     "lines": [
+      "Initialized Due Date: 2026-12-09"
+     ]
+    },
+    {
      "id": "s7056662004",
      "kind": "status",
      "at": "2026-11-21T03:31:23Z",
@@ -507,15 +711,6 @@
      "lines": [
       "Initialized Task Force: TF-Core 2",
       "Initialized AI Status: Open"
-     ]
-    },
-    {
-     "id": "s7056661957",
-     "kind": "status",
-     "at": "2026-11-21T03:31:23Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2889#issuecomment-7056661957",
-     "lines": [
-      "Initialized Due Date: 2026-12-09"
      ]
     }
    ],
@@ -1955,7 +2150,7 @@
     },
     {
      "n": 2836,
-     "title": "[Feedback] Correct casing, IDs, and links in 1.5 requirement text"
+     "title": "[Editorial] Correct casing, IDs, and links in 1.5 requirement text"
     },
     {
      "n": 2837,
@@ -2797,7 +2992,7 @@
     },
     {
      "n": 2836,
-     "title": "[Feedback] Correct casing, IDs, and links in 1.5 requirement text"
+     "title": "[Editorial] Correct casing, IDs, and links in 1.5 requirement text"
     },
     {
      "n": 2837,
@@ -3245,20 +3440,24 @@
   {
    "number": 2881,
    "kind": "pr",
-   "title": "AI #2783: Skip null values in the 1.5 CommitmentDiscount allowed-values rules",
+   "title": "Feedback #2783: Skip null values in the 1.5 CommitmentDiscount allowed-values rules",
    "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2881",
    "state": "draft",
-   "labels": [],
+   "labels": [
+    "editorial"
+   ],
    "author": "Matt-Cowsert",
    "opened": "2026-11-19",
    "last": "2026-11-19T16:47:49Z",
    "earlier": 0,
    "objects": [
-    "column:CostAndUsage.CapacityReservationStatus",
-    "attribute:CurrencyFormat",
     "column:CostAndUsage.CommitmentDiscountStatus",
     "column:CostAndUsage.CommitmentDiscountCategory",
-    "column:CostAndUsage.CommitmentDiscountId"
+    "column:CostAndUsage.CapacityReservationStatus",
+    "attribute:CurrencyFormat",
+    "column:CostAndUsage.CommitmentDiscountId",
+    "column:CostAndUsage.ChargeCategory",
+    "attribute:FocusColumnHandling"
    ],
    "files_matched": false,
    "refs": [
@@ -3332,7 +3531,7 @@
    "refs": [
     {
      "n": 2836,
-     "title": "[Feedback] Correct casing, IDs, and links in 1.5 requirement text"
+     "title": "[Editorial] Correct casing, IDs, and links in 1.5 requirement text"
     },
     {
      "n": 2864,
@@ -3349,7 +3548,7 @@
      "author": "Matt-Cowsert",
      "at": "2026-11-19T16:47:40Z",
      "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2880",
-     "excerpt": "Summary This PR applies the nine corrections from 2836 to the 1.5 working draft. Each one fixes casing, an ID, a link, or a name in normative sections. None changes what a requirement asks for. 2836 first proposed these…"
+     "excerpt": "Summary This PR applies the nine corrections from 2836 to the 1.5 working draft. Each one fixes casing, an ID, a link, a name, or a misplaced MUST. None changes what a requirement asks for. 2836 first proposed these as…"
     },
     {
      "id": "s7015754016",
@@ -5597,12 +5796,12 @@
   {
    "number": 2836,
    "kind": "issue",
-   "title": "[Feedback] Correct casing, IDs, and links in 1.5 requirement text",
+   "title": "[Editorial] Correct casing, IDs, and links in 1.5 requirement text",
    "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2836",
    "state": "open",
    "labels": [
-    "needs triage",
-    "feedback"
+    "editorial",
+    "1.5"
    ],
    "author": "Matt-Cowsert",
    "opened": "2026-11-05",
@@ -5617,6 +5816,10 @@
    ],
    "files_matched": false,
    "refs": [
+    {
+     "n": 2880,
+     "title": "Editorial #2836: Correct casing, IDs, and links in 1.5 requirement text"
+    },
     {
      "n": 2832,
      "title": "[Editorial] Correct the Contract Commitment and commitment program examples for the 1.5 release"
@@ -5644,7 +5847,7 @@
      "author": "Matt-Cowsert",
      "at": "2026-11-16T21:13:56Z",
      "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2836#issuecomment-6929539034",
-     "excerpt": "we discussed during maintainers on 2027-11-16, we've agreed to apply this as an editorial improvement, targeting workingdraft"
+     "excerpt": "we discussed during maintainers on 2026-11-16, we've agreed to apply this as an editorial improvement, targeting workingdraft"
     }
    ],
    "summary": "This issue, opened by Matt-Cowsert, collects nine fixes from a review of the full 1.5 specification: casing errors such as 'MUST not' and SchemaID, one link pointing at the wrong InvoiceId, and a renamed condition. None changes what a requirement asks for. The description planned to hold them for the 1.5 release as errata. The only later activity is a comment by Matt-Cowsert saying maintainers agreed to apply them now as an editorial improvement targeting working_draft, so they no longer seem to be waiting for the release. That comment dates the meeting 2027, which looks like a slip for 2026. The renamed condition in row 9 needs care, since it changes a published anchor and eleven links, and the comment does not say whether it was kept. No one else has replied, so support or objections are not yet visible.",
@@ -6596,8 +6799,8 @@
    "last": "2026-11-12T18:48:55Z",
    "earlier": 0,
    "objects": [
-    "column:InvoiceDetail.PaymentCurrency",
     "column:SkuPrice.ContractId",
+    "column:InvoiceDetail.PaymentCurrency",
     "dataset:SkuPrice"
    ],
    "files_matched": false,
@@ -6612,7 +6815,7 @@
     },
     {
      "n": 2836,
-     "title": "[Feedback] Correct casing, IDs, and links in 1.5 requirement text"
+     "title": "[Editorial] Correct casing, IDs, and links in 1.5 requirement text"
     },
     {
      "n": 2880,
@@ -6632,7 +6835,7 @@
     },
     {
      "n": 2881,
-     "title": "AI #2783: Skip null values in the 1.5 CommitmentDiscount allowed-values rules"
+     "title": "Feedback #2783: Skip null values in the 1.5 CommitmentDiscount allowed-values rules"
     },
     {
      "n": 16,
@@ -8257,10 +8460,6 @@
    ],
    "files_matched": false,
    "refs": [
-    {
-     "n": 2836,
-     "title": "[Feedback] Correct casing, IDs, and links in 1.5 requirement text"
-    },
     {
      "n": 2837,
      "title": "[Feedback] Correct the Payment Currency, Contract ID, and Time Sector End requirements"

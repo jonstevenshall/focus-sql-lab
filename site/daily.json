@@ -1,7 +1,88 @@
 {
  "about": "What the FOCUS working group did on GitHub each day. Written each morning by an AI model from the day's comments, reviews, merges and closures, then fact-checked against them by a second call. It interprets, so check the threads before relying on it.",
- "generated_at": "2026-11-21T23:52:15Z",
+ "generated_at": "2026-11-23T00:24:39Z",
  "days": [
+  {
+   "id": "2026-11-23",
+   "from": "2026-11-21T23:52:15Z",
+   "to": "2026-11-23T00:24:39Z",
+   "counts": {
+    "items": 3,
+    "threads": 3,
+    "people": 2,
+    "opened": 3,
+    "merged": 0,
+    "closed": 0
+   },
+   "threads": [
+    {
+     "n": 2897,
+     "kind": "issue",
+     "title": "[FR] Define path to mandatory, testable FOCUS metadata",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2896,
+     "kind": "pr",
+     "title": "AI #2460: Remove dependency loop from 1.5 Requirements Model",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 2,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.ChargeCategory",
+      "condition:IncludesUnitPricing",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2895,
+     "kind": "issue",
+     "title": "[FR] Enable comparing delivered capacity with reserved capacity",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 0,
+     "people": [
+      "undiscopurrr"
+     ],
+     "objects": [
+      "column:CostAndUsage.CapacityReservationId",
+      "column:CostAndUsage.PricingQuantity",
+      "column:CostAndUsage.CapacityReservationStatus",
+      "column:CostAndUsage.PricingUnit",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ChargeCategory"
+     ],
+     "change": null,
+     "opened": true
+    }
+   ],
+   "cost": 0.00182,
+   "runs": 1,
+   "text": "Matt-Cowsert opened two threads on 22 November. #2897 (Define path to mandatory, testable FOCUS metadata) asks for metadata rules that are required rather than recommended, so a delivery can be marked pass or fail, and it has no comments yet. Pull request #2896 (Remove dependency loop from 1.5 Requirements Model) repoints one rule at CAU-SkuPriceId-C-001-M to break a circular dependency that stops focus-validator 2.2.1 from loading the 1.5 model. It has no approvals, reviews or comments yet, and Matt-Cowsert has set its task force to TF-Supporting and its PR type to Req Model.\n\nundiscopurrr opened #2895 (Enable comparing delivered capacity with reserved capacity) on the same day. It asks for a column that states how much of a reserved charge counts as delivered, so that capacity made unavailable by host failures or maintenance is separated from capacity a customer chose not to use. It has had no replies.",
+   "written_by": "claude-haiku-5-5",
+   "titles": {
+    "2895": "[FR] Enable comparing delivered capacity with reserved capacity",
+    "2896": "AI #2460: Remove dependency loop from 1.5 Requirements Model",
+    "2897": "[FR] Define path to mandatory, testable FOCUS metadata"
+   }
+  },
   {
    "id": "2026-11-22",
    "from": "2026-11-20T23:52:15Z",
