@@ -1,7 +1,470 @@
 {
  "about": "What the FOCUS working group did on GitHub each day. Written each morning by an AI model from the day's comments, reviews, merges and closures, then fact-checked against them by a second call. It interprets, so check the threads before relying on it.",
- "generated_at": "2026-11-23T00:24:39Z",
+ "generated_at": "2026-11-24T04:21:57Z",
  "days": [
+  {
+   "id": "2026-11-24",
+   "from": "2026-11-23T00:24:39Z",
+   "to": "2026-11-24T04:21:57Z",
+   "counts": {
+    "items": 81,
+    "threads": 20,
+    "people": 8,
+    "opened": 3,
+    "merged": 0,
+    "closed": 1
+   },
+   "threads": [
+    {
+     "n": 2848,
+     "kind": "pr",
+     "title": "AI #2847: Restructure the Editorial Guidelines and align the AGENTS.md grouping",
+     "state": "draft",
+     "items": 32,
+     "comments": 32,
+     "statuses": 0,
+     "people": [
+      "jpradocueva"
+     ],
+     "objects": [
+      "column:CostAndUsage.BilledCost",
+      "column:CostAndUsage.ChargeCategory",
+      "column:CostAndUsage.CommitmentDiscountId",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.ContractedCost",
+      "column:BillingPeriod.BillingPeriodLastUpdated"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2853,
+     "kind": "pr",
+     "title": "Editorial #2833: Correct the split cost allocation and commitment discount examples",
+     "state": "open",
+     "items": 10,
+     "comments": 10,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert",
+      "jpradocueva",
+      "qquigley"
+     ],
+     "objects": [
+      "topic:commitment-discounts",
+      "topic:examples-commitment-discount-flexibility-examples",
+      "topic:split-cost-allocation-examples",
+      "topic:split-cost-allocation-field-mapping",
+      "column:CostAndUsage.AllocatedServiceName",
+      "column:CostAndUsage.EffectiveCost"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2896,
+     "kind": "pr",
+     "title": "AI #2460: Remove dependency loop from 1.5 Requirements Model",
+     "state": "open",
+     "items": 5,
+     "comments": 5,
+     "statuses": 2,
+     "people": [
+      "kk09v",
+      "qquigley"
+     ],
+     "objects": [
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.ChargeCategory",
+      "dataset:SkuPrice",
+      "condition:IncludesUnitPricing",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ServiceProviderName"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2880,
+     "kind": "pr",
+     "title": "Editorial #2836: Correct casing, IDs, and links in 1.5 requirement text",
+     "state": "open",
+     "items": 5,
+     "comments": 5,
+     "statuses": 1,
+     "people": [
+      "jpradocueva",
+      "qquigley"
+     ],
+     "objects": [
+      "column:ContractCommitment.PricingCurrency",
+      "column:ContractCommitment.PricingCurrencyContractCommitmentCost",
+      "dataset:ContractCommitment",
+      "column:CostAndUsage.AllocatedMethodDetails",
+      "column:CostAndUsage.HostProviderName",
+      "column:CostAndUsage.InvoiceDetailId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2842,
+     "kind": "pr",
+     "title": "AI #2841: Add 1.4 to 1.5 migration guide",
+     "state": "open",
+     "items": 4,
+     "comments": 4,
+     "statuses": 1,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceId",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ServiceSubcategory",
+      "column:ContractCommitment.ContractCommitmentDurationType",
+      "column:CostAndUsage.ServiceProviderName"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2844,
+     "kind": "issue",
+     "title": "[AI] Create the FOCUS 1.5 Data Model spreadsheet",
+     "state": "completed",
+     "items": 3,
+     "comments": 3,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.RequesterDetails",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.AllocatedServiceName",
+      "column:CostAndUsage.CredentialId",
+      "column:CostAndUsage.PrincipalId"
+     ],
+     "change": "closed as completed",
+     "opened": false
+    },
+    {
+     "n": 2869,
+     "kind": "pr",
+     "title": "Editorial #2834: Correct metadata links, key names, and examples",
+     "state": "open",
+     "items": 3,
+     "comments": 3,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert",
+      "jpradocueva"
+     ],
+     "objects": [
+      "topic:metadata-examples",
+      "topic:dataset-instance",
+      "topic:recency",
+      "topic:schema",
+      "dataset:ContractCommitment",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2830,
+     "kind": "pr",
+     "title": "AI #2825: Add 1.5 Contributors",
+     "state": "open",
+     "items": 3,
+     "comments": 3,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2730,
+     "kind": "issue",
+     "title": "[FR] Enable magnitude abbreviations in Unit Format",
+     "state": "open",
+     "items": 3,
+     "comments": 3,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert",
+      "kk09v"
+     ],
+     "objects": [
+      "column:CostAndUsage.PricingUnit",
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ConsumedUnit",
+      "column:ContractCommitment.ContractCommitmentUnit",
+      "column:CostAndUsage.CommitmentDiscountUnit"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2898,
+     "kind": "issue",
+     "title": "[AI] Publish the FOCUS 1.5 Data Model spreadsheet",
+     "state": "open",
+     "items": 2,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.RequesterDetails",
+      "column:CostAndUsage.AllocatedServiceName",
+      "column:CostAndUsage.CredentialId",
+      "column:CostAndUsage.PrincipalId",
+      "column:CostAndUsage.InvoiceId"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2885,
+     "kind": "issue",
+     "title": "[Feedback] How should a non-invoicing metering layer (such as an LLM gateway) carry its computed cost when BilledCost and EffectiveCost must be 0?",
+     "state": "open",
+     "items": 2,
+     "comments": 2,
+     "statuses": 0,
+     "people": [
+      "andrasKelle",
+      "roy-tong"
+     ],
+     "objects": [
+      "column:CostAndUsage.BilledCost",
+      "column:CostAndUsage.EffectiveCost",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ListCost",
+      "column:CostAndUsage.ContractedCost",
+      "column:CostAndUsage.ConsumedQuantity"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2900,
+     "kind": "pr",
+     "title": "AI #2460: Remove dependency loop from 1.5 Requirements Model",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "kk09v"
+     ],
+     "objects": [
+      "column:CostAndUsage.ChargeCategory",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.ChargeClass",
+      "column:CostAndUsage.ServiceProviderName"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2899,
+     "kind": "issue",
+     "title": "[AI] Publish the FOCUS 1.5 use cases and SQL queries to the FOCUS website",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.PricingQuantity",
+      "column:CostAndUsage.EffectiveCost",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ChargeClass",
+      "column:CostAndUsage.ChargePeriodStart"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2897,
+     "kind": "issue",
+     "title": "[FR] Define path to mandatory, testable FOCUS metadata",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2881,
+     "kind": "pr",
+     "title": "Feedback #2783: Skip null values in the 1.5 CommitmentDiscount allowed-values rules",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "qquigley"
+     ],
+     "objects": [
+      "column:CostAndUsage.CommitmentDiscountStatus",
+      "column:CostAndUsage.CommitmentDiscountCategory",
+      "column:CostAndUsage.CapacityReservationStatus",
+      "attribute:CurrencyFormat",
+      "column:CostAndUsage.CommitmentDiscountId",
+      "column:CostAndUsage.ChargeCategory"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2856,
+     "kind": "issue",
+     "title": "[AI] Clarify distinction between `SKU Price` construct and `SKU Price` records",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage",
+      "column:SkuPrice.SkuPriceEffectiveStart",
+      "column:CostAndUsage.ChargeCategory",
+      "column:CostAndUsage.ChargePeriodStart",
+      "column:SkuPrice.SkuPriceEffectiveEnd"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2846,
+     "kind": "pr",
+     "title": "Editorial #2832: Correct the Contract Commitment and commitment program examples",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "topic:contract-commitments",
+      "topic:json-object-examples",
+      "column:ContractCommitment.ContractCommitmentApplicability",
+      "column:ContractCommitment.ContractCommitmentDiscountPercentage",
+      "column:ContractCommitment.ContractCommitmentPeriodEnd",
+      "column:ContractCommitment.ContractCommitmentPeriodStart"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2807,
+     "kind": "issue",
+     "title": "[FR] Promote the SKU Price dataset to general availability",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.SkuMeter",
+      "column:CostAndUsage.BillingAccountId",
+      "column:SkuPrice.SkuPriceEligibility",
+      "column:CostAndUsage.ContractedUnitPrice"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2792,
+     "kind": "issue",
+     "title": "[AI] Define the 1.6 engagement measures and Maintainer criteria",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2742,
+     "kind": "issue",
+     "title": "[FR] Enable comparing commitment discounts with on-demand rates",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "flanakin"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": false
+    }
+   ],
+   "cost": 0.01254,
+   "runs": 1,
+   "text": "jpradocueva left 32 inline comments on the draft restructuring of the Editorial Guidelines in #2848 (Restructure the Editorial Guidelines and align the AGENTS.md grouping), mostly proposing new or reworded rules on dashes, quotes, numbers, links, note labels, JSON and tables. No replies are recorded yet.\n\nSeveral 1.5 specification pull requests also moved. #2853 (Correct the split cost allocation and commitment discount examples) gained qquigley's approval after Matt-Cowsert applied a suggestion in 8d07656f, but jpradocueva's em dash points, which break the Dash Usage rule, are unanswered. #2880 (Correct casing, IDs, and links in 1.5 requirement text) has qquigley's approval, while jpradocueva wants a Column ID in place of \"allocation method\". In #2869 (Correct metadata links, key names, and examples), Matt-Cowsert kept the FocusVersion fix jpradocueva made. #2881 (Skip null values in the 1.5 CommitmentDiscount allowed-values rules) has qquigley's approval, and #2842 (Add 1.4 to 1.5 migration guide) has flanakin's approval with small wording suggestions. In #2846 (Correct the Contract Commitment and commitment program examples), Matt-Cowsert relabelled the Datadog row and asked kk09v and ijurica whether that settles their questions. In #2830 (Add 1.5 Contributors), Matt-Cowsert told shawnalpay that one more contributor is added as an exception, another may follow if CLA steps finish by 2 December, and two stay off unless membership is confirmed. #2896 (Remove dependency loop from 1.5 Requirements Model) has qquigley's approval, but kk09v requested changes and opened #2900 (Remove dependency loop from 1.5 Requirements Model) as an alternative, arguing the other side of the loop should be narrowed.\n\n#2844 (Create the FOCUS 1.5 Data Model spreadsheet) was closed as completed, with publishing moved to #2898 (Publish the FOCUS 1.5 Data Model spreadsheet), due 7 December. Matt-Cowsert asked rileyjenk and jpradocueva to review it. #2899 (Publish the FOCUS 1.5 use cases and SQL queries to the FOCUS website) lists 107 queries to go live by 9 December.\n\nIn #2730 (Enable magnitude abbreviations in Unit Format), Matt-Cowsert said the request needs refinement before estimation, and kk09v raised the ambiguity of M and suggested scientific notation such as 1E9. In #2885 (How should a non-invoicing metering layer (such as an LLM gateway) carry its computed cost when BilledCost and EffectiveCost must be 0?), andrasKelle says 1.4 leaves no compliant column for the estimate, and roy-tong suggests recording any migration explicitly. Matt-Cowsert set #2897 (Define path to mandatory, testable FOCUS metadata) to Needs More Info. ijurica proposed renaming the SKU Price dataset to Price List in #2856 (Clarify distinction between SKU Price construct and SKU Price records). flanakin's TF2 update on #2807 (Promote the SKU Price dataset to general availability) agreed that period filters return overlapping records. In #2742 (Enable comparing commitment discounts with on-demand rates), ijurica and flanakin agreed to track commitment ID links separately and want worked examples first. #2792 (Define the 1.6 engagement measures and Maintainer criteria) has its review moved from 23 to 30 November.",
+   "written_by": "claude-haiku-5-5",
+   "titles": {
+    "2730": "[FR] Enable magnitude abbreviations in Unit Format",
+    "2742": "[FR] Enable comparing commitment discounts with on-demand rates",
+    "2792": "[AI] Define the 1.6 engagement measures and Maintainer criteria",
+    "2807": "[FR] Promote the SKU Price dataset to general availability",
+    "2830": "AI #2825: Add 1.5 Contributors",
+    "2842": "AI #2841: Add 1.4 to 1.5 migration guide",
+    "2844": "[AI] Create the FOCUS 1.5 Data Model spreadsheet",
+    "2846": "Editorial #2832: Correct the Contract Commitment and commitment program examples",
+    "2848": "AI #2847: Restructure the Editorial Guidelines and align the AGENTS.md grouping",
+    "2853": "Editorial #2833: Correct the split cost allocation and commitment discount examples",
+    "2856": "[AI] Clarify distinction between `SKU Price` construct and `SKU Price` records",
+    "2869": "Editorial #2834: Correct metadata links, key names, and examples",
+    "2880": "Editorial #2836: Correct casing, IDs, and links in 1.5 requirement text",
+    "2881": "Feedback #2783: Skip null values in the 1.5 CommitmentDiscount allowed-values rules",
+    "2885": "[Feedback] How should a non-invoicing metering layer (such as an LLM gateway) carry its computed cost when BilledCost and EffectiveCost must be 0?",
+    "2896": "AI #2460: Remove dependency loop from 1.5 Requirements Model",
+    "2897": "[FR] Define path to mandatory, testable FOCUS metadata",
+    "2898": "[AI] Publish the FOCUS 1.5 Data Model spreadsheet",
+    "2899": "[AI] Publish the FOCUS 1.5 use cases and SQL queries to the FOCUS website",
+    "2900": "AI #2460: Remove dependency loop from 1.5 Requirements Model"
+   }
+  },
   {
    "id": "2026-11-23",
    "from": "2026-11-21T23:52:15Z",
