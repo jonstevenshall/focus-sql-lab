@@ -1,6 +1,172 @@
 {
  "runs": [
   {
+   "at": "2026-11-25T03:15:53Z",
+   "task": "open-requests",
+   "model": "claude-haiku-5-5",
+   "effort": "high",
+   "fallback": "claude-sonnet-5-5",
+   "threads": 250,
+   "kept": 248,
+   "attempted": 2,
+   "first_pass": 2,
+   "escalated": 0,
+   "escalated_passed": 0,
+   "failed": 0,
+   "escalated_pct": 0.0,
+   "left": 0,
+   "spend": {
+    "claude-haiku-5-5": {
+     "input": 2898,
+     "output": 4988,
+     "cost": 0.0028,
+     "price": [
+      0.1,
+      0.5
+     ]
+    }
+   },
+   "cost": 0.0028,
+   "estimate": {
+    "input": 3411,
+    "output": 4164,
+    "cost": 0.0028
+   },
+   "escalations": [],
+   "trigger": "schedule",
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/45537648021"
+  },
+  {
+   "at": "2026-11-25T03:15:05Z",
+   "task": "daily",
+   "model": "claude-haiku-5-5",
+   "effort": "high",
+   "fallback": "claude-sonnet-5-5",
+   "reviewer": "claude-haiku-5-5",
+   "days": 1,
+   "threads": 15,
+   "items": 24,
+   "attempted": 1,
+   "first_pass": 1,
+   "escalated": 0,
+   "escalated_passed": 0,
+   "failed": 0,
+   "escalated_pct": 0.0,
+   "spend": {
+    "claude-haiku-5-5": {
+     "input": 27322,
+     "output": 12522,
+     "cost": 0.009,
+     "price": [
+      0.1,
+      0.5
+     ]
+    }
+   },
+   "cost": 0.009,
+   "estimate": {
+    "input": 35671,
+    "output": 4195,
+    "cost": 0.0119
+   },
+   "escalations": [],
+   "trigger": "schedule",
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/45537648021"
+  },
+  {
+   "at": "2026-11-25T03:14:15Z",
+   "task": "recent",
+   "model": "claude-haiku-5-5",
+   "effort": "high",
+   "fallback": "claude-sonnet-5-5",
+   "threads": 94,
+   "kept": 81,
+   "attempted": 13,
+   "first_pass": 12,
+   "escalated": 1,
+   "escalated_passed": 1,
+   "failed": 0,
+   "escalated_pct": 7.7,
+   "partly": 0,
+   "spend": {
+    "claude-haiku-5-5": {
+     "input": 118338,
+     "output": 94814,
+     "cost": 0.0592,
+     "price": [
+      0.1,
+      0.5
+     ]
+    },
+    "claude-sonnet-5-5": {
+     "input": 36895,
+     "output": 6573,
+     "cost": 0.1395,
+     "price": [
+      2.0,
+      10.0
+     ]
+    }
+   },
+   "cost": 0.1988,
+   "escalations": [
+    {
+     "key": "2871",
+     "title": "FR #2521: Add context-window pricing properties to SKU Price Details",
+     "result": "passed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "problems": [
+        "the reply stopped early (max_tokens)"
+       ],
+       "input": 16724,
+       "output": 16000,
+       "cost": 0.00967
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "problems": [
+        "gist i4604687009: it has 31 words; the limit is 30"
+       ],
+       "input": 19266,
+       "output": 8264,
+       "cost": 0.00606
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "problems": [
+        "summary: it has 143 words; the limit is 140",
+        "gist i4577456172: it has 32 words; the limit is 30",
+        "gist c6936725110: it has 37 words; the limit is 30",
+        "gist c6991329632: it has 33 words; the limit is 30",
+        "gist c7144314471: it has 33 words; the limit is 30"
+       ],
+       "input": 16723,
+       "output": 3312,
+       "cost": 0.06657
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 2,
+       "problems": [
+        "gist i4577456172: it has 32 words; the limit is 30"
+       ],
+       "input": 20172,
+       "output": 3261,
+       "cost": 0.07295
+      }
+     ],
+     "cost": 0.15525
+    }
+   ],
+   "trigger": "schedule",
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/45537648021"
+  },
+  {
    "at": "2026-11-25T02:43:20Z",
    "task": "summaries",
    "model": "claude-haiku-5-5",

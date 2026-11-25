@@ -1,7 +1,330 @@
 {
  "about": "What the FOCUS working group did on GitHub each day. Written each morning by an AI model from the day's comments, reviews, merges and closures, then fact-checked against them by a second call. It interprets, so check the threads before relying on it.",
- "generated_at": "2026-11-24T04:21:57Z",
+ "generated_at": "2026-11-25T03:06:46Z",
  "days": [
+  {
+   "id": "2026-11-25",
+   "from": "2026-11-24T04:21:57Z",
+   "to": "2026-11-25T03:06:46Z",
+   "counts": {
+    "items": 24,
+    "threads": 15,
+    "people": 4,
+    "opened": 2,
+    "merged": 0,
+    "closed": 1
+   },
+   "threads": [
+    {
+     "n": 2871,
+     "kind": "pr",
+     "title": "FR #2521: Add context-window pricing properties to SKU Price Details",
+     "state": "open",
+     "items": 7,
+     "comments": 7,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert",
+      "jerrysr99"
+     ],
+     "objects": [
+      "column:CostAndUsage.SkuPriceDetails",
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.SkuId",
+      "column:CostAndUsage.SkuMeter"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2848,
+     "kind": "pr",
+     "title": "AI #2847: Restructure the Editorial Guidelines and align the AGENTS.md grouping",
+     "state": "draft",
+     "items": 5,
+     "comments": 5,
+     "statuses": 0,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [
+      "column:CostAndUsage.BilledCost",
+      "column:CostAndUsage.CommitmentDiscountId",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.ChargeCategory",
+      "column:CostAndUsage.ContractedCost",
+      "column:BillingPeriod.BillingPeriodLastUpdated"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2842,
+     "kind": "pr",
+     "title": "AI #2841: Add 1.4 to 1.5 migration guide",
+     "state": "open",
+     "items": 3,
+     "comments": 3,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.ServiceSubcategory",
+      "column:ContractCommitment.ContractCommitmentDurationType",
+      "column:CostAndUsage.ServiceProviderName"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2902,
+     "kind": "issue",
+     "title": "[AI]  Share activities around promotion of the FOCUS Mapping Tool with with Mike",
+     "state": "open",
+     "items": 2,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "beau-finopsorg"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2694,
+     "kind": "issue",
+     "title": "[AI]  Audit the FOCUS-related contents on finops.org to see what actions are needed to prevent accidental dissociation with TF and IF",
+     "state": "completed",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "beau-finopsorg"
+     ],
+     "objects": [],
+     "change": "closed as completed",
+     "opened": false
+    },
+    {
+     "n": 2901,
+     "kind": "issue",
+     "title": "[AI] Open a feature request to improve the structure of SkuPriceDetails",
+     "state": "open",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "column:CostAndUsage.SkuPriceDetails"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2877,
+     "kind": "issue",
+     "title": "[AI] Build a 1.6 example dataset for context window pricing",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuId",
+      "column:CostAndUsage.SkuPriceId",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ConsumedQuantity",
+      "column:CostAndUsage.PricingQuantity"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2831,
+     "kind": "issue",
+     "title": "[AI] Line up practitioners to review SKU Price sample data",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "beau-finopsorg"
+     ],
+     "objects": [
+      "dataset:SkuPrice"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2792,
+     "kind": "issue",
+     "title": "[AI] Define the 1.6 engagement measures and Maintainer criteria",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2782,
+     "kind": "issue",
+     "title": "[FR] Define the preview lifecycle for whole datasets",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.ChargeCategory",
+      "dataset:CostAndUsage",
+      "dataset:BillingPeriod",
+      "dataset:ContractCommitment",
+      "dataset:InvoiceDetail"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2521,
+     "kind": "issue",
+     "title": "[FR] Distinguish AI model costs by context window size",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceDetails",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.SkuPriceId",
+      "column:CostAndUsage.PricingUnit",
+      "column:CostAndUsage.SkuId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2899,
+     "kind": "issue",
+     "title": "[AI] Publish the FOCUS 1.5 use cases and SQL queries to the FOCUS website",
+     "state": "open",
+     "items": 0,
+     "comments": 0,
+     "statuses": 1,
+     "people": [],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.PricingQuantity",
+      "column:CostAndUsage.EffectiveCost",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ChargeClass",
+      "column:CostAndUsage.ChargePeriodStart"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2898,
+     "kind": "issue",
+     "title": "[AI] Publish the FOCUS 1.5 Data Model spreadsheet",
+     "state": "open",
+     "items": 0,
+     "comments": 0,
+     "statuses": 1,
+     "people": [],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.RequesterDetails",
+      "column:CostAndUsage.AllocatedServiceName",
+      "column:CostAndUsage.CredentialId",
+      "column:CostAndUsage.PrincipalId",
+      "column:CostAndUsage.InvoiceId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2850,
+     "kind": "issue",
+     "title": "[AI] Compare SKU Price dataset columns with SkuPriceDetails properties",
+     "state": "open",
+     "items": 0,
+     "comments": 0,
+     "statuses": 1,
+     "people": [],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:CostAndUsage.SkuPriceDetails",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2800,
+     "kind": "issue",
+     "title": "[AI]  Plan around 1.5 Preview Material - outbound and inbound",
+     "state": "open",
+     "items": 0,
+     "comments": 0,
+     "statuses": 1,
+     "people": [],
+     "objects": [
+      "dataset:SkuPrice"
+     ],
+     "change": null,
+     "opened": false
+    }
+   ],
+   "cost": 0.009,
+   "runs": 1,
+   "text": "#2871 (Add context-window pricing properties to SKU Price Details) now carries one String property for the provider's tier label, after Task Force 1 agreed on 24 November to drop the numeric bounds. Matt-Cowsert recorded the decision, saying the name avoids \"Category\" and \"Type\", and jerrysr99 will implement it. On the draft examples, jerrysr99 agreed that tier bounds must be whole numbers and that every meter in a tier, cache rows included, carries the same bounds. The maximum's null conditions are to be grouped, with the same change made in #2872. Matt-Cowsert leans toward keeping 0 as the lowest minimum after testing zero input tokens.\n\nMatt-Cowsert's 24 November update on #2521 (Distinguish AI model costs by context window size) records the same swap. #2877 (Build a 1.6 example dataset for context window pricing) gained a link to SKU mapping material. Matt-Cowsert also opened #2901 (Open a feature request to improve the structure of SkuPriceDetails), assigned to ijurica and due 1 December, with no comments yet. Matt-Cowsert marked the AI item on #2850 (Compare SKU Price dataset columns with SkuPriceDetails properties) completed, though its feature requests still need Task Force 1 discussion.\n\nijurica has replied to several of jpradocueva's suggestions on #2848 (Restructure the Editorial Guidelines and align the AGENTS.md grouping). Subsection order and titles stay close to the working draft, with canonical order deferred to #2108. The entity ID naming rule is accepted with two added ID sections, and jpradocueva is asked to confirm. The thread is waiting on jpradocueva's answers. On #2842 (Add 1.4 to 1.5 migration guide), Matt-Cowsert applied a suggested lead-in sentence and removed a stray \"and\". Matt-Cowsert declined to add bullets for Commit Usage and Under Usage and Marketplace Purchases, since their 1.5 changes regroup existing queries rather than add new ones.\n\nMatt-Cowsert moved #2899 (Publish the FOCUS 1.5 use cases and SQL queries to the FOCUS website) and #2898 (Publish the FOCUS 1.5 Data Model spreadsheet) to In Review, and neither has replies yet. On #2782 (Define the preview lifecycle for whole datasets), Matt-Cowsert reported that ijurica has started review of PR #2843, asking for precise FOCUS entities wording. Whether the requirements model can mark preview content is still to be confirmed. beau-finopsorg moved #2831 (Line up practitioners to review SKU Price sample data) and #2800 (Plan around 1.5 Preview Material - outbound and inbound) to In Progress. #2831 now has a tracking sheet, with outreach emails being prepared. Matt-Cowsert is deferring #2792 (Define the 1.6 engagement measures and Maintainer criteria) until after the new year, moving its due date to 18 January 2027.\n\nbeau-finopsorg also opened #2902 (Share activities around promotion of the FOCUS Mapping Tool with with Mike), asking for 5-6 promotion options, and has so far shared only a working document link. beau-finopsorg said #2694 (Audit the FOCUS-related contents on finops.org to see what actions are needed to prevent accidental dissociation with TF and IF) is deprioritised in favour of one-off changes, and it was closed as completed.",
+   "written_by": "claude-haiku-5-5",
+   "titles": {
+    "2108": "[AI] Consistently apply our non-standard subsections",
+    "2521": "[FR] Distinguish AI model costs by context window size",
+    "2694": "[AI]  Audit the FOCUS-related contents on finops.org to see what actions are needed to prevent accidental dissociation with TF and IF",
+    "2782": "[FR] Define the preview lifecycle for whole datasets",
+    "2792": "[AI] Define the 1.6 engagement measures and Maintainer criteria",
+    "2800": "[AI]  Plan around 1.5 Preview Material - outbound and inbound",
+    "2831": "[AI] Line up practitioners to review SKU Price sample data",
+    "2842": "AI #2841: Add 1.4 to 1.5 migration guide",
+    "2843": "FR #2782: Define the preview lifecycle for whole datasets",
+    "2848": "AI #2847: Restructure the Editorial Guidelines and align the AGENTS.md grouping",
+    "2850": "[AI] Compare SKU Price dataset columns with SkuPriceDetails properties",
+    "2871": "FR #2521: Add context-window pricing properties to SKU Price Details",
+    "2872": "FR #2521: Add context-window pricing columns to SKU Price (stacked on the properties PR)",
+    "2877": "[AI] Build a 1.6 example dataset for context window pricing",
+    "2898": "[AI] Publish the FOCUS 1.5 Data Model spreadsheet",
+    "2899": "[AI] Publish the FOCUS 1.5 use cases and SQL queries to the FOCUS website",
+    "2901": "[AI] Open a feature request to improve the structure of SkuPriceDetails",
+    "2902": "[AI]  Share activities around promotion of the FOCUS Mapping Tool with with Mike"
+   }
+  },
   {
    "id": "2026-11-24",
    "from": "2026-11-23T00:24:39Z",
