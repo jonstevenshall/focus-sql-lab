@@ -4,7 +4,7 @@
   "ref": "87fcbc8",
   "date": "2026-11-19"
  },
- "checked": "2026-11-24",
+ "checked": "2026-11-25",
  "how": [
   "A token charge is an ordinary Cost and Usage row. ServiceCategory is \"AI and Machine Learning\", ConsumedUnit is \"Tokens\" and ConsumedQuantity counts them. PricingQuantity and PricingUnit say how they were priced, which can be in blocks, such as per million tokens.",
   "Which model, and which kind of token, are recorded inside one JSON column, SkuPriceDetails, as FOCUS-defined properties. ModelDeveloper, ModelFamily, ModelId and ModelVersion describe the model. TokenDirection (input or output) and TokenCacheAction (uncached, cache read, cache write) describe the tokens. All six are new in the 1.5 candidate.",
@@ -395,7 +395,7 @@
    "reason": null,
    "opened": "2026-07-07",
    "closed": null,
-   "comments": 13
+   "comments": 14
   },
   "2550": {
    "n": 2550,
@@ -538,7 +538,7 @@
    "reason": null,
    "opened": "2026-11-10",
    "closed": null,
-   "comments": 2
+   "comments": 3
   },
   "2871": {
    "n": 2871,
@@ -549,7 +549,7 @@
    "reason": null,
    "opened": "2026-11-14",
    "closed": null,
-   "comments": 8
+   "comments": 10
   },
   "2872": {
    "n": 2872,
@@ -582,7 +582,7 @@
    "reason": null,
    "opened": "2026-11-17",
    "closed": null,
-   "comments": 1
+   "comments": 2
   },
   "2885": {
    "n": 2885,
