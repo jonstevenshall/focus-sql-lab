@@ -1,7 +1,164 @@
 {
  "about": "What the FOCUS working group did on GitHub each day. Written each morning by an AI model from the day's comments, reviews, merges and closures, then fact-checked against them by a second call. It interprets, so check the threads before relying on it.",
- "generated_at": "2026-11-25T03:06:46Z",
+ "generated_at": "2026-11-26T02:22:03Z",
  "days": [
+  {
+   "id": "2026-11-26",
+   "from": "2026-11-25T03:06:46Z",
+   "to": "2026-11-26T02:22:03Z",
+   "counts": {
+    "items": 21,
+    "threads": 6,
+    "people": 5,
+    "opened": 2,
+    "merged": 0,
+    "closed": 0
+   },
+   "threads": [
+    {
+     "n": 2826,
+     "kind": "pr",
+     "title": "Period and Update Date Filtering for DatasetConfiguration",
+     "state": "open",
+     "items": 15,
+     "comments": 15,
+     "statuses": 0,
+     "people": [
+      "Matt-Cowsert",
+      "flanakin"
+     ],
+     "objects": [
+      "attribute:DatasetConfiguration",
+      "column:SkuPrice.SkuPriceLastUpdated",
+      "dataset:SkuPrice",
+      "column:SkuPrice.SkuPriceEffectiveStart",
+      "dataset:CostAndUsage",
+      "column:SkuPrice.SkuPriceEffectiveEnd"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2845,
+     "kind": "pr",
+     "title": "AI #2735: Align SKU Price record wording across the SKU Price dataset",
+     "state": "open",
+     "items": 2,
+     "comments": 2,
+     "statuses": 1,
+     "people": [
+      "Matt-Cowsert",
+      "flanakin"
+     ],
+     "objects": [
+      "topic:sku-price-examples",
+      "column:SkuPrice.SkuPriceCreated",
+      "column:SkuPrice.SkuPriceEligibility",
+      "column:SkuPrice.SkuPriceLastUpdated",
+      "dataset:SkuPrice",
+      "dataset:CostAndUsage"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 2904,
+     "kind": "pr",
+     "title": "[ADMIN] Merge working_draft into candidate_recommendation (Editorial changes) - FOCUS v1.5 Release",
+     "state": "draft",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "jpradocueva"
+     ],
+     "objects": [
+      "column:CostAndUsage.RequesterDetails"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2903,
+     "kind": "pr",
+     "title": "[ADMIN] FOCUS 1.5 Release - candidate_recommendation into main",
+     "state": "draft",
+     "items": 1,
+     "comments": 0,
+     "statuses": 1,
+     "people": [
+      "jpradocueva"
+     ],
+     "objects": [
+      "topic:ai-model-billing-examples",
+      "topic:ai-model-identity-examples",
+      "topic:ai-prompt-caching-examples",
+      "topic:commitment-discounts",
+      "topic:commitment-program-eligibility-details-examples",
+      "topic:contract-commitments"
+     ],
+     "change": null,
+     "opened": true
+    },
+    {
+     "n": 2887,
+     "kind": "issue",
+     "title": "[AI] Clarify relationship between BillingAccountId and ContractId",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:SkuPrice.ContractId",
+      "column:CostAndUsage.BillingAccountId",
+      "dataset:ContractCommitment",
+      "column:ContractCommitment.ContractCommitmentId",
+      "column:CostAndUsage.SkuPriceId"
+     ],
+     "change": null,
+     "opened": false
+    },
+    {
+     "n": 972,
+     "kind": "issue",
+     "title": "[FR] Add granular sustainability dimensions and metrics",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "seanmcilroy29"
+     ],
+     "objects": [
+      "column:CostAndUsage.ResourceId",
+      "column:CostAndUsage.RegionId",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.ChargePeriodStart",
+      "column:CostAndUsage.ResourceName",
+      "column:CostAndUsage.ResourceType"
+     ],
+     "change": null,
+     "opened": false
+    }
+   ],
+   "cost": 0.00763,
+   "runs": 1,
+   "text": "Matt-Cowsert asked for targeted changes to #2826 (Period and Update Date Filtering for DatasetConfiguration), saying the new UpdatedSince rules contradict each other, so some rows are both required and forbidden in one delivery. The inline comments on dataset_configuration.md name several conflicts, including a latest-version rule that cannot sit alongside the all-rows rule when a row key has several versions, and a clause requiring rows that an exclusion forbids. Matt-Cowsert also raised the deduplication overlap handled in #2894 (Split Append delivery into Additive and Versioned Append), asked whether the schedule rule is a default or fixed, and asked whether the rules should reach every dataset. flanakin replied on 26 November by correcting the re-sent size estimates to about 7.0 GB and 3.5 GB, giving 3.0x and 11x, and applying the suggested wording to scenario 3. Replies to the rule conflicts are not yet in the thread.\n\nMatt-Cowsert approved #2845 (Align SKU Price record wording across the SKU Price dataset), saying its six lines match the request, and approvals reached three. flanakin resolved the dataset.md discussion on 25 November, citing feedback and a TF2 agreement reached that day. No merge is recorded yet. On #2887 (Clarify relationship between BillingAccountId and ContractId), ijurica proposed that ContractId identify the source contract rather than a specific commitment, that billing accounts and contracts be treated as many-to-many until specified, and that the contract term be defined. It is the only comment so far.\n\nseanmcilroy29, commenting for the Green Software Foundation, asked on #972 (Add granular sustainability dimensions and metrics) that FOCUS adopt the SCI, SWI and SEI definitions through an ISO normative reference rather than define its own, and offered collaboration and a possible supplemental dataset. No maintainer reply is recorded.\n\njpradocueva also opened two draft v1.5 release pull requests: #2904 (Merge working_draft into candidate_recommendation (Editorial changes) - FOCUS v1.5 Release), which carries agreed editorial and formatting fixes to RequesterDetails, and #2903 (FOCUS 1.5 Release - candidate_recommendation into main). Neither has reviews yet.",
+   "written_by": "claude-haiku-5-5",
+   "titles": {
+    "972": "[FR] Add granular sustainability dimensions and metrics",
+    "2826": "Period and Update Date Filtering for DatasetConfiguration",
+    "2845": "AI #2735: Align SKU Price record wording across the SKU Price dataset",
+    "2887": "[AI] Clarify relationship between BillingAccountId and ContractId",
+    "2894": "Split Append delivery into Additive and Versioned Append",
+    "2903": "[ADMIN] FOCUS 1.5 Release - candidate_recommendation into main",
+    "2904": "[ADMIN] Merge working_draft into candidate_recommendation (Editorial changes) - FOCUS v1.5 Release"
+   }
+  },
   {
    "id": "2026-11-25",
    "from": "2026-11-24T04:21:57Z",
