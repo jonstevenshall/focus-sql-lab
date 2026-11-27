@@ -1,6 +1,14 @@
 {
  "runs": [
   {
+   "at": "2026-11-27T01:51:48Z",
+   "task": "rebuild",
+   "spec": "87fcbc8",
+   "spec_date": "2026-11-19",
+   "trigger": "schedule",
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/45924801961"
+  },
+  {
    "at": "2026-11-26T02:30:17Z",
    "task": "open-requests",
    "model": "claude-haiku-5-5",
