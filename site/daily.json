@@ -1,7 +1,51 @@
 {
  "about": "What the FOCUS working group did on GitHub each day. Written each morning by an AI model from the day's comments, reviews, merges and closures, then fact-checked against them by a second call. It interprets, so check the threads before relying on it.",
- "generated_at": "2026-11-26T02:22:03Z",
+ "generated_at": "2026-11-27T02:20:50Z",
  "days": [
+  {
+   "id": "2026-11-27",
+   "from": "2026-11-26T02:22:03Z",
+   "to": "2026-11-27T02:20:50Z",
+   "counts": {
+    "items": 1,
+    "threads": 1,
+    "people": 1,
+    "opened": 0,
+    "merged": 0,
+    "closed": 0
+   },
+   "threads": [
+    {
+     "n": 2887,
+     "kind": "issue",
+     "title": "[AI] Clarify relationship between BillingAccountId and ContractId",
+     "state": "open",
+     "items": 1,
+     "comments": 1,
+     "statuses": 0,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [
+      "dataset:SkuPrice",
+      "column:SkuPrice.ContractId",
+      "column:CostAndUsage.ContractApplied",
+      "dataset:ContractCommitment",
+      "dataset:CostAndUsage",
+      "column:CostAndUsage.BillingAccountId"
+     ],
+     "change": null,
+     "opened": false
+    }
+   ],
+   "cost": 0.00121,
+   "runs": 1,
+   "text": "#2887 (Clarify relationship between BillingAccountId and ContractId) has a new comment from ijurica proposing, as a discussion item, a separate Contract dataset. The proposal describes Agreement, Pricing and Commitment contracts, so that a price is defined once under a Pricing contract rather than repeated for each purchased commitment. It is marked as not part of the current specification.\n\nThe issue, opened by flanakin on 21 November, asks TF2 to settle how billing accounts, contracts and contract commitments relate in the SKU Price dataset, including whether a contract ID on commitment prices scopes price locks for an account or names a single commitment. No other replies are visible yet, so the thread is waiting on TF2's response to the proposal.",
+   "written_by": "claude-haiku-5-5",
+   "titles": {
+    "2887": "[AI] Clarify relationship between BillingAccountId and ContractId"
+   }
+  },
   {
    "id": "2026-11-26",
    "from": "2026-11-25T03:06:46Z",

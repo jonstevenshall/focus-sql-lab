@@ -1,10 +1,97 @@
 {
- "generated_at": "2026-11-26T02:22:03Z",
- "since": "2026-11-12T02:22:03Z",
+ "generated_at": "2026-11-27T02:20:50Z",
+ "since": "2026-11-13T02:20:50Z",
  "days": 14,
  "model": "claude-haiku-5-5",
  "about": "FOCUS_Spec issues and pull requests that people opened, commented on or reviewed in the last 14 days. Each summary (what is proposed and why, where the debate lies, how people feel and where it stands) and each one-line gist is written by an AI model from the thread and the issue it implements, and rewritten when the thread gains comments or reviews: they interpret, so check the thread before relying on one. Status changes are posted by the repository's own automation.",
  "threads": [
+  {
+   "number": 2887,
+   "kind": "issue",
+   "title": "[AI] Clarify relationship between BillingAccountId and ContractId",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2887",
+   "state": "open",
+   "labels": [],
+   "author": "flanakin",
+   "opened": "2026-11-21",
+   "last": "2026-11-26T04:02:35Z",
+   "earlier": 0,
+   "objects": [
+    "dataset:SkuPrice",
+    "column:SkuPrice.ContractId",
+    "column:CostAndUsage.ContractApplied",
+    "dataset:ContractCommitment",
+    "dataset:CostAndUsage",
+    "column:CostAndUsage.BillingAccountId",
+    "column:SkuPrice.SkuPriceEligibility",
+    "column:CostAndUsage.SkuPriceId",
+    "column:ContractCommitment.ContractCommitmentId",
+    "column:CostAndUsage.ContractedUnitPrice"
+   ],
+   "files_matched": false,
+   "refs": [
+    {
+     "n": 2807,
+     "title": "[FR] Promote the SKU Price dataset to general availability"
+    },
+    {
+     "n": 2753,
+     "title": "AI #2751: Adding CommitmentApplicability to the SKU Price dataset"
+    }
+   ],
+   "basis": [
+    "c7174393852",
+    "c7182243016",
+    "o2887"
+   ],
+   "events": [
+    {
+     "id": "o2887",
+     "kind": "opened",
+     "author": "flanakin",
+     "at": "2026-11-21T03:30:50Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2887",
+     "excerpt": "Assignee(s): @ijurica Parent Issue: 2807 Detailed Description During the November 18 Task Force 2 (TF2) discussion of Feature Request (FR) 2807, the group could not say how the SKU Price dataset relates a billing…"
+    },
+    {
+     "id": "s7056658987",
+     "kind": "status",
+     "at": "2026-11-21T03:31:06Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2887#issuecomment-7056658987",
+     "lines": [
+      "Initialized Due Date: 2026-11-25",
+      "Initialized AI Status: Open",
+      "Initialized Task Force: TF-Core 2"
+     ]
+    },
+    {
+     "id": "c7174393852",
+     "kind": "comment",
+     "author": "ijurica",
+     "at": "2026-11-25T20:56:23Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2887#issuecomment-7174393852",
+     "excerpt": "Scope of this comment Points raised Point Addressed in Status ------------ P1 Contract ID and contract commitment ID look like a parent and child. DoD 3 🟢 P2 Billing account ID and contract ID are not defined against…"
+    },
+    {
+     "id": "c7182243016",
+     "kind": "comment",
+     "author": "ijurica",
+     "at": "2026-11-26T04:02:35Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2887#issuecomment-7182243016",
+     "excerpt": "Proposal: Contract as a dataset This is a proposal for discussion. It addresses DoD 2 and the gaps G1 and G2. It is not part of the current specification. Contract dataset A new Contract dataset describes each contract…"
+    }
+   ],
+   "summary": "This issue asks TF2 to settle how billing accounts, contracts and contract commitments relate in the SKU Price dataset, a gap raised during the 18 November discussion of #2807. It matters because some setups have many billing accounts per contract and the reverse, and it is unclear whether a contract ID on commitment prices scopes price locks for an account or names one commitment. On 25 November ijurica listed open points and six questions for TF2, noting the term contract itself is undefined. On 26 November ijurica proposed a separate Contract dataset, with Agreement, Pricing and Commitment contracts, so prices are defined once under a Pricing contract rather than duplicated per purchased commitment. It is labelled a discussion proposal, not current specification. No other replies are visible yet, so the group's view is unknown and no decision is recorded yet.",
+   "gists": {
+    "o2887": "flanakin asked TF2 to decide how billing account, contract and contract commitment IDs relate, including many-to-many cases, and to record the outcome.",
+    "c7174393852": "ijurica sorted the open points by status and asked TF2 six questions, including whether ContractId on SKU Price names the contract rather than a commitment.",
+    "c7182243016": "ijurica proposes, as a discussion item, a Contract dataset with Agreement, Pricing and Commitment contracts so prices are defined once per Pricing contract, not duplicated per commitment."
+   },
+   "written_by": [
+    "claude-haiku-5-5"
+   ],
+   "style": 2
+  },
   {
    "number": 2826,
    "kind": "pr",
@@ -395,8 +482,7 @@
     "column:SkuPrice.SkuPriceCreated",
     "column:SkuPrice.SkuPriceEligibility",
     "column:SkuPrice.SkuPriceLastUpdated",
-    "dataset:SkuPrice",
-    "dataset:CostAndUsage"
+    "dataset:SkuPrice"
    ],
    "files_matched": true,
    "refs": [
@@ -414,21 +500,10 @@
     }
    ],
    "basis": [
-    "i4555806842",
     "i4701010989",
     "r6064362512"
    ],
    "events": [
-    {
-     "id": "i4555806842",
-     "kind": "inline",
-     "author": "ijurica",
-     "at": "2026-11-12T20:15:42Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2845#discussion_r4555806842",
-     "path": "specification/datasets/sku_price/dataset.md",
-     "parent": null,
-     "excerpt": "I'd keep Dave's original wording: - \"SKU Price Pricing Currency\" is not a Display Name. editorial-guidelines.md: \"References to FOCUS entities in non-normative content (i.e., outside Requirements sections) MUST use…"
-    },
     {
      "id": "r6064362512",
      "kind": "review",
@@ -458,88 +533,10 @@
      "excerpt": "Resolving based on Irena's feedback and agreement in TF2 on Nov 25"
     }
    ],
-   "summary": "PR #2845 applies the terminology rule from #2725 to six lines in the SKU Price dataset and examples: a single row becomes a SKU Price record, and requirements say SkuPrice record. The substantive point is the IsGlobalScope and IsComplexScope lines, since records under one SKU Price ID can differ on scope and reading them against the SKU Price could require true on a negotiated record. Recent activity was small. ijurica asked to keep the original dataset.md wording, arguing the dataset name is not a Display Name and that without 'record' the currency reads as a property of the SKU Price. flanakin resolved that thread on 25 November 2026, citing that feedback and TF2 agreement. Matt-Cowsert approved, and the Review Bot shows three approvals. No merge is recorded yet, and the background notes place the change in 1.6.",
+   "summary": "This pull request changes six lines in the SKU Price dataset and its examples so that a single row is called a SKU Price record in informative text and a SkuPrice record in requirements, following the terminology rule from #2725. The reason is that eligibility, audit timestamps and currency can differ between records under one SKU Price ID. Read against the SKU Price, the eligibility requirement at line 28 could wrongly demand IsGlobalScope true on a negotiated record. Matt-Cowsert approved on 25 November 2026, and flanakin resolved a thread on the dataset.md line, citing Irena's feedback and TF2 agreement that day. Approvals now stand at three, so the change looks ready on substance. The pull request itself leaves the dataset name and glossary term alone. No merge is recorded yet.",
    "gists": {
-    "i4555806842": "ijurica asked to keep the original dataset.md wording, saying the dataset name is not a Display Name and the currency would read as a SKU Price property.",
-    "r6064362512": "Matt-Cowsert approved the PR, saying the six lines match what #2735 asked for.",
-    "i4701010989": "flanakin resolved the dataset.md discussion, citing Irena's feedback and the TF2 agreement reached on 25 November 2026."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2887,
-   "kind": "issue",
-   "title": "[AI] Clarify relationship between BillingAccountId and ContractId",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2887",
-   "state": "open",
-   "labels": [],
-   "author": "flanakin",
-   "opened": "2026-11-21",
-   "last": "2026-11-25T20:56:23Z",
-   "earlier": 0,
-   "objects": [
-    "dataset:SkuPrice",
-    "column:SkuPrice.ContractId",
-    "column:CostAndUsage.BillingAccountId",
-    "dataset:ContractCommitment",
-    "column:ContractCommitment.ContractCommitmentId",
-    "column:CostAndUsage.SkuPriceId",
-    "column:CostAndUsage.ContractedUnitPrice",
-    "column:CostAndUsage.ContractApplied",
-    "dataset:CostAndUsage",
-    "column:CostAndUsage.ServiceProviderName"
-   ],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2807,
-     "title": "[FR] Promote the SKU Price dataset to general availability"
-    },
-    {
-     "n": 2753,
-     "title": "AI #2751: Adding CommitmentApplicability to the SKU Price dataset"
-    }
-   ],
-   "basis": [
-    "c7174393852",
-    "o2887"
-   ],
-   "events": [
-    {
-     "id": "o2887",
-     "kind": "opened",
-     "author": "flanakin",
-     "at": "2026-11-21T03:30:50Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2887",
-     "excerpt": "Assignee(s): @ijurica Parent Issue: 2807 Detailed Description During the November 18 Task Force 2 (TF2) discussion of Feature Request (FR) 2807, the group could not say how the SKU Price dataset relates a billing…"
-    },
-    {
-     "id": "s7056658987",
-     "kind": "status",
-     "at": "2026-11-21T03:31:06Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2887#issuecomment-7056658987",
-     "lines": [
-      "Initialized Due Date: 2026-11-25",
-      "Initialized AI Status: Open",
-      "Initialized Task Force: TF-Core 2"
-     ]
-    },
-    {
-     "id": "c7174393852",
-     "kind": "comment",
-     "author": "ijurica",
-     "at": "2026-11-25T20:56:23Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2887#issuecomment-7174393852",
-     "excerpt": "Scope of this comment Points raised P1 (Irena Jurica): Contract ID and contract commitment ID look like a parent and child. P2 (Irena Jurica): Billing account ID and contract ID are not defined against each other. P3…"
-    }
-   ],
-   "summary": "flanakin opened this to have TF2 settle how SKU Price records link billing accounts, contracts and commitments, after the 18 November 2026 discussion of #2807 could not. The gap is that the specification uses contract without defining it, and billing accounts and contracts can relate many-to-many. flanakin asked whether ContractId on commitment prices marks where prices are locked for an account, or one specific commitment. ijurica proposes that ContractId identifies the source agreement, that SkuPriceEligibility decides which billing accounts a price covers, and that many-to-many be assumed until specified. If adopted, providers could map their agreements to ContractId more consistently. The thread is early: only ijurica has commented, on 25 November 2026, and that comment appears cut off, so no other views are visible yet. TF2 still has to confirm.",
-   "gists": {
-    "o2887": "flanakin opened the item after TF2's discussion of #2807 left open how billing account, contract and commitment IDs relate, asking TF2 to decide the relationships first.",
-    "c7174393852": "ijurica proposes that ContractId identifies the source contract, not a specific commitment, that billing account and contract be treated as many-to-many until specified, and that the contract term be defined."
+    "r6064362512": "Matt-Cowsert approved the pull request, saying the six changed lines match what #2735 asks for.",
+    "i4701010989": "flanakin resolved the inline thread on dataset.md, citing Irena's feedback and the TF2 agreement reached on 25 November 2026."
    },
    "written_by": [
     "claude-haiku-5-5"
@@ -2612,7 +2609,7 @@
    "author": "Matt-Cowsert",
    "opened": "2026-11-05",
    "last": "2026-11-24T02:57:41Z",
-   "earlier": 2,
+   "earlier": 5,
    "objects": [],
    "files_matched": false,
    "refs": [
@@ -2662,97 +2659,17 @@
     }
    ],
    "basis": [
-    "c6833933562",
-    "i4553094504",
     "i4632787031",
     "i4632787063",
     "i4632787071",
     "i4674958307",
     "i4674958682",
     "i4674959009",
-    "r5880428799",
-    "r5880783779",
-    "r5880807149",
-    "r5880843786",
     "r5969960363",
     "r5980349389",
     "r5982052315"
    ],
    "events": [
-    {
-     "id": "i4553094504",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-12T16:17:41Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2830#discussion_r4553094504",
-     "path": "specification/contributors.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "r5880428799",
-     "kind": "review",
-     "state": "approved",
-     "author": "davidearney",
-     "at": "2026-11-12T19:07:06Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2830#pullrequestreview-5880428799",
-     "excerpt": "LGTM"
-    },
-    {
-     "id": "s6833248292",
-     "kind": "status",
-     "at": "2026-11-12T19:07:27Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2830#issuecomment-6833248292",
-     "lines": [
-      "Review Bot updated PR Approvals: 1 → 2"
-     ]
-    },
-    {
-     "id": "r5880783779",
-     "kind": "review",
-     "state": "approved",
-     "author": "finops-DaveMoreau",
-     "at": "2026-11-12T19:30:48Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2830#pullrequestreview-5880783779",
-     "excerpt": ""
-    },
-    {
-     "id": "s6833812695",
-     "kind": "status",
-     "at": "2026-11-12T19:31:09Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2830#issuecomment-6833812695",
-     "lines": [
-      "Review Bot updated PR Approvals: 2 → 3",
-      "Review Bot updated PR Approvals: 3 → 4",
-      "Review Bot updated PR Approvals: 4 → 5"
-     ]
-    },
-    {
-     "id": "r5880807149",
-     "kind": "review",
-     "state": "approved",
-     "author": "jpradocueva",
-     "at": "2026-11-12T19:32:31Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2830#pullrequestreview-5880807149",
-     "excerpt": "LGTM."
-    },
-    {
-     "id": "r5880843786",
-     "kind": "review",
-     "state": "approved",
-     "author": "kk09v",
-     "at": "2026-11-12T19:35:10Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2830#pullrequestreview-5880843786",
-     "excerpt": ""
-    },
-    {
-     "id": "c6833933562",
-     "kind": "comment",
-     "author": "kk09v",
-     "at": "2026-11-12T19:36:16Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2830#issuecomment-6833933562",
-     "excerpt": "Wow, time flies. I had to remember when Beau joined FinOps Foundation."
-    },
     {
      "id": "r5969960363",
      "kind": "review",
@@ -2859,23 +2776,17 @@
      "excerpt": "Joaquin aligned MAINTAINERS.md in b96c9057, and 466c3664 fixes the version typo in the Neos entry."
     }
    ],
-   "summary": "PR #2830 refreshes the Credits section for FOCUS v1.5 and is the contributors part of #2825. Each list is rebuilt from v1.5 milestone activity between 30 April and 29 October 2026, and the PR spells out how Contributors were chosen, which reviewers have welcomed. Seven approvals are recorded, from davidearney, finops-DaveMoreau, jpradocueva, kk09v, ijurica and flanakin. The main pushback came from shawnalpay, who checked every list against source files and found them matching, but asked why four non-Maintainers who posted on v1.5 items were left out. Matt-Cowsert is adding one as a deliberate exception, may add the fourth if pending CLA steps finish by 2 December, and will leave two off unless their membership is confirmed. Affiliation mismatches with MAINTAINERS.md have been fixed. With ratification set for 3 December, the thread looks close to done.",
+   "summary": "PR #2830 refreshes the v1.5 Credits section of contributors.md, rebuilding lists from activity between 30 April and 29 October 2026. Contributors are non-Maintainer members who commented on or authored v1.5 work, so the membership rule is the main thing to check. shawnalpay compared every name against the source files, found them matching, and asked for CLA confirmation on four unlisted participants and for MAINTAINERS.md to match the affiliations shown. Matt-Cowsert replied that one participant is added as a deliberate exception, since their June review predates signing the CLA; another waits on corporate CLA steps due 2 December; two stay off unless membership is confirmed. MAINTAINERS.md has been aligned. Approvals from ijurica and flanakin bring the total to seven, so support looks solid. The pending participant is the open question before ratification on 3 December 2026.",
    "gists": {
-    "i4553094504": "jpradocueva suggested the affiliation line for ijurica should read Neos / CloudVane.",
-    "r5880428799": "davidearney approved the PR with a short LGTM.",
-    "r5880783779": "finops-DaveMoreau approved the PR without written comments.",
-    "r5880807149": "jpradocueva approved the PR with a short LGTM.",
-    "r5880843786": "kk09v approved the PR without written comments.",
-    "c6833933562": "kk09v remarked in passing on how long ago one listed person joined the FinOps Foundation.",
-    "r5969960363": "ijurica approved the PR without written comments.",
-    "i4632787031": "shawnalpay asked whether four unlisted people with substantive v1.5 feedback had signed CLAs when they posted, noting one signed later and another may be covered by a member company's CLA.",
-    "i4632787063": "shawnalpay noted MAINTAINERS.md still lists only Salesforce and should be aligned with the PR's affiliation.",
-    "i4632787071": "shawnalpay noted MAINTAINERS.md still lists only Neos and should be aligned with the PR's CloudVane entry.",
-    "r5980349389": "shawnalpay reviewed the lists against source files and activity, found the Maintainers and Steering Committee matching and all 13 Contributors qualifying, and left comments rather than an approval.",
-    "r5982052315": "flanakin approved the PR without written comments.",
-    "i4674958307": "Matt-Cowsert replied that one is being added as a deliberate exception, one may follow if CLA steps finish by 2 December, and two stay off unless membership is confirmed.",
-    "i4674958682": "The MAINTAINERS.md file was aligned with the PR, as the reviewer asked.",
-    "i4674959009": "MAINTAINERS.md was aligned with the PR and a version typo in the Neos affiliation entry was fixed."
+    "r5969960363": "ijurica approved the pull request without leaving a comment.",
+    "i4632787031": "shawnalpay asked whether four unlisted non-Maintainers who gave substantive v1.5 feedback had a signed CLA at the time, since only member activity counts.",
+    "i4632787063": "shawnalpay pointed out that MAINTAINERS.md still lists only Salesforce, so it should be aligned with the Allyte entry and prior affiliation in this PR.",
+    "i4632787071": "shawnalpay pointed out that MAINTAINERS.md still lists only Neos, so it should be aligned with the CloudVane entry in this PR.",
+    "r5980349389": "shawnalpay checked the lists against source files and v1.5 activity, found them matching, and raised the CLA question, Adobe and Datadog seats, and two affiliations.",
+    "r5982052315": "flanakin approved the pull request without leaving a comment.",
+    "i4674958307": "Matt-Cowsert added Tom Cross as a deliberate exception, will add Ivan Karpusheff if CLA steps finish by 2 December, and left GH Adiko and Neco off as membership is unconfirmed.",
+    "i4674958682": "Matt-Cowsert said MAINTAINERS.md has been aligned with the contributors list in a follow-up commit.",
+    "i4674959009": "Matt-Cowsert said MAINTAINERS.md has been aligned in a follow-up commit and that the version typo in the Neos entry has been fixed."
    },
    "written_by": [
     "claude-haiku-5-5"
@@ -6344,18 +6255,18 @@
    "author": "Matt-Cowsert",
    "opened": "2026-11-06",
    "last": "2026-11-19T17:39:01Z",
-   "earlier": 1,
+   "earlier": 4,
    "objects": [
-    "column:CostAndUsage.SkuPriceId",
-    "column:CostAndUsage.ContractedUnitPrice",
-    "dataset:CostAndUsage",
     "attribute:UnitFormat",
     "dataset:ContractCommitment",
-    "column:CostAndUsage.ConsumedQuantity",
-    "column:CostAndUsage.ListUnitPrice",
+    "dataset:CostAndUsage",
+    "column:CostAndUsage.SkuPriceId",
     "column:ContractCommitment.ContractCommitmentDurationType",
-    "column:CostAndUsage.ServiceProviderName",
-    "column:CostAndUsage.BillingCurrency"
+    "column:CostAndUsage.ContractedUnitPrice",
+    "column:CostAndUsage.ConsumedQuantity",
+    "column:CostAndUsage.PrincipalId",
+    "column:CostAndUsage.CredentialId",
+    "column:CostAndUsage.RequesterDetails"
    ],
    "files_matched": false,
    "refs": [
@@ -6409,311 +6320,14 @@
     }
    ],
    "basis": [
-    "i4554759726",
-    "i4554759739",
-    "i4554759747",
-    "i4554759754",
-    "i4554759782",
-    "i4554759798",
-    "i4554759807",
-    "i4554759817",
-    "i4554759826",
-    "i4554882846",
-    "i4554883698",
-    "i4554884348",
-    "i4554885189",
-    "i4554886205",
-    "i4554887549",
-    "i4554888148",
-    "i4554888664",
-    "i4554889165",
-    "i4554942653",
-    "i4555505708",
     "i4625177209",
     "i4625185139",
     "i4625275062",
-    "r5880060055",
-    "r5880633640",
-    "r5881002028",
-    "r5881154314",
-    "r5883669660",
     "r5972749158",
     "r5978927703",
     "r5980206543"
    ],
    "events": [
-    {
-     "id": "i4554759726",
-     "kind": "inline",
-     "author": "shawnalpay",
-     "at": "2026-11-12T18:40:35Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554759726",
-     "path": "CHANGELOG.md",
-     "parent": "r5880060055",
-     "excerpt": "The new SkuPriceId rules may also change how many distinct SkuPriceId values a provider emits, which seems worth stating here. \"One and only one ListUnitPrice for a given ServiceProviderName, BillingCurrency, and…"
-    },
-    {
-     "id": "i4554759739",
-     "kind": "inline",
-     "author": "shawnalpay",
-     "at": "2026-11-12T18:40:35Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554759739",
-     "path": "CHANGELOG.md",
-     "parent": "r5880060055",
-     "excerpt": "Question on the Compatible classification. In v1.4, CostAndUsage MUST include ContractedUnitPrice when the service provider supports negotiated pricing concepts. In v1.5 the trigger is \"includes unit pricing.\" A…"
-    },
-    {
-     "id": "i4554759747",
-     "kind": "inline",
-     "author": "shawnalpay",
-     "at": "2026-11-12T18:40:35Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554759747",
-     "path": "CHANGELOG.md",
-     "parent": "r5880060055",
-     "excerpt": "One presence change here is a scope change rather than a rewording: the Allocated columns were required \"when the data generator supports data generator-calculated split cost allocation\" and are now required when \"the…"
-    },
-    {
-     "id": "i4554759754",
-     "kind": "inline",
-     "author": "shawnalpay",
-     "at": "2026-11-12T18:40:35Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554759754",
-     "path": "CHANGELOG.md",
-     "parent": "r5880060055",
-     "excerpt": "\"Restored\" reflects the working-draft history (2434), but the tag key match requirement isn't in any published release (v1.0 through v1.4). For a reader comparing releases, it is new in v1.5."
-    },
-    {
-     "id": "i4554759782",
-     "kind": "inline",
-     "author": "shawnalpay",
-     "at": "2026-11-12T18:40:35Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554759782",
-     "path": "CHANGELOG.md",
-     "parent": "r5880060055",
-     "excerpt": "Same point as line 26."
-    },
-    {
-     "id": "r5880060055",
-     "kind": "review",
-     "state": "commented",
-     "author": "shawnalpay",
-     "at": "2026-11-12T18:40:35Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#pullrequestreview-5880060055",
-     "excerpt": "Thanks for building this from the tag diff; it made checking it straightforward. I compared the section against v1.4...v1.5-cr and the counts hold up: 27 new columns (4 Cost and Usage, 23 SKU Price), 26 operating model…"
-    },
-    {
-     "id": "i4554759798",
-     "kind": "inline",
-     "author": "shawnalpay",
-     "at": "2026-11-12T18:40:36Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554759798",
-     "path": "CHANGELOG.md",
-     "parent": "r5880060055",
-     "excerpt": "Minor: v1.5 also drops the two v1.4 rules that SkuPriceId \"MUST be a valid reference to\" ListUnitPrice and ContractedUnitPrice; the one-price-per-scope rules replace them. Suggest \"replaced the valid-reference…"
-    },
-    {
-     "id": "i4554759807",
-     "kind": "inline",
-     "author": "shawnalpay",
-     "at": "2026-11-12T18:40:36Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554759807",
-     "path": "CHANGELOG.md",
-     "parent": "r5880060055",
-     "excerpt": "The ApplicabilityCriteria to Conditions rename breaks any tool that reads the model JSON, so it reads oddly under \"New ... features.\" Consider moving it to a Changed subsection (e.g., \"Changed requirements model\") or…"
-    },
-    {
-     "id": "i4554759817",
-     "kind": "inline",
-     "author": "shawnalpay",
-     "at": "2026-11-12T18:40:36Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554759817",
-     "path": "CHANGELOG.md",
-     "parent": "r5880060055",
-     "excerpt": "Operating model conditions are a new kind of entity, not just new values, but the section only lists their names. Someone reading the changelog on its own won't learn what a condition is or why every presence rule was…"
-    },
-    {
-     "id": "i4554759826",
-     "kind": "inline",
-     "author": "shawnalpay",
-     "at": "2026-11-12T18:40:36Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554759826",
-     "path": "CHANGELOG.md",
-     "parent": "r5880060055",
-     "excerpt": "The condition's name in the spec is \"Includes Billing and Payment Currency Differences,\" not \"Billing-Payment.\" (Its sibling really is \"Includes Pricing-Billing Currency Differences,\" so the inconsistency comes from the…"
-    },
-    {
-     "id": "i4554882846",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T18:51:19Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554882846",
-     "path": "CHANGELOG.md",
-     "parent": "i4554759726",
-     "excerpt": "Added your sentence in 30369f37."
-    },
-    {
-     "id": "i4554883698",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T18:51:24Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554883698",
-     "path": "CHANGELOG.md",
-     "parent": "i4554759739",
-     "excerpt": "Agreed. ContractedUnitPrice is the only one of the six whose trigger got narrower; the others got broader or stayed the same. Moved it to its own Migration Compatible entry in 30369f37, using the flat-fee example."
-    },
-    {
-     "id": "i4554884348",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T18:51:28Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554884348",
-     "path": "CHANGELOG.md",
-     "parent": "i4554759747",
-     "excerpt": "Added in 30369f37 to the split cost allocation entry (line 21). It lists the five columns that existed in v1.4 and leaves out AllocatedServiceName, since that one is new."
-    },
-    {
-     "id": "i4554885189",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T18:51:33Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554885189",
-     "path": "CHANGELOG.md",
-     "parent": "i4554759754",
-     "excerpt": "Good catch on the wording, though key preservation was in an earlier release: v1.0 and v1.1 both say \"Providers MUST NOT alter user-defined Tag keys or values,\" and v1.2 dropped the key part. In 30369f37 this now says…"
-    },
-    {
-     "id": "i4554886205",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T18:51:38Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554886205",
-     "path": "CHANGELOG.md",
-     "parent": "i4554759782",
-     "excerpt": "Reworded in 30369f37 to \"added,\" noting the key preservation from v1.0 and v1.1."
-    },
-    {
-     "id": "i4554887549",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T18:51:46Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554887549",
-     "path": "CHANGELOG.md",
-     "parent": "i4554759798",
-     "excerpt": "Took your wording in 30369f37."
-    },
-    {
-     "id": "i4554888148",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T18:51:49Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554888148",
-     "path": "CHANGELOG.md",
-     "parent": "i4554759807",
-     "excerpt": "Marked it \"Breaking:\" in 30369f37 instead of adding a new subsection, since the v1.4 changelog has no Changed requirements model heading."
-    },
-    {
-     "id": "i4554888664",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T18:51:52Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554888664",
-     "path": "CHANGELOG.md",
-     "parent": "i4554759817",
-     "excerpt": "Added in 30369f37 with two small edits. The glossary lists the operating model's parties as examples, so the paragraph now uses \"e.g.\" And \"restate a v1.4 trigger unchanged\" became \"generalized from one party to the…"
-    },
-    {
-     "id": "i4554889165",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T18:51:54Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554889165",
-     "path": "CHANGELOG.md",
-     "parent": "i4554759826",
-     "excerpt": "Fixed in 30369f37."
-    },
-    {
-     "id": "i4554942653",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T18:56:49Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4554942653",
-     "path": "CHANGELOG.md",
-     "parent": "i4554759754",
-     "excerpt": "meant to click accept suggestions, but applied as described above, resolving."
-    },
-    {
-     "id": "r5880633640",
-     "kind": "review",
-     "state": "approved",
-     "author": "davidearney",
-     "at": "2026-11-12T19:19:47Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#pullrequestreview-5880633640",
-     "excerpt": "LGTM"
-    },
-    {
-     "id": "s6833563376",
-     "kind": "status",
-     "at": "2026-11-12T19:20:09Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#issuecomment-6833563376",
-     "lines": [
-      "Review Bot updated PR Approvals: 0 → 1"
-     ]
-    },
-    {
-     "id": "i4555505708",
-     "kind": "inline",
-     "author": "flanakin",
-     "at": "2026-11-12T19:47:05Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#discussion_r4555505708",
-     "path": "CHANGELOG.md",
-     "parent": "r5881002028",
-     "excerpt": "🤖 [AI] ⚛️ [Catalyst][Claude] 💡 Suggestion Line 240 says all supported features are informative. \"Informative supported feature\" here suggests the others are not. Suggest dropping the adjective."
-    },
-    {
-     "id": "r5881002028",
-     "kind": "review",
-     "state": "commented",
-     "author": "flanakin",
-     "at": "2026-11-12T19:47:05Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#pullrequestreview-5881002028",
-     "excerpt": "🤖 [AI] ⚛️ [Catalyst][Claude] PR Review Summary: No blockers. I checked the section against v1.4...v1.5-cr on points the earlier review did not cover: All relative links in the new section resolve in v1.5-cr. Presence…"
-    },
-    {
-     "id": "r5881154314",
-     "kind": "review",
-     "state": "approved",
-     "author": "flanakin",
-     "at": "2026-11-12T19:58:32Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#pullrequestreview-5881154314",
-     "excerpt": ""
-    },
-    {
-     "id": "s6834444593",
-     "kind": "status",
-     "at": "2026-11-12T19:58:54Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#issuecomment-6834444593",
-     "lines": [
-      "Review Bot updated PR Approvals: 1 → 2"
-     ]
-    },
-    {
-     "id": "r5883669660",
-     "kind": "review",
-     "state": "approved",
-     "author": "finops-DaveMoreau",
-     "at": "2026-11-12T23:30:45Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#pullrequestreview-5883669660",
-     "excerpt": ""
-    },
-    {
-     "id": "s6839041605",
-     "kind": "status",
-     "at": "2026-11-12T23:31:08Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2840#issuecomment-6839041605",
-     "lines": [
-      "Review Bot updated PR Approvals: 2 → 3"
-     ]
-    },
     {
      "id": "i4625177209",
      "kind": "inline",
@@ -6799,39 +6413,14 @@
      ]
     }
    ],
-   "summary": "Matt-Cowsert's pull request adds the v1.5 section to CHANGELOG.md, part of #2825, listing every change from v1.4 to the v1.5 release candidate. Each change is classified as Compatible or Migration Compatible, with none Incompatible. For FOCUS data users, the seven Migration Compatible items, such as SkuPriceId scoping and consumption currency, are the ones to check. shawnalpay checked the counts and asked for clearer wording on several points; the author addressed each in one commit. flanakin found no blockers. The PR has six approvals, the last on 19 November 2026, though ijurica's later nits on Quarter removal and requester documentation have no reply yet. Editorial fixes from the IP Review will be added as they merge, ahead of WG approval on 3 December 2026.",
+   "summary": "This pull request adds a v1.5 section to the changelog, covering changes from v1.4 to the v1.5 release candidate, for #2825. Members must approve it before the working group votes on v1.5 on 3 December 2026. The discussion is about wording. ijurica points out that v1.5 drops \"Quarter\" and \"Quarters\" from the allowed units for ContractCommitmentDurationType, since the time-based UnitFormat units have none, so queries matching duration strings may need updating; two rewordings are offered. ijurica also asks that the documentation requirements for the new requester attribution columns be mentioned. Support looks solid: jpradocueva, ijurica and shawnalpay all approved on 19 November 2026, and the approval count is now six. The thread doesn't show whether the author has applied the suggestions, and entries for the remaining IP Review fixes are still to come.",
    "gists": {
-    "i4554759726": "shawnalpay suggested noting that tiered SkuPriceId values now get a distinct ID per tier, so queries counting or grouping on SkuPriceId may return more values, and gave a sample sentence.",
-    "i4554759739": "shawnalpay asked whether moving ContractedUnitPrice presence to unit pricing means flat-fee providers may now omit it, suggesting a clarifying note or Migration Compatible classification.",
-    "i4554759747": "shawnalpay said the Allocated columns requirement narrowed from data generator-calculated split allocation to operating model split allocation, a scope change that should be called out.",
-    "i4554759754": "shawnalpay said the Tags key-matching requirement is new in v1.5 rather than restored, since no published release from v1.0 to v1.4 has it, and proposed wording to match.",
-    "i4554759782": "shawnalpay repeated the Tags wording point for the Tags column alone, suggesting a shorter entry about added user-defined tag key preservation requirements.",
-    "r5880060055": "shawnalpay verified the counts of new columns, conditions, glossary entries and supported features and found no Content Constraints changes, then raised two classification questions and wording fixes.",
-    "i4554759798": "shawnalpay noted v1.5 drops the v1.4 valid-reference rules for SkuPriceId and suggested saying so, so the removal is visible to readers.",
-    "i4554759807": "shawnalpay warned that renaming ApplicabilityCriteria to Conditions breaks tools reading the model JSON, so it should not sit under new features; suggested a Changed heading or a Breaking label.",
-    "i4554759817": "shawnalpay asked for an introduction defining operating model conditions as a new entity and explaining why presence rules changed, and drafted one.",
-    "i4554759826": "shawnalpay pointed out the condition's correct name is Includes Billing and Payment Currency Differences, and the changelog should match the specification.",
-    "i4554882846": "Matt-Cowsert added shawnalpay's SkuPriceId tiering sentence in one commit.",
-    "i4554883698": "Matt-Cowsert agreed ContractedUnitPrice is the only narrowed trigger and moved it to its own Migration Compatible entry, using the flat-fee example.",
-    "i4554884348": "Matt-Cowsert added the split cost allocation scope note, listing the five v1.4 columns and leaving out AllocatedServiceName, which is new.",
-    "i4554885189": "Matt-Cowsert changed the Tags wording to added and noted that v1.0 and v1.1 required key preservation, which v1.2 dropped.",
-    "i4554886205": "Matt-Cowsert reworded the AllocatedTags and Tags suggestion to added and noted the earlier key preservation from v1.0 and v1.1.",
-    "i4554887549": "Matt-Cowsert adopted the wording suggested for the SkuPriceId rules in the same commit.",
-    "i4554888148": "Matt-Cowsert marked the ApplicabilityCriteria rename with a Breaking label rather than adding a new subsection, since v1.4 had no Changed requirements model heading.",
-    "i4554888664": "Matt-Cowsert added the operating model conditions introduction with small edits, including an e.g. and a pointer to the moved ContractedUnitPrice entry.",
-    "i4554889165": "Matt-Cowsert fixed the condition name to match the specification.",
-    "i4554942653": "Matt-Cowsert said accepted suggestions were applied as described and resolved the Tags thread.",
-    "r5880633640": "davidearney approved the PR with a brief LGTM.",
-    "i4555505708": "flanakin suggested dropping the adjective informative from the AI Model Billing entry, since it implies other supported features are not informative, and gave replacement wording.",
-    "r5881002028": "flanakin's review found no blockers: links resolve, Includes Unit Pricing replaces three triggers correctly, consumption currency narrowing is Migration Compatible, and the JsonObjectFormat and UnitFormat entries match.",
-    "r5881154314": "flanakin approved the PR without comment.",
-    "r5883669660": "finops-DaveMoreau approved the PR without comment.",
-    "i4625177209": "ijurica asked that the ContractCommitmentDurationType entry state that Quarter and Quarters were dropped, since the UnitFormat time units have none, and that queries matching duration strings may need updating.",
-    "i4625185139": "ijurica proposed alternative wording for the same ContractCommitmentDurationType point, naming the removed Quarter units and the UnitFormat format.",
-    "i4625275062": "ijurica asked that the requester attribution entry mention the documentation requirements for PrincipalId, CredentialId and RequesterDetails, including the use cases where each is not null.",
-    "r5972749158": "jpradocueva approved the PR with a brief LGTM.",
-    "r5978927703": "ijurica approved the PR without comment.",
-    "r5980206543": "shawnalpay approved the PR without comment."
+    "i4625177209": "Asks that the ContractCommitmentDurationType entry state that Quarter and Quarters are no longer units, since the v1.4 table listed them and UnitFormat time units have no Quarter.",
+    "i4625185139": "Repeats the Quarter and Quarters point for ContractCommitmentDurationType and offers a shorter alternative entry that also states the numeric value and unit format requirement.",
+    "i4625275062": "Asks that the new requester attribution columns be noted with their documentation requirements, appendix entry and personal data dataset note.",
+    "r5972749158": "jpradocueva approved the changelog with a short LGTM, giving no specific comments.",
+    "r5978927703": "ijurica approved the review with no written comment.",
+    "r5980206543": "shawnalpay approved the review with no written comment."
    },
    "written_by": [
     "claude-haiku-5-5"
@@ -7565,26 +7154,21 @@
    "author": "qquigley",
    "opened": "2026-11-12",
    "last": "2026-11-17T03:49:05Z",
-   "earlier": 1,
+   "earlier": 2,
    "objects": [],
    "files_matched": false,
    "refs": [
     {
      "n": 2771,
-     "title": "[AI] Separate Champion Scope entry from PR approval"
+     "title": null
     },
     {
      "n": 2444,
      "title": "AI #2381: Add `Recommendation` dataset"
-    },
-    {
-     "n": 2705,
-     "title": "1.6 Release Scope / Themes / Milestones"
     }
    ],
    "basis": [
     "c6937658045",
-    "i4545472823",
     "i4574613411",
     "i4574619493",
     "i4574623488",
@@ -7597,26 +7181,6 @@
     "r5915727548"
    ],
    "events": [
-    {
-     "id": "i4545472823",
-     "kind": "inline",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T02:23:46Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4545472823",
-     "path": "guidelines/contributors/development-processes.md",
-     "parent": null,
-     "excerpt": "Line 145 defines Champion scope as work that a champion chooses to lead. But line 149 says a Feature Request enters Champion scope through a sponsorship, and this line sets Scope to Champion only after one. Until then,…"
-    },
-    {
-     "id": "s6812761786",
-     "kind": "status",
-     "at": "2026-11-12T02:39:30Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#issuecomment-6812761786",
-     "lines": [
-      "Matt-Cowsert updated PR Type: Supporting",
-      "Matt-Cowsert updated Task Force: Maintainers"
-     ]
-    },
     {
      "id": "i4574613411",
      "kind": "inline",
@@ -7634,7 +7198,7 @@
      "at": "2026-11-14T16:25:14Z",
      "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2859#discussion_r4574619493",
      "path": "guidelines/contributors/development-processes.md",
-     "parent": "i4545472823",
+     "parent": null,
      "excerpt": "Agreed. A Feature Request now enters Champion scope when a contributor commits, in a comment on the FR, to lead the work, and the WG Chair sets Scope to Champion at that point. I like your suggestion of splitting the…"
     },
     {
@@ -7725,20 +7289,19 @@
      "excerpt": "Maintainers Action Item - November 16, 2026 The Maintainers looked at this proposal on November 16. Irena Jurica said it is worth pursuing. Matt Cowsert agreed with its intent. Shawn Alpay asked to see one feature…"
     }
    ],
-   "summary": "Because a Maintainer approval currently signals both Task Force entry and merge readiness, this PR adds a separate sponsorship signal. Under the draft, a contributor commits in a comment to lead the FR, the Chair sets Scope to Champion, and a non-author Maintainer sponsors it. The Maintainers then decide at their next meeting whether it is ready for a Task Force; sponsorship never counts toward merging. qquigley has addressed most of Matt-Cowsert's review points, including dropping the seven-day window. Open questions remain on which FRs qualify, triage order and whether held-back items can still come up under A.O.B. On 16 November the Maintainers were mostly positive, but asked for a worked example, a starting Scope value and a way for Task Force leads to show room. qquigley and Matt-Cowsert will work on these.",
+   "summary": "This PR would split the two jobs a Maintainer's approval does today: bringing an out-of-scope Feature Request into Task Force discussion, and counting toward merge. A contributor would commit in an FR comment to lead the work, the WG Chair would set Scope to Champion, and a non-author Maintainer would add a sponsorship comment that doesn't count toward merging. The Maintainers would then confirm readiness at a meeting before any Task Force agenda. Matt-Cowsert found the section close, with wording fixes and questions on eligibility, triage and held-back items; qquigley has answered each. On 16 November the Maintainers broadly backed the intent but asked for a worked example and a way for Task Force leads to show room. Both authors hold the open actions.",
    "gists": {
-    "i4545472823": "Asked whether Scope should change to Champion when a champion commits, since no Scope value fits a committed lead before sponsorship, and suggested splitting the champion's comment in two.",
-    "i4574613411": "Dropped the seven-day objection window; after sponsorship the Maintainers now confirm readiness at their next meeting, and a not-ready decision leaves the FR in Champion scope.",
-    "i4574619493": "Agreed that a contributor's commitment in an FR comment enters Champion scope with the Chair setting Scope to Champion, and adopted the split of the champion's comment.",
-    "i4574623488": "Confirmed the objection bullet is removed and that the FR must not go on a Task Force agenda until the Maintainers decide it is ready.",
-    "i4574633341": "Says the seven-day window is dropped and that they lacked context from the 9 November meeting, so they will adjust the wording.",
-    "i4574736177": "Said approval already means merge-ready, earlier PRs are likely one-time cases, and Champion items follow Core review once on an agenda.",
-    "i4582513381": "Suggests limiting the entry rule to Feature Requests outside Core scope, naming sponsorship as the Task Force route, and asks whether triage should come before Champion entry.",
-    "r5915727548": "Says the Champion Scope section is close, with two wording suggestions and two questions in line comments, and that qquigley's changes answer the earlier points.",
-    "i4582513408": "Suggests replacing official scope with Core scope, the term already defined earlier, so readers do not have to guess that the two mean the same thing.",
-    "i4582513415": "Asks whether a sponsored FR held back by the Maintainers can still come up under A.O.B., and suggests a note on that line to make the answer clear.",
-    "i4582513994": "Accepted the revised approval line, which now only says what an approval does not do, and resolved the thread.",
-    "c6937658045": "Maintainers backed the aim on 16 November, but asked for a worked example, a starting Scope value and how Task Force leads show room; qquigley and Matt-Cowsert will follow up."
+    "i4574613411": "qquigley says the seven-day objection window was dropped; after sponsorship the Maintainers confirm readiness at their next meeting, and a not-ready decision keeps the FR in Champion scope.",
+    "i4574619493": "qquigley agreed to start Champion scope from a contributor's comment committing to lead the work, with the WG Chair setting Scope, and split the champion's comments as suggested.",
+    "i4574623488": "qquigley removed the objection bullet and kept the rule that a Feature Request must not go on a Task Force agenda until the Maintainers decide it is ready.",
+    "i4574633341": "qquigley dropped the seven-day wording, explaining they had missed the 9 November meeting discussion because a notifier only runs on Thursdays.",
+    "i4574736177": "qquigley says approval means ready to merge, older PRs like #2444 are a one-time case needing no special rules, and Champion items on a Task Force agenda follow Core review.",
+    "i4582513381": "Matt-Cowsert proposed adding outside Core scope so Core items with leads are not set to Champion, and asked whether triage must come before entry into Champion scope.",
+    "r5915727548": "Matt-Cowsert calls the section close, with two wording suggestions and two questions, and says the changes answer the earlier review points.",
+    "i4582513408": "Matt-Cowsert suggests replacing the phrase official scope with Core scope in the approval note, since official scope appears nowhere else in the file.",
+    "i4582513415": "Matt-Cowsert asks whether held-back items can still come up under any other business, given the agenda hold and the open any-other-business path, and suggests a note.",
+    "i4582513994": "Matt-Cowsert accepts the approval-wording reply and will resolve the thread, since the approval line now says only what an approval does not do.",
+    "c6937658045": "The 16 November Maintainers discussion broadly backed the idea, asked for one feature request to be walked through the full process, and set three actions for qquigley and Matt-Cowsert."
    },
    "written_by": [
     "claude-haiku-5-5"
@@ -8329,605 +7892,6 @@
    "gists": {
     "o2872": "Draft PR implementing FR #2521 in SKU Price: two Conditional columns, an IncludesContextWindowPricing condition, SkuPriceId requirements and an appendix example, stacked on #2871.",
     "c6872951115": "Snapshot, as of 9 November 2026, of providers and models with context-window pricing, quoting threshold wording only, offered as context for naming those bounds as columns."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2868,
-   "kind": "pr",
-   "title": "AI #2860: Add semantic tag tooling to the specification build",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2868",
-   "state": "open",
-   "labels": [],
-   "author": "finops-DaveMoreau",
-   "opened": "2026-11-13",
-   "last": "2026-11-13T00:20:38Z",
-   "earlier": 0,
-   "objects": [
-    "dataset:BillingPeriod"
-   ],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2860,
-     "title": "[AI] Add semantic tag tooling to the specification build"
-    },
-    {
-     "n": 2779,
-     "title": "[FR] Enable verifiable entity references in specification source"
-    },
-    {
-     "n": 2819,
-     "title": "FR #2779: Tag entity references semantically across the specification"
-    },
-    {
-     "n": 2861,
-     "title": "[AI] Decide the conversion and rendering rules for semantic tags"
-    },
-    {
-     "n": 2862,
-     "title": "[AI] Convert existing references to semantic tags with the translation rules"
-    },
-    {
-     "n": 2863,
-     "title": "[AI] Tag plain Display Names, quoted values, and file datasets with the inference rules"
-    },
-    {
-     "n": 2787,
-     "title": null
-    },
-    {
-     "n": 2867,
-     "title": "[FR] Run unit tests for the repository's Python tooling in CI"
-    }
-   ],
-   "basis": [
-    "o2868"
-   ],
-   "events": [
-    {
-     "id": "o2868",
-     "kind": "opened",
-     "author": "finops-DaveMoreau",
-     "at": "2026-11-13T00:20:38Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2868",
-     "excerpt": "Summary Implements AI 2860 under FR 2779. It brings the semantic tag tooling from the demo (2819) into the specification build, with no change to specification content. Content is converted in later AIs (2861, 2862,…"
-    },
-    {
-     "id": "s6839924261",
-     "kind": "status",
-     "at": "2026-11-13T00:20:58Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2868#issuecomment-6839924261",
-     "lines": [
-      "Initialized PR Approvals: 0",
-      "Initialized PR Change Requests: 0"
-     ]
-    }
-   ],
-   "summary": "This draft, opened by finops-DaveMoreau on 13 November 2026, brings the semantic tag tooling from the demo (#2819) into the specification build under #2779, with no content change. Tags name the entity a reference means and the build turns them into today's links and italics, checking each one. Untagged output should match the base branch byte for byte, so existing links keep working. Open questions are where the tools live, resolving tags before Pandoc, keeping REG016 a warning, and running REG017 before releases. Billing Period was converted in a scratch copy with small rendered differences, and tests pass locally. No one has commented or reviewed yet, so reception is unknown; it is still a draft that the conversions #2861 to #2863 depend on.",
-   "gists": {
-    "o2868": "Opens the draft PR to bring the semantic tag tooling into the build with no content change, lists the open decisions for review, and reports local verification and tests."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2867,
-   "kind": "issue",
-   "title": "[FR] Run unit tests for the repository's Python tooling in CI",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2867",
-   "state": "open",
-   "labels": [
-    "needs triage",
-    "feature"
-   ],
-   "author": "finops-DaveMoreau",
-   "opened": "2026-11-12",
-   "last": "2026-11-12T23:40:20Z",
-   "earlier": 0,
-   "objects": [],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2860,
-     "title": "[AI] Add semantic tag tooling to the specification build"
-    },
-    {
-     "n": 2779,
-     "title": "[FR] Enable verifiable entity references in specification source"
-    }
-   ],
-   "basis": [
-    "o2867"
-   ],
-   "events": [
-    {
-     "id": "o2867",
-     "kind": "opened",
-     "author": "finops-DaveMoreau",
-     "at": "2026-11-12T23:40:20Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2867",
-     "excerpt": "Requester Information Problem Statement The specification is built and checked by Python scripts in this repository, but CI does not test the scripts themselves. On every push, the genpdf job in workingdraft.yml and…"
-    }
-   ],
-   "summary": "finops-DaveMoreau asks that the unit tests for the repository's Python build and check scripts run in CI. Today CI only runs content checks, so a change to a linter or build script can pass and surface later as a build that behaves differently. It wants such tests to run on any pull request changing a script, fail the check when they break, stay apart from content checks, and follow a stated naming pattern. Some tests exist but run only by hand, such as a title-case test that prints rather than asserts and the 48-test semantic suite from #2860. Location, workflow and the title-case conversion are open questions. Opened on 12 November 2026 and tagged as tech debt, with Coinbase rating it nice to have. No replies yet, so the working group's view is unknown.",
-   "gists": {
-    "o2867": "Asked for unit tests of the Python build and check scripts to run in CI, since current CI only tests content and some existing tests run only by hand."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2866,
-   "kind": "issue",
-   "title": "[AI] Align FOCUS entity references and links in the spec with Contributor Guidelines",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2866",
-   "state": "open",
-   "labels": [],
-   "author": "ijurica",
-   "opened": "2026-11-12",
-   "last": "2026-11-12T19:03:05Z",
-   "earlier": 0,
-   "objects": [
-    "dataset:SkuPrice"
-   ],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2772,
-     "title": "[AI] Align references and links in the specification with the contributor guidelines"
-    },
-    {
-     "n": 2773,
-     "title": "AI #2772: Align references and links in the specification with the contributor guidelines"
-    }
-   ],
-   "basis": [
-    "o2866"
-   ],
-   "events": [
-    {
-     "id": "o2866",
-     "kind": "opened",
-     "author": "ijurica",
-     "at": "2026-11-12T19:03:05Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2866",
-     "excerpt": "Detailed Description Review the specification content listed below and fix references (Entity IDs, Display Names, glossary terms, etc.) and links that do not follow the contributor guidelines. This continues 2772 (PR…"
-    },
-    {
-     "id": "s6833153440",
-     "kind": "status",
-     "at": "2026-11-12T19:03:29Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2866#issuecomment-6833153440",
-     "lines": [
-      "Initialized AI Status: Open"
-     ]
-    }
-   ],
-   "summary": "ijurica opened #2866 on 12 November 2026 to align entity references and links in three parts of the specification with the contributor guidelines: the SKU Price dataset, the appendix and supported features. These were skipped in #2772 and PR #2773 to avoid clashing with other open PRs. Focus areas are reference forms in normative requirements, Entity ID and Display Name formatting, first-occurrence linking and link targets. It is explicitly best-effort, so some references may stay unaligned, either pending discussion or following decisions not yet written into the guidelines. In practice this looks like editorial tidying rather than new requirements. The thread has no comments yet, so there is no visible support or pushback. The only stated completion point is a draft PR, which has not been opened yet.",
-   "gists": {
-    "o2866": "ijurica asked to align entity references and links in the SKU Price dataset, appendix and supported features with the contributor guidelines, following #2773; done when a draft PR exists."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2865,
-   "kind": "issue",
-   "title": "[Process] 1.6 Interim Consistency Review",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2865",
-   "state": "open",
-   "labels": [
-    "process"
-   ],
-   "author": "ijurica",
-   "opened": "2026-11-12",
-   "last": "2026-11-12T18:57:13Z",
-   "earlier": 0,
-   "objects": [],
-   "files_matched": false,
-   "refs": [],
-   "basis": [
-    "o2865"
-   ],
-   "events": [
-    {
-     "id": "o2865",
-     "kind": "opened",
-     "author": "ijurica",
-     "at": "2026-11-12T18:57:13Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2865",
-     "excerpt": "Description This is a placeholder task to group editorial alignment Action Items during 1.6 development, ahead of the Final Consistency Review v1.6 (2027-03-25 to 2027-04-15). It covers changes that bring existing…"
-    }
-   ],
-   "summary": "This is a placeholder issue opened by ijurica on 12 November 2026 to collect editorial alignment action items from 1.6 development. The aim is to bring existing specification wording into line with the contributor guidelines without changing what the specification means, so the changes are editorial rather than substantive. It is meant to track those items ahead of the Final Consistency Review for v1.6, which runs from 25 March 2027 to 15 April 2027. The only completion condition given is that every associated alignment action item is either completed or otherwise resolved. The only activity in the last two weeks is the opening description, so no one has discussed it yet, and no specific edits are named here.",
-   "gists": {
-    "o2865": "Opened the placeholder issue by ijurica to group editorial alignment action items for 1.6 so existing content matches the contributor guidelines without changing meaning."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2864,
-   "kind": "pr",
-   "title": "AI #2849: Add 1.5 errata",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2864",
-   "state": "draft",
-   "labels": [],
-   "author": "Matt-Cowsert",
-   "opened": "2026-11-12",
-   "last": "2026-11-12T18:48:55Z",
-   "earlier": 0,
-   "objects": [
-    "column:SkuPrice.ContractId",
-    "column:InvoiceDetail.PaymentCurrency",
-    "dataset:SkuPrice"
-   ],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2849,
-     "title": "[AI] Track the 1.5 errata from Maintainer assessment to one errata PR"
-    },
-    {
-     "n": 2837,
-     "title": "[Feedback] Correct the Payment Currency, Contract ID, and Time Sector End requirements"
-    },
-    {
-     "n": 2836,
-     "title": "[Editorial] Correct casing, IDs, and links in 1.5 requirement text"
-    },
-    {
-     "n": 2880,
-     "title": "Editorial #2836: Correct casing, IDs, and links in 1.5 requirement text"
-    },
-    {
-     "n": 12,
-     "title": null
-    },
-    {
-     "n": 15,
-     "title": "Generate Service Category normalized values"
-    },
-    {
-     "n": 2783,
-     "title": null
-    },
-    {
-     "n": 2881,
-     "title": "Feedback #2783: Skip null values in the 1.5 CommitmentDiscount allowed-values rules"
-    },
-    {
-     "n": 16,
-     "title": null
-    },
-    {
-     "n": 13,
-     "title": null
-    },
-    {
-     "n": 14,
-     "title": "Create a Service Category normalized dimension"
-    },
-    {
-     "n": 2821,
-     "title": "[Feedback] Replace undefined Entry references in Requester Details object requirements"
-    }
-   ],
-   "basis": [
-    "o2864"
-   ],
-   "events": [
-    {
-     "id": "o2864",
-     "kind": "opened",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-12T18:48:55Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2864",
-     "excerpt": "Summary This draft PR sets out the 1.5 errata tracked in 2849. It adds a Version 1.5 section to ERRATA.md with one row for each correction that stays an erratum after the Nov 16 Maintainers review. The Nov 16…"
-    },
-    {
-     "id": "s6832830508",
-     "kind": "status",
-     "at": "2026-11-12T18:49:17Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2864#issuecomment-6832830508",
-     "lines": [
-      "Initialized PR Approvals: 0",
-      "Initialized PR Change Requests: 0"
-     ]
-    }
-   ],
-   "summary": "Matt-Cowsert opened this draft PR to set out the scope of the 1.5 errata tracked in #2849 for Maintainer assessment. It adds a Version 1.5 section to ERRATA.md with one row per correction from #2836, #2837 and #2783, so the Maintainers can assess them in final form. Nothing carries the errata label yet, and the PR merges only after 1.5 is published. Flagged for the Maintainers: whether the lowercase 'must' in row #3 is a typo or needs a Feature Request, whether the anchor rename in row #8 is worth breaking existing links, and that rows #13 and #14 stand or fall with rows #1 and #2. Section numbers, fix PRs and SkuPrice rules are left for later. No one has reacted yet, so the group's view is unknown and the PR awaits Maintainer assessment.",
-   "gists": {
-    "o2864": "Opened the draft adding a Version 1.5 section to ERRATA.md with a row per current candidate, flagging rows #3, #8, #13 and #14 for Maintainer assessment."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2863,
-   "kind": "issue",
-   "title": "[AI] Tag plain Display Names, quoted values, and file datasets with the inference rules",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2863",
-   "state": "open",
-   "labels": [],
-   "author": "finops-DaveMoreau",
-   "opened": "2026-11-12",
-   "last": "2026-11-12T03:15:19Z",
-   "earlier": 0,
-   "objects": [],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2779,
-     "title": "[FR] Enable verifiable entity references in specification source"
-    },
-    {
-     "n": 2862,
-     "title": "[AI] Convert existing references to semantic tags with the translation rules"
-    },
-    {
-     "n": 2861,
-     "title": "[AI] Decide the conversion and rendering rules for semantic tags"
-    }
-   ],
-   "basis": [
-    "o2863"
-   ],
-   "events": [
-    {
-     "id": "o2863",
-     "kind": "opened",
-     "author": "finops-DaveMoreau",
-     "at": "2026-11-12T03:15:19Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2863",
-     "excerpt": "Action Item Details Parent Issue: 2779 Depends on: AI 2862 Detailed Description After the translations, many references are still plain text. Today's markup doesn't identify them, but their context does: Display Names…"
-    },
-    {
-     "id": "s6813309598",
-     "kind": "status",
-     "at": "2026-11-12T03:15:35Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2863#issuecomment-6813309598",
-     "lines": [
-      "Initialized AI Status: Open",
-      "Initialized Task Force: TF-Supporting"
-     ]
-    }
-   ],
-   "summary": "AI #2863 proposes switching on three inference rules approved in #2861 and running them over the files translated under #2862. The rules tag references that are plain text today but identifiable from context: Display Names written as plain words, quoted allowed values, and shared ColumnIds in files without their own dataset. Inferences stay separate from translations so a wrong guess can be reverted alone. Each of the 56 inferred datasets in mixed files needs an area reviewer's confirmation or removal. The PR should change no visible words, though the rendered spec.md differs on many lines and gains links. Semantic review follows in later AIs under #2779. The thread has no comments since it opened on 12 November 2026, so no reaction exists yet; it is assigned to the TF-Supporting task force.",
-   "gists": {
-    "o2863": "Sets out the work: run the approved inference rules on the #2862 files, list review evidence per rule, confirm or remove each inferred dataset, and show no visible word change."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2862,
-   "kind": "issue",
-   "title": "[AI] Convert existing references to semantic tags with the translation rules",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2862",
-   "state": "open",
-   "labels": [],
-   "author": "finops-DaveMoreau",
-   "opened": "2026-11-12",
-   "last": "2026-11-12T03:15:18Z",
-   "earlier": 0,
-   "objects": [
-    "dataset:SkuPrice"
-   ],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2779,
-     "title": "[FR] Enable verifiable entity references in specification source"
-    },
-    {
-     "n": 2861,
-     "title": "[AI] Decide the conversion and rendering rules for semantic tags"
-    },
-    {
-     "n": 2735,
-     "title": "[AI] Align the SKU Price record wording across the SKU Price dataset"
-    },
-    {
-     "n": 2787,
-     "title": null
-    }
-   ],
-   "basis": [
-    "o2862"
-   ],
-   "events": [
-    {
-     "id": "o2862",
-     "kind": "opened",
-     "author": "finops-DaveMoreau",
-     "at": "2026-11-12T03:15:18Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2862",
-     "excerpt": "Action Item Details Parent Issue: 2779 Depends on: AI 2861 Detailed Description This AI runs the translation rules approved in AI 2861 (entity links, italic glossary terms, and plain entity IDs) over the specification,…"
-    },
-    {
-     "id": "s6813309508",
-     "kind": "status",
-     "at": "2026-11-12T03:15:35Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2862#issuecomment-6813309508",
-     "lines": [
-      "Initialized AI Status: Open",
-      "Initialized Task Force: TF-Supporting"
-     ]
-    }
-   ],
-   "summary": "finops-DaveMoreau proposes running the translation rules approved in #2861 over the specification, converting entity links, italic glossary terms and plain entity IDs into semantic tags and marking each kind as mechanical so CI keeps it converted. The conversion copies what the markup says now and corrects nothing. A first mention that will link to the glossary rather than the record #2735 describes is left for a separate change. The proposal is one PR for every kind and file, timed with maintainers, with one PR per area as the alternative. It changes 689 rendered lines but no visible words, and leaves 234 items open, mostly ColumnIds defined in several datasets. Checks show no errors and 20 warnings that reflect existing source disagreements. The thread is new, opened 12 November 2026 and assigned to TF-Supporting, with no discussion or reaction yet.",
-   "gists": {
-    "o2862": "Proposes running the #2861 translation rules over the specification as one PR covering every kind and file, carrying over current markup without corrections."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2861,
-   "kind": "issue",
-   "title": "[AI] Decide the conversion and rendering rules for semantic tags",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2861",
-   "state": "open",
-   "labels": [],
-   "author": "finops-DaveMoreau",
-   "opened": "2026-11-12",
-   "last": "2026-11-12T03:15:16Z",
-   "earlier": 0,
-   "objects": [
-    "dataset:SkuPrice",
-    "column:CostAndUsage.ChargeClass",
-    "column:CostAndUsage.ServiceCategory",
-    "dataset:CostAndUsage",
-    "dataset:ContractCommitment",
-    "column:ContractCommitment.ContractPeriodStart",
-    "dataset:BillingPeriod",
-    "column:BillingPeriod.BillingPeriodStatus"
-   ],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2779,
-     "title": "[FR] Enable verifiable entity references in specification source"
-    },
-    {
-     "n": 2860,
-     "title": "[AI] Add semantic tag tooling to the specification build"
-    },
-    {
-     "n": 2735,
-     "title": "[AI] Align the SKU Price record wording across the SKU Price dataset"
-    },
-    {
-     "n": 2514,
-     "title": null
-    },
-    {
-     "n": 2765,
-     "title": "AI #2486-Ext: Review changes to entity reference and linking rules proposed in #2514"
-    }
-   ],
-   "basis": [
-    "o2861"
-   ],
-   "events": [
-    {
-     "id": "o2861",
-     "kind": "opened",
-     "author": "finops-DaveMoreau",
-     "at": "2026-11-12T03:15:16Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2861",
-     "excerpt": "Action Item Details Parent Issue: 2779 Depends on: AI 2860 Detailed Description Converting the specification to semantic tags touches more than 300 files, which is too many to review line by line. Instead, the Working…"
-    },
-    {
-     "id": "s6813309329",
-     "kind": "status",
-     "at": "2026-11-12T03:15:34Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2861#issuecomment-6813309329",
-     "lines": [
-      "Initialized AI Status: Open",
-      "Initialized Task Force: TF-Supporting"
-     ]
-    }
-   ],
-   "summary": "Opened by finops-DaveMoreau on 12 November 2026 under #2779, this issue writes down the rules for converting the specification to semantic tags, so the Working Group approves each rule once rather than reviewing 300-plus files line by line. Conversion rules decide which text becomes which tag; rendering rules decide how tags appear in the published specification, so they touch every tag. Translations carry over existing markup, wrong links included, and account for 6,841 tags in 332 files. Inferences go further: plain Display Name matching adds 866 tags in 231 files, with Title Case words meaning a concept rather than a column as the main risk. Each rule becomes a separate converter switch, and later conversion PRs would be checked only against approved rules. Nobody has commented yet, so there is no reaction to read; the issue depends on #2860.",
-   "gists": {
-    "o2861": "Sets out writing down conversion and rendering rules for semantic tags, each approved once with examples, counts and failure modes, since 300-plus files are too many to review individually."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
-   "number": 2860,
-   "kind": "issue",
-   "title": "[AI] Add semantic tag tooling to the specification build",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2860",
-   "state": "open",
-   "labels": [],
-   "author": "finops-DaveMoreau",
-   "opened": "2026-11-12",
-   "last": "2026-11-12T03:15:03Z",
-   "earlier": 0,
-   "objects": [
-    "column:CostAndUsage.BilledCost"
-   ],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2779,
-     "title": "[FR] Enable verifiable entity references in specification source"
-    },
-    {
-     "n": 2819,
-     "title": "FR #2779: Tag entity references semantically across the specification"
-    },
-    {
-     "n": 2669,
-     "title": null
-    },
-    {
-     "n": 2787,
-     "title": null
-    },
-    {
-     "n": 2867,
-     "title": "[FR] Run unit tests for the repository's Python tooling in CI"
-    }
-   ],
-   "basis": [
-    "o2860"
-   ],
-   "events": [
-    {
-     "id": "o2860",
-     "kind": "opened",
-     "author": "finops-DaveMoreau",
-     "at": "2026-11-12T03:15:03Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2860",
-     "excerpt": "Action Item Details Parent Issue: 2779 Detailed Description FR 2779 proposes semantic tags, such as BilledCost and charges, that name the entity a reference means. The build resolves each tag to today's link and italics…"
-    },
-    {
-     "id": "s6813306265",
-     "kind": "status",
-     "at": "2026-11-12T03:15:22Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2860#issuecomment-6813306265",
-     "lines": [
-      "Initialized AI Status: Open"
-     ]
-    },
-    {
-     "id": "s6813451814",
-     "kind": "status",
-     "at": "2026-11-12T03:24:50Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/issues/2860#issuecomment-6813451814",
-     "lines": [
-      "finops-DaveMoreau updated Critical Path: Yes"
-     ]
-    }
-   ],
-   "summary": "finops-DaveMoreau opened this action item to bring the semantic tag tooling from the #2779 demo into the specification build, with no change to specification content. Tags such as column and term references are resolved to today's link and italics conventions and checked; the registry and resolver come with tests. The change is meant to be backwards compatible: with no tags the output stays identical, and tagged and hand-written links can coexist. Converting the specification would follow in separate reviewable steps, each recording conversion progress per tag kind. Two open decisions are flagged, on tool location and whether spec.md resolves tags before Pandoc; the description cuts off there. Opened 12 November 2026 and marked critical path. No comments or reactions yet, so the working group's view is not visible.",
-   "gists": {
-    "o2860": "Opens the action item to add the semantic tag tooling to the build without content change, noting backwards compatibility and two open decisions on tool location and tag resolution."
    },
    "written_by": [
     "claude-haiku-5-5"

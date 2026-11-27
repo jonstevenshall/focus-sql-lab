@@ -1,6 +1,110 @@
 {
  "runs": [
   {
+   "at": "2026-11-27T02:25:00Z",
+   "task": "open-requests",
+   "model": "claude-haiku-5-5",
+   "effort": "high",
+   "fallback": "claude-sonnet-5-5",
+   "threads": 252,
+   "kept": 246,
+   "attempted": 6,
+   "first_pass": 6,
+   "escalated": 0,
+   "escalated_passed": 0,
+   "failed": 0,
+   "escalated_pct": 0.0,
+   "left": 0,
+   "spend": {
+    "claude-haiku-5-5": {
+     "input": 17491,
+     "output": 12650,
+     "cost": 0.0081,
+     "price": [
+      0.1,
+      0.5
+     ]
+    }
+   },
+   "cost": 0.0081,
+   "estimate": {
+    "input": 17300,
+    "output": 12489,
+    "cost": 0.0095
+   },
+   "escalations": [],
+   "trigger": "schedule",
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/45927753763"
+  },
+  {
+   "at": "2026-11-27T02:23:40Z",
+   "task": "daily",
+   "model": "claude-haiku-5-5",
+   "effort": "high",
+   "fallback": "claude-sonnet-5-5",
+   "reviewer": "claude-haiku-5-5",
+   "days": 1,
+   "threads": 1,
+   "items": 1,
+   "attempted": 1,
+   "first_pass": 1,
+   "escalated": 0,
+   "escalated_passed": 0,
+   "failed": 0,
+   "escalated_pct": 0.0,
+   "spend": {
+    "claude-haiku-5-5": {
+     "input": 4346,
+     "output": 1566,
+     "cost": 0.0012,
+     "price": [
+      0.1,
+      0.5
+     ]
+    }
+   },
+   "cost": 0.0012,
+   "estimate": {
+    "input": 7513,
+    "output": 4194,
+    "cost": 0.0045
+   },
+   "escalations": [],
+   "trigger": "schedule",
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/45927753763"
+  },
+  {
+   "at": "2026-11-27T02:23:29Z",
+   "task": "recent",
+   "model": "claude-haiku-5-5",
+   "effort": "high",
+   "fallback": "claude-sonnet-5-5",
+   "threads": 74,
+   "kept": 69,
+   "attempted": 5,
+   "first_pass": 5,
+   "escalated": 0,
+   "escalated_passed": 0,
+   "failed": 0,
+   "escalated_pct": 0.0,
+   "partly": 0,
+   "spend": {
+    "claude-haiku-5-5": {
+     "input": 35567,
+     "output": 31341,
+     "cost": 0.0192,
+     "price": [
+      0.1,
+      0.5
+     ]
+    }
+   },
+   "cost": 0.0192,
+   "escalations": [],
+   "trigger": "schedule",
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/45927753763"
+  },
+  {
    "at": "2026-11-27T01:51:48Z",
    "task": "rebuild",
    "spec": "87fcbc8",
