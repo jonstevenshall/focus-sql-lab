@@ -1,10 +1,720 @@
 {
- "generated_at": "2026-11-27T02:20:50Z",
- "since": "2026-11-13T02:20:50Z",
+ "generated_at": "2026-11-28T02:06:01Z",
+ "since": "2026-11-14T02:06:01Z",
  "days": 14,
  "model": "claude-haiku-5-5",
  "about": "FOCUS_Spec issues and pull requests that people opened, commented on or reviewed in the last 14 days. Each summary (what is proposed and why, where the debate lies, how people feel and where it stands) and each one-line gist is written by an AI model from the thread and the issue it implements, and rewritten when the thread gains comments or reviews: they interpret, so check the thread before relying on one. Status changes are posted by the repository's own automation.",
  "threads": [
+  {
+   "number": 2848,
+   "kind": "pr",
+   "title": "AI #2847: Restructure the Editorial Guidelines and align the AGENTS.md grouping",
+   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848",
+   "state": "draft",
+   "labels": [],
+   "author": "ijurica",
+   "opened": "2026-11-10",
+   "last": "2026-11-27T17:15:04Z",
+   "earlier": 1,
+   "objects": [
+    "column:CostAndUsage.BilledCost",
+    "column:CostAndUsage.ContractedCost",
+    "column:CostAndUsage.ChargeCategory",
+    "column:SkuPrice.ContractId",
+    "column:CostAndUsage.CommitmentDiscountId",
+    "column:CostAndUsage.SkuPriceId",
+    "column:BillingPeriod.BillingPeriodLastUpdated",
+    "column:BillingPeriod.BillingPeriodCreated",
+    "column:CostAndUsage.SkuPriceDetails",
+    "column:CostAndUsage.EffectiveCost"
+   ],
+   "files_matched": false,
+   "refs": [
+    {
+     "n": 2847,
+     "title": null
+    },
+    {
+     "n": 2886,
+     "title": "AI 2847 reply to Irena's editorial proposal"
+    },
+    {
+     "n": 2108,
+     "title": null
+    }
+   ],
+   "basis": [
+    "i4612739091",
+    "i4612750392",
+    "i4666886126",
+    "i4666948582",
+    "i4667056310",
+    "i4667097772",
+    "i4667140541",
+    "i4667293965",
+    "i4668104041",
+    "i4668214846",
+    "i4668247208",
+    "i4668331963",
+    "i4668449121",
+    "i4668510222",
+    "i4668606483",
+    "i4668700280",
+    "i4668832752",
+    "i4668865286",
+    "i4669120972",
+    "i4669162502",
+    "i4669262313",
+    "i4669359019",
+    "i4669490413",
+    "i4669523304",
+    "i4669533317",
+    "i4669631520",
+    "i4669745281",
+    "i4669783405",
+    "i4669852064",
+    "i4669887900",
+    "i4669940048",
+    "i4669994015",
+    "i4670010986",
+    "i4670060385",
+    "i4685088515",
+    "i4685102429",
+    "i4685640388",
+    "i4686011888",
+    "i4715099686",
+    "i4715378916",
+    "i4715814772",
+    "i4715836097",
+    "i4715860363",
+    "i4715907212",
+    "i4715963340",
+    "i4716301685",
+    "i4716494042",
+    "i4716528805",
+    "i4716622070",
+    "i4716623979",
+    "i4716943687",
+    "i4720351657",
+    "i4721738936",
+    "i4722013479",
+    "i4722072327"
+   ],
+   "events": [
+    {
+     "id": "i4612739091",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-18T10:55:11Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4612739091",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4612750392",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-18T10:56:06Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4612750392",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4666886126",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T14:06:12Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4666886126",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4666948582",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T14:11:14Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4666948582",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4667056310",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T14:20:09Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4667056310",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4667097772",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T14:23:42Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4667097772",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4667140541",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T14:27:19Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4667140541",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4667293965",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T14:39:52Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4667293965",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4668104041",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T15:43:16Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668104041",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4668214846",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T15:51:49Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668214846",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4668247208",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T15:54:08Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668247208",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4668331963",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T16:00:36Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668331963",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4668449121",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T16:09:57Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668449121",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4668510222",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T16:14:49Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668510222",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4668606483",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T16:22:30Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668606483",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4668700280",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T16:29:51Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668700280",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4668832752",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T16:40:31Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668832752",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4668865286",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T16:43:12Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668865286",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4669120972",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T17:03:38Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669120972",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4669162502",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T17:06:52Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669162502",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4669262313",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T17:15:00Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669262313",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4669359019",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T17:21:51Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669359019",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4669490413",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T17:31:44Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669490413",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4669523304",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T17:34:11Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669523304",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4669533317",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T17:34:54Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669533317",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4669631520",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T17:42:36Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669631520",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4669745281",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T17:51:40Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669745281",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4669783405",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T17:54:41Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669783405",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": "text { \"ProviderName\": \"Microsoft\", \"BilledCost\": 100, ... }"
+    },
+    {
+     "id": "i4669852064",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T18:00:18Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669852064",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4669887900",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T18:03:18Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669887900",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4669940048",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T18:08:02Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669940048",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4669994015",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T18:12:30Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669994015",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4670010986",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T18:13:58Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4670010986",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4670060385",
+     "kind": "inline",
+     "author": "jpradocueva",
+     "at": "2026-11-23T18:18:14Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4670060385",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4685088515",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-24T19:03:52Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4685088515",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": "i4667097772",
+     "excerpt": "I'd prefer to keep this PR within the scope of 2847, which it resolves: rules are moved between sections, not rewritten. Where a change would set new requirements, I'd stay as close to the workingdraft text as possible.…"
+    },
+    {
+     "id": "i4685102429",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-24T19:04:59Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4685102429",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": "i4667140541",
+     "excerpt": "This proposal refers to \"the titles listed above\", which are the fixed subsections listed in the proposal for Consistent Subsection Order. As in my reply on Consistent Subsection Order, I'd suggest addressing the names…"
+    },
+    {
+     "id": "i4685640388",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-24T19:49:53Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4685640388",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": "i4668214846",
+     "excerpt": "I'd prefer to keep this within the scope of 2847 and stay close to the workingdraft text. As for the proposal itself: dropping \"when available\" makes the rule unconditional, but not every FOCUS entity has a Display…"
+    },
+    {
+     "id": "i4686011888",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-24T20:20:51Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4686011888",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": "i4668247208",
+     "excerpt": "I'd prefer to keep this within the scope of 2847 and stay close to the workingdraft text. As for the proposal itself: Attribute Name is not the only case: metadata objects use Metadata Name, and objects use Object…"
+    },
+    {
+     "id": "i4715099686",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T02:31:56Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4715099686",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": "i4668104041",
+     "excerpt": "Follow-up on my reply above: Initially, I planned to make an exception and accept this proposal in a slightly modified form. On a closer look, the proposal needs further work, so I'll keep the workingdraft text in step…"
+    },
+    {
+     "id": "i4715378916",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T03:25:48Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4715378916",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": "i4667293965",
+     "excerpt": "While I understand the idea, I'd keep the workingdraft text here since this introduces a new MUST, which goes beyond the scope of 2847 (see the Approach in the PR description). I've posted feedback on A-27 in the…"
+    },
+    {
+     "id": "i4715814772",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T04:55:21Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4715814772",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4715836097",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T04:59:15Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4715836097",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4715860363",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T05:03:59Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4715860363",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4715907212",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T05:12:54Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4715907212",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": "i4668449121",
+     "excerpt": "Thanks, this documents what the build already checks (specification/tests/testspeclinks.py), so I've accepted it as an exception to the scope of 2847, with some changes: I've stated the scope as part of the rule instead…"
+    },
+    {
+     "id": "i4715963340",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T05:23:38Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4715963340",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": ""
+    },
+    {
+     "id": "i4716301685",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T06:21:34Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4716301685",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": "i4668331963",
+     "excerpt": "While I agree with the direction, I think this needs further discussion which goes beyond the scope of 2847 (see the Approach in the PR description), so I'd keep the workingdraft text here and postpone this change. A…"
+    },
+    {
+     "id": "i4716494042",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T06:54:30Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4716494042",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": "i4669359019",
+     "excerpt": "Good catch! What about this? clearly associated vs directly associated: directly might suggest a structural or physical link. placed vs appear: placed seems a bit more precise for the position. after it vs after the…"
+    },
+    {
+     "id": "i4716528805",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T07:00:07Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4716528805",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": "i4669490413",
+     "excerpt": "Thanks! I'd only drop \"a single line of\", as \"on the same line as the label\" already implies it: @jpradocueva if this works for you, please resolve this thread."
+    },
+    {
+     "id": "i4716622070",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T07:14:51Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4716622070",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": "i4669631520",
+     "excerpt": "Thanks. Since the notes have no anchors of their own, I'd point the link to the headings they sit under. I'm posting two options for the wording; Option 1:"
+    },
+    {
+     "id": "i4716623979",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T07:15:09Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4716623979",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": "i4669631520",
+     "excerpt": "Option 2: @jpradocueva which one do you prefer?"
+    },
+    {
+     "id": "i4716943687",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T08:01:18Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4716943687",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": "i4668510222",
+     "excerpt": "I agree that we should use one form, and I'm fine with \"be equal to\", as it is consistent with the other comparisons, which all use \"be\" (e.g., \"MUST be greater than or equal to\", \"MUST be 0\"). For the wording, I'd…"
+    },
+    {
+     "id": "i4720351657",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T14:08:01Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4720351657",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": "i4668606483",
+     "excerpt": "While I agree with the idea of explicitly listing forms to avoid, I think applying such a list is more complicated than it may initially seem. I'd therefore keep the workingdraft text for now, as this needs further work…"
+    },
+    {
+     "id": "i4721738936",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T16:34:12Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4721738936",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": "i4668700280",
+     "excerpt": "Thanks. I agree with the formatting issue in the label you raised in 2886, so I'd fix it here, keeping the content as it is: the colon moves inside the bold label, as in the other labels. I think the proposed additions…"
+    },
+    {
+     "id": "i4722013479",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T17:07:31Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4722013479",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": null,
+     "excerpt": "I agree that the NRG guidance is repeated across the two sentences and the \"Entity ID References\" bullet, and that the boundary between the two documents (A-05) should be stated. The bullet also conflicts with A-05, as…"
+    },
+    {
+     "id": "i4722072327",
+     "kind": "inline",
+     "author": "ijurica",
+     "at": "2026-11-27T17:15:04Z",
+     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4722072327",
+     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
+     "parent": "i4666948582",
+     "excerpt": "Thanks. In 2886 you proposed replacing both sentences and the \"Entity ID References\" bullet, so I assume the suggestion here was meant to cover all three. As a suggestion on this line replaces only the second sentence,…"
+    }
+   ],
+   "summary": "ijurica's draft PR restructures the Editorial Guidelines, and this thread is review of its step 1 file, which follows the structure from jpradocueva's Editorial Guidelines Review. Most comments are jpradocueva proposing new or tighter rules on entity IDs and display names, linking, numbers, quotes, notes, exceptions, JSON, SQL and table formatting. ijurica's position is that this PR only moves rules within #2847, so most proposals keep the existing working_draft text and are deferred to follow-up items such as #2108 and the review's A-numbered points. The one accepted addition is an internal link rule documented as a scope exception, since it describes what the build already checks. Other proposals are awaiting jpradocueva's reply. Many threads are still open, and ijurica plans to answer all of them by 26 November 2026, with the PR staying in draft until then.",
+   "gists": {
+    "i4612739091": "Suggests adding two commented-out table of contents entries for Supported Features Editorial Rules and Retired Rule IDs (Optional).",
+    "i4612750392": "Suggests commenting out the Supported Features Editorial Rules heading as a placeholder until that section has content.",
+    "i4666886126": "Proposes rewording the introduction to say the guidelines ensure consistent, clear, professional documentation, with no change to any rule.",
+    "i4666948582": "Proposes that authors write normative requirements per the Normative Requirements Guidelines, with this document governing formatting, punctuation and comparison wording.",
+    "i4667056310": "Proposes that the rules apply to all FOCUS entities and notes that guideline documents follow them where applicable, with two known exceptions.",
+    "i4667097772": "Proposes a fixed subsection order for column and attribute files, starting with Requirements and ending with the ID, name, description and version fields.",
+    "i4667140541": "Proposes that fixed subsection titles use exactly the listed names.",
+    "i4667293965": "Proposes that normative BCP-14 keywords appear only in Requirements sections, and that object sections defining requirements have a Requirements subsection.",
+    "i4668104041": "Proposes that entity IDs be written exactly as in the ID section, including letter case, such as CommitmentDiscountId.",
+    "i4668214846": "Proposes that non-normative prose refer to entities by Display Name, excluding Requirements, ID sections, Content Constraints tables and code.",
+    "i4668247208": "Proposes that Display Names be spelled exactly as in the entity's Display Name section, with the Attribute Name section counting for attributes.",
+    "i4668331963": "Proposes linking only the first occurrence of each entity reference, IDs and Display Names counted together, with headings, code and own-definition files excluded and Content Constraints and Glossary as exceptions.",
+    "i4668449121": "Proposes that every internal anchor or relative link must resolve in the built specification, with external URLs not checked.",
+    "i4668510222": "Proposes using 'be equal to' for numeric comparisons and avoiding 'equal', 'equals' or 'match' so the wording is consistent.",
+    "i4668606483": "Proposes using 'greater than or equal to' and 'less than or equal to' for limits, and avoiding 'at least', 'no more than', 'no less than' and '>='.",
+    "i4668700280": "Proposes spelling out zero to nine and using numerals from 10 up, plus extra numeral rules for units, versions, requirements, code and sentences already using a large numeral.",
+    "i4668832752": "Proposes that HTML entities and special Unicode dashes not be used, with an example showing a plain hyphen.",
+    "i4668865286": "Proposes straight quotes and three periods only, prohibiting smart quotes and the ellipsis character.",
+    "i4669120972": "Proposes that notes use Markdown blockquotes and that blockquotes be used only for notes.",
+    "i4669162502": "Proposes that notes begin with Note, Notes or Preview labels only, with Preview reserved for preview content and no other labels allowed.",
+    "i4669262313": "Proposes that exception callouts appear only in guideline documents and non-normative text, with requirements using when or unless for conditions.",
+    "i4669359019": "Proposes that exceptions be directly associated with the content they modify and placed immediately after it.",
+    "i4669490413": "Proposes that a single-statement exception be written as one line of plain text on the same line as its label.",
+    "i4669523304": "Suggests adding an exception that the rule does not apply when ChargeCategory is Adjustment.",
+    "i4669533317": "Suggests adding an exception that the rule does not apply when ChargeCategory is Tax.",
+    "i4669631520": "Proposes that the Conventions section in the overview identify the same headings and exceptions as the notes, and link to each note.",
+    "i4669745281": "Proposes that every json-fenced block must parse as valid JSON.",
+    "i4669783405": "Proposes that shortened samples using ellipses or comments use a text fence, and gives an example of one.",
+    "i4669852064": "Proposes two-space JSON indentation and no leading offset, so the opening brace or bracket starts the line.",
+    "i4669887900": "Proposes that SQL blocks in datasets and supported features be valid, use only FOCUS Column IDs, custom x_ columns or query-defined names, and use question marks for reader values.",
+    "i4669940048": "Suggests labeling the example as HTML, illustrative.",
+    "i4669994015": "Proposes padding Markdown tables so pipes align when the longest raw line is under 120 characters.",
+    "i4670010986": "Proposes that tables with lines of 120 characters or more use exactly one space after each value.",
+    "i4670060385": "Suggests deleting a line, with no replacement text.",
+    "i4685088515": "Keeps the Consistent Subsection Order rule as drafted, only correcting its example headings, and defers the canonical order to #2108 to keep scope to moves.",
+    "i4685102429": "Keeps the working draft for subsection titles, arguing names and order should be addressed together through #2108.",
+    "i4685640388": "Keeps the working draft for display names, noting some entities such as object properties have no name section, so they need a name or an explicit exclusion.",
+    "i4686011888": "Keeps the working draft for display name spelling, noting name sections differ by entity type and the spec uses shortened forms and plurals, so these need deciding first.",
+    "i4715099686": "Keeps the working draft for entity ID naming because some entities lack an ID section; also agrees grammatical number should never change an ID.",
+    "i4715378916": "Keeps the working draft for subsection order, since it adds a new MUST beyond scope and column subsection naming belongs in #2108.",
+    "i4715814772": "Suggests an HTML comment marking a link target addition as not part of the proposal, traced to the linking items in the review.",
+    "i4715836097": "Proposes a Glossary Link Targets rule requiring glossary links to point to their glossary entry, and adds the internal links rule as a documented scope exception.",
+    "i4715860363": "Suggests deleting a line, with no replacement text.",
+    "i4715907212": "Accepts the internal links rule as a scope exception, with its scope stated in the rule, and asks jpradocueva to resolve the thread if it works.",
+    "i4715963340": "Suggests deleting a line, with no replacement text.",
+    "i4716301685": "Keeps the working draft for first-occurrence linking, saying the proposal needs separate rules for what counts as a reference, areas like the appendix, glossary wording and section links.",
+    "i4716494042": "Suggests rewording the exception placement rule to say exceptions are clearly associated with and placed after the content they modify, for more precision.",
+    "i4716528805": "Suggests dropping 'a single line of' from the single-line exception rule, since 'on the same line as the label' already implies it.",
+    "i4716622070": "Offers option 1 for the Conventions rule, linking to the respective headings because notes have no anchors of their own.",
+    "i4716623979": "Offers option 2 for the Conventions rule, linking to each heading, and asks which option jpradocueva prefers.",
+    "i4716943687": "Agrees with 'be equal to' but suggests narrower wording for numeric values, while keeping the working draft because the NRG uses 'MUST equal' and both should change together.",
+    "i4720351657": "Keeps the working draft for inequality wording, noting 'at least' is used in five requirements and counts need exclusions, so the forbidden list needs more work.",
+    "i4721738936": "Fixes the colon placement in the number label and keeps the spelling-out content, but postpones the proposed number additions, listing issues such as inconsistent numerals across sentences.",
+    "i4722013479": "Proposes a single merged Normative Requirements rule, replacing three proposed sentences and bullet, stating the boundary with the NRG, and asks for agreement.",
+    "i4722072327": "Notes the earlier suggestion covered only one sentence, posts an alternative covering all three, and proposes listing it as a scope exception."
+   },
+   "written_by": [
+    "claude-haiku-5-5"
+   ],
+   "style": 2
+  },
   {
    "number": 2887,
    "kind": "issue",
@@ -1681,522 +2391,6 @@
    "style": 2
   },
   {
-   "number": 2848,
-   "kind": "pr",
-   "title": "AI #2847: Restructure the Editorial Guidelines and align the AGENTS.md grouping",
-   "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848",
-   "state": "draft",
-   "labels": [],
-   "author": "ijurica",
-   "opened": "2026-11-10",
-   "last": "2026-11-24T20:20:51Z",
-   "earlier": 1,
-   "objects": [
-    "column:CostAndUsage.BilledCost",
-    "column:CostAndUsage.CommitmentDiscountId",
-    "column:CostAndUsage.SkuPriceId",
-    "column:CostAndUsage.ChargeCategory",
-    "column:CostAndUsage.ContractedCost",
-    "column:BillingPeriod.BillingPeriodLastUpdated",
-    "column:BillingPeriod.BillingPeriodCreated",
-    "column:SkuPrice.ContractId"
-   ],
-   "files_matched": false,
-   "refs": [
-    {
-     "n": 2847,
-     "title": null
-    },
-    {
-     "n": 2886,
-     "title": "AI 2847 reply to Irena's editorial proposal"
-    },
-    {
-     "n": 2108,
-     "title": null
-    }
-   ],
-   "basis": [
-    "i4612739091",
-    "i4612750392",
-    "i4666886126",
-    "i4666948582",
-    "i4667056310",
-    "i4667097772",
-    "i4667140541",
-    "i4667293965",
-    "i4668104041",
-    "i4668214846",
-    "i4668247208",
-    "i4668331963",
-    "i4668449121",
-    "i4668510222",
-    "i4668606483",
-    "i4668700280",
-    "i4668832752",
-    "i4668865286",
-    "i4669120972",
-    "i4669162502",
-    "i4669262313",
-    "i4669359019",
-    "i4669490413",
-    "i4669523304",
-    "i4669533317",
-    "i4669631520",
-    "i4669745281",
-    "i4669783405",
-    "i4669852064",
-    "i4669887900",
-    "i4669940048",
-    "i4669994015",
-    "i4670010986",
-    "i4670060385",
-    "i4685088515",
-    "i4685102429",
-    "i4685330065",
-    "i4685640388",
-    "i4686011888"
-   ],
-   "events": [
-    {
-     "id": "i4612739091",
-     "kind": "inline",
-     "author": "ijurica",
-     "at": "2026-11-18T10:55:11Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4612739091",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4612750392",
-     "kind": "inline",
-     "author": "ijurica",
-     "at": "2026-11-18T10:56:06Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4612750392",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4666886126",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T14:06:12Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4666886126",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4666948582",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T14:11:14Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4666948582",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4667056310",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T14:20:09Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4667056310",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4667097772",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T14:23:42Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4667097772",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4667140541",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T14:27:19Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4667140541",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4667293965",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T14:39:52Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4667293965",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4668104041",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T15:43:16Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668104041",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4668214846",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T15:51:49Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668214846",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4668247208",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T15:54:08Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668247208",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4668331963",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T16:00:36Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668331963",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4668449121",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T16:09:57Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668449121",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4668510222",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T16:14:49Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668510222",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4668606483",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T16:22:30Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668606483",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4668700280",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T16:29:51Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668700280",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4668832752",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T16:40:31Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668832752",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4668865286",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T16:43:12Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4668865286",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4669120972",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T17:03:38Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669120972",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4669162502",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T17:06:52Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669162502",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4669262313",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T17:15:00Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669262313",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4669359019",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T17:21:51Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669359019",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4669490413",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T17:31:44Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669490413",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4669523304",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T17:34:11Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669523304",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4669533317",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T17:34:54Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669533317",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4669631520",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T17:42:36Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669631520",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4669745281",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T17:51:40Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669745281",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4669783405",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T17:54:41Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669783405",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": "text { \"ProviderName\": \"Microsoft\", \"BilledCost\": 100, ... }"
-    },
-    {
-     "id": "i4669852064",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T18:00:18Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669852064",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4669887900",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T18:03:18Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669887900",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4669940048",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T18:08:02Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669940048",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4669994015",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T18:12:30Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4669994015",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4670010986",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T18:13:58Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4670010986",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4670060385",
-     "kind": "inline",
-     "author": "jpradocueva",
-     "at": "2026-11-23T18:18:14Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4670060385",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": null,
-     "excerpt": ""
-    },
-    {
-     "id": "i4685088515",
-     "kind": "inline",
-     "author": "ijurica",
-     "at": "2026-11-24T19:03:52Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4685088515",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": "i4667097772",
-     "excerpt": "I'd prefer to keep this PR within the scope of 2847, which it resolves: rules are moved between sections, not rewritten. Where a change would set new requirements, I'd stay as close to the workingdraft text as possible.…"
-    },
-    {
-     "id": "i4685102429",
-     "kind": "inline",
-     "author": "ijurica",
-     "at": "2026-11-24T19:04:59Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4685102429",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": "i4667140541",
-     "excerpt": "This depends on the canonical order, so I'd keep the workingdraft text here and update both rules together through AI 2108."
-    },
-    {
-     "id": "i4685330065",
-     "kind": "inline",
-     "author": "ijurica",
-     "at": "2026-11-24T19:23:42Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4685330065",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": "i4668104041",
-     "excerpt": "In principle, I'd like to keep step 1 within the scope of 2847, but this is clearly a better version: it keeps the requirement as it is and replaces the undefined \"schema\" with something reviewers can check. I'm making…"
-    },
-    {
-     "id": "i4685640388",
-     "kind": "inline",
-     "author": "ijurica",
-     "at": "2026-11-24T19:49:53Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4685640388",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": "i4668214846",
-     "excerpt": "I'd prefer to keep this within the scope of 2847 and stay close to the workingdraft text. As for the proposal itself: dropping \"when available\" makes the rule unconditional, but not every FOCUS entity has a Display…"
-    },
-    {
-     "id": "i4686011888",
-     "kind": "inline",
-     "author": "ijurica",
-     "at": "2026-11-24T20:20:51Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2848#discussion_r4686011888",
-     "path": "supporting_content/guidelines/contributors/editorial-guidelines-restructuring-step-1.md",
-     "parent": "i4668247208",
-     "excerpt": "I'd prefer to keep this within the scope of 2847 and stay close to the workingdraft text. As for the proposal itself: Attribute Name is not the only case: metadata objects use Metadata Name, and objects use Object…"
-    }
-   ],
-   "summary": "This draft reorganises the Editorial Guidelines to match the Editorial Guidelines Review, moving rules rather than rewriting them to stay within #2847. Most of the thread is jpradocueva's suggestions from 23 November 2026, which would make many points explicit MUST and SHOULD rules covering subsection order, names, linking, numbers, punctuation, notes, code blocks and tables. ijurica has replied to only five: accepting the entity ID naming rule with two extra ID sections, correcting one example, and keeping working draft text on subsection titles and Display Name wording, with canonical order deferred to AI #2108. Open points are Display Names for object properties, inconsistent name section titles, and shortened forms and plurals. The other suggestions have no response yet, so the thread is waiting on jpradocueva; ijurica plans to reply to open threads by 26 November 2026.",
-   "gists": {
-    "i4612739091": "ijurica suggests commenting out the table of contents links for the Supported Features Editorial Rules and Retired Rule IDs sections in the draft.",
-    "i4612750392": "ijurica suggests commenting out the Supported Features Editorial Rules heading in the draft.",
-    "i4666886126": "jpradocueva proposes replacing the introductory paragraph with a shorter statement of what the editorial style guidelines cover.",
-    "i4666948582": "jpradocueva proposes stating that authors follow the Normative Requirements Guidelines for requirements, while this document governs formatting, punctuation and comparison wording.",
-    "i4667056310": "jpradocueva proposes defining the scope as all FOCUS entities, and noting that guideline documents follow these rules where they apply, with known exceptions on keywords and links.",
-    "i4667097772": "jpradocueva proposes a fixed subsection order for column and attribute files, with required start and end sections and optional sections allowed between them.",
-    "i4667140541": "jpradocueva proposes that fixed subsection titles SHOULD use exactly the titles listed in the rule.",
-    "i4667293965": "jpradocueva proposes that normative BCP-14 requirements appear only in Requirements sections of specification files, and that object sections defining requirements have their own Requirements subsection.",
-    "i4668104041": "jpradocueva proposes that entity IDs be written exactly as defined in the ID section, including letter case, replacing the undefined schema wording.",
-    "i4668214846": "jpradocueva proposes that non-normative prose always refer to entities by Display Name, with exclusions for requirements, ID sections, constraints tables and code.",
-    "i4668247208": "jpradocueva proposes that Display Names be written exactly as defined in the entity's Display Name section, with attribute names counting as Display Names.",
-    "i4668331963": "jpradocueva proposes linking only first occurrences of entity references per source file, treating an ID and its Display Name as one reference, and no links in headings or code.",
-    "i4668449121": "jpradocueva proposes that every internal anchor or relative link must resolve in the built specification, with external URLs not checked.",
-    "i4668510222": "jpradocueva proposes using be equal to for numeric comparisons and banning equal alone, equals and match.",
-    "i4668606483": "jpradocueva proposes requiring \"greater than or equal to\" and \"less than or equal to\" even for dates, banning at least, no more than, no less than and >=.",
-    "i4668700280": "jpradocueva proposes writing numbers zero to nine as words in prose and using numerals for 10 and above, and always using numerals for units, versions, requirements, tables and code.",
-    "i4668832752": "jpradocueva proposes that HTML entities and special Unicode dash characters not be used, with an illustrative example using a plain hyphen.",
-    "i4668865286": "jpradocueva proposes straight quotes and three periods, and banning smart quotes and the ellipsis character.",
-    "i4669120972": "jpradocueva proposes that notes use Markdown blockquotes and that blockquotes be used only for notes.",
-    "i4669162502": "jpradocueva proposes limiting note labels to Note, Notes and Preview, with Preview only for preview content, and banning other labels such as Warning.",
-    "i4669262313": "jpradocueva proposes that exception callouts appear only in guideline documents and non-normative explanation, with requirements expressing conditions using when or unless.",
-    "i4669359019": "jpradocueva proposes that exceptions be directly associated with the content they modify and placed immediately after it.",
-    "i4669490413": "jpradocueva proposes that a single-statement exception be written as one line of plain text on the same line as its label.",
-    "i4669523304": "jpradocueva proposes adding an exception that the rule does not apply when ChargeCategory is Adjustment.",
-    "i4669533317": "jpradocueva proposes adding an exception that the rule does not apply when ChargeCategory is Tax.",
-    "i4669631520": "jpradocueva proposes that the Conventions section in the overview identify the same headings and exceptions as the notes and link to each note.",
-    "i4669745281": "jpradocueva proposes that every block fenced as json must parse as valid JSON.",
-    "i4669783405": "jpradocueva proposes that shortened samples using ellipses or comments use a text fence, with an illustrative example.",
-    "i4669852064": "jpradocueva proposes two-space JSON indentation and no leading offset, so the opening brace or bracket starts the line.",
-    "i4669887900": "jpradocueva proposes that SQL blocks in datasets and supported features be valid, use only FOCUS Column IDs, custom columns or query-defined names, and use ? for reader-supplied values.",
-    "i4669940048": "jpradocueva proposes labelling an HTML sample as an illustrative HTML example.",
-    "i4669994015": "jpradocueva proposes padding Markdown tables so the pipes align when the longest raw line is shorter than 120 characters.",
-    "i4670010986": "jpradocueva proposes that tables whose longest raw line is 120 characters or more use exactly one space after each value.",
-    "i4670060385": "jpradocueva suggests removing a line with no replacement text.",
-    "i4685088515": "ijurica keeps the subsection order rule close to the working draft, correcting only the example headings, and defers the canonical order to AI #2108, asking jpradocueva whether this works.",
-    "i4685102429": "ijurica keeps the working draft text for the subsection titles rule, since it depends on canonical order, to be updated together through AI #2108.",
-    "i4685330065": "ijurica accepts the entity ID naming rule as an exception, adding Operating Model Condition ID and Metadata ID to the listed ID sections, and asks jpradocueva to confirm.",
-    "i4685640388": "ijurica prefers keeping the prose Display Name rule close to the working draft, since object properties lack a name section and need a name or exclusion first.",
-    "i4686011888": "ijurica keeps Display Name spelling close to the working draft, raising inconsistent name section titles and shortened forms and plurals as points to decide first."
-   },
-   "written_by": [
-    "claude-haiku-5-5"
-   ],
-   "style": 2
-  },
-  {
    "number": 2842,
    "kind": "pr",
    "title": "AI #2841: Add 1.4 to 1.5 migration guide",
@@ -2805,14 +2999,14 @@
    "author": "Matt-Cowsert",
    "opened": "2026-11-13",
    "last": "2026-11-24T01:21:45Z",
-   "earlier": 0,
+   "earlier": 1,
    "objects": [
     "topic:metadata-examples",
     "topic:dataset-instance",
     "topic:recency",
     "topic:schema",
-    "dataset:ContractCommitment",
     "dataset:CostAndUsage",
+    "dataset:ContractCommitment",
     "column:ContractCommitment.ContractCommitmentId",
     "attribute:DateTimeFormat"
    ],
@@ -2847,28 +3041,9 @@
     "i4673172137",
     "i4673900710",
     "i4674282996",
-    "o2869",
     "r5999737660"
    ],
    "events": [
-    {
-     "id": "o2869",
-     "kind": "opened",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-13T16:11:15Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2869",
-     "excerpt": "Summary This PR fixes each item in 2834. Each is a link, description, or example in the Metadata section or the metadata examples in the appendix. Shawn Alpay found most of them in his review of the 1.5 specification.…"
-    },
-    {
-     "id": "s6858413268",
-     "kind": "status",
-     "at": "2026-11-13T16:11:37Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2869#issuecomment-6858413268",
-     "lines": [
-      "Initialized PR Approvals: 0",
-      "Initialized PR Change Requests: 0"
-     ]
-    },
     {
      "id": "i4604095115",
      "kind": "inline",
@@ -2998,21 +3173,20 @@
      "excerpt": "Thanks for catching this, Joaquin. FocusVersion is the defined Metadata ID, so the fix stays, and the PR description now lists it as the one requirement line this PR changes."
     }
    ],
-   "summary": "This pull request fixes wrong links, key names, and example dates in the Metadata section and appendix examples for 1.5, closing #2834. Apart from one casing fix in a requirement line, the changes are informative only. Reviewer jpradocueva raised three problems: schema objects sharing a creation date, recency examples using dataset instance IDs that no instance defines, and an updated recency time matching the original. Matt-Cowsert corrected the dates and IDs and, rather than pushing the update later, moved the original recency time earlier so the update follows it. jpradocueva accepted this and applied the casing change. flanakin approved on 20 November 2026. Nothing has been merged, and the last comment was on 24 November 2026. The fixes can merge into working_draft during the 1.5 IP Review, which ends 1 December 2026.",
+   "summary": "It fixes editorial errors in the Metadata section and metadata appendix examples of the 1.5 specification, raised in #2834. The fixes are informative only: wrong links, key names, Dataset IDs in examples, and example dates and identifiers, plus one casing fix in a requirement line. It can merge into the working draft during the 1.5 IP Review, which ends 1 December 2026. jpradocueva's review raised three substantive problems: schemas sharing a creation date, recency examples using dataset instance IDs no other example defines, and an updated recency object with an unchanged timestamp. Matt-Cowsert fixed each, setting the original recency time earlier rather than moving the update later. jpradocueva resolved that thread and flanakin approved on 20 November 2026, so support looks solid. No merge is recorded, and the last comment, on 24 November 2026, leaves it looking ready.",
    "gists": {
-    "o2869": "Matt-Cowsert opened the pull request to fix the links, key names, casing, dates and IDs listed in #2834, and says the requirement wording stays the same.",
-    "i4604095115": "jpradocueva says the prior schema object still has the same CreationDate as its replacement, so readers cannot tell which came first, and asks the author to decide the right date.",
-    "i4604155158": "jpradocueva says two recency IDs match no dataset instance in the Dataset Instance example, and one is also a SchemaId; this pull request left those lines unchanged.",
-    "i4604178267": "jpradocueva says the updated recency time repeats the original's time even though the update adds later sectors, and the changed 05:00 sector keeps its old update time.",
-    "i4604194140": "jpradocueva says the schema created after the rename has the same CreationDate as the rename schema, so the order of the schemas cannot be read from their dates.",
-    "i4633435129": "Matt-Cowsert replied that the prior schema's CreationDate is now 2024-03-02T12:01:03Z, matching the date other examples give its SchemaId, so it precedes the replacing schema.",
-    "i4633436346": "Matt-Cowsert says all three recency examples now use dataset instance IDs from the Dataset Instance example, with the file path using the first object's ID.",
-    "i4633436749": "Matt-Cowsert kept the update's time, moved the original recency example's time back to 04:00:00Z so the update follows it, and changed two sector times in the update example.",
-    "i4633437175": "Matt-Cowsert changed the schema after the rename to 2024-07-02T12:01:03Z so it follows the rename schema dated March 2024.",
-    "r5999737660": "flanakin approved the pull request without a written comment.",
-    "i4673172137": "jpradocueva changed FOCUSVersion to FocusVersion on line 15 of the schema overview, since FocusVersion is the defined Metadata ID and FOCUSVersion is not defined anywhere.",
+    "i4604095115": "jpradocueva flagged that the prior and new schema objects share the same CreationDate, so readers cannot tell which came first, and left the fix to the author.",
+    "i4604155158": "jpradocueva noted that the recency example uses dataset instance and schema IDs no other example defines, as an optional improvement the PR did not change.",
+    "i4604178267": "jpradocueva argued that the updated time-series recency object keeps the original timestamp even though its sectors changed, and that the 05:00 sector still shows its old time.",
+    "i4604194140": "jpradocueva pointed out that the schema created after the rename has the same CreationDate as the rename schema, so date ordering would not show the sequence.",
+    "i4633435129": "Matt-Cowsert replied that the prior schema date is now 2 March 2024, matching the date other examples give its SchemaId, so it comes before the replacing schema.",
+    "i4633436346": "Matt-Cowsert explained that the recency examples now use CrestNode dataset instance IDs from the Dataset Instance example, so each ID matches a defined instance.",
+    "i4633436749": "Matt-Cowsert set the original recency example to an earlier time and moved two sectors in the update later, so the update now follows the first example.",
+    "i4633437175": "Matt-Cowsert changed the post-rename schema's CreationDate to 2 July 2024 so it follows the rename schema dated 2 March 2024.",
+    "r5999737660": "flanakin approved the pull request on 20 November 2026 without leaving review text.",
+    "i4673172137": "jpradocueva changed the schema overview line to FocusVersion, the defined Metadata ID, because FOCUSVersion is not defined anywhere in the Schema metadata.",
     "i4673900710": "jpradocueva accepted Matt-Cowsert's explanation of the recency update timing and resolved that conversation.",
-    "i4674282996": "Matt-Cowsert agreed the FocusVersion change stays and noted the pull request description now lists it as the only requirement line changed."
+    "i4674282996": "Matt-Cowsert agreed to keep the FocusVersion casing fix and listed it in the PR description as the one requirement line the PR changes."
    },
    "written_by": [
     "claude-haiku-5-5"
@@ -5270,7 +5444,7 @@
    "author": "Matt-Cowsert",
    "opened": "2026-11-13",
    "last": "2026-11-20T21:36:58Z",
-   "earlier": 0,
+   "earlier": 1,
    "objects": [
     "dataset:ContractCommitment",
     "column:CostAndUsage.SkuPriceDetails",
@@ -5301,30 +5475,11 @@
     }
    ],
    "basis": [
-    "o2870",
     "r5944761804",
     "r5971435331",
     "r5999734479"
    ],
    "events": [
-    {
-     "id": "o2870",
-     "kind": "opened",
-     "author": "Matt-Cowsert",
-     "at": "2026-11-13T16:11:29Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2870",
-     "excerpt": "Summary This PR fixes each item in 2835. Each is a summary table, glossary entry, label, relationship list, section order, or link outside a requirement. Shawn Alpay found most of them in his review of the 1.5…"
-    },
-    {
-     "id": "s6858419224",
-     "kind": "status",
-     "at": "2026-11-13T16:11:52Z",
-     "url": "https://github.com/FinOps-Open-Cost-and-Usage-Spec/FOCUS_Spec/pull/2870#issuecomment-6858419224",
-     "lines": [
-      "Initialized PR Approvals: 0",
-      "Initialized PR Change Requests: 0"
-     ]
-    },
     {
      "id": "r5944761804",
      "kind": "review",
@@ -5380,11 +5535,10 @@
      ]
     }
    ],
-   "summary": "Matt-Cowsert's pull request fixes editorial problems listed in #2835 for the 1.5 specification: wrong summary table entries, glossary naming and order, preview labels, relationship lists, section order and one link. It changes informative text only, so it can merge into working_draft during the 1.5 IP review, which ends 1 December 2026. Three reviewers approved with no change requests: jpradocueva after checking validation, flanakin without comment, and ijurica, who flagged a missing Billing Period relationship on Invoice Detail and suggested adding it here or in a separate PR. The thread does not show that addition being made, so the open question is where it belongs. Activity stopped on 20 November 2026 and no merge is recorded, so it looks like the PR is waiting on that decision.",
+   "summary": "PR #2870 from Matt-Cowsert fixes editorial problems listed in #2835, mostly found by Shawn Alpay in the 1.5 specification: a wrong Allows Nulls value, a bad link, preview labels, glossary entries and ordering, relationship lists and section order. It changes informative text only, so it can merge into working_draft during the 1.5 IP review ending 1 December 2026. Three reviewers have approved it: jpradocueva, ijurica and flanakin. ijurica also noticed Invoice Detail's relationships omit Billing Period, the same gap as in Cost and Usage, and suggested a separate PR or adding it here; the thread doesn't show that change. Support looks solid with no pushback. As of 20 November 2026 it remains open with no merge recorded, so the open question is whether the Billing Period fix goes in here.",
    "gists": {
-    "o2870": "Opens the PR to fix the editorial items in #2835 (summary table, glossary, labels, relationships, section order, one link) without changing any requirement lines.",
-    "r5944761804": "jpradocueva approved, stating the PR content passes validation under the current AGENTS.md.",
-    "r5971435331": "ijurica approved but flagged that Invoice Detail omits the Billing Period relationship, the same gap as in #2835, and suggested adding it here or in a separate PR.",
+    "r5944761804": "jpradocueva approved the PR after checking that its content passes validation under the current AGENTS.md guidance.",
+    "r5971435331": "ijurica approved, and noted Invoice Detail's Relationships omits Billing Period, the same gap as in Cost and Usage; proposed adding it here or in a separate PR.",
     "r5999734479": "flanakin approved with no comment."
    },
    "written_by": [

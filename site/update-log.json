@@ -1,6 +1,143 @@
 {
  "runs": [
   {
+   "at": "2026-11-28T02:09:09Z",
+   "task": "daily",
+   "model": "claude-haiku-5-5",
+   "effort": "high",
+   "fallback": "claude-sonnet-5-5",
+   "reviewer": "claude-haiku-5-5",
+   "days": 1,
+   "threads": 1,
+   "items": 17,
+   "attempted": 1,
+   "first_pass": 0,
+   "escalated": 1,
+   "escalated_passed": 1,
+   "failed": 0,
+   "escalated_pct": 100.0,
+   "spend": {
+    "claude-haiku-5-5": {
+     "input": 20032,
+     "output": 10432,
+     "cost": 0.0072,
+     "price": [
+      0.1,
+      0.5
+     ]
+    },
+    "claude-sonnet-5-5": {
+     "input": 10947,
+     "output": 1542,
+     "cost": 0.0373,
+     "price": [
+      2.0,
+      10.0
+     ]
+    }
+   },
+   "cost": 0.0445,
+   "estimate": {
+    "input": 13678,
+    "output": 4193,
+    "cost": 0.0061
+   },
+   "escalations": [
+    {
+     "key": "2026-11-28",
+     "title": "Daily summary for 28 November 2026",
+     "result": "passed",
+     "tries": [
+      {
+       "model": "claude-haiku-5-5",
+       "try": 1,
+       "input": 5054,
+       "output": 4291,
+       "cost": 0.00265,
+       "problems": [
+        "it uses a stock phrase; say what happened directly (\"Smaller items:\")",
+        "it uses a filler phrase; say what a thread is waiting on, or nothing (\"is still a draft.\")"
+       ]
+      },
+      {
+       "model": "claude-haiku-5-5",
+       "try": 2,
+       "input": 5777,
+       "output": 2419,
+       "cost": 0.00179,
+       "review": {
+        "model": "claude-haiku-5-5",
+        "input": 4526,
+        "output": 2405,
+        "cost": 0.00166
+       },
+       "problems": [
+        "fact check: \"Other proposals keep the working draft text because they go beyond #2847's scope.\": This gives one reason for all the remaining proposals, but the items give different reasons. Entity ID naming is kept because some entities lack an ID section (i4715099686), and numeric wording because the NRG uses 'MUST equal' (i4716943687). Inequality wording is kept because 'at least' appears in five requirements (i4720351657). Only subsection order (i4715378916) and first-occurrence linking (i4716301685) are said to go beyond the scope of 2847."
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 1,
+       "input": 5053,
+       "output": 777,
+       "cost": 0.01788,
+       "problems": [
+        "a paragraph has 181 words; keep each paragraph under 170 words"
+       ]
+      },
+      {
+       "model": "claude-sonnet-5-5",
+       "try": 2,
+       "input": 5894,
+       "output": 765,
+       "cost": 0.01944,
+       "review": {
+        "model": "claude-haiku-5-5",
+        "input": 4675,
+        "output": 1317,
+        "cost": 0.00113
+       },
+       "problems": []
+      }
+     ],
+     "cost": 0.04455
+    }
+   ],
+   "trigger": "schedule",
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/46096362367"
+  },
+  {
+   "at": "2026-11-28T02:08:13Z",
+   "task": "recent",
+   "model": "claude-haiku-5-5",
+   "effort": "high",
+   "fallback": "claude-sonnet-5-5",
+   "threads": 74,
+   "kept": 71,
+   "attempted": 3,
+   "first_pass": 3,
+   "escalated": 0,
+   "escalated_passed": 0,
+   "failed": 0,
+   "escalated_pct": 0.0,
+   "partly": 0,
+   "spend": {
+    "claude-haiku-5-5": {
+     "input": 37798,
+     "output": 27138,
+     "cost": 0.0173,
+     "price": [
+      0.1,
+      0.5
+     ]
+    }
+   },
+   "cost": 0.0173,
+   "escalations": [],
+   "trigger": "schedule",
+   "run": "https://github.com/jonstevenshall/focus-sql-lab/actions/runs/46096362367"
+  },
+  {
    "at": "2026-11-28T01:34:14Z",
    "task": "rebuild",
    "spec": "87fcbc8",

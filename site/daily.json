@@ -1,7 +1,53 @@
 {
  "about": "What the FOCUS working group did on GitHub each day. Written each morning by an AI model from the day's comments, reviews, merges and closures, then fact-checked against them by a second call. It interprets, so check the threads before relying on it.",
- "generated_at": "2026-11-27T02:20:50Z",
+ "generated_at": "2026-11-28T02:06:01Z",
  "days": [
+  {
+   "id": "2026-11-28",
+   "from": "2026-11-27T02:20:50Z",
+   "to": "2026-11-28T02:06:01Z",
+   "counts": {
+    "items": 17,
+    "threads": 1,
+    "people": 1,
+    "opened": 0,
+    "merged": 0,
+    "closed": 0
+   },
+   "threads": [
+    {
+     "n": 2848,
+     "kind": "pr",
+     "title": "AI #2847: Restructure the Editorial Guidelines and align the AGENTS.md grouping",
+     "state": "draft",
+     "items": 17,
+     "comments": 17,
+     "statuses": 0,
+     "people": [
+      "ijurica"
+     ],
+     "objects": [
+      "column:CostAndUsage.BilledCost",
+      "column:CostAndUsage.ContractedCost",
+      "column:CostAndUsage.ChargeCategory",
+      "column:SkuPrice.ContractId",
+      "column:CostAndUsage.CommitmentDiscountId",
+      "column:CostAndUsage.SkuPriceId"
+     ],
+     "change": null,
+     "opened": false
+    }
+   ],
+   "cost": 0.04455,
+   "runs": 1,
+   "text": "ijurica posted replies to most of jpradocueva's open review comments on #2848 (Restructure the Editorial Guidelines and align the AGENTS.md grouping), the draft pull request that moves rules into the new editorial-guidelines structure.\n\nThe line ijurica holds throughout is that the PR only relocates existing rules from #2847, so proposals that add new requirements stay on the working draft text for now. This applies to the subsection order rule, which would add a new MUST, with column subsection naming left to #2108. It also applies to first-occurrence linking, where ijurica agrees with the direction but says it needs separate rules for what counts as a reference, the appendix, glossary wording and section links. The inequality wording is deferred too, because \"at least\" appears in five requirements and counts need exclusions. The proposed number additions are postponed, listing issues such as inconsistent numerals across sentences. The entity ID naming proposal also stays on the working draft because some entities lack an ID section, though ijurica agrees grammatical number should never change an ID.\n\nOn comparisons, ijurica agrees with \"be equal to\" and suggests narrower wording for numeric values, but keeps the draft because the normative requirements guidance (NRG) uses \"MUST equal\" and both should change together.\n\nijurica accepted two things. The internal links rule is accepted as an exception to the scope of #2847 because it documents what the build already checks, with its scope stated in the rule, and a Glossary Link Targets rule is proposed alongside it. The colon in the number label is also moved inside the bold label, as in the other labels.\n\nSeveral wording suggestions are waiting on jpradocueva. ijurica proposed rewording the exception placement rule so exceptions are clearly associated with and placed after the content they modify, and dropping \"a single line of\" from the single-line exception rule. For the Conventions rule, ijurica posted two options linking to the headings that notes sit under and asked which jpradocueva prefers. ijurica also proposed one merged Normative Requirements rule stating the boundary with the NRG, replacing the two sentences and the \"Entity ID References\" bullet, and suggested listing it as a scope exception. It is waiting on jpradocueva's agreement. Two other suggestions only propose deleting a line, and another adds an HTML comment marking a link target addition as not part of the proposal.",
+   "written_by": "claude-sonnet-5-5",
+   "titles": {
+    "2108": "[AI] Consistently apply our non-standard subsections",
+    "2847": "[AI] Restructure the Editorial Guidelines and align the AGENTS.md grouping",
+    "2848": "AI #2847: Restructure the Editorial Guidelines and align the AGENTS.md grouping"
+   }
+  },
   {
    "id": "2026-11-27",
    "from": "2026-11-26T02:22:03Z",
